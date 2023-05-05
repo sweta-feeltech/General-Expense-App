@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import 'conts.dart';
 import 'dashboardScreen.dart';
+
 
 
 class MainPageScreen extends StatefulWidget {
@@ -16,6 +18,32 @@ class MainPageScreen extends StatefulWidget {
 
 class _MainPageScreenState extends State<MainPageScreen> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  bool _isLoading = false;
+
+  Future<void> login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Perform login authentication
+    await Future.delayed(Duration(seconds: 2));
+
+    // Save login status to shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', true);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    // Navigate to home screen
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => HomeScreen()),
+    // );
+  }
+
 
   String? _profilePicture;
   // String? _username;
@@ -30,15 +58,15 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
 
     return Scaffold(
-      
+
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/wall.png",
-              ),
-              fit: BoxFit.fill
-            )
+              image: DecorationImage(
+                  image: AssetImage("assets/images/wall.png",
+                  ),
+                  fit: BoxFit.fill
+              )
           ),
 
           child: Column(
@@ -73,6 +101,9 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
                             try{
                               setState(() {
+
+                                login();
+
                                 String username = value!.displayName!;
                                 String? email = value!.email;
                                 String? serviceAuth = value!.serverAuthCode;
@@ -87,6 +118,8 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                 ServiceAuth = serviceAuth;
                                 ProfilePicture = profilePicture;
                                 ID = id;
+
+
 
                               }
                               );
@@ -144,8 +177,8 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     Text(
                       "Already have an account ",
                       style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,),
+                        fontSize: 16,
+                        color: Colors.grey,),
                       textAlign: TextAlign.center,
                     ),
                     TextButton(
