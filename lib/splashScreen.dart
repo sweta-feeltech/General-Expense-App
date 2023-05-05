@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'conts.dart';
 import 'dashboardScreen.dart';
@@ -7,59 +8,44 @@ import 'mainpage.dart';
 
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
-    // Add any initialization logic here, such as loading data
-    Future.delayed(Duration(seconds: 3), () {
-
-      AuthorizedUser == true ?
-
-          // debugPrint("author")
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DashboardScreen(),
-        ),
-      )
-      :
-
-          // debugPrint("notauth");
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MainPageScreen(),
-        ),
-      );
-
-
-
-    });
+    checkLoginStatus();
   }
 
+  void checkLoginStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    if (isLoggedIn) {
+      // User is already logged in, navigate to home screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => DashboardScreen()),
+      );
+    } else {
+      // User is not logged in, show login screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainPageScreen()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      body: SafeArea(
-        child: Center(
-          child: Container(
-              height: 150,
-              width: 150,
-              child: Image.asset("assets/images/g.png",
-              fit: BoxFit.fill ,),),
-        ),
+      body: Center(
+        child: Container(
+            height: 150,
+            width: 150,
+            child: Image.asset("assets/images/g.png")),
       ),
-
     );
   }
 }
