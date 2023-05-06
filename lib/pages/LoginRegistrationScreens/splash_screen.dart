@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
-import '../Dashboard/dashboard_screen.dart';
+import '../Dashboard/bottom_navbar_screen.dart';
+import '../Dashboard/home_screen.dart';
 import 'main_screen.dart';
 
 
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // User is already logged in, navigate to home screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => DashboardScreen()),
+        MaterialPageRoute(builder: (context) => BottomNavbarScreen()),
       );
     } else {
       // User is not logged in, show login screen
