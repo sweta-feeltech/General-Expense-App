@@ -37,9 +37,13 @@ class _NavDrawerState extends State<NavDrawer> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      backgroundColor: Colors.green,
+      backgroundColor: primaryPurple,
       body: Column(
         children: [
+
+          SizedBox(
+            height: 100,
+          ),
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
 
 
@@ -71,6 +75,9 @@ class _NavDrawerState extends State<NavDrawer> {
               ),
             ),
           ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
         ],
       ),
 
