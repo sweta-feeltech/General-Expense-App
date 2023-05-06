@@ -7,14 +7,14 @@ import 'package:image_picker/image_picker.dart';
 import '../../Utils/constants.dart';
 
 
-class ProfleScreen extends StatefulWidget {
-  const ProfleScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProfleScreen> createState() => _ProfleScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfleScreenState extends State<ProfleScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
 
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();

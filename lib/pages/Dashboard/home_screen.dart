@@ -3,14 +3,14 @@ import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _HomeScreenState extends State<HomeScreen> {
 
 
   Future<void> logout() async {
