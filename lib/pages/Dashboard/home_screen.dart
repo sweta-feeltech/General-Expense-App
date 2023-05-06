@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Utils/colors.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -32,10 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryGrey,
 
       appBar: AppBar(
 
-        title: Text("Dashboard"),
+        title: Text("Home Screen"),
       ),
 
       body: Center(

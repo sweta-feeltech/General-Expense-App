@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
@@ -24,11 +25,14 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddInventoryScreen()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => AddInventoryScreen()));
           //code to execute on button press
         },
         child: Icon(Icons.add),
@@ -51,65 +55,97 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
             shape: CircularNotchedRectangle(),
             notchMargin: 5,
             child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [primaryPurple, Colors.black],
-                  begin: Alignment.topLeft,
-                  end: Alignment.topRight,
-                  stops: [0.1, 0.8],
-                  tileMode: TileMode.clamp,
-                ),
-              ),
+              decoration: BoxDecoration(
+                  // gradient: LinearGradient(
+                  //   colors: [primaryPurple, Colors.black],
+                  //   begin: Alignment.topLeft,
+                  //   end: Alignment.topRight,
+                  //   stops: [0.1, 0.8],
+                  //   tileMode: TileMode.clamp,
+                  // ),
+                  color: Colors.white),
+              padding: EdgeInsets.symmetric(horizontal: main_Height * 0.025),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.home_filled,
-                      color: _currentIndex == 0 ? primaryPurple : Colors.white,
-                    ),
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       setState(() {
                         _currentIndex = 0;
                       });
                     },
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.check_circle,
-                      color: _currentIndex == 1 ? primaryPurple : Colors.white,
+                    child: SvgPicture.asset(
+                      _currentIndex == 0
+                          ? "assets/icons/home_1.svg"
+                          : "assets/icons/home.svg",
+                      height: main_Height * 0.06,
+                      width: main_Height * 0.06,
+                      fit: BoxFit.none,
                     ),
-                    onPressed: () {
+                  ),
+                  InkWell(
+                    onTap: () {
                       setState(() {
                         _currentIndex = 1;
                       });
                     },
+                    child: _currentIndex == 1
+                        ? SvgPicture.asset(
+                            "assets/icons/expense_1.svg",
+                            height: main_Height * 0.06,
+                            width: main_Height * 0.06,
+                            fit: BoxFit.none,
+                          )
+                        : SvgPicture.asset(
+                            "assets/icons/expense.svg",
+                            height: main_Height * 0.06,
+                            width: main_Height * 0.06,
+                            fit: BoxFit.none,
+                          ),
                   ),
                   SizedBox(
-                    width: 50,
+                    height: main_Height * 0.065,
+                    width: main_Height * 0.065,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.analytics,
-                      color: _currentIndex == 2 ? primaryPurple : Colors.white,
-                    ),
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       setState(() {
                         _currentIndex = 2;
                       });
                     },
+                    child: _currentIndex == 2
+                        ? SvgPicture.asset(
+                            "assets/icons/inventory_1.svg",
+                            height: main_Height * 0.06,
+                            width: main_Height * 0.06,
+                            fit: BoxFit.none,
+                          )
+                        : SvgPicture.asset(
+                            "assets/icons/inventory.svg",
+                            height: main_Height * 0.06,
+                            width: main_Height * 0.06,
+                            fit: BoxFit.none,
+                          ),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.person,
-                      color: _currentIndex == 3 ? primaryPurple : Colors.white,
-                    ),
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       setState(() {
                         _currentIndex = 3;
                       });
                     },
+                    child: _currentIndex == 3
+                        ? SvgPicture.asset(
+                            "assets/icons/profile_1.svg",
+                            height: main_Height * 0.06,
+                            width: main_Height * 0.06,
+                            fit: BoxFit.none,
+                          )
+                        : SvgPicture.asset(
+                            "assets/icons/profile.svg",
+                            height: main_Height * 0.06,
+                            width: main_Height * 0.06,
+                            fit: BoxFit.none,
+                          ),
                   ),
                 ],
               ),
