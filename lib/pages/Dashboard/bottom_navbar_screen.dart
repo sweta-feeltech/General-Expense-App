@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
@@ -31,7 +32,7 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
           //code to execute on button press
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.green,
+        backgroundColor: primaryPurple,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
@@ -41,10 +42,10 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
           color: Colors.white,
         ),
         child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
-          ),
+          // borderRadius: const BorderRadius.only(
+          //   topLeft: Radius.circular(30.0),
+          //   topRight: Radius.circular(30.0),
+          // ),
           child: BottomAppBar(
             color: Colors.transparent,
             shape: CircularNotchedRectangle(),
@@ -52,7 +53,7 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
             child: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.green, Colors.black],
+                  colors: [primaryPurple, Colors.black],
                   begin: Alignment.topLeft,
                   end: Alignment.topRight,
                   stops: [0.1, 0.8],
@@ -66,7 +67,7 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.home_filled,
-                      color: _currentIndex == 0 ? Colors.green : Colors.white,
+                      color: _currentIndex == 0 ? primaryPurple : Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
@@ -77,7 +78,7 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.check_circle,
-                      color: _currentIndex == 1 ? Colors.green : Colors.white,
+                      color: _currentIndex == 1 ? primaryPurple : Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
@@ -91,7 +92,7 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.analytics,
-                      color: _currentIndex == 2 ? Colors.green : Colors.white,
+                      color: _currentIndex == 2 ? primaryPurple : Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
@@ -102,7 +103,7 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.person,
-                      color: _currentIndex == 3 ? Colors.green : Colors.white,
+                      color: _currentIndex == 3 ? primaryPurple : Colors.white,
                     ),
                     onPressed: () {
                       setState(() {
