@@ -9,7 +9,7 @@ import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class BottomNavbarScreen extends StatefulWidget {
-  static String routeName = "TabletDashBoardPageScreen";
+  static String routeName = "homePageScreen";
   const BottomNavbarScreen({Key? key}) : super(key: key);
 
   @override

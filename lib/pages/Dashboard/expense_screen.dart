@@ -4,7 +4,7 @@ import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import '../../Utils/colors.dart';
 
 class ExpenseScreen extends StatefulWidget {
-  static String routeName = 'MyCourseScreen';
+  static String routeName = 'ExpenseScreen';
   Function backPressCallback;
   ExpenseScreen(this.backPressCallback,{super.key});
 

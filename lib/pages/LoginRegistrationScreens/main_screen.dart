@@ -11,7 +11,7 @@ import '../Dashboard/home_screen.dart';
 
 
 class MainPageScreen extends StatefulWidget {
-  static String routeName = '/loginScreen';
+  static String routeName = '/mainScreen';
   const MainPageScreen({Key? key}) : super(key: key);
 
 

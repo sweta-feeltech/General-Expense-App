@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../../Utils/colors.dart';
 
 class InventoryScreen extends StatefulWidget {
-  static String routeName = 'MyCourseScreen';
+  static String routeName = 'InventoryScreen';
   Function backPressCallback;
   InventoryScreen(this.backPressCallback,{super.key});
+
   @override
   State<InventoryScreen> createState() => _InventoryScreenState();
 }
