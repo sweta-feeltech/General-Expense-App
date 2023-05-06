@@ -4,8 +4,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-import 'conts.dart';
-import 'dashboardScreen.dart';
+import '../../Utils/constants.dart';
+import '../Dashboard/dashboard_screen.dart';
 
 
 

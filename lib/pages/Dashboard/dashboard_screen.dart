@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:general_expense_app/splashScreen.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

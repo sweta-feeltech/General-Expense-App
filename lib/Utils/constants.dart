@@ -1,4 +1,3 @@
-
 String? Username;
 
 String? Email;
