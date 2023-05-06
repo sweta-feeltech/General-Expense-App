@@ -3,6 +3,7 @@ import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/colors.dart';
+import '../Widgets/nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/homeScreen';
@@ -55,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         centerTitle: true,
       ),
+      drawer: NavDrawer(),
       body: Center(
         child: ElevatedButton(
           onPressed: () {

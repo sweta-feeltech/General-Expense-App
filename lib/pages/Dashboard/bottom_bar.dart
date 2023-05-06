@@ -79,12 +79,10 @@ class _BottomBarState extends State<BottomBar> with WidgetsBindingObserver {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: primaryPurple,
       statusBarIconBrightness: Brightness.light,
     ));
-              // print(" bottombar ${IsBottom}");
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
@@ -100,10 +98,6 @@ class _BottomBarState extends State<BottomBar> with WidgetsBindingObserver {
       child: SafeArea(
 
         child: Scaffold(
-
-
-
-
           body: Stack(
             children: [
               _buildOffstageNavigator("Page1"),
@@ -112,7 +106,11 @@ class _BottomBarState extends State<BottomBar> with WidgetsBindingObserver {
               _buildOffstageNavigator("Page4"),
             ],
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){},
+          ),
 
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
           bottomNavigationBar : BottomNavigation(context),
 
@@ -147,13 +145,10 @@ class _BottomBarState extends State<BottomBar> with WidgetsBindingObserver {
       controller: _controller,
       navBarStyle: NavBarStyle.style2,
       resizeToAvoidBottomInset: true,
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (){},
+      // ),
       // bottomScreenMargin: ,
-
-
-
       items: [
 
         PersistentBottomNavBarItem(

@@ -7,6 +7,7 @@ import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
+import 'package:general_expense_app/pages/Widgets/nav_drawer.dart';
 import 'package:general_expense_app/responsive/responsive_layout.dart';
 
 import 'pages/LoginRegistrationScreens/main_screen.dart';
@@ -78,6 +79,9 @@ class MyApp extends StatelessWidget {
     }
     if(settings.name == InventoryScreen.routeName) {
       return getMaterialPageRoute(InventoryScreen((){}));
+    }
+    if(settings.name == NavDrawer.routeName) {
+      return getMaterialPageRoute(NavDrawer());
     }
 }
 
