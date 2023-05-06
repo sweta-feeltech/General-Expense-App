@@ -19,19 +19,20 @@ class _InventoryScreenState extends State<InventoryScreen> {
 
     return Scaffold(
       backgroundColor: primaryGrey,
+
       appBar: AppBar(
         leading: IconButton(
           padding: EdgeInsets.zero,
           constraints: BoxConstraints(minHeight: 20, minWidth: 20),
           onPressed: () {
-            // widget.backPressCallback.call();
-            // Navigator.of(context).pop();
+            widget.backPressCallback.call();
+            Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.menu, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         titleSpacing: 0,
         title: Text(
-          "Home",
+          "Inventory",
           style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
         ),
         automaticallyImplyLeading: false,
@@ -39,6 +40,9 @@ class _InventoryScreenState extends State<InventoryScreen> {
         elevation: 0,
         centerTitle: true,
       ),
+
+
+
     );
   }
 }

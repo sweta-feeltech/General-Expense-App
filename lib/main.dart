@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:general_expense_app/pages/Dashboard/bottom_navbar_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/bottom_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
       return getMaterialPageRoute(MainPageScreen());
     }
     if(settings.name == HomeScreen.routeName) {
-      return getMaterialPageRoute(BottomNavbarScreen());
+      return getMaterialPageRoute(BottomBar());
     }
     if(settings.name == ProfileScreen.routeName) {
       return getMaterialPageRoute(ProfileScreen(
