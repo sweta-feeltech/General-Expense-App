@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
       return getMaterialPageRoute(MainPageScreen());
     }
     if(settings.name == HomeScreen.routeName) {
-      return getMaterialPageRoute(BottomBar());
+      return getMaterialPageRoute(BottomBarScreen());
     }
     if(settings.name == ProfileScreen.routeName) {
       return getMaterialPageRoute(ProfileScreen(

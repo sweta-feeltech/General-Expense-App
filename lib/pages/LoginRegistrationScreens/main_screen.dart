@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
 import '../Dashboard/bottom_bar.dart';
-import '../Dashboard/home_screen.dart';
+// import '../Dashboard/botton_bar_1.dart';
 
 
 
@@ -127,7 +127,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                               }
                               );
 
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomBar()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomBarScreen()));
                             }catch(e){
                               print(" ${e}");
                             }

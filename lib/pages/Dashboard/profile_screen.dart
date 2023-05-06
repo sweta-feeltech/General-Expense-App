@@ -68,8 +68,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () {
 
 
+              widget.backPressCallback.call();
 
-              Navigator.of(context).pop("refresh");
+
+              // Navigator.of(context).pop("refresh");
 
             },
             icon: const Icon(Icons.arrow_back, color: Colors.white),

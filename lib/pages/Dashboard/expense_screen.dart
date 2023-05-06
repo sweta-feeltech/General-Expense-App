@@ -26,7 +26,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           constraints: BoxConstraints(minHeight: 20, minWidth: 20),
           onPressed: () {
             widget.backPressCallback.call();
-            Navigator.of(context).pop();
+            // Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
