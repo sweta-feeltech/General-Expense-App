@@ -11,7 +11,9 @@ import '../Dashboard/home_screen.dart';
 
 
 class MainPageScreen extends StatefulWidget {
+  static String routeName = '/loginScreen';
   const MainPageScreen({Key? key}) : super(key: key);
+
 
   @override
   State<MainPageScreen> createState() => _MainPageScreenState();

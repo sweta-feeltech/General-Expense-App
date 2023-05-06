@@ -9,6 +9,9 @@ import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class BottomNavbarScreen extends StatefulWidget {
+  static String routeName = "TabletDashBoardPageScreen";
+  const BottomNavbarScreen({Key? key}) : super(key: key);
+
   @override
   _BottomNavbarScreenState createState() => _BottomNavbarScreenState();
 }
@@ -18,9 +21,9 @@ class _BottomNavbarScreenState extends State<BottomNavbarScreen> {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    ExpenseScreen(),
-    InventoryScreen(),
-    ProfileScreen(),
+    ExpenseScreen((){}),
+    InventoryScreen((){}),
+    ProfileScreen((){}),
   ];
 
   @override

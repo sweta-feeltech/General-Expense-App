@@ -9,7 +9,10 @@ import '../../Utils/constants.dart';
 
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  static String routeName = 'profileScreen';
+  Function backPressCallback;
+
+  ProfileScreen(this.backPressCallback,{super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();

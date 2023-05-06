@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/colors.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String routeName = '/loginScreen';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

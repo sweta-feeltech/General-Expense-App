@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LogInScreen extends StatefulWidget {
+  static String routeName = '/loginScreen';
   const LogInScreen({Key? key}) : super(key: key);
 
   @override

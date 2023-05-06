@@ -4,7 +4,9 @@ import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import '../../Utils/colors.dart';
 
 class ExpenseScreen extends StatefulWidget {
-  const ExpenseScreen({Key? key}) : super(key: key);
+  static String routeName = 'MyCourseScreen';
+  Function backPressCallback;
+  ExpenseScreen(this.backPressCallback,{super.key});
 
   @override
   State<ExpenseScreen> createState() => _ExpenseScreenState();
