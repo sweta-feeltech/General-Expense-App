@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,55 +15,102 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<void> logout() async {
-    // Sign out the user from Firebase, if applicable
-    // ...
 
-    // Remove login status from shared preferences
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('isLoggedIn');
 
-    // Navigate back to login screen
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => SplashScreen()),
-    );
-  }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      key: _scaffoldKey,
+
       backgroundColor: primaryGrey,
       appBar: AppBar(
+          title: Text(
+            "Home",
+            style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+          ),
         leading: IconButton(
-          padding: EdgeInsets.zero,
-          constraints: BoxConstraints(minHeight: 20, minWidth: 20),
+          icon: Icon(Icons.menu,
+          color: Colors.black,),
           onPressed: () {
-            // widget.backPressCallback.call();
-            // Navigator.of(context).pop();
+            _scaffoldKey.currentState?.openDrawer();
           },
-          icon: const Icon(Icons.menu, color: Colors.black),
         ),
-        titleSpacing: 0,
-        title: Text(
-          "Home",
-          style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
-        ),
+          titleSpacing: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: primaryGrey,
-        elevation: 0,
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: primaryGrey,
       ),
-      drawer: NavDrawer(),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            logout();
-          },
-          child: Text("Logout"),
+
+      drawer: Drawer(
+        width: main_Width * 0.6,
+        child: NavDrawer(),
+      ),
+
+      body:SingleChildScrollView(
+        child: Column(
+          children: [
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: main_Height * 0.02),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Hello,",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: main_Height * 0.020,
+                        ),
+                      ),
+
+                      Text("Dytta!",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: main_Height * 0.022,
+                        ),
+                      ),
+
+                    ],
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: main_Height * 0.023,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(padding: EdgeInsets.symmetric(horizontal: main_Height * 0.02),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30)
+                ),
+              child: SvgPicture.asset("assets/images/card.svg",
+              clipBehavior: Clip.antiAlias,
+              fit: BoxFit.fill,
+              ),
+
+              ),
+            ),
+
+
+
+
+          ],
         ),
       ),
     );
