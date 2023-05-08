@@ -23,29 +23,29 @@ class _InventoryScreenState extends State<InventoryScreen> {
       backgroundColor: primaryGrey,
 
       appBar: AppBar(
-        leading: IconButton(
-          padding: EdgeInsets.zero,
-          constraints: BoxConstraints(minHeight: 20, minWidth: 20),
-          onPressed: () {
-            widget.backPressCallback.call();
-            // Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-        ),
-        titleSpacing: 0,
+        // leading: IconButton(
+        //   padding: EdgeInsets.zero,
+        //   constraints: BoxConstraints(minHeight: 20, minWidth: 20),
+        //   onPressed: () {
+        //     widget.backPressCallback.call();
+        //     // Navigator.of(context).pop();
+        //   },
+        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
+        // ),
+        titleSpacing: 15,
         title: Text(
           "Inventory",
           style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: primaryGrey,
+        backgroundColor: primaryPurple,
         elevation: 0,
-        centerTitle: true,
+        // centerTitle: true,
       ),
 
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: main_Width * 0.03,right: main_Width * 0.03),
+          padding: EdgeInsets.only(left: main_Width * 0.03,right: main_Width * 0.03, top: 10,),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -58,7 +58,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         letterSpacing: 1,
-                        fontSize: main_Height * 0.018,
+                        fontSize: main_Height * 0.021,
                         fontWeight: FontWeight.w500
                     ),
                   ),
@@ -79,6 +79,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
 
                 ],
               ),
+              SizedBox(height: 5,),
               Container(
                 height: main_Height * 0.75,
                 padding: EdgeInsets.symmetric(vertical: 2),

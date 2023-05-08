@@ -210,8 +210,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 ),
                                               )
                                                   : profilePic == null ?  Ink.image(
-                                                image: NetworkImage(
-                                                    "https://st2.depositphotos.com/1006318/5909/v/380/depositphotos_59095055-stock-illustration-profile-icon-male-avatar.jpg?forcejpeg=true"),
+                                                image: AssetImage(
+                                                    "assets/images/profile.png"),
                                                 fit: BoxFit.cover,
                                                 width: 120,
                                                 height: 120,

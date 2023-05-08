@@ -102,11 +102,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(10.0),
                                           image:
-
-
                                           DecorationImage(
-                                            image: NetworkImage(
-                                                "https://st2.depositphotos.com/1006318/5909/v/380/depositphotos_59095055-stock-illustration-profile-icon-male-avatar.jpg?forcejpeg=true"),
+                                            image: AssetImage(
+                                                "assets/images/profile.png"),
                                             fit: BoxFit.cover,
 
                                           )
