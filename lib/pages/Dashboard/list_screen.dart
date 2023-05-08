@@ -155,7 +155,6 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
               ///List
               ///
 
-
               Container(
                 height: main_Height * 0.735,
                 child: ListView.builder(

@@ -75,103 +75,98 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         centerTitle: true,
       ),
 
-
       body: SingleChildScrollView(
         child: Column(
-          children: [
+           children: [
 
-          InkWell(
-            onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ListOfExpenses()));
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Container(
-                      // width: main_Width * 0.4,
-                      height: main_Height * 0.11,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Color(0xFFE6EBFE)
+             Padding(
+            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Container(
+                    // width: main_Width * 0.4,
+                    height: main_Height * 0.11,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xFFE6EBFE)
+                    ),
+
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Total Income",
+                          style: TextStyle(
+                            color: Color(0xFFAAB1CF),
+                            fontSize: main_Height * 0.015
+                          ),
+                          ),
+                          SizedBox(height: main_Height * 0.01,),
+                          Text("\$7,750.00",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Color(0xFF677CD2),
+                              fontSize: main_Height * 0.022,
+                            fontWeight: FontWeight.w500
+                          ),
+                          ),
+                        ],
                       ),
+                    ),
 
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Total Income",
-                            style: TextStyle(
-                              color: Color(0xFFAAB1CF),
+                  ),
+                ),
+
+                SizedBox(
+                  width: main_Width * 0.028,
+                ),
+
+                Expanded(
+                  child: Container(
+                    // width: main_Width * 0.4,
+                    height: main_Height * 0.11,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xFFF6E5DC)
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Total Expense",
+                          style: TextStyle(
+                            color: Color(0xFFD0B6A8),
                               fontSize: main_Height * 0.015
-                            ),
-                            ),
-                            SizedBox(height: main_Height * 0.01,),
-                            Text("\$7,750.00",
+                          ),),
+                          SizedBox(
+                            height: main_Height * 0.01,
+                          ),
+                          Text("\$4,390.00",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Color(0xFF677CD2),
-                                fontSize: main_Height * 0.022,
+                          style: TextStyle(
+                            color: Color(0xFFE98852),
+                              fontSize: main_Height * 0.022,
                               fontWeight: FontWeight.w500
-                            ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          ),
+                        ],
                       ),
-
                     ),
+
                   ),
+                ),
 
-                  SizedBox(
-                    width: main_Width * 0.028,
-                  ),
-
-                  Expanded(
-                    child: Container(
-                      // width: main_Width * 0.4,
-                      height: main_Height * 0.11,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Color(0xFFF6E5DC)
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Total Expense",
-                            style: TextStyle(
-                              color: Color(0xFFD0B6A8),
-                                fontSize: main_Height * 0.015
-                            ),),
-                            SizedBox(
-                              height: main_Height * 0.01,
-                            ),
-                            Text("\$4,390.00",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Color(0xFFE98852),
-                                fontSize: main_Height * 0.022,
-                                fontWeight: FontWeight.w500
-                            ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                    ),
-                  ),
-
-                ],
-              ),
+              ],
             ),
           ),
 
-      SizedBox(height: 15,),
-      Padding(
+             SizedBox(height: 15,),
+
+             Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,7 +331,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         ),
       ),
 
-            Container(
+             Container(
               height: main_Height * 0.1,
               width: main_Width * 1,
               decoration: BoxDecoration(
@@ -379,37 +374,150 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     ),
 
                     Expanded(
-                      child: Container(
-                        height: main_Height * 0.052,
-                        decoration: BoxDecoration(
-                            color: primaryPurple,
-                            // border: Border.all(
-                            //   color: Colors.white,
-                            //   width: 1,
-                            // ),
-                            borderRadius: BorderRadius.circular(10)
-                        ),
-                        child: Center(
-                          child: Text("EXPENSE",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1,
-                              fontSize: main_Height * 0.015,
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ListOfExpenses()));
+
+                        },
+                        child: Container(
+                          height: main_Height * 0.052,
+                          decoration: BoxDecoration(
+                              color: primaryPurple,
+                              // border: Border.all(
+                              //   color: Colors.white,
+                              //   width: 1,
+                              // ),
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child: Text("EXPENSE",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1,
+                                fontSize: main_Height * 0.015,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
 
-
                   ],
                 ),
               ),
             ),
 
+             Container(
+               child: ListView.builder(
+                   itemCount: 10,
+                   itemBuilder: (BuildContext context, int index) {
+                     return   Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.006),
+                       child: Expanded(
+                         child: Container(
+                           height: main_Height * 0.09,
+                           decoration: BoxDecoration(
+                             color: Colors.white,
+                             borderRadius: BorderRadius.circular(13),
+                           ),
+                           padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+
+                               Container(
+                                 height: main_Height * 0.061,
+                                 width: main_Height * 0.061,
+                                 decoration: BoxDecoration(
+                                   color: Color(0xFFEFEFF1),
+                                   borderRadius: BorderRadius.circular(13),
+                                 ),
+                                 child: Center(
+                                   child: SvgPicture.asset("assets/images/bankI.svg",
+                                     fit: BoxFit.contain,
+                                   ),
+                                 ),
+                               ),
+
+                               Expanded(
+                                 child: Padding(
+                                   padding: EdgeInsets.symmetric(vertical: main_Width * 0.04,horizontal: main_Width * 0.03),
+                                   child: Column(
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Text("Bank Transfer",
+                                         maxLines: 1,
+                                         overflow: TextOverflow.ellipsis,
+                                         style: TextStyle(
+                                             letterSpacing: 0.06,
+                                             fontWeight: FontWeight.w500,
+                                             fontSize: main_Height * 0.018
+                                         ),
+                                       ),
+
+
+                                       Row(
+                                         children: [
+                                           Text("25 Oct, 2022  ",
+                                             maxLines: 1,
+                                             overflow: TextOverflow.ellipsis,
+                                             style: TextStyle(
+                                                 letterSpacing: 1,
+                                                 fontWeight: FontWeight.w300,
+                                                 color: Color(0xFF959698),
+                                                 fontSize: main_Height * 0.017
+                                             ),
+                                           ),
+                                           SvgPicture.asset("assets/images/dot1.svg"),
+                                           Text(" 09:00 AM",
+                                             maxLines: 1,
+                                             overflow: TextOverflow.ellipsis,
+                                             style: TextStyle(
+                                                 letterSpacing: 1,
+                                                 fontWeight: FontWeight.w300,
+                                                 color: Color(0xFF959698),
+                                                 fontSize: main_Height * 0.017
+                                             ),
+                                           ),
+
+                                         ],
+                                       )
+
+
+
+
+                                     ],
+                                   ),
+                                 ),
+                               ),
+
+
+                               Container(
+                                 child: Center(
+                                   child: Text("+\$2800",
+                                     style: TextStyle(
+                                         letterSpacing: 0.6,
+                                         color: Color(0xFF25B07F),
+                                         fontWeight: FontWeight.w500,
+                                         fontSize: main_Height * 0.02
+                                     ),
+                                   ),
+                                 ),
+                               )
+
+
+                             ],
+                           ),
+
+                         ),
+                       ),
+                     );
+
+                   }),
+             )
 
           ],
         ),

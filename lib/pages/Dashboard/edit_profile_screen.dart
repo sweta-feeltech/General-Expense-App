@@ -265,7 +265,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         const SizedBox(height: 5,),
                         TextFormField(
-                          initialValue: "${Username}",
+                          // initialValue: "${Username}",
                           // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
                           style: TextStyle(
                             fontSize: main_Height * 0.022,
@@ -321,7 +321,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         const SizedBox(height: 5,),
                         TextFormField(
-                          initialValue: "${Email}",
+                          // initialValue: "${Email}",
                           // initialValue: "${getProfileModelData?.email == null ? appUserData!.email : getProfileModelData!.email}",
                           style: TextStyle(
                             fontSize: main_Height * 0.022,
