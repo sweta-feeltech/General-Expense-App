@@ -60,6 +60,8 @@ dependencies:
   ##bottombar
   persistent_bottom_nav_bar: ^5.0.2
 
+  ## for chart
+  syncfusion_flutter_charts: ^21.2.3
 
 
 dev_dependencies:
