@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 
 import '../../Utils/colors.dart';
 
@@ -39,6 +41,27 @@ class _InventoryScreenState extends State<InventoryScreen> {
         backgroundColor: primaryGrey,
         elevation: 0,
         centerTitle: true,
+      ),
+
+      body: Container(
+        width: main_Width,
+
+        child: GridView.count(
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          // physics: const NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          childAspectRatio: 6/7,
+          mainAxisSpacing: 4,
+          crossAxisSpacing: 4,
+          children: List.generate(
+                        8,
+                  (index) {
+                return CommonWidgets.CommonInventoryList(context);
+              }
+          ),
+        ),
+
       ),
 
 
