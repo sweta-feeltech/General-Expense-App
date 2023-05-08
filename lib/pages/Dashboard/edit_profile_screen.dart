@@ -69,7 +69,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               padding: EdgeInsets.zero,
               constraints: BoxConstraints(minHeight: 20, minWidth: 20),
               onPressed: () {
-                widget.backPressCallback.call();
+                Navigator.of(context).pop();
+                // widget.backPressCallback.call();
                 // Navigator.of(context).pop("refresh");
               },
               icon: const Icon(Icons.arrow_back, color: Colors.white),

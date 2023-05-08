@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
 import 'dart:math' as math;
+import '../LoginRegistrationScreens/splash_screen.dart';
 import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -19,6 +21,23 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  Future<void> logout() async {
+    // Sign out the user from Firebase, if applicable
+    // ...
+
+    // Remove login status from shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('isLoggedIn');
+
+    // Navigate back to login screen
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => SplashScreen()),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double main_Width = MediaQuery.of(context).size.width;
@@ -246,6 +265,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
 
                           ListTile(
+                            onTap: (){
+                              logout();
+                            },
                             title: Row(
                               children:  [
                                 SizedBox(width: 20,),
