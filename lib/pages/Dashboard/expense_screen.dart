@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 
 import '../../Utils/colors.dart';
@@ -105,7 +106,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   ),
 
                   SizedBox(
-                    width: main_Width * 0.04,
+                    width: main_Width * 0.028,
                   ),
 
                   Expanded(
@@ -154,7 +155,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               height: main_Height * 0.1,
               width: main_Width * 1,
               decoration: BoxDecoration(
-                  color: Colors.white
+                  color: Colors.transparent
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03),
@@ -166,20 +167,20 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       child: Container(
                         height: main_Height * 0.052,
                         decoration: BoxDecoration(
-                          // color: Colors.green,
-                            border: Border.all(
-                                color: primaryPurple,
-                                width: 1
-                            ),
-                            borderRadius: BorderRadius.circular(30)
+                          color: Colors.white,
+                            // border: Border.all(
+                            //     color: primaryPurple,
+                            //     width: 1
+                            // ),
+                            borderRadius: BorderRadius.circular(10)
                         ),
                         child: Center(
-                          child: Text("ADD INCOME",
+                          child: Text("Income",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               letterSpacing: 1,
-                              color: primaryPurple,
+                              color: Color(0xFF959698),
                               fontWeight: FontWeight.w600,
                               fontSize: main_Height * 0.015,
                             ),
@@ -197,14 +198,14 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                         height: main_Height * 0.052,
                         decoration: BoxDecoration(
                             color: primaryPurple,
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(30)
+                            // border: Border.all(
+                            //   color: Colors.white,
+                            //   width: 1,
+                            // ),
+                            borderRadius: BorderRadius.circular(10)
                         ),
                         child: Center(
-                          child: Text("ADD EXPENSE",
+                          child: Text("EXPENSE",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -222,9 +223,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   ],
                 ),
               ),
-            )
-
-
+            ),
 
 
 
