@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../Utils/colors.dart';
 import 'list_screen.dart';
@@ -10,11 +11,30 @@ class ExpenseScreen extends StatefulWidget {
   Function backPressCallback;
   ExpenseScreen(this.backPressCallback, {super.key});
 
+
   @override
   State<ExpenseScreen> createState() => _ExpenseScreenState();
 }
 
 class _ExpenseScreenState extends State<ExpenseScreen> {
+  late List<_ChartData> data;
+  late TooltipBehavior _tooltip;
+
+  @override
+  void initState() {
+    data = [
+      _ChartData('CHN', 12),
+      _ChartData('GER', 15),
+      _ChartData('RUS', 30),
+      _ChartData('BRZ', 6.4),
+      _ChartData('IND', 14)
+    ];
+
+    _tooltip = TooltipBehavior(enable: true);
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double main_Width = MediaQuery.of(context).size.width;
@@ -117,7 +137,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           borderRadius: BorderRadius.circular(12),
                           color: Color(0xFFF6E5DC)
                       ),
-
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -150,6 +169,172 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               ),
             ),
           ),
+
+      SizedBox(height: 15,),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Flexible(
+                  child: Text(
+                    "Expense",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
+                ),
+
+                InkWell(
+                  onTap: () async {
+
+                  },
+                  child: Material(
+                    elevation: 2,
+                    borderRadius: BorderRadius.circular(5),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding:const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: primaryPurple,
+                                width: 1
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 8,
+                                  spreadRadius: -2,
+                                  color: Color.fromARGB(255, 190, 190, 190),
+                                  blurStyle: BlurStyle.solid
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Text(
+                                "",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+
+                              SizedBox(width: 2,),
+
+                              IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(minWidth: 10, minHeight: 34),
+                                // constraints: const BoxConstraints(maxWidth: 50, maxHeight: 50),
+
+                                onPressed: null,
+                                disabledColor: Colors.black,
+                                // icon: Icon(
+                                //   Icons.calendar_month,
+                                // )
+                                icon: Image(image: AssetImage("assets/images/calender.png")),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            // const SizedBox(
+            //   height: 25,
+            // ),
+
+            SizedBox(
+              height: 300,
+              child: SfCartesianChart(
+                // enableAxisAnimation: true,
+                plotAreaBorderColor: Colors.transparent,
+                // tooltipBehavior: _tooltipBehaviorForBarGraph,
+
+                legend: Legend(
+                  isVisible: true,
+                  position: LegendPosition.bottom,
+                ),
+
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+
+                primaryXAxis: CategoryAxis(
+                  majorGridLines: const MajorGridLines(color: Colors.transparent),
+                  //interval: 2,
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.w500),
+                  //visibleMinimum: ((productionChartData?.actual?.length ?? 0) <= 5) ? 0 : 5,
+                  // visibleMaximum: ((productionChartData?.actual?.length ?? 0) <= 5) ? 4 : 5,
+                ),
+
+                primaryYAxis: CategoryAxis(),
+
+                // zoomPanBehavior: _zoomPanBehavior,
+
+
+                onSelectionChanged: (selectionArgs) {
+                  selectionArgs.selectedColor = Colors.red;
+                  print(selectionArgs.viewportPointIndex);
+                },
+
+                series: <ChartSeries>[
+                  /////
+                  ///
+                  /// TARGET PRODUCTION DATA FOR GRAPH
+                  ///
+                  /////
+                  ColumnSeries<_ChartData, String>(
+                    name: "Target",
+                    enableTooltip: true,
+                    // borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                    legendIconType: LegendIconType.rectangle,
+                    dataSource: data,
+                    xValueMapper: (_ChartData data, _) => data.x,
+                    yValueMapper: (_ChartData data, _) => data.y,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                    spacing: 0.3,
+                    width: 0.9,
+                    dataLabelSettings: const DataLabelSettings(
+                      // isVisible: true,
+
+                    ),
+                    onPointTap: (pointInteractionDetails) {
+                      print(pointInteractionDetails.pointIndex);
+                    },
+                    color: primaryOrange,
+                  ),
+                  /////
+                  ///
+                  /// ACTUAL PRODUCTION DATA FOR GRAPH
+                  ///
+                  /////
+                  ColumnSeries<_ChartData, String>(
+                    name: "Actual",
+                    legendIconType: LegendIconType.rectangle,
+                    dataSource: data,
+                    xValueMapper: (_ChartData data, _) => data.x,
+                    yValueMapper: (_ChartData data, _) => data.y,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                    spacing: 0.3,
+                    width: 0.9,
+                    color: primaryPurple,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
 
             Container(
               height: main_Height * 0.1,
@@ -231,4 +416,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       ),
     );
   }
+}
+
+class _ChartData {
+  _ChartData(this.x, this.y);
+
+  final String x;
+  final double y;
 }
