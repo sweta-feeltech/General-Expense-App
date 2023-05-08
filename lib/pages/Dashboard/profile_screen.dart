@@ -1,12 +1,12 @@
-import 'dart:io';
-
-import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
+import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
 
-import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
-
+import 'dart:math' as math;
+import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = 'profileScreen';
@@ -19,481 +19,265 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
-
-  final _picker = ImagePicker();
-
-  File? profilePic;
-
-
-  Future getImage() async {
-
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
-
-    if(pickedFile != null) {
-      profilePic = File(pickedFile.path);
-      setState(() {
-      });
-      print(profilePic);
-    } else {
-      print("No Image Selected");
-    }
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-    return Form(
-      key: _formkey,
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size(0,0),
+        child: AppBar(
 
-        backgroundColor: primaryGrey,
-        // resizeToAvoidBottomInset: false,
-        appBar:AppBar(
-          // centerTitle: false,
-          titleSpacing: 0,
-          backgroundColor: Color(0xFF0A1823),
-          // elevation: 0,
-          leading:   IconButton(
-            padding: EdgeInsets.zero,
-            constraints: BoxConstraints(minHeight: 20, minWidth: 20),
-            onPressed: () {
-              widget.backPressCallback.call();
-              // Navigator.of(context).pop("refresh");
-            },
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-          ),
-          title:    Text("Profile Page",
-            style:
-            TextStyle(color: Colors.white, fontSize: main_Height * 0.025),),
-
-        ),
-
-        bottomSheet: Container(
-          height: main_Height * 0.085,
-          width: main_Width * 1,
-          decoration: BoxDecoration(color: Colors.white),
-          child: Padding(
-            padding:
-            EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
-            child: Container(
-              height: main_Height * 0.06,
-              width: main_Width * 0.75,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  primary: Colors.blue,
-                ),
-                onPressed: () {
-
-                },
-                child: Text("Next",
-                  style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: main_Height * 0.018,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                ),
-              ),
-            ),
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            // Status bar color
+            statusBarColor: primaryPurple,
+            // Status bar brightness (optional)
+            statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+            statusBarBrightness: Brightness.light, // For iOS (dark icons)
           ),
         ),
+      ),
 
+      body: WillPopScope(
+        onWillPop: () async{
+          widget.backPressCallback.call();
+          return true;
+        },
+        child: RefreshIndicator(
+          onRefresh: () async {
 
-        body: SafeArea(
+          },
           child: SingleChildScrollView(
-            // physics: BouncingScrollPhysics(),
             child: Column(
               children: [
+                AppBar(
+                  centerTitle: false,
+                  titleSpacing: 0,
+                  backgroundColor: primaryPurple,
+                  // elevation: 10,
+                  leading:   IconButton(
+                    padding: EdgeInsets.zero,
+                    constraints: BoxConstraints(minHeight: 20, minWidth: 20),
+                    onPressed: () {
+                      widget.backPressCallback.call();
+                    },
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  ),
+                  title:  Text("Profile",
+                    style:
+                    TextStyle(color: Colors.white, fontSize: main_Height * 0.025),),
 
-
-
+                ),
+                Divider(thickness: 0.1,height: 0, indent: 0, endIndent: 0,color: primaryGrey,),
                 Container(
                   decoration: BoxDecoration(
-                      color: Color(0xFF0A1823),
-                      border: Border.all(
-                          width: 0,
-                          color: Color(0xFF0A1823)
-                      )
+                      color: primaryPurple
                   ),
-                  height: main_Height * 0.015,
-                ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: main_Height * 0.04,vertical: main_Height * 0.040),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: primaryGrey,
+                              ),
+                              child: ClipOval(
+                                child: Material(
+                                    child: Container(
+                                      height: main_Height * 0.06,
+                                      width: main_Height * 0.06,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          image:
 
-                Container(
-                  color: Color(0xFF0A1823),
-                  child: Stack(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xFF0A1823)
-                            ),
-                            height: main_Height * 0.07,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(width: 0,color: Colors.white),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0)
-                                ),
-                                color: Colors.white
-                            ),
-                            height: main_Height * 0.07,
-                          )
-                        ],
-                      ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.grey,
-                                ),
-                                child: ClipOval(
-                                  child: Material(
-                                      child: Container(
-                                        width: main_Height * 0.13,
-                                        height: main_Height * 0.13,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(7)
-                                        ),
-                                        child: Material(
-                                            color: Colors.transparent,
-                                            child:
-                                            ProfilePicture != null ?
-                                            profilePic == null ?
-                                            Ink.image(
-                                              image: NetworkImage("$ProfilePicture"),
-                                              fit: BoxFit.cover,
-                                              width: 120,
-                                              height: 120,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  getImage();
-                                                },
-                                              ),
-                                            ) :
-                                            GestureDetector(
-                                              onTap: () {
-                                                getImage();
-                                              },
-                                              child: Image.file(
-                                                File("${profilePic!.path}").absolute,
-                                                width: 120,
-                                                height: 120,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            )
-                                                : profilePic == null ?  Ink.image(
-                                              image: NetworkImage(
-                                                  "https://st2.depositphotos.com/1006318/5909/v/380/depositphotos_59095055-stock-illustration-profile-icon-male-avatar.jpg?forcejpeg=true"),
-                                              fit: BoxFit.cover,
-                                              width: 120,
-                                              height: 120,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  getImage();
-                                                },
-                                              ),
-                                            ) :
-                                            GestureDetector(
-                                              onTap: () {
-                                                getImage();
-                                              },
-                                              child: Image.file(
-                                                File("${profilePic!.path}").absolute,
-                                                width: 120,
-                                                height: 120,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            )
-                                        ),
-                                      )
-                                  ),
+                                          DecorationImage(
+                                            image: NetworkImage(
+                                                "https://st2.depositphotos.com/1006318/5909/v/380/depositphotos_59095055-stock-illustration-profile-icon-male-avatar.jpg?forcejpeg=true"),
+                                            fit: BoxFit.cover,
+
+                                          )
+
+                                      ),
+                                    )
                                 ),
                               ),
+                            ),
+                            SizedBox(
+                              width: main_Height * 0.015,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: main_Width * 0.4,
+                                  // child: Text("${widget.fname == "" ? appUserData!.firstName : widget.fname} ${widget.lname == "" ? appUserData!.lastName : widget.lname}",
+                                  child: Text("${Username}",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: main_Height * 0.0218,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          child: ElevatedButton(onPressed: () async {
 
+                            String refresh = await Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                                builder: (context) => EditProfileScreen((){})));
+                            if(refresh == "refresh"){
+                            }
+                          },
+                            child: Text("Edit Profile",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: main_Height * 0.015,
+                                  color: primaryPurple,
+                                  fontWeight: FontWeight.w500
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)
+                                  )
+                              ),
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            ),
+                          ),
+                        ),
 
-                            ],
-                          )
-                        ],)
-
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.05,),
-                  color: Colors.white,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.05),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Text("User Name",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.017,
-                                fontWeight: FontWeight.w600
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 5,),
-                      TextFormField(
-                        initialValue: "${Username}",
-                        // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
-                        style: TextStyle(
-                          fontSize: main_Height * 0.022,
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: main_Height * 0.01),
+                        child: Row(
+                          children: [
+                            Text("Account Settings ",
+                              style: TextStyle(
+                                letterSpacing: 0.5,
+                                fontSize: main_Height * 0.019,
+                                // fontSize: main_Height * 0.04,
+                                fontWeight: FontWeight.w600,
+                                color: darkGrey,
+                              ),
+                            )
+                          ],
                         ),
-                        // onSaved: (newValue) {
-                        //   firstName = newValue;
-                        // },
-                        // onChanged: (value){
-                        //   firstName = value;
-                        // },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'First Name can\'t be empty';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                          // filled: true,
-                          enabledBorder: OutlineInputBorder(
-
-                          ),
-                          // fillColor: ,
-                          hintText: "User Name",
-                          hintStyle:  TextStyle(
-                              color: Colors.grey,
-                              fontSize: main_Height * 0.018
-                          ),
-                          border: OutlineInputBorder(
-                            // borderSide:
-                            //     const BorderSide(color: Colors.transparent),
-                            // borderRadius: BorderRadius.circular(10)
-
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-
-
-                      Row(
-                        children: [
-                          Text("Email Address",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.017,
-                                fontWeight: FontWeight.w600
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 5,),
-                      TextFormField(
-                        initialValue: "${Email}",
-                        // initialValue: "${getProfileModelData?.email == null ? appUserData!.email : getProfileModelData!.email}",
-                        style: TextStyle(
-                          fontSize: main_Height * 0.022,
-                        ),
-                        // onSaved: (newValue) {
-                        //   email = newValue;
-                        // },
-                        // onChanged: (value){
-                        //   email = value;
-                        // },
-                        validator: (value) {
-                          RegExp regex = RegExp(
-                              "^[a-zA-Z0-9.a-zA-Z0-9.!#\$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                          if (value == null || value.isEmpty) {
-                            return 'Email can\'t be empty';
-                          } else if (!regex.hasMatch(value)) {
-                            return ("Please check your email address");
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                          // filled: true,
-                          enabledBorder: OutlineInputBorder(
-
-                          ),
-                          // fillColor: ,
-                          hintText: "Email Address",
-                          hintStyle:  TextStyle(
-                              color: Colors.grey,
-                              fontSize: main_Height * 0.018
-                          ),
-                          border: OutlineInputBorder(
-                            // borderSide:
-                            //     const BorderSide(color: Colors.transparent),
-                            // borderRadius: BorderRadius.circular(10)
-
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-
-
-                      Row(
-                        children: [
-                          Text("Mobile No.",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.017,
-                                fontWeight: FontWeight.w600
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 5,),
-                      TextFormField(
-                        // initialValue: "${Email}",
-                        // initialValue: "${getProfileModelData?.email == null ? appUserData!.email : getProfileModelData!.email}",
-                        style: TextStyle(
-                          fontSize: main_Height * 0.022,
-                        ),
-                        // onSaved: (newValue) {
-                        //   email = newValue;
-                        // },
-                        // onChanged: (value){
-                        //   email = value;
-                        // },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Mobile Number can\'t be empty';
-                          } else if (value.length != 10) {
-                            return 'Mobile Number should have atleast 10 digits';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                          // filled: true,
-                          enabledBorder: OutlineInputBorder(
-
-                          ),
-                          // fillColor: ,
-                          hintText: "Mobile No",
-                          hintStyle:  TextStyle(
-                              color: Colors.grey,
-                              fontSize: main_Height * 0.018
-                          ),
-                          border: OutlineInputBorder(
-                            // borderSide:
-                            //     const BorderSide(color: Colors.transparent),
-                            // borderRadius: BorderRadius.circular(10)
-
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-
-
-                      Row(
-                        children: [
-                          Text("Date of Birth",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.017,
-                                fontWeight: FontWeight.w600
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 5,),
-                      DateTimePicker(
-                        decoration: InputDecoration(
-                          contentPadding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                          // filled: true,
-                          enabledBorder: OutlineInputBorder(
-
-                          ),
-                          // fillColor: ,
-                          hintText: "Date of Birth",
-                          hintStyle:  TextStyle(
-                              color: Colors.grey,
-                              fontSize: main_Height * 0.018
-                          ),
-                          border: OutlineInputBorder(
-                            // borderSide:
-                            //     const BorderSide(color: Colors.transparent),
-                            // borderRadius: BorderRadius.circular(10)
-
-                          ),
-                        ),
-                        type: DateTimePickerType.date,
-                        dateMask: 'dd MMM, yyyy',
-                        // initialValue: "${getProfileModelData?.dob == null ? appUserData?.dob == null ? DateTime.now().toString() : appUserData?.dob : getProfileModelData?.dob}",
-                        // initialValue: "${appUserData!.dob}" == null ? DateTime.now().toString() : "${appUserData!.dob}",
-                        initialValue: DateTime.now().toString(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime.now(),
-                        // icon: Icon(Icons.event),
-                        // dateLabelText: 'Date',
-                        // timeLabelText: "Hour",
-                        onChanged: (val) => print(val),
-                        // validator: (val) {
-                        //   print(val);
-                        //   return null;
-                        // },
-                        // onSaved: (val) {
-                        //   dob = val;
-                        //
-                        // },
-                      ),
-                      const SizedBox(
-                        height: 15,
                       ),
 
 
                     ],
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(15),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Column(
+                        children: [
 
-                SizedBox(
-                  height: main_Height * 0.085,
-                  width: main_Width * 1,
-                )
+                          ListTile(
+                            onTap: () async{
+
+                              String refresh = await Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                                  builder: (context) => EditProfileScreen((){})));
+
+                              if(refresh == "refresh"){
+                              }
+                            },
+                            title: Row(
+                              children:  [
+                                SizedBox(width: 2),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.person,color: primaryPurple,),
+                                ),
+                                SizedBox(width: main_Height * 0.020,),
+                                Text("My Profile", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+
+                          Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+
+                          ListTile(
+                            onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen((){})));
+                            },
+                            title: Row(
+                              children:  [
+                                SizedBox(width: 2),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.book_outlined,color: primaryPurple,),
+                                ),
+                                SizedBox(width: main_Height * 0.020,),
+                                Text("Inventory", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+                          Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+
+                          ListTile(
+                            title: Row(
+                              children:  [
+                                SizedBox(width: 20,),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Transform(
+                                      transform:Matrix4.rotationY(math.pi),
+                                      child: Icon(Icons.logout,
+                                    color: primaryPurple,
+                                  ),
+                                  )
+                                ),
+                                Text("Logout", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500),),
+                              ],
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
 
               ],
             ),
           ),
+
         ),
+
       ),
+
     );
   }
 }

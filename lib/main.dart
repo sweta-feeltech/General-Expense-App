@@ -4,6 +4,7 @@ import 'package:general_expense_app/pages/Dashboard/bottom_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
@@ -71,6 +72,12 @@ class MyApp extends StatelessWidget {
     }
     if(settings.name == ProfileScreen.routeName) {
       return getMaterialPageRoute(ProfileScreen(
+              (){}
+
+      ));
+    }
+    if(settings.name == EditProfileScreen.routeName) {
+      return getMaterialPageRoute(EditProfileScreen(
               (){}
       ));
     }

@@ -37,7 +37,7 @@ class _NavDrawerState extends State<NavDrawer> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      backgroundColor: primaryPurple,
+      backgroundColor: Colors.white,
       body: Column(
         children: [
 
