@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../Utils/colors.dart';
+
 class CommonWidgets {
 
   static Widget CommonListView(BuildContext context) {
@@ -111,99 +113,83 @@ class CommonWidgets {
   }
 
 
-
-  static Widget CommonInventoryList(BuildContext context) {
+  static Widget CommonInventoryList(BuildContext context,
+      {int? index}
+      ) {
 
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
     return InkWell(
       onTap: () {
-
+        // Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>CategoryCoursesScreen(
+        //     "${courseCategoryModelData![index].id}"
+        // )));
+        // Navigator.of(context, rootNavigator: false).push(MaterialPageRoute(builder: (context) => new AllNuBeeRequestListScreen()));
       },
 
-      child: Card(
-        margin: const EdgeInsets.all(5),
-        clipBehavior: Clip.antiAlias,
-        shadowColor: const Color.fromARGB(255, 78, 78, 78),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Material(
-          elevation: 8,
-          child: Container(
-            decoration: const BoxDecoration(
-                color: Color.fromARGB(212, 245, 245, 245),
-                // borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                      color: Color.fromARGB(225, 241, 98, 120),
-                      // blurStyle: BlurStyle.normal
-                      blurStyle: BlurStyle.normal),
-                ]),
-            width: main_Width * 0.43,
-            // Details Of Main Card
-            child: Column(
-              children: [
-                // Main Image in card
-                Expanded(
-                  child: Container(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 3),
+        height: main_Height * 0.1,
+        width: main_Width * 0.25,
+        decoration: BoxDecoration(
+          // boxShadow: const [
+          // boxShadow: const [
+          //   BoxShadow(
+          //       blurRadius: 0.5, color: Colors.grey),
+          // ],
+            borderRadius: BorderRadius.circular(15),
+            color: getColor(index!,4)
+
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment:
+            MainAxisAlignment.center,
+            children: [
+              Container(
+                height: main_Height * 0.06,
+                width: main_Height * 0.06,
+                decoration: BoxDecoration(
                     color: Colors.white,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 8, right: 8, left: 8),
-                      child: Container(
-
-                        decoration: BoxDecoration(
-                            // color: getColor(index!, courseCategoryModelData!.length),
-                            borderRadius: BorderRadius.circular(10),
-                            // image: DecorationImage(
-                            //   image: courseCategoryModelData![index].categoryImg == null
-                            //       ? const AssetImage(
-                            //       "assets/images/image_not_found.png")
-                            //   as ImageProvider
-                            //       : NetworkImage(
-                            //       "$BASEIMAGEURL${courseCategoryModelData![index].categoryImg}"),
-                            //   fit: BoxFit.fill,
-                            // )
-
-                        ),
-                      ),
-                    ),
+                    borderRadius:
+                    BorderRadius.circular(10)),
+                // child: items.categoryImg != null ?
+                padding: EdgeInsets.all(5),
+            child :
+                  SvgPicture.asset("assets/images/icn.svg",
+                  fit: BoxFit.contain,
                   ),
-                ),
+              ),
+              SizedBox(
+                height: main_Height * 0.02,
+              ),
+              Column(
+           children: [
+             Text(
+               "Diffrent Places",
+               maxLines: 1,
+               // items.name.toString(),
+               overflow: TextOverflow.ellipsis,
+               style: TextStyle(
+                   color: Colors.black,
+                   fontWeight: FontWeight.w600,
+                   fontSize: main_Height * 0.014),
+             ),
 
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding:
-                    EdgeInsets.only(bottom: 8, right: 8, left: 8, top: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Diffrent Places",
-                          maxLines: 2,
-                          style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              // fontSize: 16
-                              fontSize: main_Height * 0.016),
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+             Text(
+               "7 Devices",
+               maxLines: 1,
+               // items.name.toString(),
+               overflow: TextOverflow.ellipsis,
+               style: TextStyle(
+                   color: darkGrey,
+                   fontWeight: FontWeight.w600,
+                   fontSize: main_Height * 0.014),
+             ),
+           ],
+         )
+            ],
           ),
         ),
       ),

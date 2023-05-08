@@ -45,19 +45,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size(0,0),
-        child: AppBar(
-
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            // Status bar color
-            statusBarColor: primaryPurple,
-            // Status bar brightness (optional)
-            statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-            statusBarBrightness: Brightness.light, // For iOS (dark icons)
-          ),
-        ),
-      ),
 
       body: WillPopScope(
         onWillPop: () async{
@@ -138,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Container(
                                   width: main_Width * 0.4,
                                   // child: Text("${widget.fname == "" ? appUserData!.firstName : widget.fname} ${widget.lname == "" ? appUserData!.lastName : widget.lname}",
-                                  child: Text("${Username}",
+                                  child: Text("User Name",
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: main_Height * 0.0218,

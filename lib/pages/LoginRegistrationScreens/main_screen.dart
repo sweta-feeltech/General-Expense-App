@@ -112,7 +112,12 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                 String? serviceAuth = value!.serverAuthCode;
                                 String? profilePicture = value.photoUrl;
                                 String? id = value!.id;
+                                print("serviceAuth;   $serviceAuth");
+                                print("id;   $id");
                                 print("profile;   $profilePicture");
+                                print("profile;   $profilePicture");
+                                // print("profile;   $profilePicture");
+                                // print("profile;   $profilePicture");
 
                                 AuthorizedUser = true;
 

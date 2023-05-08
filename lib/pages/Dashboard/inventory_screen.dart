@@ -43,25 +43,64 @@ class _InventoryScreenState extends State<InventoryScreen> {
         centerTitle: true,
       ),
 
-      body: Container(
-        width: main_Width,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(left: main_Width * 0.03,right: main_Width * 0.03),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-        child: GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          // physics: const NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          childAspectRatio: 6/7,
-          mainAxisSpacing: 4,
-          crossAxisSpacing: 4,
-          children: List.generate(
-                        8,
-                  (index) {
-                return CommonWidgets.CommonInventoryList(context);
-              }
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Inventories ",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.018,
+                        fontWeight: FontWeight.w500
+                    ),
+                  ),
+                  
+                  InkWell(
+                    onTap: (){
+
+
+                    },
+                    child: Container(
+                      height: main_Height * 0.05,
+                      width: main_Height * 0.05,
+                      child: SvgPicture.asset("assets/images/addI.svg",
+                      fit: BoxFit.fill,),
+                    ),
+                  )
+
+
+                ],
+              ),
+              Container(
+                height: main_Height * 0.75,
+                padding: EdgeInsets.symmetric(vertical: 2),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  childAspectRatio: 6/4.5,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  children: List.generate(
+                      10,
+                          (index) {
+                        return CommonWidgets.CommonInventoryList(context,index: index,);
+                      }
+                  ),
+                ),
+              )
+            ],
           ),
         ),
-
       ),
 
 
