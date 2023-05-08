@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
@@ -48,7 +49,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           IconButton(
             icon: Icon(
               Icons.notifications_none_outlined,
-              color: Colors.black,
+              color: Colors.white,
             ),
             onPressed: () {
               // Add your onPressed logic here
@@ -56,24 +57,24 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             },
           ),
         ],
-        leading: IconButton(
-          padding: EdgeInsets.zero,
-          constraints: BoxConstraints(minHeight: 20, minWidth: 20),
-          onPressed: () {
-            widget.backPressCallback.call();
-            // Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-        ),
-        titleSpacing: 0,
+        // leading: IconButton(
+        //   padding: EdgeInsets.zero,
+        //   constraints: BoxConstraints(minHeight: 20, minWidth: 20),
+        //   onPressed: () {
+        //     widget.backPressCallback.call();
+        //     // Navigator.of(context).pop();
+        //   },
+        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
+        // ),
+        titleSpacing: 15,
         title: Text(
           "Expense",
-          style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: primaryGrey,
+        backgroundColor: primaryPurple,
         elevation: 0,
-        centerTitle: true,
+        // centerTitle: true,
       ),
 
       body: SingleChildScrollView(
@@ -81,7 +82,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
            children: [
 
              Padding(
-            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03),
+            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -165,7 +166,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             ),
           ),
 
-             SizedBox(height: 15,),
+             // SizedBox(height: 15,),
 
              Padding(
         padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03),
@@ -184,63 +185,38 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   ),
                 ),
 
-                InkWell(
-                  onTap: () async {
+                Container(
+                  height: 35,
+                  width: 110,
+                  child: DateTimePicker(
+                    decoration: const InputDecoration(
+                      contentPadding:
+                      EdgeInsets.only(top: 5, bottom: 5, left: 8),
+                      // filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)
 
-                  },
-                  child: Material(
-                    elevation: 2,
-                    borderRadius: BorderRadius.circular(5),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding:const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                                color: primaryPurple,
-                                width: 1
-                            ),
-                            boxShadow: const [
-                              BoxShadow(
-                                  blurRadius: 8,
-                                  spreadRadius: -2,
-                                  color: Color.fromARGB(255, 190, 190, 190),
-                                  blurStyle: BlurStyle.solid
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Text(
-                                "",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500
-                                ),
-                              ),
+                      ),
+                      // fillColor: ,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)
+                        // borderSide:
+                        //     const BorderSide(color: Colors.transparent),
+                        // borderRadius: BorderRadius.circular(10)
 
-                              SizedBox(width: 2,),
-
-                              IconButton(
-                                padding: EdgeInsets.zero,
-                                constraints: BoxConstraints(minWidth: 10, minHeight: 34),
-                                // constraints: const BoxConstraints(maxWidth: 50, maxHeight: 50),
-
-                                onPressed: null,
-                                disabledColor: Colors.black,
-                                // icon: Icon(
-                                //   Icons.calendar_month,
-                                // )
-                                icon: Image(image: AssetImage("assets/images/calender.png")),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
+                    type: DateTimePickerType.date,
+                    dateMask: 'dd MMM, yyyy',
+                    initialValue: "${DateTime.now().toString()}",
+                   
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                    onChanged: (val) => print(val),
+                    validator: (val) {
+                      print(val);
+                      return null;
+                    },
                   ),
                 ),
               ],
@@ -361,9 +337,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               letterSpacing: 1,
-                              color: Color(0xFF959698),
+                              color: primaryPurple,
                               fontWeight: FontWeight.w600,
-                              fontSize: main_Height * 0.015,
+                              fontSize: main_Height * 0.018,
                             ),
                           ),
                         ),
@@ -391,14 +367,14 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               borderRadius: BorderRadius.circular(10)
                           ),
                           child: Center(
-                            child: Text("EXPENSE",
+                            child: Text("Expense",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 1,
-                                fontSize: main_Height * 0.015,
+                                fontSize: main_Height * 0.018,
                               ),
                             ),
                           ),
