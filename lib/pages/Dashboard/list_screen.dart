@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 
 
 class ListOfExpenses extends StatefulWidget {
@@ -129,7 +130,7 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
 
 
       body: Padding(
-        padding: EdgeInsets.only(bottom: main_Height * 0.1,left: main_Height * 0.02,right: main_Height * 0.02),
+        padding: EdgeInsets.only(bottom: main_Height * 0.1,),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -139,7 +140,7 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
 
 
               Padding(
-                padding: EdgeInsets.symmetric(vertical: main_Height * 0.008),
+                padding: EdgeInsets.symmetric(vertical: main_Height * 0.008,horizontal: main_Width * 0.03),
                 child: Row(children: [
                   Text("Last Added",
                   style: TextStyle(
@@ -160,107 +161,7 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
                 child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
-                      return   Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.006),
-                        child: Expanded(
-                          child: Container(
-                            height: main_Height * 0.09,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(13),
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-
-                                Container(
-                                  height: main_Height * 0.061,
-                                  width: main_Height * 0.061,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFEFEFF1),
-                                    borderRadius: BorderRadius.circular(13),
-                                  ),
-                                  child: Center(
-                                    child: SvgPicture.asset("assets/images/bankI.svg",
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: main_Width * 0.04,horizontal: main_Width * 0.03),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("Bank Transfer",
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              letterSpacing: 0.06,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: main_Height * 0.018
-                                          ),
-                                        ),
-
-
-                                        Row(
-                                          children: [
-                                            Text("25 Oct, 2022  ",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  letterSpacing: 1,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Color(0xFF959698),
-                                                  fontSize: main_Height * 0.017
-                                              ),
-                                            ),
-                                            SvgPicture.asset("assets/images/dot1.svg"),
-                                            Text(" 09:00 AM",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  letterSpacing: 1,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Color(0xFF959698),
-                                                  fontSize: main_Height * 0.017
-                                              ),
-                                            ),
-
-                                          ],
-                                        )
-
-
-
-
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-
-                                Container(
-                                  child: Center(
-                                    child: Text("+\$2800",
-                                      style: TextStyle(
-                                          letterSpacing: 0.6,
-                                          color: Color(0xFF25B07F),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: main_Height * 0.02
-                                      ),
-                                    ),
-                                  ),
-                                )
-
-
-                              ],
-                            ),
-
-                          ),
-                        ),
-                      );
+                      return   CommonWidgets.CommonListView(context);
 
                     }),
               ),
