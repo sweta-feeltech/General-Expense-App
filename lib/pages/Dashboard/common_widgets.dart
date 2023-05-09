@@ -11,7 +11,7 @@ class CommonWidgets {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-    return Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.006,horizontal: main_Width * 0.03),
+    return Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.03),
       child: Expanded(
         child: Container(
           height: main_Height * 0.09,
@@ -40,7 +40,7 @@ class CommonWidgets {
 
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: main_Width * 0.04,horizontal: main_Width * 0.03),
+                  padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +65,7 @@ class CommonWidgets {
                                 letterSpacing: 1,
                                 fontWeight: FontWeight.w300,
                                 color: Color(0xFF959698),
-                                fontSize: main_Height * 0.017
+                                fontSize: main_Height * 0.015
                             ),
                           ),
                           SvgPicture.asset("assets/images/dot1.svg"),
@@ -167,13 +167,13 @@ class CommonWidgets {
                 Column(
              children: [
                Text(
-                 "Diffrent Places",
+                 "Different Places",
                  maxLines: 1,
                  // items.name.toString(),
                  overflow: TextOverflow.ellipsis,
                  style: TextStyle(
                      color: Colors.black,
-                     fontWeight: FontWeight.w600,
+                     fontWeight: FontWeight.w500,
                      fontSize: main_Height * 0.014),
                ),
 
@@ -184,7 +184,7 @@ class CommonWidgets {
                  overflow: TextOverflow.ellipsis,
                  style: TextStyle(
                      color: darkGrey,
-                     fontWeight: FontWeight.w600,
+                     fontWeight: FontWeight.w500,
                      fontSize: main_Height * 0.014),
                ),
              ],

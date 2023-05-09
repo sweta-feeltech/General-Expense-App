@@ -72,7 +72,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: main_Height * 0.028,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 color: primaryOrange),
                           ),
                           Text(
@@ -97,7 +97,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: main_Height * 0.028,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 color: Colors.black),
                           ),
                         ],
@@ -165,12 +165,12 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     "Create Account",
                     style: TextStyle(
                         fontSize: main_Height < 700 ? 12 : 15,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
                 ),
               ),
-              SizedBox(height: 25,),
+              SizedBox(height: 15,),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -274,7 +274,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       fontSize: main_Height * 0.018,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
 
@@ -323,7 +323,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
               //     },
               //   ),
               // ),
-              SizedBox(height: 15,),
+              SizedBox(height: 10,),
 
               Center(child:
               Container(
@@ -344,7 +344,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       child: const Text(
                         "Log In",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           // color: Color(0xFFFF7622),
                           color: primaryPurple,
                           fontWeight: FontWeight.w500,
