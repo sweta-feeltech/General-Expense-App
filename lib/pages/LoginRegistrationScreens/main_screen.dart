@@ -79,7 +79,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                             " to start again",
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: main_Height * 0.030,
+                                fontSize: main_Height * 0.028,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),
                           ),
@@ -93,7 +93,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "authetic information",
+                            "authentic information",
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: main_Height * 0.028,
@@ -116,7 +116,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        "Please create an account or log in to access more \naunthethic information",
+                        "Please create an account or log in to access more \naunthenthic information",
                         textAlign: TextAlign.left,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

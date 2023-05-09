@@ -58,7 +58,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 "Create Account",
                 style: TextStyle(
                     fontSize: main_Height * 0.02,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                     color: Colors.white),
               ),
             ),
@@ -89,14 +89,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: main_Height * 0.028,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 color: primaryOrange),
                           ),
                           Text(
                             " to start again",
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: main_Height * 0.030,
+                                fontSize: main_Height * 0.028,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),
                           ),
@@ -107,11 +107,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "authetic information",
+                            "authentic information",
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: main_Height * 0.028,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 color: Colors.black),
                           ),
                         ],
@@ -129,7 +129,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        "Please create an account or log in to access more \naunthethic information",
+                        "Please create an account or log in to access more \naunthenthic information",
                         textAlign: TextAlign.left,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
