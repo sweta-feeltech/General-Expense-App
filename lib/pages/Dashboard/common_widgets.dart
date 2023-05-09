@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/pages/Dashboard/inventory_2_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 
 import '../../Utils/colors.dart';
 
@@ -122,6 +124,9 @@ class CommonWidgets {
 
     return InkWell(
       onTap: () {
+
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
+
         // Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>CategoryCoursesScreen(
         //     "${courseCategoryModelData![index].id}"
         // )));
@@ -195,6 +200,106 @@ class CommonWidgets {
       ),
     );
 
+  }
+
+
+  static Widget CommonShelfListView(BuildContext context) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Column(
+      children: [
+        Container(
+          height: main_Height * 0.07,
+          decoration: BoxDecoration(
+            color: primaryGrey,
+            // color: Colors.white,
+            // borderRadius: BorderRadius.circular(13),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: main_Width * 0.02,horizontal: main_Width * 0.03),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Bank Transfer",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 0.06,
+                            fontWeight: FontWeight.w500,
+                            fontSize: main_Height * 0.018
+                        ),
+                      ),
+
+
+                      Row(
+                        children: [
+                          Text("25 Oct, 2022  ",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xFF959698),
+                                fontSize: main_Height * 0.017
+                            ),
+                          ),
+                          SvgPicture.asset("assets/images/dot1.svg"),
+                          Text(" 09:00 AM",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xFF959698),
+                                fontSize: main_Height * 0.017
+                            ),
+                          ),
+
+                        ],
+                      )
+
+
+
+
+                    ],
+                  ),
+                ),
+              ),
+
+
+              Container(
+                child: Center(
+                  child: Text("+\$2800",
+                    style: TextStyle(
+                        letterSpacing: 0.6,
+                        color: Color(0xFF25B07F),
+                        fontWeight: FontWeight.w500,
+                        fontSize: main_Height * 0.02
+                    ),
+                  ),
+                ),
+              )
+
+
+            ],
+          ),
+
+        ),
+
+        Divider(
+          thickness: 1,
+          color: Colors.white,
+        )
+      ],
+    ) ;
   }
 
 

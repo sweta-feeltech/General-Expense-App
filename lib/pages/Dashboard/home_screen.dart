@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(
                                 children: [
                                   Container(
-                                    child: SvgPicture.asset("assets/images/up.svg",
+                                    child: SvgPicture.asset("assets/images/down.svg",
                                       clipBehavior: Clip.antiAlias,
                                       fit: BoxFit.fill,
                                     ),
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
 
                                     Container(
-                                      child: SvgPicture.asset("assets/images/down.svg",
+                                      child: SvgPicture.asset("assets/images/up.svg",
                                         clipBehavior: Clip.antiAlias,
                                         fit: BoxFit.fill,
                                       ),
