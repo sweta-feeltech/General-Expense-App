@@ -45,8 +45,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
-        // fontFamily: 'Poppins',
-        // fontFamily: 'PTSerif',
+        fontFamily: 'Poppins',
       ),
 
       initialRoute: ResponsiveLayout.routeName,
