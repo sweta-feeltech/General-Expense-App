@@ -128,7 +128,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 80,),
               Container(
                 width: main_Width * 0.75,
                 height: main_Height * 0.30,
@@ -139,7 +139,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     )
                 ),
               ),
-              SizedBox(height: 80,),
+              SizedBox(height: 100,),
               SizedBox(
                 height: main_Height * 0.060,
                 width: main_Width * 0.9,
@@ -148,12 +148,12 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
 
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)
+                        borderRadius: BorderRadius.circular(30)
                     ),
                     side: BorderSide(
                         style: BorderStyle.none
                     ),
-                    backgroundColor: primaryOrange,
+                    backgroundColor: primaryPurple,
                   ),
                   onPressed: () {
                     Navigator.of(context).pushNamedAndRemoveUntil(
@@ -171,7 +171,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 25,),
+              SizedBox(height: 20,),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -179,14 +179,14 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     Text("Or Signin With Google",
                       style: TextStyle(
                           fontSize: main_Height < 700 ? 12 : 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromARGB(100, 0, 0, 0)
+                          // fontWeight: FontWeight.w600,
+                          color: Colors.black
                       ),
                     ),
 
                    ]
               ),
-              SizedBox(height: 15,),
+              SizedBox(height: 10,),
 
               Center(
                 child:Container(
@@ -199,13 +199,14 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       height: main_Height * 0.06,
                       width: main_Width * 0.75,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        color: primaryPurple,
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
 
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                           primary: Colors.white,
                         ),
@@ -270,7 +271,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                 ),
 
 
-                                Text("Sign with Google",
+                                Text("Google",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       fontSize: main_Height * 0.018,
@@ -288,41 +289,42 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: main_Height * 0.060,
-                width: main_Width * 0.9,
-                child: OutlinedButton(
-                  child: Text(
-                    "Login with OTP",
-                    style: TextStyle(
-                        fontSize: main_Height < 700 ? 12 : 15,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white),
-                  ),
-
-                  style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)
-                    ),
-                    side: BorderSide(
-                        style: BorderStyle.none
-                    ),
-                    backgroundColor: primaryOrange,
-                  ),
-                  onPressed: () {
-                    ////
-                    // Here, we are assigning true to IsGuest Because This Button will be pressed before login so it will be consider as a guest.
-                    ////
-                    // IsGuest = true;
-                    // // StartStepperPage = true;
-                    //
-                    // // Navigator.pushNamed(context, FundraiserStepperPage.routeName);
-                    // Navigator.of(context).pushNamed(NewFundraiserStepperPage.routeName);
-                  },
-                ),
-              ),
+              // SizedBox(
+              //   height: main_Height * 0.060,
+              //   width: main_Width * 0.9,
+              //   child: OutlinedButton(
+              //     child: Text(
+              //       "Login with OTP",
+              //       style: TextStyle(
+              //           fontSize: main_Height < 700 ? 12 : 15,
+              //           fontWeight: FontWeight.w700,
+              //           color: Colors.white),
+              //     ),
+              //
+              //     style: OutlinedButton.styleFrom(
+              //       padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              //
+              //       shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(30)
+              //       ),
+              //       side: BorderSide(
+              //           style: BorderStyle.none
+              //       ),
+              //       backgroundColor: primaryPurple,
+              //     ),
+              //     onPressed: () {
+              //       ////
+              //       // Here, we are assigning true to IsGuest Because This Button will be pressed before login so it will be consider as a guest.
+              //       ////
+              //       // IsGuest = true;
+              //       // // StartStepperPage = true;
+              //       //
+              //       // // Navigator.pushNamed(context, FundraiserStepperPage.routeName);
+              //       // Navigator.of(context).pushNamed(NewFundraiserStepperPage.routeName);
+              //     },
+              //   ),
+              // ),
+              SizedBox(height: 30,),
 
               Center(child:
               Container(
