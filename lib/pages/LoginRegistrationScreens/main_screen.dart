@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -185,7 +185,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
               Center(
                 child:Container(
-                  height: main_Height * 0.080,
+                  height: main_Height * 0.085,
                   width: main_Width * 1,
                   child: Padding(
                     padding:
@@ -196,8 +196,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                       ),
-
-                      child: OutlinedButton(
+                      child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
 
                           shape: RoundedRectangleBorder(
@@ -334,8 +333,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     ),
                     TextButton(
                       onPressed: () => {
-
-
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RegistrationScreen()))
                       },
                       child: const Text(
                         "Log In",

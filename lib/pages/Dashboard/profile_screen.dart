@@ -11,7 +11,7 @@ import '../LoginRegistrationScreens/splash_screen.dart';
 import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  static String routeName = 'profileScreen';
+  static String routeName = '/profileScreen';
   Function backPressCallback;
 
   ProfileScreen(this.backPressCallback,{super.key});

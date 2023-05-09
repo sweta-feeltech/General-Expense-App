@@ -4,6 +4,7 @@ import '../../Utils/colors.dart';
 
 
 class AddInventoryScreen extends StatefulWidget {
+  static String routeName = 'addInventoryScreen';
   const AddInventoryScreen({Key? key}) : super(key: key);
 
   @override

@@ -14,6 +14,16 @@ class InventoryScreen extends StatefulWidget {
 }
 
 class _InventoryScreenState extends State<InventoryScreen> {
+
+  bool _bottomSheetVisible = false;
+
+  void _toggleBottomSheet() {
+    setState(() {
+      _bottomSheetVisible = !_bottomSheetVisible;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double main_Width = MediaQuery.of(context).size.width;
@@ -53,7 +63,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Inventories ",
+                  Text("Add Inventories ",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -66,6 +76,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   InkWell(
                     onTap: (){
 
+                      _toggleBottomSheet();
 
                     },
                     child: Container(
@@ -103,6 +114,24 @@ class _InventoryScreenState extends State<InventoryScreen> {
           ),
         ),
       ),
+
+
+        bottomSheet: Visibility(
+          visible: _bottomSheetVisible,
+          child: Container(
+            height: 200,
+            color: Colors.grey[300],
+            child: Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  _toggleBottomSheet();
+
+                },
+                child: Text("close"),
+              ),
+            ),
+          ),
+        )
 
 
 
