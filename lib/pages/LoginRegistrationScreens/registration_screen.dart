@@ -37,19 +37,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             height: main_Height * 0.060,
             width: main_Width * 0.9,
             child: OutlinedButton(
-              child: Text(
-                "Create Account",
-                style: TextStyle(
-                    fontSize: main_Height * 0.02,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white),
-              ),
               style: OutlinedButton.styleFrom(
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0)),
+                    borderRadius: BorderRadius.circular(30)),
                 side: BorderSide(style: BorderStyle.none),
-                backgroundColor: primaryOrange,
+                backgroundColor: primaryPurple,
               ),
               onPressed: () {
                 if (validateAndSave()) {
@@ -61,6 +54,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 }
 
               },
+              child: Text(
+                "Create Account",
+                style: TextStyle(
+                    fontSize: main_Height * 0.02,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
+              ),
             ),
           ),
         ),
@@ -72,8 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: main_Width * 0.03, vertical: main_Height * 0.04),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -142,60 +141,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ],
                 ),
 
-                // Column(
-                //   children: [
-                //     Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         Text(
-                //           "Sign Up",
-                //           maxLines: 1,
-                //           overflow: TextOverflow.ellipsis,
-                //           style: TextStyle(
-                //               fontSize: main_Height * 0.026,
-                //               fontWeight: FontWeight.w600,
-                //               color: Colors.black),
-                //         ),
-                //         InkWell(
-                //           onTap: (){
-                //             Navigator.of(context).pop();
-                //             // Navigator.of(context).pushNamedAndRemoveUntil(MainPageScreen.routeName, (route) => false);
-                //           },
-                //           child: Text(
-                //             "Cancel",
-                //             maxLines: 1,
-                //             overflow: TextOverflow.ellipsis,
-                //             style: TextStyle(
-                //                 fontSize: main_Height * 0.018,
-                //                 fontWeight: FontWeight.w600,
-                //                 color: primaryOrange),
-                //           ),
-                //         )
-                //       ],
-                //     ),
-                //     SizedBox(
-                //       height: main_Height * 0.02,
-                //     ),
-                //     Text(
-                //         "Please create an account or log in to access more aunthethic information, Lorem Ipsum is simply dummy text of the.",
-                //         maxLines: 4,
-                //         overflow: TextOverflow.ellipsis,
-                //         style: TextStyle(
-                //           height: 1.5,
-                //           fontSize: main_Height * 0.020,
-                //           color: Colors.grey,
-                //         )),
-                //   ],
-                // ),
+
 
                 SizedBox(
                   height: main_Height * 0.04,
                 ),
 
-
                 Container(
                   width: main_Width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       // color: Color.fromARGB(255, 240, 240, 240),
                       color: Colors.transparent,
                       // borderRadius: BorderRadius.circular(10)
@@ -204,100 +158,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     key: _formkey,
                     child: Column(
                       children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        //   children: [
-                        //     Flexible(
-                        //       child: TextFormField(
-                        //           onSaved: (onSavedVal) {
-                        //             firstName = onSavedVal;
-                        //           },
-                        //           validator: (value) {
-                        //             if (value == null || value.isEmpty) {
-                        //               return 'First Name can\'t be empty';
-                        //             }
-                        //             return null;
-                        //           },
-                        //           decoration: InputDecoration(
-                        //             floatingLabelBehavior:
-                        //                 FloatingLabelBehavior.never,
-                        //             hintText: "First Name",
-                        //             hintStyle: TextStyle(
-                        //                 fontWeight: FontWeight.w400,
-                        //                 color: darkGrey,
-                        //                 fontSize: main_Height * 0.020),
-                        //             prefixIcon: SizedBox(
-                        //                 width: 5,
-                        //                 height: 5,
-                        //                 child: IconButton(
-                        //                   icon: Icon(
-                        //                     Icons.person,
-                        //                     size: main_Height * 0.03,
-                        //                     color: primaryPurple,
-                        //                   ),
-                        //                   onPressed: null,
-                        //                   alignment: Alignment.bottomLeft,
-                        //                 )),
-                        //             contentPadding:
-                        //                 EdgeInsets.only(top: 18, bottom: 0),
-                        //             enabledBorder:
-                        //                 ThemeHelper.signupMyInputBorder(),
-                        //             focusedBorder:
-                        //                 ThemeHelper.signupMyFocusedBorder(),
-                        //           ),
-                        //           textInputAction: TextInputAction.next),
-                        //     ),
-                        //     SizedBox(
-                        //       width: 15,
-                        //     ),
-                        //     Flexible(
-                        //       child: TextFormField(
-                        //           onSaved: (onSavedVal) {
-                        //             lastName = onSavedVal;
-                        //           },
-                        //           validator: (value) {
-                        //             if (value == null || value.isEmpty) {
-                        //               return 'Last Name can\'t be empty';
-                        //             }
-                        //             return null;
-                        //           },
-                        //           decoration: InputDecoration(
-                        //             floatingLabelBehavior:
-                        //                 FloatingLabelBehavior.never,
-                        //
-                        //             hintText: "Last Name",
-                        //             hintStyle: TextStyle(
-                        //                 fontWeight: FontWeight.w400,
-                        //                 color: darkGrey,
-                        //                 fontSize: main_Height * 0.020),
-                        //             prefixIcon: SizedBox(
-                        //                 width: 5,
-                        //                 height: 5,
-                        //                 child: IconButton(
-                        //                   icon: Icon(
-                        //                     Icons.person,
-                        //                     size: main_Height * 0.03,
-                        //                     color: primaryPurple,
-                        //                   ),
-                        //                   onPressed: null,
-                        //                   alignment: Alignment.bottomLeft,
-                        //                 )),
-                        //             contentPadding:
-                        //                 EdgeInsets.only(top: 18, bottom: 0),
-                        //             enabledBorder:
-                        //                 ThemeHelper.signupMyInputBorder(),
-                        //             focusedBorder:
-                        //                 ThemeHelper.signupMyFocusedBorder(),
-                        //             // errorBorder: ThemeHelper.enableerrorBorder(),
-                        //             // focusedErrorBorder: ThemeHelper.enablefocuserrorBorder(),
-                        //             errorStyle:
-                        //                 TextStyle(color: Colors.redAccent),
-                        //           ),
-                        //           textInputAction: TextInputAction.next),
-                        //     ),
-                        //   ],
-                        // ),
-
                         TextFormField(
                             onSaved: (onSavedVal) {
                               firstName = onSavedVal;
