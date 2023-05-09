@@ -15,7 +15,7 @@ class CommonWidgets {
           height: main_Height * 0.09,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(10),
           ),
           padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
           child: Row(
@@ -27,7 +27,7 @@ class CommonWidgets {
                 width: main_Height * 0.061,
                 decoration: BoxDecoration(
                   color: Color(0xFFEFEFF1),
-                  borderRadius: BorderRadius.circular(13),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: SvgPicture.asset("assets/images/bankI.svg",
@@ -120,32 +120,22 @@ class CommonWidgets {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-    return InkWell(
-      onTap: () {
-        // Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>CategoryCoursesScreen(
-        //     "${courseCategoryModelData![index].id}"
-        // )));
-        // Navigator.of(context, rootNavigator: false).push(MaterialPageRoute(builder: (context) => new AllNuBeeRequestListScreen()));
-      },
+    return Material(
+      borderRadius: BorderRadius.circular(7),
+      elevation: 3,
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Container(
+          // padding: EdgeInsets.all(10),
+          height: main_Height * 0.1,
+          width: main_Width * 0.25,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7),
+              color: getColor(index!,4)
 
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 3),
-        height: main_Height * 0.1,
-        width: main_Width * 0.25,
-        decoration: BoxDecoration(
-          // boxShadow: const [
-          // boxShadow: const [
-          //   BoxShadow(
-          //       blurRadius: 0.5, color: Colors.grey),
-          // ],
-            borderRadius: BorderRadius.circular(15),
-            color: getColor(index!,4)
-
-        ),
-        child: Center(
+          ),
           child: Column(
-            mainAxisAlignment:
-            MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 height: main_Height * 0.06,
@@ -153,7 +143,7 @@ class CommonWidgets {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
-                    BorderRadius.circular(10)),
+                    BorderRadius.circular(15)),
                 // child: items.categoryImg != null ?
                 padding: EdgeInsets.all(5),
             child :
@@ -188,7 +178,7 @@ class CommonWidgets {
                    fontSize: main_Height * 0.014),
              ),
            ],
-         )
+           )
             ],
           ),
         ),

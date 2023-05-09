@@ -45,18 +45,18 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     return Scaffold(
       backgroundColor: primaryGrey,
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // Add your onPressed logic here
-              ///for notification
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.notifications_none_outlined,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () {
+        //       // Add your onPressed logic here
+        //       ///for notification
+        //     },
+        //   ),
+        // ],
         // leading: IconButton(
         //   padding: EdgeInsets.zero,
         //   constraints: BoxConstraints(minHeight: 20, minWidth: 20),

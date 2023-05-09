@@ -64,7 +64,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/wall.png",
                   ),
@@ -108,10 +108,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                 login();
 
                                 String username = value!.displayName!;
-                                String? email = value!.email;
-                                String? serviceAuth = value!.serverAuthCode;
+                                String? email = value.email;
+                                String? serviceAuth = value.serverAuthCode;
                                 String? profilePicture = value.photoUrl;
-                                String? id = value!.id;
+                                String? id = value.id;
                                 print("serviceAuth;   $serviceAuth");
                                 print("id;   $id");
                                 print("profile;   $profilePicture");
@@ -182,7 +182,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Already have an account ",
                       style: TextStyle(
                         fontSize: 16,
@@ -194,7 +194,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
 
                       },
-                      child: Text(
+                      child: const Text(
                         "Log In",
                         style: TextStyle(
                           fontSize: 18,

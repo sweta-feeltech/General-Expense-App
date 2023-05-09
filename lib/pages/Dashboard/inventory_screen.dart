@@ -35,7 +35,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
         titleSpacing: 15,
         title: Text(
           "Inventory",
-          style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
         ),
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
@@ -79,7 +79,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
 
                 ],
               ),
-              SizedBox(height: 5,),
+              SizedBox(height: 10,),
               Container(
                 height: main_Height * 0.75,
                 padding: EdgeInsets.symmetric(vertical: 2),

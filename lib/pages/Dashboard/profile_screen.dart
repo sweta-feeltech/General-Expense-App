@@ -60,37 +60,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 AppBar(
                   centerTitle: false,
-                  titleSpacing: 0,
+                  titleSpacing: 15,
                   backgroundColor: primaryPurple,
                   // elevation: 10,
-                  leading:   IconButton(
-                    padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(minHeight: 20, minWidth: 20),
-                    onPressed: () {
-                      widget.backPressCallback.call();
-                    },
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  ),
+                  // leading:   IconButton(
+                  //   padding: EdgeInsets.zero,
+                  //   constraints: BoxConstraints(minHeight: 20, minWidth: 20),
+                  //   onPressed: () {
+                  //     widget.backPressCallback.call();
+                  //   },
+                  //   icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  // ),
                   title:  Text("Profile",
                     style:
                     TextStyle(color: Colors.white, fontSize: main_Height * 0.025),),
 
                 ),
-                Divider(thickness: 0.1,height: 0, indent: 0, endIndent: 0,color: primaryGrey,),
+                const Divider(thickness: 0.1,height: 0.1, indent: 0, endIndent: 0,color: primaryGrey,),
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: primaryPurple
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: main_Height * 0.04,vertical: main_Height * 0.040),
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
                             Container(
-                              padding: EdgeInsets.all(3),
-                              decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(3),
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: primaryGrey,
                               ),
@@ -102,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(10.0),
                                           image:
-                                          DecorationImage(
+                                          const DecorationImage(
                                             image: AssetImage(
                                                 "assets/images/profile.png"),
                                             fit: BoxFit.cover,
@@ -147,14 +147,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             if(refresh == "refresh"){
                             }
                           },
-                            child: Text("Edit Profile",
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: main_Height * 0.015,
-                                  color: primaryPurple,
-                                  fontWeight: FontWeight.w500
-                              ),
-                            ),
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
@@ -163,6 +155,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                             ),
+                            child: Text("Edit Profile",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: main_Height * 0.015,
+                                  color: primaryPurple,
+                                  fontWeight: FontWeight.w500
+                              ),
+                            ),
                           ),
                         ),
 
@@ -170,39 +170,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.05),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: main_Height * 0.01),
-                        child: Row(
-                          children: [
-                            Text("Account Settings ",
-                              style: TextStyle(
-                                letterSpacing: 0.5,
-                                fontSize: main_Height * 0.019,
-                                // fontSize: main_Height * 0.04,
-                                fontWeight: FontWeight.w600,
-                                color: darkGrey,
-                              ),
-                            )
-                          ],
-                        ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Row(
+                        children: [
+                          Text("Account Settings ",
+                            style: TextStyle(
+                              letterSpacing: 0.5,
+                              fontSize: main_Height * 0.019,
+                              // fontSize: main_Height * 0.04,
+                              fontWeight: FontWeight.w600,
+                              color: darkGrey,
+                            ),
+                          )
+                        ],
                       ),
+                    ),
 
 
-                    ],
-                  ),
+                  ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Material(
                     elevation: 5,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
                         children: [
@@ -218,8 +215,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             },
                             title: Row(
                               children:  [
-                                SizedBox(width: 2),
-                                Align(
+                                const SizedBox(width: 2),
+                                const Align(
                                   alignment: Alignment.center,
                                   child: Icon(Icons.person,color: primaryPurple,),
                                 ),
@@ -229,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
 
-                          Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
 
                           ListTile(
                             onTap: (){
@@ -238,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             title: Row(
                               children:  [
                                 SizedBox(width: 2),
-                                Align(
+                                const Align(
                                   alignment: Alignment.center,
                                   child: Icon(Icons.book_outlined,color: primaryPurple,),
                                 ),
@@ -247,7 +244,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                           ),
-                          Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
 
                           ListTile(
                             onTap: (){
@@ -260,7 +257,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   alignment: Alignment.center,
                                   child: Transform(
                                       transform:Matrix4.rotationY(math.pi),
-                                      child: Icon(Icons.logout,
+                                      child: const Icon(Icons.logout,
                                     color: primaryPurple,
                                   ),
                                   )

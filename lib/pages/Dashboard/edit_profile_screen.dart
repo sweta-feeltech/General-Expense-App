@@ -67,7 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             // elevation: 0,
             leading:   IconButton(
               padding: EdgeInsets.zero,
-              constraints: BoxConstraints(minHeight: 20, minWidth: 20),
+              constraints: const BoxConstraints(minHeight: 20, minWidth: 20),
               onPressed: () {
                 Navigator.of(context).pop();
                 // widget.backPressCallback.call();
@@ -84,7 +84,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           bottomSheet: Container(
             height: main_Height * 0.085,
             width: main_Width * 1,
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: const BoxDecoration(color: Colors.white),
             child: Padding(
               padding:
               EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
@@ -144,7 +144,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         Column(
                           children: [
                             Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   color: primaryPurple
                               ),
                               height: main_Height * 0.07,
@@ -152,7 +152,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Container(
                               decoration: BoxDecoration(
                                   border: Border.all(width: 0,color: Colors.white),
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(30.0),
                                       topRight: Radius.circular(30.0)
                                   ),
@@ -169,8 +169,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Stack(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.grey,
                                   ),
@@ -203,14 +203,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                   getImage();
                                                 },
                                                 child: Image.file(
-                                                  File("${profilePic!.path}").absolute,
+                                                  File(profilePic!.path).absolute,
                                                   width: 120,
                                                   height: 120,
                                                   fit: BoxFit.cover,
                                                 ),
                                               )
                                                   : profilePic == null ?  Ink.image(
-                                                image: AssetImage(
+                                                image: const AssetImage(
                                                     "assets/images/profile.png"),
                                                 fit: BoxFit.cover,
                                                 width: 120,
@@ -226,7 +226,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                   getImage();
                                                 },
                                                 child: Image.file(
-                                                  File("${profilePic!.path}").absolute,
+                                                  File(profilePic!.path).absolute,
                                                   width: 120,
                                                   height: 120,
                                                   fit: BoxFit.cover,
@@ -286,7 +286,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             contentPadding:
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
 
                             ),
                             // fillColor: ,
@@ -295,7 +295,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 color: Colors.grey,
                                 fontSize: main_Height * 0.018
                             ),
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                               // borderSide:
                               //     const BorderSide(color: Colors.transparent),
                               // borderRadius: BorderRadius.circular(10)
@@ -346,7 +346,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             contentPadding:
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
 
                             ),
                             // fillColor: ,
@@ -355,7 +355,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 color: Colors.grey,
                                 fontSize: main_Height * 0.018
                             ),
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                               // borderSide:
                               //     const BorderSide(color: Colors.transparent),
                               // borderRadius: BorderRadius.circular(10)
@@ -404,7 +404,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             contentPadding:
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
 
                             ),
                             // fillColor: ,
@@ -413,7 +413,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 color: Colors.grey,
                                 fontSize: main_Height * 0.018
                             ),
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                               // borderSide:
                               //     const BorderSide(color: Colors.transparent),
                               // borderRadius: BorderRadius.circular(10)
@@ -443,7 +443,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             contentPadding:
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
 
                             ),
                             // fillColor: ,
@@ -452,7 +452,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 color: Colors.grey,
                                 fontSize: main_Height * 0.018
                             ),
-                            border: OutlineInputBorder(
+                            border: const OutlineInputBorder(
                               // borderSide:
                               //     const BorderSide(color: Colors.transparent),
                               // borderRadius: BorderRadius.circular(10)

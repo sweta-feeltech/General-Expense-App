@@ -65,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       body:SingleChildScrollView(
-        child: Column(
+        child:
+        Column(
           children: [
 
             // Padding(
@@ -105,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             //   ),
             // ),
 
-            Padding(padding: EdgeInsets.symmetric(horizontal: main_Height * 0.02),
+            Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Stack(
                 children: [
 
@@ -282,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
             Padding(
-              padding: EdgeInsets.symmetric(vertical: main_Height * 0.015,horizontal: main_Height * 0.02),
+              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -298,6 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
+                    color: Colors.black,
                       letterSpacing: 1,
                       fontSize: main_Height * 0.016,
                       fontWeight: FontWeight.w200
