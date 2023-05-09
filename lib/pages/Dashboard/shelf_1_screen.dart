@@ -61,7 +61,6 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
         body: Column(
           children: [
 
-
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
               child: Row(
@@ -101,8 +100,8 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
                     "assets/images/down1.svg",
                     fit: BoxFit.fill,
                   ),
-                headerBorderRadius: 5.0,
-                contentBorderRadius: 5.0,
+                headerBorderRadius: 20.0,
+                contentBorderRadius: 20.0,
                 headerBackgroundColor: Colors.black12,
                 contentBackgroundColor: Colors.white,
                 paddingListTop: 0,
