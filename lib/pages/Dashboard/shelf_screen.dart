@@ -44,7 +44,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
           // ),
           titleSpacing: 15,
           title: Text(
-            "Shelf1",
+            "Shelf",
             style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
           ),
           automaticallyImplyLeading: false,
@@ -61,7 +61,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Add Shelf 1",
+                  Text("Add Shelf",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

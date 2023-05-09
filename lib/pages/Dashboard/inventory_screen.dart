@@ -15,14 +15,6 @@ class InventoryScreen extends StatefulWidget {
 
 class _InventoryScreenState extends State<InventoryScreen> {
 
-  bool _bottomSheetVisible = false;
-
-  void _toggleBottomSheet() {
-    setState(() {
-      _bottomSheetVisible = !_bottomSheetVisible;
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,85 +45,65 @@ class _InventoryScreenState extends State<InventoryScreen> {
         // centerTitle: true,
       ),
 
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(left: main_Width * 0.03,right: main_Width * 0.03, top: 10,),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Add Inventories ",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: main_Height * 0.021,
-                        fontWeight: FontWeight.w500
-                    ),
-                  ),
-                  
-                  InkWell(
-                    onTap: (){
-
-                      _toggleBottomSheet();
-
-                    },
-                    child: Container(
-                      height: main_Height * 0.05,
-                      width: main_Height * 0.05,
-                      child: SvgPicture.asset("assets/images/addI.svg",
-                      fit: BoxFit.fill,),
-                    ),
-                  )
-
-
-                ],
-              ),
-              SizedBox(height: 10,),
-              Container(
-                height: main_Height * 0.75,
-                padding: EdgeInsets.symmetric(vertical: 2),
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  // physics: const NeverScrollableScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  childAspectRatio: 6/4.5,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  children: List.generate(
-                      10,
-                          (index) {
-                        return CommonWidgets.CommonInventoryList(context,index: index,);
-                      }
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Add Inventories",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: 1,
+                      fontSize: main_Height * 0.021,
+                      fontWeight: FontWeight.w500
                   ),
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
+
+                InkWell(
+                  onTap: (){
 
 
-        bottomSheet: Visibility(
-          visible: _bottomSheetVisible,
-          child: Container(
-            height: 200,
-            color: Colors.grey[300],
-            child: Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _toggleBottomSheet();
+                  },
+                  child: Container(
+                    height: main_Height * 0.05,
+                    width: main_Height * 0.05,
+                    child: SvgPicture.asset("assets/images/addI.svg",
+                      fit: BoxFit.fill,),
+                  ),
+                )
 
-                },
-                child: Text("close"),
-              ),
+
+              ],
             ),
           ),
-        )
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+              child: GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                // physics: const NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                childAspectRatio: 6/4.5,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                children: List.generate(
+                    10,
+                        (index) {
+                      return CommonWidgets.CommonInventoryList(context,index: index,);
+                    }
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+
 
 
 

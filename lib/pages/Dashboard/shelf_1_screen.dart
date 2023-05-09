@@ -58,84 +58,151 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
           // centerTitle: true,
         ),
 
-        body: Accordion(
-            rightIcon: SvgPicture.asset(
-              "assets/images/down1.svg",
-              fit: BoxFit.fill,
+        body: Column(
+          children: [
+
+
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Add Shelf 1",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.021,
+                        fontWeight: FontWeight.w500
+                    ),
+                  ),
+
+                  InkWell(
+                    onTap: (){
+
+
+                    },
+                    child: Container(
+                      height: main_Height * 0.05,
+                      width: main_Height * 0.05,
+                      child: SvgPicture.asset("assets/images/addI.svg",
+                        fit: BoxFit.fill,),
+                    ),
+                  )
+
+
+                ],
+              ),
             ),
-          headerBorderRadius: 5.0,
-          contentBorderRadius: 5.0,
-          headerBackgroundColor: Colors.white,
-          contentBackgroundColor: primaryOrange,
-          paddingListTop: 0,
-          paddingListBottom: 0,
-          maxOpenSections: 3,
-          headerTextStyle: TextStyle(
-              color: Colors.black,
-              fontSize: main_Height * 0.019,
-              fontWeight: FontWeight.w500),
-          leftIcon: Icon(Icons.home_filled,
-              color: Colors.black),
-          children: [
 
-            for(int i = 0; i <= 15; i ++)
+            Expanded(
+              child: Accordion(
+                  rightIcon: SvgPicture.asset(
+                    "assets/images/down1.svg",
+                    fit: BoxFit.fill,
+                  ),
+                headerBorderRadius: 5.0,
+                contentBorderRadius: 5.0,
+                headerBackgroundColor: Colors.black12,
+                contentBackgroundColor: Colors.white,
+                paddingListTop: 0,
+                paddingListBottom: 0,
+                maxOpenSections: 2,
+                headerTextStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: main_Height * 0.019,
+                    fontWeight: FontWeight.w500),
+                leftIcon: Icon(Icons.home_filled,
+                    color: Colors.black),
+                children: [
 
-         AccordionSection(headerText:"Place",
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+                  for(int i = 0; i <= 15; i ++)
 
-
-            Text("Things",
-                  style :  TextStyle(
+               AccordionSection(headerText:"Places",
+              content:   Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  // border: Border.all(color: Colors.black,width: 2)
+                ),
+                padding: EdgeInsets.all(5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
                       color: Colors.black,
-                      fontSize: main_Height * 0.019,
-                      fontWeight: FontWeight.w500)),
-            Divider(
-              color: Colors.black,
-              height: 2,
+                      height: 2,
+                    ),
+
+
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      height: 2,
+                    ),
+
+
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      height: 2,
+                    ),
+
+
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      height: 2,
+                    ),
+
+
+                  ],
+                ),
+              ))
+
+
+
+
+                ],
+              ),
             ),
-
-            Text("Things",
-                style :  TextStyle(
-                    color: Colors.black,
-                    fontSize: main_Height * 0.019,
-                    fontWeight: FontWeight.w500)),
-            Divider(
-              color: Colors.white,
-              height: 2,
-            ),
-
-            Text("Things",
-                style :  TextStyle(
-                    color: Colors.black,
-                    fontSize: main_Height * 0.019,
-                    fontWeight: FontWeight.w500)),
-            Divider(
-              color: Colors.white,
-              height: 2,
-            ),
-
-            Text("Things",
-                style :  TextStyle(
-                    color: Colors.black,
-                    fontSize: main_Height * 0.019,
-                    fontWeight: FontWeight.w500)),
-            Divider(
-              color: Colors.white,
-              height: 2,
-            ),
-
-
-
-
-
-          ],
-        ))
-
-
-
-
           ],
         ),
 
