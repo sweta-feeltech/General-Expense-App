@@ -128,6 +128,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ],
                 ),
               ),
+
               SizedBox(height: 20,),
               Container(
                 width: main_Width * 0.75,
@@ -156,9 +157,8 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     backgroundColor: primaryOrange,
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      RegistrationScreen.routeName, (route) => false,
-                    );
+                    Navigator.of(context).pushNamed(
+                      RegistrationScreen.routeName);
 
 
                   },

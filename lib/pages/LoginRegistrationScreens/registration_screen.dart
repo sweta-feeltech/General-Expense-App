@@ -65,58 +65,129 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
         ),
       ),
+
+
+
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: main_Width * 0.03, vertical: main_Height * 0.02),
+                horizontal: main_Width * 0.03, vertical: main_Height * 0.04),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Sign Up",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: main_Height * 0.026,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        ),
-                        InkWell(
-                          onTap: (){
-                            Navigator.of(context).pushNamedAndRemoveUntil(MainPageScreen.routeName, (route) => false);
-                          },
-                          child: Text(
-                            "Cancle",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+
+                Container(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Sign Up",
+                            maxLines: 2,
                             style: TextStyle(
-                                fontSize: main_Height * 0.018,
+                                fontSize: main_Height * 0.028,
                                 fontWeight: FontWeight.w600,
                                 color: primaryOrange),
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: main_Height * 0.02,
-                    ),
+                          Text(
+                            " to start again",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.030,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "authetic information",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.028,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                        "Please create an account or log in to access more aunthethic information, Lorem Ipsum is simply dummy text of the.",
-                        maxLines: 4,
+                        "Please create an account or log in to access more \naunthethic information",
+                        textAlign: TextAlign.left,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           height: 1.5,
-                          fontSize: main_Height * 0.020,
+                          fontSize: main_Height * 0.0155,
                           color: Colors.grey,
                         )),
                   ],
                 ),
+
+                // Column(
+                //   children: [
+                //     Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         Text(
+                //           "Sign Up",
+                //           maxLines: 1,
+                //           overflow: TextOverflow.ellipsis,
+                //           style: TextStyle(
+                //               fontSize: main_Height * 0.026,
+                //               fontWeight: FontWeight.w600,
+                //               color: Colors.black),
+                //         ),
+                //         InkWell(
+                //           onTap: (){
+                //             Navigator.of(context).pop();
+                //             // Navigator.of(context).pushNamedAndRemoveUntil(MainPageScreen.routeName, (route) => false);
+                //           },
+                //           child: Text(
+                //             "Cancel",
+                //             maxLines: 1,
+                //             overflow: TextOverflow.ellipsis,
+                //             style: TextStyle(
+                //                 fontSize: main_Height * 0.018,
+                //                 fontWeight: FontWeight.w600,
+                //                 color: primaryOrange),
+                //           ),
+                //         )
+                //       ],
+                //     ),
+                //     SizedBox(
+                //       height: main_Height * 0.02,
+                //     ),
+                //     Text(
+                //         "Please create an account or log in to access more aunthethic information, Lorem Ipsum is simply dummy text of the.",
+                //         maxLines: 4,
+                //         overflow: TextOverflow.ellipsis,
+                //         style: TextStyle(
+                //           height: 1.5,
+                //           fontSize: main_Height * 0.020,
+                //           color: Colors.grey,
+                //         )),
+                //   ],
+                // ),
+
                 SizedBox(
                   height: main_Height * 0.04,
                 ),
@@ -127,104 +198,191 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   decoration: BoxDecoration(
                       // color: Color.fromARGB(255, 240, 240, 240),
                       color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(10)),
+                      // borderRadius: BorderRadius.circular(10)
+                  ),
                   child: Form(
                     key: _formkey,
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Flexible(
-                              child: TextFormField(
-                                  onSaved: (onSavedVal) {
-                                    firstName = onSavedVal;
-                                  },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'First Name can\'t be empty';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                    hintText: "First Name",
-                                    hintStyle: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        color: darkGrey,
-                                        fontSize: main_Height * 0.020),
-                                    prefixIcon: SizedBox(
-                                        width: 5,
-                                        height: 5,
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.person,
-                                            size: main_Height * 0.03,
-                                            color: primaryPurple,
-                                          ),
-                                          onPressed: null,
-                                          alignment: Alignment.bottomLeft,
-                                        )),
-                                    contentPadding:
-                                        EdgeInsets.only(top: 18, bottom: 0),
-                                    enabledBorder:
-                                        ThemeHelper.signupMyInputBorder(),
-                                    focusedBorder:
-                                        ThemeHelper.signupMyFocusedBorder(),
-                                  ),
-                                  textInputAction: TextInputAction.next),
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Flexible(
-                              child: TextFormField(
-                                  onSaved: (onSavedVal) {
-                                    lastName = onSavedVal;
-                                  },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Last Name can\'t be empty';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //     Flexible(
+                        //       child: TextFormField(
+                        //           onSaved: (onSavedVal) {
+                        //             firstName = onSavedVal;
+                        //           },
+                        //           validator: (value) {
+                        //             if (value == null || value.isEmpty) {
+                        //               return 'First Name can\'t be empty';
+                        //             }
+                        //             return null;
+                        //           },
+                        //           decoration: InputDecoration(
+                        //             floatingLabelBehavior:
+                        //                 FloatingLabelBehavior.never,
+                        //             hintText: "First Name",
+                        //             hintStyle: TextStyle(
+                        //                 fontWeight: FontWeight.w400,
+                        //                 color: darkGrey,
+                        //                 fontSize: main_Height * 0.020),
+                        //             prefixIcon: SizedBox(
+                        //                 width: 5,
+                        //                 height: 5,
+                        //                 child: IconButton(
+                        //                   icon: Icon(
+                        //                     Icons.person,
+                        //                     size: main_Height * 0.03,
+                        //                     color: primaryPurple,
+                        //                   ),
+                        //                   onPressed: null,
+                        //                   alignment: Alignment.bottomLeft,
+                        //                 )),
+                        //             contentPadding:
+                        //                 EdgeInsets.only(top: 18, bottom: 0),
+                        //             enabledBorder:
+                        //                 ThemeHelper.signupMyInputBorder(),
+                        //             focusedBorder:
+                        //                 ThemeHelper.signupMyFocusedBorder(),
+                        //           ),
+                        //           textInputAction: TextInputAction.next),
+                        //     ),
+                        //     SizedBox(
+                        //       width: 15,
+                        //     ),
+                        //     Flexible(
+                        //       child: TextFormField(
+                        //           onSaved: (onSavedVal) {
+                        //             lastName = onSavedVal;
+                        //           },
+                        //           validator: (value) {
+                        //             if (value == null || value.isEmpty) {
+                        //               return 'Last Name can\'t be empty';
+                        //             }
+                        //             return null;
+                        //           },
+                        //           decoration: InputDecoration(
+                        //             floatingLabelBehavior:
+                        //                 FloatingLabelBehavior.never,
+                        //
+                        //             hintText: "Last Name",
+                        //             hintStyle: TextStyle(
+                        //                 fontWeight: FontWeight.w400,
+                        //                 color: darkGrey,
+                        //                 fontSize: main_Height * 0.020),
+                        //             prefixIcon: SizedBox(
+                        //                 width: 5,
+                        //                 height: 5,
+                        //                 child: IconButton(
+                        //                   icon: Icon(
+                        //                     Icons.person,
+                        //                     size: main_Height * 0.03,
+                        //                     color: primaryPurple,
+                        //                   ),
+                        //                   onPressed: null,
+                        //                   alignment: Alignment.bottomLeft,
+                        //                 )),
+                        //             contentPadding:
+                        //                 EdgeInsets.only(top: 18, bottom: 0),
+                        //             enabledBorder:
+                        //                 ThemeHelper.signupMyInputBorder(),
+                        //             focusedBorder:
+                        //                 ThemeHelper.signupMyFocusedBorder(),
+                        //             // errorBorder: ThemeHelper.enableerrorBorder(),
+                        //             // focusedErrorBorder: ThemeHelper.enablefocuserrorBorder(),
+                        //             errorStyle:
+                        //                 TextStyle(color: Colors.redAccent),
+                        //           ),
+                        //           textInputAction: TextInputAction.next),
+                        //     ),
+                        //   ],
+                        // ),
 
-                                    hintText: "Last Name",
-                                    hintStyle: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        color: darkGrey,
-                                        fontSize: main_Height * 0.020),
-                                    prefixIcon: SizedBox(
-                                        width: 5,
-                                        height: 5,
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.person,
-                                            size: main_Height * 0.03,
-                                            color: primaryPurple,
-                                          ),
-                                          onPressed: null,
-                                          alignment: Alignment.bottomLeft,
-                                        )),
-                                    contentPadding:
-                                        EdgeInsets.only(top: 18, bottom: 0),
-                                    enabledBorder:
-                                        ThemeHelper.signupMyInputBorder(),
-                                    focusedBorder:
-                                        ThemeHelper.signupMyFocusedBorder(),
-                                    // errorBorder: ThemeHelper.enableerrorBorder(),
-                                    // focusedErrorBorder: ThemeHelper.enablefocuserrorBorder(),
-                                    errorStyle:
-                                        TextStyle(color: Colors.redAccent),
-                                  ),
-                                  textInputAction: TextInputAction.next),
+                        TextFormField(
+                            onSaved: (onSavedVal) {
+                              firstName = onSavedVal;
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'First Name can\'t be empty';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                              hintText: "First Name",
+                              hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: darkGrey,
+                                  fontSize: main_Height * 0.020),
+                              prefixIcon: SizedBox(
+                                  width: 5,
+                                  height: 5,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.person,
+                                      size: main_Height * 0.03,
+                                      color: primaryPurple,
+                                    ),
+                                    onPressed: null,
+                                    alignment: Alignment.bottomLeft,
+                                  )),
+                              contentPadding:
+                              EdgeInsets.only(top: 18, bottom: 0),
+                              enabledBorder:
+                              ThemeHelper.signupMyInputBorder(),
+                              focusedBorder:
+                              ThemeHelper.signupMyFocusedBorder(),
                             ),
-                          ],
+                            textInputAction: TextInputAction.next),
+
+                        SizedBox(
+                          height: main_Height * 0.016,
                         ),
+                        TextFormField(
+                            onSaved: (onSavedVal) {
+                              lastName = onSavedVal;
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Last Name can\'t be empty';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+
+                              hintText: "Last Name",
+                              hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: darkGrey,
+                                  fontSize: main_Height * 0.020),
+                              prefixIcon: SizedBox(
+                                  width: 5,
+                                  height: 5,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.person,
+                                      size: main_Height * 0.03,
+                                      color: primaryPurple,
+                                    ),
+                                    onPressed: null,
+                                    alignment: Alignment.bottomLeft,
+                                  )),
+                              contentPadding:
+                              EdgeInsets.only(top: 18, bottom: 0),
+                              enabledBorder:
+                              ThemeHelper.signupMyInputBorder(),
+                              focusedBorder:
+                              ThemeHelper.signupMyFocusedBorder(),
+                              // errorBorder: ThemeHelper.enableerrorBorder(),
+                              // focusedErrorBorder: ThemeHelper.enablefocuserrorBorder(),
+                              errorStyle:
+                              TextStyle(color: Colors.redAccent),
+                            ),
+                            textInputAction: TextInputAction.next),
                         SizedBox(
                           height: main_Height * 0.016,
                         ),
@@ -387,19 +545,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               errorStyle: TextStyle(color: Colors.redAccent),
                             ),
                             textInputAction: TextInputAction.done),
-                        SizedBox(
-                          height: main_Height * 0.032,
-                        )
+
+
+
+
                       ],
                     ),
                   ),
                 ),
 
 
-
                 SizedBox(
                   height: main_Height * 0.1,
-                )
+                ),
+
               ],
             ),
           ),
