@@ -122,66 +122,71 @@ class CommonWidgets {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-    return Material(
-      borderRadius: BorderRadius.circular(7),
-      elevation: 3,
-      child: Padding(
-        padding: EdgeInsets.all(5),
-        child: Container(
-          // padding: EdgeInsets.all(10),
-          height: main_Height * 0.1,
-          width: main_Width * 0.25,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(7),
-              color: getColor(index!,4)
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
+      },
+      child: Material(
+        borderRadius: BorderRadius.circular(7),
+        elevation: 3,
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: Container(
+            // padding: EdgeInsets.all(10),
+            height: main_Height * 0.1,
+            width: main_Width * 0.25,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                color: getColor(index!,4)
 
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: main_Height * 0.06,
-                width: main_Height * 0.06,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                    BorderRadius.circular(15)),
-                // child: items.categoryImg != null ?
-                padding: EdgeInsets.all(5),
-            child :
-                  SvgPicture.asset("assets/images/icn.svg",
-                  fit: BoxFit.contain,
-                  ),
-              ),
-              SizedBox(
-                height: main_Height * 0.02,
-              ),
-              Column(
-           children: [
-             Text(
-               "Diffrent Places",
-               maxLines: 1,
-               // items.name.toString(),
-               overflow: TextOverflow.ellipsis,
-               style: TextStyle(
-                   color: Colors.black,
-                   fontWeight: FontWeight.w600,
-                   fontSize: main_Height * 0.014),
-             ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: main_Height * 0.06,
+                  width: main_Height * 0.06,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                      BorderRadius.circular(15)),
+                  // child: items.categoryImg != null ?
+                  padding: EdgeInsets.all(5),
+              child :
+                    SvgPicture.asset("assets/images/icn.svg",
+                    fit: BoxFit.contain,
+                    ),
+                ),
+                SizedBox(
+                  height: main_Height * 0.02,
+                ),
+                Column(
+             children: [
+               Text(
+                 "Diffrent Places",
+                 maxLines: 1,
+                 // items.name.toString(),
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyle(
+                     color: Colors.black,
+                     fontWeight: FontWeight.w600,
+                     fontSize: main_Height * 0.014),
+               ),
 
-             Text(
-               "7 Devices",
-               maxLines: 1,
-               // items.name.toString(),
-               overflow: TextOverflow.ellipsis,
-               style: TextStyle(
-                   color: darkGrey,
-                   fontWeight: FontWeight.w600,
-                   fontSize: main_Height * 0.014),
-             ),
-           ],
-           )
-            ],
+               Text(
+                 "7 Devices",
+                 maxLines: 1,
+                 // items.name.toString(),
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyle(
+                     color: darkGrey,
+                     fontWeight: FontWeight.w600,
+                     fontSize: main_Height * 0.014),
+               ),
+             ],
+             )
+              ],
+            ),
           ),
         ),
       ),
