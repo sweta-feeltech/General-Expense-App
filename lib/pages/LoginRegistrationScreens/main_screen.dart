@@ -156,9 +156,8 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     backgroundColor: primaryPurple,
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      RegistrationScreen.routeName, (route) => false,
-                    );
+                    Navigator.of(context).pushNamed(
+                      RegistrationScreen.routeName);
 
 
                   },
@@ -171,7 +170,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 25,),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
