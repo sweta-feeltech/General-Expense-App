@@ -156,6 +156,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     backgroundColor: primaryOrange,
                   ),
                   onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      RegistrationScreen.routeName, (route) => false,
+                    );
+
 
                   },
                   child: Text(

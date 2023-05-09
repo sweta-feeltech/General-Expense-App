@@ -8,8 +8,10 @@ import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:general_expense_app/pages/Widgets/nav_drawer.dart';
 import 'package:general_expense_app/responsive/responsive_layout.dart';
@@ -101,8 +103,16 @@ class MyApp extends StatelessWidget {
       return getMaterialPageRoute(ListOfExpenses());
     }
 
-    if(settings.name == ShelfListScreen.routeName) {
-      return getMaterialPageRoute(ShelfListScreen());
+    if(settings.name == ShelfScreen.routeName) {
+      return getMaterialPageRoute(ShelfScreen());
+    }
+    if(settings.name == Shelf1Screen.routeName) {
+      return getMaterialPageRoute(Shelf1Screen());
+    }
+
+
+    if(settings.name == RegistrationScreen.routeName) {
+      return getMaterialPageRoute(RegistrationScreen());
     }
 
 

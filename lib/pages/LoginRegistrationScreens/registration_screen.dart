@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
 
 import '../../Utils/constants.dart';
 import '../Dashboard/bottom_bar.dart';
 import '../Widgets/theme_helper.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  static String routeName = '/registrationScreen';
+
   const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
@@ -86,7 +89,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pushNamedAndRemoveUntil(MainPageScreen.routeName, (route) => false);
                           },
                           child: Text(
                             "Cancle",

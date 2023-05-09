@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 
 import '../../Utils/colors.dart';
 
@@ -123,6 +124,10 @@ class CommonWidgets {
 
     return InkWell(
       onTap: (){
+        Navigator.of(context).pushNamed(
+          ShelfScreen.routeName
+        );
+
         // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
       },
       child: Material(
@@ -203,7 +208,11 @@ class CommonWidgets {
       children: [
         InkWell(
           onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ShelfListScreen()));
+
+            Navigator.of(context).pushNamed(
+                Shelf1Screen.routeName
+            );
+
           },
           child: Container(
             height: main_Height * 0.05,
