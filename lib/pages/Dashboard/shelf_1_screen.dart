@@ -103,11 +103,11 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
                   ),
                 headerBorderRadius: 5.0,
                 contentBorderRadius: 5.0,
-                headerBackgroundColor: Colors.white,
-                contentBackgroundColor: primaryOrange,
+                headerBackgroundColor: Colors.black12,
+                contentBackgroundColor: Colors.white,
                 paddingListTop: 0,
                 paddingListBottom: 0,
-                maxOpenSections: 3,
+                maxOpenSections: 2,
                 headerTextStyle: TextStyle(
                     color: Colors.black,
                     fontSize: main_Height * 0.019,
@@ -118,57 +118,83 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
 
                   for(int i = 0; i <= 15; i ++)
 
-               AccordionSection(headerText:"Place",
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+               AccordionSection(headerText:"Places",
+              content:   Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  // border: Border.all(color: Colors.black,width: 2)
+                ),
+                padding: EdgeInsets.all(5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      height: 2,
+                    ),
 
 
-                  Text("Things",
-                        style :  TextStyle(
-                            color: Colors.black,
-                            fontSize: main_Height * 0.019,
-                            fontWeight: FontWeight.w500)),
-                  Divider(
-                    color: Colors.black,
-                    height: 2,
-                  ),
-
-                  Text("Things",
-                      style :  TextStyle(
-                          color: Colors.black,
-                          fontSize: main_Height * 0.019,
-                          fontWeight: FontWeight.w500)),
-                  Divider(
-                    color: Colors.white,
-                    height: 2,
-                  ),
-
-                  Text("Things",
-                      style :  TextStyle(
-                          color: Colors.black,
-                          fontSize: main_Height * 0.019,
-                          fontWeight: FontWeight.w500)),
-                  Divider(
-                    color: Colors.white,
-                    height: 2,
-                  ),
-
-                  Text("Things",
-                      style :  TextStyle(
-                          color: Colors.black,
-                          fontSize: main_Height * 0.019,
-                          fontWeight: FontWeight.w500)),
-                  Divider(
-                    color: Colors.white,
-                    height: 2,
-                  ),
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      height: 2,
+                    ),
 
 
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      height: 2,
+                    ),
 
 
+                    Row(
+                      children: [
+                        Text("Things ",
+                            style :  TextStyle(
+                                color: Colors.black,
+                                fontSize: main_Height * 0.019,
+                                fontWeight: FontWeight.w500)),
+                        Icon(Icons.access_alarm)
+                      ],
+                    ),
+                    Divider(
+                      color: Colors.black,
+                      height: 2,
+                    ),
 
-                ],
+
+                  ],
+                ),
               ))
 
 
