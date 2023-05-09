@@ -46,12 +46,12 @@ class _InventoryScreen2State extends State<InventoryScreen2> {
       ),
 
       body:   ListView.builder(
-          itemCount: 7,
+          itemCount: 25,
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
-            return   CommonWidgets.CommonShelfListView(context);
+            return CommonWidgets.CommonShelfListView(context);
           }),
 
 

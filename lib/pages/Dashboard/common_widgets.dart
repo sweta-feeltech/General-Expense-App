@@ -200,98 +200,41 @@ class CommonWidgets {
     double main_Height = MediaQuery.of(context).size.height;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: main_Height * 0.07,
-          decoration: BoxDecoration(
-            color: primaryGrey,
-            // color: Colors.white,
-            // borderRadius: BorderRadius.circular(13),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: main_Width * 0.02,horizontal: main_Width * 0.03),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Bank Transfer",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 0.06,
-                            fontWeight: FontWeight.w500,
-                            fontSize: main_Height * 0.018
-                        ),
-                      ),
-
-
-                      Row(
-                        children: [
-                          Text("25 Oct, 2022  ",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
-                                fontSize: main_Height * 0.017
-                            ),
-                          ),
-                          SvgPicture.asset("assets/images/dot1.svg"),
-                          Text(" 09:00 AM",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
-                                fontSize: main_Height * 0.017
-                            ),
-                          ),
-
-                        ],
-                      )
-
-
-
-
-                    ],
+        InkWell(
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ShelfListScreen()));
+          },
+          child: Container(
+            height: main_Height * 0.05,
+            decoration: BoxDecoration(
+              color: primaryGrey,
+              // color: Colors.white,
+              // borderRadius: BorderRadius.circular(13),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+            child: Center(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text("Places : Some Demo Text",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: 0.06,
+                      fontWeight: FontWeight.w500,
+                      fontSize: main_Height * 0.018
                   ),
                 ),
               ),
+            ),
 
-
-              Container(
-                child: Center(
-                  child: Text("+\$2800",
-                    style: TextStyle(
-                        letterSpacing: 0.6,
-                        color: Color(0xFF25B07F),
-                        fontWeight: FontWeight.w500,
-                        fontSize: main_Height * 0.02
-                    ),
-                  ),
-                ),
-              )
-
-
-            ],
           ),
-
         ),
-
-        Divider(
-          thickness: 1,
-          color: Colors.white,
-        )
+        Divider(height: 3,color: Colors.white,
+          endIndent: 0,indent: 0,)
       ],
-    ) ;
+    );
   }
 
 
