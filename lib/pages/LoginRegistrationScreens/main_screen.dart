@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -191,8 +192,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     ),
                     TextButton(
                       onPressed: () => {
-
-
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RegistrationScreen()))
                       },
                       child: const Text(
                         "Log In",

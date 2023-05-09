@@ -9,7 +9,7 @@ import '../../Utils/constants.dart';
 
 
 class EditProfileScreen extends StatefulWidget {
-  static String routeName = 'profileScreen';
+  static String routeName = '/editProfileScreen';
   Function backPressCallback;
 
   EditProfileScreen(this.backPressCallback,{super.key});

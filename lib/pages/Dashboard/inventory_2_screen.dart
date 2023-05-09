@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../Utils/colors.dart';
 import 'common_widgets.dart';
 
 
 class InventoryScreen2 extends StatefulWidget {
+  static String routeName = '/inventoryScreen2';
   const InventoryScreen2({Key? key}) : super(key: key);
 
   @override
@@ -45,14 +47,54 @@ class _InventoryScreen2State extends State<InventoryScreen2> {
         // centerTitle: true,
       ),
 
-      body:   ListView.builder(
-          itemCount: 25,
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (BuildContext context, int index) {
-            return CommonWidgets.CommonShelfListView(context);
-          }),
+      body:   Column(
+        children: [
+
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Add Shelf 1",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: 1,
+                      fontSize: main_Height * 0.021,
+                      fontWeight: FontWeight.w500
+                  ),
+                ),
+
+                InkWell(
+                  onTap: (){
+
+
+                  },
+                  child: Container(
+                    height: main_Height * 0.05,
+                    width: main_Height * 0.05,
+                    child: SvgPicture.asset("assets/images/addI.svg",
+                      fit: BoxFit.fill,),
+                  ),
+                )
+
+
+              ],
+            ),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+                itemCount: 25,
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) {
+                  return CommonWidgets.CommonShelfListView(context);
+                }),
+          ),
+        ],
+      ),
 
 
 

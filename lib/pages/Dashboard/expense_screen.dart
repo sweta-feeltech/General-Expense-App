@@ -9,7 +9,7 @@ import '../../Utils/colors.dart';
 import 'list_screen.dart';
 
 class ExpenseScreen extends StatefulWidget {
-  static String routeName = 'ExpenseScreen';
+  static String routeName = '/expenseScreen';
   Function backPressCallback;
   ExpenseScreen(this.backPressCallback, {super.key});
 

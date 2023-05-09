@@ -5,6 +5,7 @@ import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 
 
 class ListOfExpenses extends StatefulWidget {
+  static String routeName = '/listOfExpenses';
   const ListOfExpenses({Key? key}) : super(key: key);
 
   @override

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/inventory_2_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:general_expense_app/pages/Widgets/nav_drawer.dart';
@@ -87,9 +91,34 @@ class MyApp extends StatelessWidget {
     if(settings.name == InventoryScreen.routeName) {
       return getMaterialPageRoute(InventoryScreen((){}));
     }
+    if(settings.name == AddInventoryScreen.routeName) {
+      return getMaterialPageRoute(AddInventoryScreen());
+    }
     if(settings.name == NavDrawer.routeName) {
       return getMaterialPageRoute(NavDrawer());
     }
+
+    if(settings.name == InventoryScreen2.routeName) {
+      return getMaterialPageRoute(InventoryScreen2());
+    }
+    if(settings.name == ListOfExpenses.routeName) {
+      return getMaterialPageRoute(ListOfExpenses());
+    }
+
+    if(settings.name == ShelfListScreen.routeName) {
+      return getMaterialPageRoute(ShelfListScreen());
+    }
+
+
+
+    if(settings.name == EditProfileScreen.routeName) {
+      return getMaterialPageRoute(EditProfileScreen(
+        (){
+
+        }
+      ));
+    }
+
 }
 
   static MaterialPageRoute getMaterialPageRoute(
