@@ -146,6 +146,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 SizedBox(
                   height: main_Height * 0.04,
                 ),
+                Center(
+                  child: Container(
+                    width: main_Width * 0.60,
+                    height: main_Height * 0.25,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/1.png",),
+                            fit: BoxFit.fill
+                        )
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10,),
 
                 Container(
                   width: main_Width,
