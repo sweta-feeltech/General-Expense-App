@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 
 import '../../Utils/colors.dart';
 
@@ -124,7 +123,7 @@ class CommonWidgets {
 
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
+        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
       },
       child: Material(
         borderRadius: BorderRadius.circular(7),
