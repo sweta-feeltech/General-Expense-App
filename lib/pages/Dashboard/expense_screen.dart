@@ -69,7 +69,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         titleSpacing: 15,
         title: Text(
           "Expense",
-          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
@@ -181,7 +181,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     "Expense",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                 ),
 
@@ -191,7 +191,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   child: DateTimePicker(
                     decoration: const InputDecoration(
                       contentPadding:
-                      EdgeInsets.only(top: 5, bottom: 5, left: 8),
+                      EdgeInsets.only(top: 5, bottom: 5, left: 5, ),
                       // filled: true,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black)
@@ -338,7 +338,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             style: TextStyle(
                               letterSpacing: 1,
                               color: primaryPurple,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                               fontSize: main_Height * 0.018,
                             ),
                           ),
@@ -372,7 +372,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 letterSpacing: 1,
                                 fontSize: main_Height * 0.018,
                               ),

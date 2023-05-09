@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
 
                   Container(
-                        height: main_Height * 0.2,
+                        height: main_Height * 0.21,
                     child: SvgPicture.asset("assets/images/Card1.svg",
                       clipBehavior: Clip.antiAlias,
                       fit: BoxFit.fill,
@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     height: main_Height * 0.2,
                     padding: EdgeInsets.symmetric(
-                      vertical: main_Height * 0.023,
+                      vertical: main_Height * 0.018,
                       horizontal:  main_Height * 0.023
                     ),
                     child: Column(
@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: main_Height * 0.033,
+                                    fontSize: main_Height * 0.028,
                                   ),
                                 ),
 
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
 
                                   SizedBox(
-                                    width: main_Width * 0.03,
+                                    width: main_Width * 0.02,
                                   ),
 
                                   Column(

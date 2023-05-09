@@ -45,7 +45,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
         titleSpacing: 15,
         title: Text(
           "Inventory",
-          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,

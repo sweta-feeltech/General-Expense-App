@@ -77,7 +77,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             title:    Text("Edit Profile",
               style:
-              TextStyle(color: Colors.white, fontSize: main_Height * 0.025),),
+              TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
 
           ),
 
@@ -110,7 +110,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     style: TextStyle(
                         letterSpacing: 1,
                         fontSize: main_Height * 0.018,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w500,
                         color: Colors.white),
                   ),
                 ),
@@ -254,8 +254,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Text("User Name",
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: main_Height * 0.017,
-                                  fontWeight: FontWeight.w600
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500
                               ),
                             )
                           ],
@@ -310,8 +310,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Text("Email Address",
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: main_Height * 0.017,
-                                  fontWeight: FontWeight.w600
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500
                               ),
                             )
                           ],
@@ -370,8 +370,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Text("Mobile No.",
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: main_Height * 0.017,
-                                  fontWeight: FontWeight.w600
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500
                               ),
                             )
                           ],
@@ -428,8 +428,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Text("Date of Birth",
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: main_Height * 0.017,
-                                  fontWeight: FontWeight.w600
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500
                               ),
                             )
                           ],

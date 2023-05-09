@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // ),
                   title:  Text("Profile",
                     style:
-                    TextStyle(color: Colors.white, fontSize: main_Height * 0.025),),
+                    TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
 
                 ),
                 const Divider(thickness: 0.1,height: 0.1, indent: 0, endIndent: 0,color: primaryGrey,),
@@ -128,7 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     style: TextStyle(
                                         fontSize: main_Height * 0.0218,
                                         color: Colors.white,
-                                        fontWeight: FontWeight.w600
+                                        fontWeight: FontWeight.w500
                                     ),
                                   ),
                                 ),
@@ -179,9 +179,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text("Account Settings ",
                             style: TextStyle(
                               letterSpacing: 0.5,
-                              fontSize: main_Height * 0.019,
+                              fontSize: main_Height * 0.017,
                               // fontSize: main_Height * 0.04,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                               color: darkGrey,
                             ),
                           )
