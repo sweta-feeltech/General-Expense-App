@@ -64,7 +64,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             // centerTitle: false,
             titleSpacing: 0,
             backgroundColor: primaryPurple,
-            // elevation: 0,
+            elevation: 0,
             leading:   IconButton(
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minHeight: 20, minWidth: 20),
@@ -80,6 +80,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               TextStyle(color: Colors.white, fontSize: main_Height * 0.025),),
 
           ),
+
 
           bottomSheet: Container(
             height: main_Height * 0.085,
@@ -98,14 +99,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   style: ElevatedButton.styleFrom(
 
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    primary: primaryOrange,
+                    primary: primaryPurple,
                   ),
                   onPressed: () {
 
                   },
-                  child: Text("Next",
+                  child: Text("Update",
                     style: TextStyle(
                         letterSpacing: 1,
                         fontSize: main_Height * 0.018,
@@ -123,9 +124,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               // physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
-
-
-
                   Container(
                     decoration: BoxDecoration(
                         color: primaryPurple,
@@ -136,7 +134,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     height: main_Height * 0.015,
                   ),
-
                   Container(
                     color: primaryPurple,
                     child: Stack(

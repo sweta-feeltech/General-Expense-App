@@ -62,7 +62,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         // crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,7 +323,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
               //     },
               //   ),
               // ),
-              SizedBox(height: 30,),
+              SizedBox(height: 15,),
 
               Center(child:
               Container(
@@ -331,10 +331,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Already have an account ",
+                      "Already have an account ?",
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey,),
+                        color: Colors.black,),
                       textAlign: TextAlign.center,
                     ),
                     TextButton(
@@ -346,7 +346,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                         style: TextStyle(
                           fontSize: 16,
                           // color: Color(0xFFFF7622),
-                          color: Colors.black,
+                          color: primaryPurple,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
