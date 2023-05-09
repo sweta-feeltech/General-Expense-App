@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/Utils/colors.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,17 +41,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
       _isLoading = false;
     });
 
-    // Navigate to home screen
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => HomeScreen()),
-    // );
   }
-
-
-  String? _profilePicture;
-  // String? _username;
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,28 +49,143 @@ class _MainPageScreenState extends State<MainPageScreen> {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-
-
     return Scaffold(
 
       body: SafeArea(
         child: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/images/wall.png",
-                  ),
-                  fit: BoxFit.fill
-              )
-          ),
-
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Container(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Register",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.028,
+                                fontWeight: FontWeight.w600,
+                                color: primaryOrange),
+                          ),
+                          Text(
+                            " to start again",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.030,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "authetic information",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.028,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        "Please create an account or log in to access more \naunthethic information",
+                        textAlign: TextAlign.left,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          height: 1.5,
+                          fontSize: main_Height * 0.0155,
+                          color: Colors.grey,
+                        )),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+              Container(
+                width: main_Width * 0.75,
+                height: main_Height * 0.30,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/cover.png",),
+                        fit: BoxFit.fill
+                    )
+                ),
+              ),
+              SizedBox(height: 80,),
+              SizedBox(
+                height: main_Height * 0.060,
+                width: main_Width * 0.9,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)
+                    ),
+                    side: BorderSide(
+                        style: BorderStyle.none
+                    ),
+                    backgroundColor: primaryOrange,
+                  ),
+                  onPressed: () {
+
+                  },
+                  child: Text(
+                    "Create Account",
+                    style: TextStyle(
+                        fontSize: main_Height < 700 ? 12 : 15,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(height: 25,),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Or Signin With Google",
+                      style: TextStyle(
+                          fontSize: main_Height < 700 ? 12 : 14,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(100, 0, 0, 0)
+                      ),
+                    ),
+
+                   ]
+              ),
+              SizedBox(height: 15,),
 
               Center(
                 child:Container(
-                  height: main_Height * 0.085,
+                  height: main_Height * 0.080,
                   width: main_Width * 1,
                   child: Padding(
                     padding:
@@ -90,7 +196,8 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: ElevatedButton(
+
+                      child: OutlinedButton(
                         style: ElevatedButton.styleFrom(
 
                           shape: RoundedRectangleBorder(
@@ -159,7 +266,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                 ),
 
 
-                                Text("Login with Google",
+                                Text("Sign with Google",
                                   style: TextStyle(
                                       letterSpacing: 1,
                                       fontSize: main_Height * 0.018,
@@ -172,8 +279,44 @@ class _MainPageScreenState extends State<MainPageScreen> {
                           ],
                         ),
                       ),
+
                     ),
                   ),
+                ),
+              ),
+              SizedBox(
+                height: main_Height * 0.060,
+                width: main_Width * 0.9,
+                child: OutlinedButton(
+                  child: Text(
+                    "Login with OTP",
+                    style: TextStyle(
+                        fontSize: main_Height < 700 ? 12 : 15,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
+                  ),
+
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)
+                    ),
+                    side: BorderSide(
+                        style: BorderStyle.none
+                    ),
+                    backgroundColor: primaryOrange,
+                  ),
+                  onPressed: () {
+                    ////
+                    // Here, we are assigning true to IsGuest Because This Button will be pressed before login so it will be consider as a guest.
+                    ////
+                    // IsGuest = true;
+                    // // StartStepperPage = true;
+                    //
+                    // // Navigator.pushNamed(context, FundraiserStepperPage.routeName);
+                    // Navigator.of(context).pushNamed(NewFundraiserStepperPage.routeName);
+                  },
                 ),
               ),
 
@@ -185,7 +328,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     const Text(
                       "Already have an account ",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Colors.grey,),
                       textAlign: TextAlign.center,
                     ),
@@ -197,11 +340,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       child: const Text(
                         "Log In",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           // color: Color(0xFFFF7622),
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),

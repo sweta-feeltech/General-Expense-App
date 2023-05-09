@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:general_expense_app/pages/Dashboard/inventory_2_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 
 import '../../Utils/colors.dart';
@@ -231,7 +231,7 @@ class CommonWidgets {
 
           ),
         ),
-        Divider(height: 3,color: Colors.white,
+        Divider(height: 3,color: Colors.black,
           endIndent: 0,indent: 0,)
       ],
     );
