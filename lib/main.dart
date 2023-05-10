@@ -5,6 +5,7 @@ import 'package:general_expense_app/pages/Dashboard/add_group_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/group_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/income_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
@@ -125,6 +126,9 @@ class MyApp extends StatelessWidget {
 
     if(settings.name == AddExpenseScreen.routeName) {
       return getMaterialPageRoute(AddExpenseScreen());
+    }
+    if(settings.name == GroupScreen.routeName) {
+      return getMaterialPageRoute(GroupScreen());
     }
 
     if(settings.name == EditProfileScreen.routeName) {

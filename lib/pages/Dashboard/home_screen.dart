@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:general_expense_app/pages/Dashboard/group_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -163,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: (){
 
                                 Navigator.of(context).pushNamed(
-                                    AddGroupScreen.routeName
+                                    GroupScreen.routeName
                                 );
 
 
@@ -189,10 +190,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                               child: Row(
                                 children: [
-                                  Container(
-                                    child: SvgPicture.asset("assets/images/down.svg",
-                                      clipBehavior: Clip.antiAlias,
-                                      fit: BoxFit.fill,
+                                  InkWell(
+                                    onTap : (){
+                                      Navigator.of(context).pushNamed(
+                                          GroupScreen.routeName
+                                      );
+                                    },
+                                    child: Container(
+                                      child: SvgPicture.asset("assets/images/down.svg",
+                                        clipBehavior: Clip.antiAlias,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
 
@@ -232,10 +240,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Row(
                                   children: [
 
-                                    Container(
-                                      child: SvgPicture.asset("assets/images/up.svg",
-                                        clipBehavior: Clip.antiAlias,
-                                        fit: BoxFit.fill,
+                                    InkWell(
+                                      onTap : (){
+                                        Navigator.of(context).pushNamed(
+                                            AddGroupScreen.routeName
+                                        );
+                                      },
+                                      child: Container(
+                                        child: SvgPicture.asset("assets/images/up.svg",
+                                          clipBehavior: Clip.antiAlias,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
                                     ),
 
