@@ -139,9 +139,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   child: InkWell(
                     onTap: (){
 
-                      Navigator.of(context).pushNamed(
-                          AddExpenseScreen.routeName
-                      );
 
                     },
                     child: Container(

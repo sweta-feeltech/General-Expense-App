@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 
+import 'add_expense_screen.dart';
+
 
 class ListOfExpenses extends StatefulWidget {
   static String routeName = '/listOfExpenses';
@@ -98,26 +100,34 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
               ),
 
               Expanded(
-                child: Container(
-                  height: main_Height * 0.052,
-                  decoration: BoxDecoration(
-                    color: primaryPurple,
-                      border: Border.all(
-                          color: Colors.white,
-                          width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-                  child: Center(
-                    child: Text("ADD EXPENSE",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1,
-                      fontSize: main_Height * 0.015,
+                child: InkWell(
+                  onTap: (){
+                    Navigator.of(context).pushNamed(
+                        AddExpenseScreen.routeName
+                    );
+
+                  },
+                  child: Container(
+                    height: main_Height * 0.052,
+                    decoration: BoxDecoration(
+                      color: primaryPurple,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(30)
                     ),
+                    child: Center(
+                      child: Text("ADD EXPENSE",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.015,
+                      ),
+                      ),
                     ),
                   ),
                 ),
