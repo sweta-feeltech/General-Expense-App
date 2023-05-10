@@ -321,25 +321,35 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   children: [
 
                     Expanded(
-                      child: Container(
-                        height: main_Height * 0.052,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                            // border: Border.all(
-                            //     color: primaryPurple,
-                            //     width: 1
-                            // ),
-                            borderRadius: BorderRadius.circular(10)
-                        ),
-                        child: Center(
-                          child: Text("Income",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              letterSpacing: 1,
-                              color: primaryPurple,
-                              fontWeight: FontWeight.w500,
-                              fontSize: main_Height * 0.018,
+                      child: InkWell(
+                        onTap: (){
+
+                          Navigator.of(context).pushNamed(
+                              ListOfExpenses.routeName
+                          );
+
+
+                        },
+                        child: Container(
+                          height: main_Height * 0.052,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                              // border: Border.all(
+                              //     color: primaryPurple,
+                              //     width: 1
+                              // ),
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child: Text("Income",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                letterSpacing: 1,
+                                color: primaryPurple,
+                                fontWeight: FontWeight.w500,
+                                fontSize: main_Height * 0.018,
+                              ),
                             ),
                           ),
                         ),
@@ -353,7 +363,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     Expanded(
                       child: InkWell(
                         onTap: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ListOfExpenses()));
+                          Navigator.of(context).pushNamed(
+                              ListOfExpenses.routeName
+                          );
 
                         },
                         child: Container(

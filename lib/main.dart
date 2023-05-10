@@ -4,6 +4,7 @@ import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/income_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/list_screen.dart';
@@ -108,13 +109,13 @@ class MyApp extends StatelessWidget {
     if(settings.name == Shelf1Screen.routeName) {
       return getMaterialPageRoute(Shelf1Screen());
     }
-
+    if(settings.name == ListofIncomeScreen.routeName) {
+      return getMaterialPageRoute(ListofIncomeScreen());
+    }
 
     if(settings.name == RegistrationScreen.routeName) {
       return getMaterialPageRoute(RegistrationScreen());
     }
-
-
 
     if(settings.name == EditProfileScreen.routeName) {
       return getMaterialPageRoute(EditProfileScreen(

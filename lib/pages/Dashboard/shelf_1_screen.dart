@@ -95,112 +95,14 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
             ),
 
             Expanded(
-              child: Accordion(
-                  rightIcon: SvgPicture.asset(
-                    "assets/images/down1.svg",
-                    fit: BoxFit.fill,
-                  ),
-                headerBorderRadius: 20.0,
-                contentBorderRadius: 20.0,
-                headerBackgroundColor: Colors.black12,
-                contentBackgroundColor: Colors.white,
-                paddingListTop: 0,
-                paddingListBottom: 0,
-                maxOpenSections: 2,
-                headerTextStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: main_Height * 0.019,
-                    fontWeight: FontWeight.w500),
-                leftIcon: Icon(Icons.home_filled,
-                    color: Colors.black),
-                children: [
-
-                  for(int i = 0; i <= 15; i ++)
-
-               AccordionSection(headerText:"Places",
-              content:   Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  // border: Border.all(color: Colors.black,width: 2)
-                ),
-                padding: EdgeInsets.all(5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Text("Things ",
-                            style :  TextStyle(
-                                color: Colors.black,
-                                fontSize: main_Height * 0.019,
-                                fontWeight: FontWeight.w500)),
-                        Icon(Icons.access_alarm)
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.black,
-                      height: 2,
-                    ),
-
-
-                    Row(
-                      children: [
-                        Text("Things ",
-                            style :  TextStyle(
-                                color: Colors.black,
-                                fontSize: main_Height * 0.019,
-                                fontWeight: FontWeight.w500)),
-                        Icon(Icons.access_alarm)
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.black,
-                      height: 2,
-                    ),
-
-
-                    Row(
-                      children: [
-                        Text("Things ",
-                            style :  TextStyle(
-                                color: Colors.black,
-                                fontSize: main_Height * 0.019,
-                                fontWeight: FontWeight.w500)),
-                        Icon(Icons.access_alarm)
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.black,
-                      height: 2,
-                    ),
-
-
-                    Row(
-                      children: [
-                        Text("Things ",
-                            style :  TextStyle(
-                                color: Colors.black,
-                                fontSize: main_Height * 0.019,
-                                fontWeight: FontWeight.w500)),
-                        Icon(Icons.access_alarm)
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.black,
-                      height: 2,
-                    ),
-
-
-                  ],
-                ),
-              ))
-
-
-
-
-                ],
-              ),
+              child: ListView.builder(
+                  itemCount: 25,
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CommonWidgets.CommonListShelf2(context,index: index);
+                  }),
             ),
           ],
         ),
