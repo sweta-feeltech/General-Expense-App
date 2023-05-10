@@ -128,7 +128,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 80,),
+              SizedBox(height: 50,),
               Container(
                 width: main_Width * 0.75,
                 height: main_Height * 0.30,
@@ -139,7 +139,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     )
                 ),
               ),
-              SizedBox(height: 100,),
+              SizedBox(height: 80,),
               SizedBox(
                 height: main_Height * 0.060,
                 width: main_Width * 0.9,
