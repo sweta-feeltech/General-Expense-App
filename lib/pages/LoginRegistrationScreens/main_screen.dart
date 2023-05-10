@@ -62,7 +62,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                      padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         // crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         // crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +110,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   // crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,8 +225,6 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                 String? id = value.id;
                                 print("serviceAuth;   $serviceAuth");
                                 print("id;   $id");
-                                print("profile;   $profilePicture");
-                                print("profile;   $profilePicture");
                                 // print("profile;   $profilePicture");
                                 // print("profile;   $profilePicture");
 
@@ -237,8 +235,6 @@ class _MainPageScreenState extends State<MainPageScreen> {
                                 ServiceAuth = serviceAuth;
                                 ProfilePicture = profilePicture;
                                 ID = id;
-
-
 
                               }
                               );
@@ -330,10 +326,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       "Already have an account ?",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: main_Height * 0.0165,
                         color: Colors.black,),
                       textAlign: TextAlign.center,
                     ),
@@ -341,10 +337,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       onPressed: () => {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RegistrationScreen()))
                       },
-                      child: const Text(
+                      child:  Text(
                         "Log In",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: main_Height * 0.0165,
                           // color: Color(0xFFFF7622),
                           color: primaryPurple,
                           fontWeight: FontWeight.w500,
