@@ -1,6 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -90,38 +91,43 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Container(
-                    // width: main_Width * 0.4,
-                    height: main_Height * 0.11,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                        color: Color(0xFFE6EBFE)
-                    ),
+                  child: InkWell(
+                    onTap: (){
 
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Total Income",
-                          style: TextStyle(
-                            color: Color(0xFFAAB1CF),
-                            fontSize: main_Height * 0.015
-                          ),
-                          ),
-                          SizedBox(height: main_Height * 0.01,),
-                          Text("\$7,750.00",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: Color(0xFF677CD2),
-                              fontSize: main_Height * 0.022,
-                            fontWeight: FontWeight.w500
-                          ),
-                          ),
-                        ],
+                    },
+                    child: Container(
+                      // width: main_Width * 0.4,
+                      height: main_Height * 0.11,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          color: Color(0xFFE6EBFE)
                       ),
-                    ),
 
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Total Income",
+                            style: TextStyle(
+                              color: Color(0xFFAAB1CF),
+                              fontSize: main_Height * 0.015
+                            ),
+                            ),
+                            SizedBox(height: main_Height * 0.01,),
+                            Text("\$7,750.00",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Color(0xFF677CD2),
+                                fontSize: main_Height * 0.022,
+                              fontWeight: FontWeight.w500
+                            ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ),
                   ),
                 ),
 
@@ -130,38 +136,47 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 ),
 
                 Expanded(
-                  child: Container(
-                    // width: main_Width * 0.4,
-                    height: main_Height * 0.11,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                        color: Color(0xFFF6E5DC)
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Total Expense",
-                          style: TextStyle(
-                            color: Color(0xFFD0B6A8),
-                              fontSize: main_Height * 0.015
-                          ),),
-                          SizedBox(
-                            height: main_Height * 0.01,
-                          ),
-                          Text("\$4,390.00",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: Color(0xFFE98852),
-                              fontSize: main_Height * 0.022,
-                              fontWeight: FontWeight.w500
-                          ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  child: InkWell(
+                    onTap: (){
 
+                      Navigator.of(context).pushNamed(
+                          AddExpenseScreen.routeName
+                      );
+
+                    },
+                    child: Container(
+                      // width: main_Width * 0.4,
+                      height: main_Height * 0.11,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          color: Color(0xFFF6E5DC)
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Total Expense",
+                            style: TextStyle(
+                              color: Color(0xFFD0B6A8),
+                                fontSize: main_Height * 0.015
+                            ),),
+                            SizedBox(
+                              height: main_Height * 0.01,
+                            ),
+                            Text("\$4,390.00",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Color(0xFFE98852),
+                                fontSize: main_Height * 0.022,
+                                fontWeight: FontWeight.w500
+                            ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ),
                   ),
                 ),
 

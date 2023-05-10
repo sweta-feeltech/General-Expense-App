@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/colors.dart';
 import '../Widgets/nav_drawer.dart';
+import 'add_group_screen.dart';
 import 'common_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -160,6 +161,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
                             InkWell(
                               onTap: (){
+
+                                Navigator.of(context).pushNamed(
+                                    AddGroupScreen.routeName
+                                );
+
 
                               },
                               child: Container(

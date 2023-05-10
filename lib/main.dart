@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/add_group_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
@@ -113,8 +115,16 @@ class MyApp extends StatelessWidget {
       return getMaterialPageRoute(ListofIncomeScreen());
     }
 
+    if(settings.name == AddGroupScreen.routeName) {
+      return getMaterialPageRoute(AddGroupScreen());
+    }
+
     if(settings.name == RegistrationScreen.routeName) {
       return getMaterialPageRoute(RegistrationScreen());
+    }
+
+    if(settings.name == AddExpenseScreen.routeName) {
+      return getMaterialPageRoute(AddExpenseScreen());
     }
 
     if(settings.name == EditProfileScreen.routeName) {
