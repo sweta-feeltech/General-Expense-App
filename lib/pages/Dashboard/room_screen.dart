@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 
 import '../../Utils/colors.dart';
+import '../Widgets/theme_helper.dart';
 
 class RoomScreen extends StatefulWidget {
   static String routeName = 'RoomScreen';
@@ -66,7 +67,13 @@ class _RoomScreenState extends State<RoomScreen> {
 
                 InkWell(
                   onTap: (){
-
+                    ThemeHelper.addRoomDialogBox(
+                      context: context, 
+                      logoutPress: () {}, 
+                      heightData: main_Height, 
+                      popupTitle: "Add a room", 
+                      popupcontent: "popupcontent"
+                    );
 
                   },
                   child: Container(

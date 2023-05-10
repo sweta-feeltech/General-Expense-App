@@ -58,7 +58,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         },
         child: Scaffold(
 
-          backgroundColor: primaryGrey,
+          backgroundColor: Colors.white,
           // resizeToAvoidBottomInset: false,
           appBar:AppBar(
             // centerTitle: false,
@@ -243,8 +243,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                     ),
                   ),
-
-                  Container  (
+                  Container(
                     padding: EdgeInsets.symmetric(horizontal: main_Width * 0.05,),
                     color: Colors.white,
                     child: Column(
@@ -488,16 +487,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ],
                     ),
                   ),
-
                   SizedBox(
                     height: main_Height * 0.085,
                     width: main_Width * 1,
                   )
-
                 ],
               ),
             ),
           ),
+
         ),
       ),
     );
