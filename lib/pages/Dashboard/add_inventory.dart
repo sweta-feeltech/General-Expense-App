@@ -37,6 +37,9 @@ class _AddInventoryScreenState extends State<AddInventoryScreen> {
         children: [
 
 
+
+
+
         ],
       ),
 

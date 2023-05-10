@@ -113,6 +113,7 @@ class CommonWidgets {
     ) ;
   }
 
+
   static Widget CommonListView2(BuildContext context) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
@@ -217,6 +218,193 @@ class CommonWidgets {
       ),
     ) ;
   }
+
+  static Widget CommonGroupListView(BuildContext context,
+      {int? index}
+      ) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.03),
+      child: Column(
+        children: [
+          Container(
+            height: main_Height * 0.09,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(7),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                Container(
+                  height: main_Height * 0.061,
+                  width: main_Height * 0.061,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFEFEFF1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.all(main_Height * 0.008),
+                  child: Center(
+                    child: Image.asset("assets/images/grp1.jpg"),
+                  ),
+                ),
+
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Family Group ${index! + 1}",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: 0.06,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: main_Height * 0.018
+                              ),
+                            ),
+                            
+                            Text("5 Members")
+                            
+                          ],
+                        ),
+
+
+                        Text("Member 1, Member 2 , Member 3, Member 4, Member 5",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w300,
+                              color: Color(0xFF959698),
+                              fontSize: main_Height * 0.015
+                          ),
+                        ),
+
+
+                      ],
+                    ),
+                  ),
+                ),
+
+
+
+              ],
+            ),
+
+          ),
+          Divider(
+            height: 1,
+            color: Colors.black,
+            endIndent: 1,
+            thickness: 0.7,
+          )
+        ],
+      ),
+    ) ;
+  }
+
+
+
+
+  static Widget CommonGroupList2(BuildContext context,
+      {int? index}
+      ) {
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return InkWell(
+      onTap: (){
+
+        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
+      },
+      child: Material(
+        borderRadius: BorderRadius.circular(7),
+        elevation: 3,
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: Container(
+            // padding: EdgeInsets.all(10),
+            height: main_Height * 0.1,
+            width: main_Width * 0.25,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                color: primaryGrey
+                // color: getColor(index!,4)
+
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+
+                Expanded(
+                  child: Container(
+                    height: main_Height * 0.08,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                        BorderRadius.circular(5)
+
+                    ),
+                    // child: items.categoryImg != null ?
+                    padding: EdgeInsets.all(main_Height * 0.03),
+                    child : Image.asset("assets/images/grp1.jpg",
+                    fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+
+
+                SizedBox(
+                  height: main_Height * 0.01,
+                ),
+
+                
+                Column(
+                  children: [
+                    Text(
+                      "Family Group ${index! + 1}",
+                      maxLines: 1,
+                      // items.name.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: main_Height * 0.014),
+                    ),
+
+                    Text(
+                      "7 Members",
+                      maxLines: 1,
+                      // items.name.toString(),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: darkGrey,
+                          fontWeight: FontWeight.w500,
+                          fontSize: main_Height * 0.014),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+  }
+
 
 
   static Widget CommonInventoryList(BuildContext context,
@@ -351,7 +539,7 @@ class CommonWidgets {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Shelfs List ${index}",
+                          Text("Shelfs List ${index! + 1}",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -457,7 +645,7 @@ class CommonWidgets {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Shelfs List ${index}",
+                          Text("Shelfs List ${index! + 1}",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
