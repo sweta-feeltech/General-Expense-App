@@ -244,7 +244,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
 
-                  Container(
+                  Container  (
                     padding: EdgeInsets.symmetric(horizontal: main_Width * 0.05,),
                     color: Colors.white,
                     child: Column(
