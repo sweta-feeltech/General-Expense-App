@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -176,23 +178,26 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                           ),
                           borderRadius: BorderRadius.circular(3)),
                       padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: DropdownButton<String>(
-                        value: _selectedOption,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedOption = newValue!;
-                          });
-                        },
-                        items: _options.map((String option) {
-                          return DropdownMenuItem<String>(
-                            value: option,
-                            child: Text(
-                              option,
-                              selectionColor: Colors.black,
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _selectedOption,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedOption = newValue!;
+                            });
+                          },
+                          items: _options.map((String option) {
+                            return DropdownMenuItem<String>(
+                              value: option,
+                              child: Text(
+                                option,
+                                selectionColor: Colors.black,
+                              ),
+                            );
+                          }).toList(),
+                          underline: null,
+                        ),
+                      )
                     ),
                     const SizedBox(
                       height: 15,
@@ -312,6 +317,69 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             // borderRadius: BorderRadius.circular(10)
 
                             ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+
+
+                    Row(
+                      children: [
+                        Text("Remarks",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: main_Height * 0.018,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 5,),
+                    Container(
+                      height: main_Height * 0.2,
+                      child: TextFormField(
+                        // initialValue: "Remarks",
+                        // initialValue: "${getProfileModelData?.description == null ? appUserData?.description == null ?  "" : appUserData?.description : getProfileModelData?.description}",
+                        textAlignVertical: TextAlignVertical.top,
+                        keyboardType: TextInputType.multiline,
+                        expands: true,
+                        // textAlign: TextAlign.start,
+                        maxLines: null,
+                        // minLines: null,
+                        style: TextStyle(
+                          fontSize: main_Height * 0.022,
+                        ),
+                        // onSaved: (newValue) {
+                        //   description = newValue;
+                        // },
+                        // onChanged: (value){
+                        //   description = value;
+                        // },
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'First Name can\'t be empty';
+                        //   }
+                        //   return null;
+                        // },
+                        decoration: InputDecoration(
+                          hintText: "Remarks",
+                          contentPadding:
+                          EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                          // filled: true,
+                          enabledBorder: OutlineInputBorder(
+                          ),
+                          // fillColor: ,
+
+                          hintStyle:  TextStyle(
+                              color: Colors.grey,
+                              fontSize: main_Height * 0.018
+                          ),
+                          border: OutlineInputBorder(
+                            // borderSide:
+                            //     const BorderSide(color: Colors.transparent),
+                            // borderRadius: BorderRadius.circular(10)
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(
