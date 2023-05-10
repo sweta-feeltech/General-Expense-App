@@ -90,14 +90,17 @@ class ThemeHelper {
                     // color: Color.fromARGB(255, 217, 231, 250),
                     color: Colors.white,
                   ),
-                  height: main_Height * 0.22,
+                  height: main_Height * 0.24,
                   width: main_Width * 0.7,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 15,),
+
                         Text(
                           popupTitle,
                           style: TextStyle(
@@ -106,7 +109,7 @@ class ThemeHelper {
                             fontWeight: FontWeight.bold
                           ),
                         ),
-                        SizedBox(height: 5,),
+                        // SizedBox(height: 5,),
                         // SizedBox(height: main_Height * 0.0235,),
                         // Image(image: AssetImage("assets/images/logout_reverse.png"), width: 30, height: 30,),
 
@@ -166,8 +169,7 @@ class ThemeHelper {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: main_Width * 0.2,
+                            Expanded(
                               child: TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -178,10 +180,9 @@ class ThemeHelper {
                                 child: Text("Cancel", style: TextStyle(color: darkGrey, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
                               ),
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(width: 5,),
               
-                            SizedBox(
-                                width: main_Width * 0.2,
+                            Expanded(
                               child: TextButton(
                                 style: ButtonStyle(
                                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
@@ -207,19 +208,29 @@ class ThemeHelper {
                 ),
               ),
 
-              // Positioned(
-              //   top: -60,
-              //   child: Material(
-              //     borderRadius: BorderRadius.circular(60),
-              //     elevation: 10,
-              //     child: CircleAvatar(
-              //       // backgroundColor: Color.fromARGB(255, 230, 241, 255),
-              //       backgroundColor: Colors.white,
-              //       radius: 60,
-              //       child: Image.asset("assets/images/app_icon_png.png", width: 80, height: 80,)
-              //     ),
-              //   )
-              // )
+              Positioned(
+                top: -35,
+                child: Material(
+                  borderRadius: BorderRadius.circular(60),
+                  // elevation: 4,
+                  // elevation: 10,
+                  child: Container(
+                    padding: EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle
+                    ),
+                    child: CircleAvatar(
+                      // backgroundColor: Colors.white,
+                      backgroundColor: primaryPurple,
+                      radius: 35,
+                      // child: Icon(Icons.home, size: 35,)
+                      child: Icon(Icons.home,color: Colors.white, size: 40,)
+                      // child: Image.asset("assets/images/app_icon_png.png", width: 80, height: 80,)
+                    ),
+                  ),
+                )
+              )
             ],
           ),
         );
