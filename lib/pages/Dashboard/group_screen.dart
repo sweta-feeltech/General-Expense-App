@@ -43,7 +43,7 @@ class _GroupScreenState extends State<GroupScreen> {
         // ),
         titleSpacing: 15,
         title: Text(
-          "Group List",
+          "My Groups",
           style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
@@ -63,7 +63,7 @@ class _GroupScreenState extends State<GroupScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Add Group",
+                Text("My Groups",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

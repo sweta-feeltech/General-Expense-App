@@ -106,10 +106,10 @@ class ThemeHelper {
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold
+                            fontWeight: FontWeight.w500
                           ),
                         ),
-                        // SizedBox(height: 5,),
+                        SizedBox(height: 10,),
                         // SizedBox(height: main_Height * 0.0235,),
                         // Image(image: AssetImage("assets/images/logout_reverse.png"), width: 30, height: 30,),
 
@@ -169,20 +169,19 @@ class ThemeHelper {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                }, 
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
-                                ),
-                                child: Text("Cancel", style: TextStyle(color: darkGrey, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
                               ),
+                              child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
                             ),
                             SizedBox(width: 5,),
               
-                            Expanded(
+                            SizedBox(
+                              width: 75,
                               child: TextButton(
                                 style: ButtonStyle(
                                   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
@@ -194,7 +193,7 @@ class ThemeHelper {
                                   style: TextStyle(
                                     fontSize: main_Height * 0.01872,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w700
+                                    fontWeight: FontWeight.w500
                                   ),
                                 )
                               ),

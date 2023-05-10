@@ -40,7 +40,7 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
         // ),
         titleSpacing: 15,
         title: Text(
-          "Group List",
+          "Group",
           style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
@@ -54,9 +54,9 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
-                child: Image.asset(
-                  "assets/images/grp.jpg",
+                child: SvgPicture.asset("assets/icons/group.svg",
                   height: main_Height * 0.4,
+
                 ),
               ),
 
@@ -69,8 +69,8 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   // color: Color.fromARGB(255, 158, 158, 158),
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500,
                   fontSize: main_Height * 0.0239,
                 ),
               ),
@@ -79,49 +79,33 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
                 height: main_Height * 0.04,
               ),
 
-              InkWell(
-                onTap: (){
-
-                  ThemeHelper.addGroupDialogBox(
-                      context: context,
-                      logoutPress: () {},
-                      heightData: main_Height,
-                      popupTitle: "Add a Group",
-                      popupcontent: "popupcontent"
-                  );
-
-                },
-                child: Container(
-                  height: main_Height * 0.045,
+              Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(30),
+                child: SizedBox(
+                  height: main_Height * 0.060,
                   width: main_Width * 0.5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(
-                      color: primaryPurple,
-                      width: 3
-                    ),
-                  ),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
 
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset("assets/icons/addGrp.svg",
-                      height: main_Height * 0.027,
-                        width: main_Height * 0.027,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
                       ),
-                      SizedBox(width: 8,),
-                      Text("Start a new group",
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          // color: Color.fromARGB(255, 158, 158, 158),
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: main_Height * 0.017,
-                        ),
-                      )
-                    ],
+                      side: BorderSide(
+                          style: BorderStyle.none
+                      ),
+                      backgroundColor: primaryPurple,
+                    ),
+                    onPressed: () {
+                    },
+                    child: Text(
+                      "Add Group",
+                      style: TextStyle(
+                          fontSize: main_Height < 700 ? 12 : 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
                   ),
                 ),
               )
