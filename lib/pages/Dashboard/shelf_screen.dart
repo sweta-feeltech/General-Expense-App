@@ -25,11 +25,13 @@ class _ShelfScreenState extends State<ShelfScreen> {
 
 
     return WillPopScope(
+
       onWillPop: () async{
 
         Navigator.of(context).pop();
         return true;
       },
+
       child: Scaffold(
 
         appBar: AppBar(
@@ -96,15 +98,12 @@ class _ShelfScreenState extends State<ShelfScreen> {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (BuildContext context, int index) {
-                    return CommonWidgets.CommonShelfListView(context);
+                    return CommonWidgets.CommonListShelf(context,index: index);
                   }),
             ),
           ],
         ),
-
-
-
-
+        
 
       ),
     );

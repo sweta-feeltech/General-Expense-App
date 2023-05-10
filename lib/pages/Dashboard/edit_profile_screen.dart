@@ -284,6 +284,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
                             enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
 
                             ),
                             // fillColor: ,
@@ -294,7 +295,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             border: const OutlineInputBorder(
                               // borderSide:
-                              //     const BorderSide(color: Colors.transparent),
+                                  // const BorderSide(color: Colors.white),
                               // borderRadius: BorderRadius.circular(10)
 
                             ),
@@ -344,6 +345,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
                             enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
 
                             ),
                             // fillColor: ,
@@ -402,6 +404,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
                             enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
 
                             ),
                             // fillColor: ,
@@ -441,6 +444,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
                             enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
 
                             ),
                             // fillColor: ,
