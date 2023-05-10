@@ -33,7 +33,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
       },
 
       child: Scaffold(
-
+        backgroundColor: primaryGrey,
         appBar: AppBar(
           // leading: IconButton(
           //   padding: EdgeInsets.zero,

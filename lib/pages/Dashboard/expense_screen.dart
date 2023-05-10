@@ -94,7 +94,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     // width: main_Width * 0.4,
                     height: main_Height * 0.11,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(7),
                         color: Color(0xFFE6EBFE)
                     ),
 
@@ -134,7 +134,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     // width: main_Width * 0.4,
                     height: main_Height * 0.11,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(7),
                         color: Color(0xFFF6E5DC)
                     ),
                     child: Center(
@@ -331,25 +331,29 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
 
                         },
-                        child: Container(
-                          height: main_Height * 0.052,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                              // border: Border.all(
-                              //     color: primaryPurple,
-                              //     width: 1
-                              // ),
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Center(
-                            child: Text("Income",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                letterSpacing: 1,
-                                color: primaryPurple,
-                                fontWeight: FontWeight.w500,
-                                fontSize: main_Height * 0.018,
+                        child: Material(
+                          elevation: 1,
+                          borderRadius: BorderRadius.circular(30),
+                          child: Container(
+                            height: main_Height * 0.052,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                                // border: Border.all(
+                                //     color: primaryPurple,
+                                //     width: 1
+                                // ),
+                                borderRadius: BorderRadius.circular(30)
+                            ),
+                            child: Center(
+                              child: Text("Income",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: primaryPurple,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: main_Height * 0.018,
+                                ),
                               ),
                             ),
                           ),
@@ -369,25 +373,29 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           );
 
                         },
-                        child: Container(
-                          height: main_Height * 0.052,
-                          decoration: BoxDecoration(
-                              color: primaryPurple,
-                              // border: Border.all(
-                              //   color: Colors.white,
-                              //   width: 1,
-                              // ),
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Center(
-                            child: Text("Expense",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
-                                fontSize: main_Height * 0.018,
+                        child: Material(
+                          elevation: 2,
+                          borderRadius: BorderRadius.circular(30),
+                          child: Container(
+                            height: main_Height * 0.052,
+                            decoration: BoxDecoration(
+                                color: primaryPurple,
+                                // border: Border.all(
+                                //   color: Colors.white,
+                                //   width: 1,
+                                // ),
+                                borderRadius: BorderRadius.circular(30)
+                            ),
+                            child: Center(
+                              child: Text("Expense",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                  fontSize: main_Height * 0.018,
+                                ),
                               ),
                             ),
                           ),

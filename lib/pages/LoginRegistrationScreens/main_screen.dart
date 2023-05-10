@@ -140,33 +140,37 @@ class _MainPageScreenState extends State<MainPageScreen> {
                 ),
               ),
               SizedBox(height: main_Height * 0.085,),
-              SizedBox(
-                height: main_Height * 0.060,
-                width: main_Width * 0.9,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(30),
+                child: SizedBox(
+                  height: main_Height * 0.060,
+                  width: main_Width * 0.9,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
 
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      side: BorderSide(
+                          style: BorderStyle.none
+                      ),
+                      backgroundColor: primaryPurple,
                     ),
-                    side: BorderSide(
-                        style: BorderStyle.none
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        RegistrationScreen.routeName);
+
+
+                    },
+                    child: Text(
+                      "Create an Account",
+                      style: TextStyle(
+                          fontSize: main_Height < 700 ? 12 : 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ),
-                    backgroundColor: primaryPurple,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      RegistrationScreen.routeName);
-
-
-                  },
-                  child: Text(
-                    "Create an Account",
-                    style: TextStyle(
-                        fontSize: main_Height < 700 ? 12 : 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
                   ),
                 ),
               ),

@@ -70,7 +70,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
                   ),
                   SizedBox(width: 10,),
-                  Text("LogOut", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
+                  Text("Logout", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
                 ],
               ),
             ),

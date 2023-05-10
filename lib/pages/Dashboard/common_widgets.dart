@@ -17,7 +17,7 @@ class CommonWidgets {
         height: main_Height * 0.09,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(7),
         ),
         padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
         child: Row(
@@ -316,87 +316,91 @@ class CommonWidgets {
 
         },
         child: Expanded(
-          child: Container(
-            height: main_Height * 0.09,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+          child: Material(
+            elevation: 1,
+            borderRadius: BorderRadius.circular(7),
+            child: Container(
+              height: main_Height * 0.09,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
 
-                Container(
-                  height: main_Height * 0.061,
-                  width: main_Height * 0.061,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEFEFF1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset("assets/images/intenetI.svg",
-                      fit: BoxFit.contain,
+                  Container(
+                    height: main_Height * 0.061,
+                    width: main_Height * 0.061,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFEFEFF1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset("assets/images/intenetI.svg",
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ),
 
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Shelfs List ${index}",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              letterSpacing: 0.06,
-                              fontWeight: FontWeight.w500,
-                              fontSize: main_Height * 0.018
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Shelfs List ${index}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 0.06,
+                                fontWeight: FontWeight.w500,
+                                fontSize: main_Height * 0.018
+                            ),
                           ),
-                        ),
 
 
-                        Row(
-                          children: [
-                            Text("25 Oct, 2022  ",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFF959698),
-                                  fontSize: main_Height * 0.015
+                          Row(
+                            children: [
+                              Text("25 Oct, 2022  ",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color(0xFF959698),
+                                    fontSize: main_Height * 0.015
+                                ),
                               ),
-                            ),
-                            SvgPicture.asset("assets/images/dot1.svg"),
-                            Text(" 09:00 AM",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFF959698),
-                                  fontSize: main_Height * 0.017
+                              SvgPicture.asset("assets/images/dot1.svg"),
+                              Text(" 09:00 AM",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color(0xFF959698),
+                                    fontSize: main_Height * 0.017
+                                ),
                               ),
-                            ),
 
-                          ],
-                        )
-
+                            ],
+                          )
 
 
 
-                      ],
+
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
-              ],
+                ],
+              ),
+
             ),
-
           ),
         ),
       ),
@@ -418,87 +422,91 @@ class CommonWidgets {
 
         },
         child: Expanded(
-          child: Container(
-            height: main_Height * 0.09,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+          child: Material(
+            elevation: 1,
+            borderRadius: BorderRadius.circular(7),
+            child: Container(
+              height: main_Height * 0.09,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
 
-                Container(
-                  height: main_Height * 0.061,
-                  width: main_Height * 0.061,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEFEFF1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset("assets/images/intenetI.svg",
-                      fit: BoxFit.contain,
+                  Container(
+                    height: main_Height * 0.061,
+                    width: main_Height * 0.061,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFEFEFF1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset("assets/images/intenetI.svg",
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ),
 
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Shelfs List ${index}",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              letterSpacing: 0.06,
-                              fontWeight: FontWeight.w500,
-                              fontSize: main_Height * 0.018
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Shelfs List ${index}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 0.06,
+                                fontWeight: FontWeight.w500,
+                                fontSize: main_Height * 0.018
+                            ),
                           ),
-                        ),
 
 
-                        Row(
-                          children: [
-                            Text("25 Oct, 2022  ",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFF959698),
-                                  fontSize: main_Height * 0.015
+                          Row(
+                            children: [
+                              Text("25 Oct, 2022  ",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color(0xFF959698),
+                                    fontSize: main_Height * 0.015
+                                ),
                               ),
-                            ),
-                            SvgPicture.asset("assets/images/dot1.svg"),
-                            Text(" 09:00 AM",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFF959698),
-                                  fontSize: main_Height * 0.017
+                              SvgPicture.asset("assets/images/dot1.svg"),
+                              Text(" 09:00 AM",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    letterSpacing: 1,
+                                    fontWeight: FontWeight.w300,
+                                    color: Color(0xFF959698),
+                                    fontSize: main_Height * 0.017
+                                ),
                               ),
-                            ),
 
-                          ],
-                        )
-
+                            ],
+                          )
 
 
 
-                      ],
+
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
-              ],
+                ],
+              ),
+
             ),
-
           ),
         ),
       ),

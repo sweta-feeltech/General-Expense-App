@@ -150,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)
+                                      borderRadius: BorderRadius.circular(30)
                                   )
                               ),
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -195,11 +195,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(10),
+                    elevation: 3,
+                    borderRadius: BorderRadius.circular(7),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(7),
                       ),
                       child: Column(
                         children: [
