@@ -10,6 +10,8 @@ import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import 'add_expense_screen.dart';
+
 class BottomBarScreen extends StatefulWidget {
   static String routeName = "homePageScreen";
   const BottomBarScreen({Key? key}) : super(key: key);
@@ -45,8 +47,14 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => AddInventoryScreen()));
+
+          Navigator.of(context).pushNamed(
+              AddExpenseScreen.routeName
+          );
+
+
+          // Navigator.of(context).push(
+          //     MaterialPageRoute(builder: (context) => AddInventoryScreen()));
           //code to execute on button press
         },
         child: Icon(Icons.add),
