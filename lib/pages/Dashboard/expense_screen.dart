@@ -6,6 +6,7 @@ import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../Utils/colors.dart';
+import 'income_screen.dart';
 import 'list_screen.dart';
 
 class ExpenseScreen extends StatefulWidget {
@@ -43,7 +44,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     double main_Height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+
       backgroundColor: primaryGrey,
+
       appBar: AppBar(
         // actions: [
         //   IconButton(
@@ -165,8 +168,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               ],
             ),
           ),
-
-             // SizedBox(height: 15,),
 
              Padding(
         padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03),
@@ -325,7 +326,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                         onTap: (){
 
                           Navigator.of(context).pushNamed(
-                              ListOfExpenses.routeName
+                              ListofIncomeScreen.routeName
                           );
 
 

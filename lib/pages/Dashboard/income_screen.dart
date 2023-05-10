@@ -47,7 +47,7 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
         ),
         titleSpacing: 0,
         title: Text(
-          "Expense List",
+          "Income List",
           style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
         ),
         automaticallyImplyLeading: false,
