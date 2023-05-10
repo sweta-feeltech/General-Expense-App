@@ -98,6 +98,14 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
                       backgroundColor: primaryPurple,
                     ),
                     onPressed: () {
+                      ThemeHelper.addGroupDialogBox(
+                          context: context,
+                          logoutPress: () {},
+                          heightData: main_Height,
+                          popupTitle: "Add a Group",
+                          popupcontent: "popupcontent");
+
+
                     },
                     child: Text(
                       "Add Group",
