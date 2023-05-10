@@ -405,7 +405,7 @@ class CommonWidgets {
 
 
 
-  static Widget CommonInventoryList(BuildContext context,
+  static Widget CommonRoomList(BuildContext context,
       {int? index}
       ) {
 
@@ -485,7 +485,6 @@ class CommonWidgets {
         ),
       ),
     );
-
   }
 
 

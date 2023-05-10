@@ -102,17 +102,16 @@ class _RoomScreenState extends State<RoomScreen> {
                 children: List.generate(
                     10,
                         (index) {
-                      return CommonWidgets.CommonInventoryList(context,index: index,);
+                      return CommonWidgets.CommonRoomList(context,index: index,);
                     }
                 ),
               ),
             ),
-          )
+
+          ),
+          SizedBox(height: 10,),
         ],
       ),
-
-
-
 
     );
   }
