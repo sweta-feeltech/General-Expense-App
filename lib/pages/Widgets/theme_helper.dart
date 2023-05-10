@@ -278,12 +278,13 @@ class ThemeHelper {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          SizedBox(height: 15,),
                           Text(
                             popupTitle,
                             style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.w500
                             ),
                           ),
                           SizedBox(height: 5,),
@@ -346,22 +347,19 @@ class ThemeHelper {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(
-                                width: main_Width * 0.2,
-                                child: TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
-                                    ),
-                                    child: Text("Cancel", style: TextStyle(color: darkGrey, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
-                                ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
+                                  ),
+                                  child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
                               ),
-                              SizedBox(width: 10,),
+                              SizedBox(width: 5,),
 
                               SizedBox(
-                                width: main_Width * 0.2,
+                                width: 75,
                                 child: TextButton(
                                     style: ButtonStyle(
                                         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
@@ -373,7 +371,7 @@ class ThemeHelper {
                                       style: TextStyle(
                                           fontSize: main_Height * 0.01872,
                                           color: Colors.white,
-                                          fontWeight: FontWeight.w700
+                                          fontWeight: FontWeight.w500
                                       ),
                                     )
                                 ),
