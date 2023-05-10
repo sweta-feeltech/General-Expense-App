@@ -45,7 +45,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
           titleSpacing: 15,
           title: Text(
             "Shelf",
-            style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+            style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
           ),
           automaticallyImplyLeading: false,
           backgroundColor: primaryPurple,
