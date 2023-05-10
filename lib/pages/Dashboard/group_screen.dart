@@ -29,7 +29,7 @@ class _GroupScreenState extends State<GroupScreen> {
 
     return Scaffold(
 
-      backgroundColor: Colors.white,
+      backgroundColor: primaryGrey,
 
       appBar: AppBar(
         // leading: IconButton(
@@ -119,7 +119,7 @@ class _GroupScreenState extends State<GroupScreen> {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 children: List.generate(
-                    10,
+                    5,
                         (index) {
                       return CommonWidgets.CommonGroupList2(context,index: index,);
                     }

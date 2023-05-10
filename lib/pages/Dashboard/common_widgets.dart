@@ -144,56 +144,54 @@ class CommonWidgets {
               ),
             ),
 
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Bank Transfer",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          letterSpacing: 0.06,
-                          fontWeight: FontWeight.w500,
-                          fontSize: main_Height * 0.018
-                      ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Bank Transfer",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 0.06,
+                        fontWeight: FontWeight.w500,
+                        fontSize: main_Height * 0.018
                     ),
+                  ),
 
 
-                    Row(
-                      children: [
-                        Text("25 Oct, 2022  ",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xFF959698),
-                              fontSize: main_Height * 0.015
-                          ),
+                  Row(
+                    children: [
+                      Text("25 Oct, 2022  ",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xFF959698),
+                            fontSize: main_Height * 0.015
                         ),
-                        SvgPicture.asset("assets/images/dot1.svg"),
-                        Text(" 09:00 AM",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xFF959698),
-                              fontSize: main_Height * 0.017
-                          ),
+                      ),
+                      SvgPicture.asset("assets/images/dot1.svg"),
+                      Text(" 09:00 AM",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xFF959698),
+                            fontSize: main_Height * 0.017
                         ),
+                      ),
 
-                      ],
-                    )
+                    ],
+                  )
 
 
 
 
-                  ],
-                ),
+                ],
               ),
             ),
 
