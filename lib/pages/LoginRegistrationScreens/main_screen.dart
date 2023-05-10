@@ -139,7 +139,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     )
                 ),
               ),
-              SizedBox(height: 80,),
+              SizedBox(height: main_Height * 0.085,),
               SizedBox(
                 height: main_Height * 0.060,
                 width: main_Width * 0.9,
@@ -162,7 +162,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
                   },
                   child: Text(
-                    "Create Account",
+                    "Create an Account",
                     style: TextStyle(
                         fontSize: main_Height < 700 ? 12 : 15,
                         fontWeight: FontWeight.w500,
@@ -284,42 +284,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   height: main_Height * 0.060,
-              //   width: main_Width * 0.9,
-              //   child: OutlinedButton(
-              //     child: Text(
-              //       "Login with OTP",
-              //       style: TextStyle(
-              //           fontSize: main_Height < 700 ? 12 : 15,
-              //           fontWeight: FontWeight.w700,
-              //           color: Colors.white),
-              //     ),
-              //
-              //     style: OutlinedButton.styleFrom(
-              //       padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-              //
-              //       shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(30)
-              //       ),
-              //       side: BorderSide(
-              //           style: BorderStyle.none
-              //       ),
-              //       backgroundColor: primaryPurple,
-              //     ),
-              //     onPressed: () {
-              //       ////
-              //       // Here, we are assigning true to IsGuest Because This Button will be pressed before login so it will be consider as a guest.
-              //       ////
-              //       // IsGuest = true;
-              //       // // StartStepperPage = true;
-              //       //
-              //       // // Navigator.pushNamed(context, FundraiserStepperPage.routeName);
-              //       // Navigator.of(context).pushNamed(NewFundraiserStepperPage.routeName);
-              //     },
-              //   ),
-              // ),
-              SizedBox(height: 10,),
+              SizedBox(height: main_Height * 0.065,),
 
               Center(child:
               Container(

@@ -5,7 +5,7 @@ import 'package:general_expense_app/pages/Dashboard/bottom_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/income_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
@@ -89,8 +89,8 @@ class MyApp extends StatelessWidget {
     if(settings.name == ExpenseScreen.routeName) {
       return getMaterialPageRoute(ExpenseScreen((){}));
     }
-    if(settings.name == InventoryScreen.routeName) {
-      return getMaterialPageRoute(InventoryScreen((){}));
+    if(settings.name == RoomScreen.routeName) {
+      return getMaterialPageRoute(RoomScreen((){}));
     }
     if(settings.name == AddInventoryScreen.routeName) {
       return getMaterialPageRoute(AddInventoryScreen());

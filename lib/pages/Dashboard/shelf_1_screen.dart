@@ -49,7 +49,7 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
           // ),
           titleSpacing: 15,
           title: Text(
-            "Shelf1",
+            "Shelf 1",
             style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
           ),
           automaticallyImplyLeading: false,
@@ -84,7 +84,7 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
                     child: Container(
                       height: main_Height * 0.05,
                       width: main_Height * 0.05,
-                      child: SvgPicture.asset("assets/images/addI.svg",
+                      child: SvgPicture.asset("assets/images/add.svg",
                         fit: BoxFit.fill,),
                     ),
                   )

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:general_expense_app/Utils/colors.dart';
-import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
@@ -230,7 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           ListTile(
                             onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen((){})));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen((){})));
                             },
                             title: Row(
                               children:  [
