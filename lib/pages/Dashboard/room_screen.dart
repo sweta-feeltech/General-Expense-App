@@ -4,16 +4,16 @@ import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 
 import '../../Utils/colors.dart';
 
-class InventoryScreen extends StatefulWidget {
-  static String routeName = 'InventoryScreen';
+class RoomScreen extends StatefulWidget {
+  static String routeName = 'RoomScreen';
   Function backPressCallback;
-  InventoryScreen(this.backPressCallback,{super.key});
+  RoomScreen(this.backPressCallback,{super.key});
 
   @override
-  State<InventoryScreen> createState() => _InventoryScreenState();
+  State<RoomScreen> createState() => _RoomScreenState();
 }
 
-class _InventoryScreenState extends State<InventoryScreen> {
+class _RoomScreenState extends State<RoomScreen> {
 
 
   @override
@@ -36,7 +36,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
         // ),
         titleSpacing: 15,
         title: Text(
-          "Inventory",
+          "Rooms",
           style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
@@ -54,7 +54,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Add Inventories",
+                Text("Add Rooms",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -72,7 +72,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                   child: Container(
                     height: main_Height * 0.05,
                     width: main_Height * 0.05,
-                    child: SvgPicture.asset("assets/images/addI.svg",
+                    child: SvgPicture.asset("assets/images/add.svg",
                       fit: BoxFit.fill,),
                   ),
                 )

@@ -5,7 +5,7 @@ import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/inventory_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -32,7 +32,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       ExpenseScreen((){
         Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
       }),
-      InventoryScreen((){
+      RoomScreen((){
         Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
       }),
       ProfileScreen((){

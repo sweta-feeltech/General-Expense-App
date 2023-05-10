@@ -55,7 +55,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
               },
               child: Text(
-                "Create Account",
+                "Create an Account",
                 style: TextStyle(
                     fontSize: main_Height * 0.02,
                     fontWeight: FontWeight.w500,

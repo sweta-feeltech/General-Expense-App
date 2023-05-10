@@ -81,7 +81,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
                     child: Container(
                       height: main_Height * 0.05,
                       width: main_Height * 0.05,
-                      child: SvgPicture.asset("assets/images/addI.svg",
+                      child: SvgPicture.asset("assets/images/add.svg",
                         fit: BoxFit.fill,),
                     ),
                   )

@@ -21,22 +21,13 @@ class _AddInventoryScreenState extends State<AddInventoryScreen> {
     return Scaffold(
         backgroundColor: primaryGrey,
         appBar: AppBar(
-          // leading: IconButton(
-          //   padding: EdgeInsets.zero,
-          //   constraints: BoxConstraints(minHeight: 20, minWidth: 20),
-          //   onPressed: () {
-          //     // widget.backPressCallback.call();
-          //     Navigator.of(context).pop();
-          //   },
-          //   icon: Icon(Icons.arrow_back, color: Colors.black),
-          // ),
           titleSpacing: 15,
           title: Text(
             "Add Inventory",
-            style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+            style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
           ),
           automaticallyImplyLeading: false,
-          backgroundColor: primaryGrey,
+          backgroundColor: primaryPurple,
           elevation: 0,
           // centerTitle: true,
         ),
