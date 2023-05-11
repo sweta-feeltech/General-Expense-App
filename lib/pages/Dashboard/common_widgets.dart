@@ -307,8 +307,6 @@ class CommonWidgets {
   }
 
 
-
-
   static Widget CommonGroupList2(BuildContext context,
       {int? index}
       ) {
@@ -396,7 +394,6 @@ class CommonWidgets {
     );
 
   }
-
 
 
   static Widget CommonRoomList(BuildContext context,
@@ -731,6 +728,145 @@ class CommonWidgets {
       ],
     );
   }
+
+
+  static Widget masterCategoryCardOfUI(BuildContext context, {int? index}) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.03),
+      child: Container(
+        height: main_Height * 0.1,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(7),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                Container(
+                  height: main_Height * 0.061,
+                  width: main_Height * 0.061,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFEFEFF1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset("assets/images/bankI.svg",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Bank Transfer",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 0.06,
+                            fontWeight: FontWeight.w500,
+                            fontSize: main_Height * 0.018
+                        ),
+                      ),
+
+
+                      Row(
+                        children: [
+                          Text("25 Oct, 2022  ",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xFF959698),
+                                fontSize: main_Height * 0.015
+                            ),
+                          ),
+                          SvgPicture.asset("assets/images/dot1.svg"),
+                          Text(" 09:00 AM",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xFF959698),
+                                fontSize: main_Height * 0.017
+                            ),
+                          ),
+
+                        ],
+                      )
+
+
+
+
+                    ],
+                  ),
+                ),
+
+
+
+                Column(
+                  children: [
+                    Container(
+                      height: main_Height * 0.04,
+                      width: main_Height * 0.04,
+
+                      decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+
+                      ),
+                      child: Center(
+                        child:SvgPicture.asset("assets/images/edit.svg",
+                          height: main_Height * 0.03,
+                          width: main_Height * 0.03,
+                        ) ,
+                      ),
+                    ),
+
+
+                    Container(
+                      height: main_Height * 0.04,
+                      width: main_Height * 0.04,
+
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+
+                      ),
+                      child: Center(
+                        child:SvgPicture.asset("assets/images/delete.svg",
+                          height: main_Height * 0.03,
+                          width: main_Height * 0.03,
+                        ) ,
+                      ),
+                    ),
+
+                  ],
+                )
+
+              ],
+            ),
+
+          ],
+        ),
+
+      ),
+    ) ;
+  }
+
+
+
+
+
 
 
 }
