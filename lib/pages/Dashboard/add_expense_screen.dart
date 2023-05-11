@@ -52,13 +52,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         elevation: 0,
         // centerTitle: true,
       ),
+
+
       bottomSheet: Container(
-        height: main_Height * 0.085,
+        height: main_Height * 0.13,
         width: main_Width * 1,
         decoration: const BoxDecoration(color: primaryGrey),
         child: Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
+              EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: main_Height * 0.035),
           child: Container(
             height: main_Height * 0.06,
             width: main_Width * 0.75,
@@ -366,7 +368,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                           contentPadding:
                           EdgeInsets.only(top: 5, bottom: 5, left: 10),
                           // filled: true,
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black38),
                           ),
                           // fillColor: ,
 
