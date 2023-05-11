@@ -66,100 +66,91 @@ class _LogInScreenState extends State<LogInScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: main_Width * 0.03,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: main_Width * 0.03,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Sign Up",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.028,
+                                fontWeight: FontWeight.w500,
+                                color: primaryOrange),
+                          ),
+                          Text(
+                            " to start again",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.028,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Sign Up",
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: main_Height * 0.028,
-                              fontWeight: FontWeight.w500,
-                              color: primaryOrange),
-                        ),
-                        Text(
-                          " to start again",
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: main_Height * 0.028,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: main_Width * 0.03,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "authentic information",
+                            maxLines: 2,
+                            style: TextStyle(
+                                fontSize: main_Height * 0.028,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: main_Width * 0.03,
+                    const SizedBox(
+                      height: 10,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "authentic information",
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: main_Height * 0.028,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: main_Width * 0.03,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: main_Width * 0.03,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        "By click the create account button, you agree \nto Terms and Service and acknlowledge \nthe Privacy and Policy of the company",
+                        textAlign: TextAlign.left,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          height: 1.5,
+                          fontSize: main_Height * 0.0155,
+                          color: Colors.grey,
+                        )),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                      "By click the create account button, you agree \nto Terms and Service and acknlowledge \nthe Privacy and Policy of the company",
-                      textAlign: TextAlign.left,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        height: 1.5,
-                        fontSize: main_Height * 0.0155,
-                        color: Colors.grey,
-                      )),
-                ],
+              SizedBox(
+                height: 50,
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Form(
-                key: _formkey,
-                child: Container(
-                  width: main_Height,
-                  height: main_Height * 0.728,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(30),
-                      topLeft: Radius.circular(30),
-                    ),
-                  ),
+              Form(
+                  key: _formkey,
                   child: Column(
                     children: [
                       Padding(
@@ -307,9 +298,9 @@ class _LogInScreenState extends State<LogInScreen> {
                         ),
                       ),
                     ],
-                  ),
-                )),
-          ],
+                  )),
+            ],
+          ),
         ),
       ),
     );
