@@ -26,6 +26,17 @@ class _LogInScreenState extends State<LogInScreen> {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
+    return mainLoginForm();
+
+
+  }
+
+
+
+  Widget mainLoginForm(){
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       bottomSheet: Container(
         height: main_Height * 0.1,
@@ -47,14 +58,14 @@ class _LogInScreenState extends State<LogInScreen> {
                 ),
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  if (_formkey.currentState!.validate()) {
-                    _formkey.currentState!.save();
+                  if (validateAndSave()) {
 
-                    // loginBloc
-                    //     .add(PostLoginDataEvent(email!, password!));
+                    // print(
+                    // " details $firstName, $lastName, $email, $password, $confirmPassword");
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomBarScreen()));
+
                   }
-                  // Navigator.of(context).push
-                  //   (MaterialPageRoute(builder: (context)=>Dashboard()));
+
                 },
                 child: Text(
                   "LogIn",
@@ -71,6 +82,7 @@ class _LogInScreenState extends State<LogInScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 child: Column(
@@ -84,7 +96,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         // crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Sign Up",
+                            "Sign In",
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: main_Height * 0.028,
@@ -131,25 +143,34 @@ class _LogInScreenState extends State<LogInScreen> {
                 padding: EdgeInsets.symmetric(
                   horizontal: main_Width * 0.03,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                        "By click the create account button, you agree \nto Terms and Service and acknlowledge \nthe Privacy and Policy of the company",
-                        textAlign: TextAlign.left,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          height: 1.5,
-                          fontSize: main_Height * 0.0155,
-                          color: Colors.grey,
-                        )),
-                  ],
+                child: Text(
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                    textAlign: TextAlign.left,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      height: 1.5,
+                      fontSize: main_Height * 0.0155,
+                      color: Colors.grey,
+                    )),
+              ),
+              SizedBox(
+                height: main_Height * 0.02,
+              ),
+              Center(
+                child: Container(
+                  width: main_Width * 0.75,
+                  height: main_Height * 0.30,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/cover.png",),
+                          fit: BoxFit.fill
+                      )
+                  ),
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: main_Height * 0.02,
               ),
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
@@ -165,6 +186,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             },
                             Icons.mail,
                             TextInputAction.next,
+                            initalTxt: "admin@gmail.com",
                             validatingFunc: (value) {
                               RegExp regex = RegExp(EmailRegex);
                               if (value == null || value.isEmpty) {
@@ -176,9 +198,11 @@ class _LogInScreenState extends State<LogInScreen> {
                             },
                             context: context
                         ),
+
                         SizedBox(
                           height: main_Height * 0.016,
                         ),
+
                         TextFormField(
                             obscureText: visiblePassowrd,
                             onSaved: (onSavedVal) {
@@ -187,12 +211,13 @@ class _LogInScreenState extends State<LogInScreen> {
                             onChanged: (value) {
                               password = value;
                             },
+                            initialValue: "Admin@123",
                             validator: (value) {
                               RegExp regex = RegExp(PassWordRegex);
                               if (value == null || value.isEmpty) {
                                 return 'Password can\'t be empty';
                               } else
-                              return null;
+                                return null;
                             },
                             decoration: InputDecoration(
                               floatingLabelBehavior:
@@ -242,8 +267,6 @@ class _LogInScreenState extends State<LogInScreen> {
                             ),
                             textInputAction: TextInputAction.next),
 
-
-
                         Container(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -251,7 +274,8 @@ class _LogInScreenState extends State<LogInScreen> {
                               Text(
                                 "Don't have an account?",
                                 style: TextStyle(
-                                    fontSize: 17, color: Color(0xFF646982)),
+                                  fontSize: main_Height * 0.0165,
+                                  color: Colors.black,),
                                 textAlign: TextAlign.center,
                               ),
                               TextButton(
@@ -262,17 +286,16 @@ class _LogInScreenState extends State<LogInScreen> {
                                 child: Text(
                                   "SIGN UP",
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    // color: Color(0xFFFF7622),
-                                    color: Color.fromARGB(255, 0, 160, 227),
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.italic,
+                                    fontSize: main_Height * 0.0165,
+                                    color: primaryPurple,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
+
                       ],
                     )),
               ),
@@ -282,6 +305,8 @@ class _LogInScreenState extends State<LogInScreen> {
       ),
     );
   }
+
+
 
   bool validateAndSave() {
     final form = _formkey.currentState;
