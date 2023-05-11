@@ -15,6 +15,9 @@ String? ProfilePicture;
 
 bool? AuthorizedUser;
 
+String? accessToken;
+
+
 
 /////
 /// REGEX FOR EMAIL ADDRESS.
