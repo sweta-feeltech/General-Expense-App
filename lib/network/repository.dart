@@ -34,7 +34,7 @@ class Repository {
   ///
   Future<GetProfileModel> getProfileData() async {
     try {
-      Map<String, dynamic> listData = await apiClient.getApiCall(BASEURL,"$getProfileApiEnd", isAccessToken: accessToken);
+      Map<String, dynamic> listData = await apiClient.getApiCall(BASEURL,"$getProfileApiEnd", isAccessToken: accessToken,isBearer:true);
       GetProfileModel list = GetProfileModel.fromJson(listData);
       return list;
     } on CustomException {

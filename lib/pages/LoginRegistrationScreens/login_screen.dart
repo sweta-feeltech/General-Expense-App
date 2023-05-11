@@ -66,8 +66,6 @@ class _LogInScreenState extends State<LogInScreen> {
               fontSize: 16.0,
             );
 
-
-
             accessToken = state.loginResponseData.accessToken;
           }
         },

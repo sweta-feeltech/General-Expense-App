@@ -28,11 +28,11 @@ class ApiClient {
   /// ~~~~~~GET API CALL: SENDING GET REQUEST TO SERVER.~~~~~
   ///
   ///
-  Future<dynamic> getApiCall(String baseUrl, String endPoint, {String query = "", String? isAccessToken, dynamic bodyForGetApi}) async {
+  Future<dynamic> getApiCall(String baseUrl, String endPoint, {String query = "", String? isAccessToken, dynamic bodyForGetApi,bool? isBearer}) async {
     var getResponseJson;
     var getUrl;
 
-    Map<String, String>? headers;
+    // Map<String, String>? headers;
 
     if(query.isNotEmpty) {
       getUrl = "$baseUrl$endPoint?$query";
@@ -40,19 +40,13 @@ class ApiClient {
       getUrl = "$baseUrl$endPoint";
     }
 
-    if(isAccessToken != null) {
-      print("get with token");
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": isAccessToken,
-      };
-    }
-    else {
-      print("get without token");
-      headers = {
-        "Content-Type": "application/json"
-      };
-    }
+
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $accessToken"
+    };
+
+
 
     print("url $getUrl, headers: $headers");
 
@@ -106,49 +100,34 @@ class ApiClient {
   ///
   Future<dynamic> postApiCall(String baseUrl, String endPoint, dynamic postBody, {
     String? isAccessToken,
-    String? fireBaseTokenWhenBothNeeded,
-    bool? isGetFirebaseToken, bool? isAppUserToken
+    bool? isBearer
   }) async {
     var postResponseJson;
     var getUrl;
 
-    Map<String, String>? headers;
 
-    getUrl = '$baseUrl$endPoint';
-    print(getUrl);
-    print(postBody);
+    // getUrl = '$baseUrl$apiEndPoint';
+
+    Map<String, String> headers;
+    //print("herrreeeeee1");
+    //print(postBody);
+    // //print();
 
     var encodedBody = json.encode(postBody);
 
+    //print("herrreeeeee2");
+    if(isBearer == true){
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $accessToken"
+      };
+    }else{
+      headers = {
+        "Content-Type": "application/json",
+        // "Authorization": "$accessToken"
+      };
+    }
 
-    if(isAppUserToken == true && isGetFirebaseToken == true) {
-      print("with firebase and app user token");
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": isAccessToken!,
-        "firebase": fireBaseTokenWhenBothNeeded!,
-      };
-    }
-    else if(isGetFirebaseToken == true) {
-      print("with firebase token only");
-      headers = {
-        "Content-Type": "application/json",
-        "firebase": isAccessToken!,
-      };
-    }
-    else if(isAccessToken != null) {
-      print("with token");
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": isAccessToken,
-      };
-    }
-    else {
-      print("without token");
-      headers = {
-        "Content-Type": "application/json"
-      };
-    }
 
     print("Test 1 ");
     print("post url: $getUrl, headers: $headers, body: $encodedBody");
@@ -267,18 +246,33 @@ class ApiClient {
   ///
   /// ~~~~~~~~~~~~~~~~~~~NORMAL PUT API CALL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<dynamic> normalPutAPICall(String baseurl, String endPoint, dynamic body) async {
+  Future<dynamic> normalPutAPICall(String baseurl, String endPoint, dynamic body,{bool? isBearer}) async {
     var putResponseJson;
     var getUrl;
 
-    getUrl ='$baseurl$endPoint';
+
+    // getUrl = '$baseUrl$apiEndPoint';
+
+    Map<String, String> headers;
+    //print("herrreeeeee1");
+    //print(postBody);
+    // //print();
 
     var encodedBody = json.encode(body);
 
-    Map<String, String> headers = {
-      "Content-Type": "application/json",
-      "Authorization": "$accessToken"
-    };
+    //print("herrreeeeee2");
+    if(isBearer == true){
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $accessToken"
+      };
+    }else{
+      headers = {
+        "Content-Type": "application/json",
+        // "Authorization": "$accessToken"
+      };
+    }
+
 
     print("url: $getUrl, headers: $headers");
     try {
