@@ -1,8 +1,10 @@
-import 'dart:ffi';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../Utils/colors.dart';
 
@@ -25,6 +27,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     'Category 4'
   ];
 
+
+  final amountController = TextEditingController();
+
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +39,76 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   }
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  /////
+  /// HERE WE CREATE A INSTANCE OF IMAGE PICKER PACKAGE
+  /////
+  final _picker = ImagePicker();
+  File? featureImage;
+  final fundraiserInnerImageList = List<File>.filled(2, File(""));
+  // List<dynamic>? fundraiserInnerImageList = [];
+  File? fundraiserInnerImage1, fundraiserInnerImage2, fundraiserInnerImage3;
+
+  Future getImage(int ind) async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+
+    if (pickedFile != null) {
+      if(ind == 0){
+        featureImage = File(pickedFile.path);
+      }
+      // if(ind == 1 || ind == 2 || ind == 3) {
+      if(ind == 1 || ind == 2 ) {
+        for(int i = 0; i < 2; i++) {
+          if(fundraiserInnerImageList.length < 3) {
+            if(ind == 1){
+              // fundraiserInnerImageList[0] = File(pickedFile.toString());
+              fundraiserInnerImageList[0] = File(pickedFile.path);
+            }
+            if(ind == 2){
+              // fundraiserInnerImageList[1] = File(pickedFile.toString());
+              fundraiserInnerImageList[1] = File(pickedFile.path);
+            }
+            // if(ind == 3) {
+            //   // fundraiserInnerImageList[2] = File(pickedFile.toString());
+            //   fundraiserInnerImageList[2] = File(pickedFile.path);
+            // }
+          }
+          break;
+        }
+        if(ind == 1) {
+          fundraiserInnerImage1 = File(pickedFile.path);
+        }
+        if (ind == 2) {
+          fundraiserInnerImage2 = File(pickedFile.path);
+        }
+        // if (ind == 3) {
+        //   fundraiserInnerImage3 = File(pickedFile.path);
+        // }
+        print("fundraiserInnerImageList: $fundraiserInnerImageList");
+      }
+      setState(() {});
+      print(featureImage);
+    } else {
+      print("No Image Selected");
+    }
+  }
+
+
+
+
+
+  @override
+  void dispose() {
+    amountController.dispose();
+    super.dispose();
+  }
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,36 +133,39 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       bottomSheet: Container(
         height: main_Height * 0.13,
         width: main_Width * 1,
-        decoration: const BoxDecoration(color: primaryGrey),
-        child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: main_Height * 0.035),
-          child: Container(
-            height: main_Height * 0.06,
-            width: main_Width * 0.75,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+        decoration: BoxDecoration(color: Colors.transparent),
+        alignment: Alignment.center,
+        // padding: EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: main_Height * 0.035),
+        child: Container(
+          height: main_Height * 0.06,
+          width: main_Width * 0.8,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              primary: primaryPurple,
             ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                primary: primaryPurple,
-              ),
-              onPressed: () {},
-              child: Text(
-                "Add Expense",
-                style: TextStyle(
-                    letterSpacing: 1,
-                    fontSize: main_Height * 0.018,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white),
-              ),
+            onPressed: () {
+
+
+            },
+            child: Text(
+              "Add Expense",
+              style: TextStyle(
+                  letterSpacing: 1,
+                  fontSize: main_Height * 0.018,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white),
             ),
           ),
         ),
       ),
+
+
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
@@ -127,6 +206,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       // onChanged: (value){
                       //   firstName = value;
                       // },
+                      keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'First Name can\'t be empty';
@@ -390,10 +470,190 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
 
 
+                    Row(
+                      children: [
+                        Text("Demo Text",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: main_Height * 0.018,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    // const SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: InkWell(
+                            onTap: () {
+                              // selectProfilePic();
+                              getImage(1);
+                              print("hi");
+                            },
+                            // child: (userPic == null)
+                            child: (fundraiserInnerImage1 == null)
+                                ? Image(
+                              image: AssetImage(
+                                  "assets/images/upload_image_holder.png"),
+                              width: main_Height * 0.2 ,
+                              height: main_Height * 0.2,
+                            )
+                                : Stack(
+                              alignment: Alignment.topRight,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  child: Image.file(
+                                    File(fundraiserInnerImage1!.path),
+                                    // width: main_height < 700 ? 100 : 160,
+                                    // height: main_height < 700 ? 100 : 140,
+
+                                  ),
+                                ),
+                                Positioned(
+                                  top: -5,
+                                  right: -7,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      fundraiserInnerImage1 = null;
+                                      fundraiserInnerImageList[0] = File("");
+                                      print("fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
+                                      print("first inner image");
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        padding: EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                          color: Color.fromARGB(255, 211, 211, 211),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(Icons.clear, size: 18, color: Colors.black,)
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10,),
+
+                        Flexible(
+                          child: InkWell(
+                            onTap: () {
+                              getImage(2);
+                            },
+                            child: (fundraiserInnerImage2 == null)
+                                ? Image(
+                              image: AssetImage(
+                                  "assets/images/upload_image_holder.png"),
+                              width: main_Height * 0.2,
+                              height: main_Height * 0.2,
+                            )
+                                : Stack(
+                              alignment: Alignment.topRight,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  child: Image.file(
+                                    File(fundraiserInnerImage2!.path),
+                                    // width: main_height < 700 ? 200 : 160,
+                                    // height: main_height < 700 ? 200 : 140,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: -5,
+                                  right: -7,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      fundraiserInnerImage2 = null;
+                                      fundraiserInnerImageList[1] = File("");
+                                      print("fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                        padding: EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                          color: Color.fromARGB(255, 211, 211, 211),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(Icons.clear, size: 18, color: Colors.black,)
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        // SizedBox(width: 10,),
+
+                        // Flexible(
+                        //   child: InkWell(
+                        //     onTap: () {
+                        //       // selectProfilePic();
+                        //       getImage(3);
+                        //       print("hi");
+                        //     },
+                        //     // child: (userPic == null)
+                        //     child: (fundraiserInnerImage3 == null)
+                        //         ? Image(
+                        //       image: AssetImage(
+                        //           "assets/images/upload_image_holder.png"),
+                        //       width: main_Height * 0.2,
+                        //       height: main_Height * 0.2,
+                        //     )
+                        //         : Stack(
+                        //       alignment: Alignment.topRight,
+                        //       clipBehavior: Clip.none,
+                        //       children: [
+                        //         Padding(
+                        //           padding: const EdgeInsets.symmetric(vertical: 8),
+                        //           child: Image.file(
+                        //             File(fundraiserInnerImage3!.path),
+                        //             // width: main_height < 700 ? 200 : 160,
+                        //             // height: main_height < 700 ? 200 : 140,
+                        //           ),
+                        //         ),
+                        //         Positioned(
+                        //           top: -5,
+                        //           // right: -2,
+                        //           child: GestureDetector(
+                        //             onTap: () {
+                        //               fundraiserInnerImage3 = null;
+                        //               fundraiserInnerImageList[2] = File("");
+                        //               print("fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
+                        //               setState(() {});
+                        //             },
+                        //             child: Container(
+                        //                 padding: EdgeInsets.all(2),
+                        //                 decoration: BoxDecoration(
+                        //                   color: Color.fromARGB(255, 211, 211, 211),
+                        //                   shape: BoxShape.circle,
+                        //                 ),
+                        //                 child: Icon(Icons.clear, size: 18, color: Colors.black,)
+                        //             ),
+                        //           ),
+                        //         )
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+
+
 
                   ],
                 ),
+              ),
+
+              Container(
+                height: main_Height * 0.13,
+                width: main_Width * 1,
               )
+
             ],
           ),
         ),
