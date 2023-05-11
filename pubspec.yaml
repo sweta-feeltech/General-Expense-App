@@ -74,6 +74,12 @@ dependencies:
   accordion: ^1.0.3
   getwidget: ^3.0.1
 
+  ## for file and image picker is used to get image and file from local phone
+  file_picker: ^5.2.0+1
+  url_launcher: ^6.1.6
+  path_provider: ^2.0.11
+  share_plus: ^4.0.10
+
 
 dev_dependencies:
   flutter_test:

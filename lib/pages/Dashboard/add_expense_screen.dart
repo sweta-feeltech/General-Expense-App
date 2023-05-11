@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../Utils/colors.dart';
+import '../../Utils/document_upload.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   static String routeName = '/addExpenseScreen';
@@ -93,6 +95,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     }
   }
 
+  List<dynamic>? allDocs = [];
 
 
 
@@ -472,15 +475,59 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
                     Row(
                       children: [
-                        Text("Demo Text",
+                        Text("Add File Or Images",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: main_Height * 0.018,
                               fontWeight: FontWeight.w500),
                         )
+                        
                       ],
                     ),
-                    // const SizedBox(height: 5,),
+                    SizedBox(
+                      height: main_Height * 0.1,
+                      child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                            var abc = 1;
+                            PlatformFile? single;
+
+                            allDocs?.forEach((value) {
+                              // print("hello: ${value['name']}");
+                              if (value['name'] == abc) {
+                                single = value['file'];
+                              }
+                            });
+
+                            return InkWell(
+                              onTap: () async {
+                                PlatformFile? a =
+                                await UploadDocumets.selectFile();
+
+                                setState(() {
+                                  var b = {
+                                    "name": abc,
+                                    "file": a
+                                  };
+                                  allDocs = [...?allDocs, b];
+                                  // docObject.addEntries({"${kycDocListModelData![index].id}" : "${a}"}.entries);
+                                  // docObject = {
+                                  //   ...docObject,
+                                  //   "${kycDocListModelData![index].id}": "${a}"
+                                  // };
+                                });
+                              },
+                              child: Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: (single != null)
+                                      ? cardOfDocAfterUploadSuccessWidget(single!,
+                                      context,
+                                      cardTextWidth: 200)
+                                      : cardOfDocBeforeUploadWidget(context)),
+                            );
+                          }),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -644,7 +691,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
 
 
-
                   ],
                 ),
               ),
@@ -660,4 +706,95 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       ),
     );
   }
+
+
+
+  Widget cardOfDocBeforeUploadWidget(BuildContext context) {
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+
+    return Container(
+      height: main_Height * 0.072,
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black38,width:1),
+      borderRadius: BorderRadius.circular(3)
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Click to upload",
+                style: TextStyle(color: primaryPurple, fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                child: Text("Upload .jpg or .pdf file",
+                    style: TextStyle(color: Colors.black, fontSize: 10)),
+              )
+            ],
+          ),
+          Image(
+            image: AssetImage("assets/images/add_doc.png"),
+            width: 40,
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  Widget cardOfDocAfterUploadSuccessWidget(PlatformFile uploadedFile,BuildContext context,{double? cardTextWidth}) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Container(
+      height: main_Height * 0.072,
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(border: Border.all(color: Colors.black38,width:1),
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: cardTextWidth ?? null,
+                child: RichText(
+                    softWrap: true,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      text: "${uploadedFile.name}\n",
+                      style: TextStyle(
+                          color: primaryPurple, fontWeight: FontWeight.w500),
+                    )),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
+          uploadedFile.extension == "jpeg" ||
+              uploadedFile.extension == "png" ||
+              uploadedFile.extension == "jpg"
+              ? Image(
+            image: AssetImage("assets/images/picture_pre.jpg"),
+            width: 40,
+          )
+              : Image(
+            image: AssetImage("assets/images/pdf_pre.png"),
+            width: 40,
+          )
+        ],
+      ),
+    );
+  }
+
+
 }
