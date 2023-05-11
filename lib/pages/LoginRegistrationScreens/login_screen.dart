@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import '../../Utils/api_end_points.dart';
 import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
 import '../../blocs/Login/login_screen_bloc.dart';
@@ -19,6 +21,32 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+
+
+  bool _isLoading = false;
+
+  Future<void> login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Perform login authentication
+    await Future.delayed(Duration(seconds: 2));
+
+    // Save login status to shared preferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', true);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+  }
+
+
+
+
+
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   final toast = FToast();
@@ -29,6 +57,19 @@ class _LogInScreenState extends State<LogInScreen> {
   String? password;
 
   bool visiblePassowrd = true;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +93,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
 
           } else if (state is PostLoginDataEventState) {
+
 
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => BottomBarScreen()));
@@ -363,4 +405,6 @@ class _LogInScreenState extends State<LogInScreen> {
       return false;
     }
   }
+
+
 }

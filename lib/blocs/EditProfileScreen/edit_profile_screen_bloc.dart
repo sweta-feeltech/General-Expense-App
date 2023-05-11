@@ -1,5 +1,6 @@
 
-import 'dart:html';
+
+import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,28 +18,6 @@ class EditProfilePageBloc extends Bloc<EditProfilePageEvent, EditProfilePageStat
   EditProfilePageBloc(this.repositoryRepo) : super(EditProfilePageInitialState()) {
 
     on<EditProfilePageEvent>((event, emit) async {
-
-      //
-      // if(event is AllFetchDataForProfilePageEvent){
-      //   late GetProfileModel allProfileData;
-      //
-      //   try {
-      //     print("sttt");
-      //     emit(EditProfilePageLoadingState(true));
-      //     print("sttt2");
-      //     allProfileData =
-      //     await repositoryRepo.getProfileData();
-      //     print("sttt3");
-      //     emit(EditProfilePageLoadingState(false));
-      //     print("sttt4");
-      //     emit(AllFetchDataForProfilePageState(allProfileData));
-      //   }
-      //   catch(error,stacktrace){
-      //     print("stacktrave: $stacktrace");
-      //     emit(EditProfilePageLoadingState(false));
-      //     emit(ApiFailureState(Exception(error.toString())));
-      //   }
-      // }
 
 
       if(event is PutProfileDataEvent){

@@ -1,3 +1,5 @@
+import '../models/CommonModel/user_data_model.dart';
+
 String? Username;
 
 String? Email;
@@ -16,6 +18,16 @@ String? ProfilePicture;
 bool? AuthorizedUser;
 
 String? accessToken;
+
+
+UserData? appUserData;
+
+String? userDataForSession;
+
+UserData? sessionParesdData;
+Map<String,dynamic>? UserDatas;
+
+List<String> enrolledCoursesIdList = [];
 
 
 

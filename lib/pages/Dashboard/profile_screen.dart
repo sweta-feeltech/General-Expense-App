@@ -86,8 +86,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             if (state is ProfileScreenLoadingEventState) {
               return ThemeHelper.buildLoadingWidget();
             } else if (state is FetchAllProfileScreenAPIsEventState) {
+              print("hi2");
               profileDataListModelData = state.profileDataListModelData;
+              print("hi");
               return ProfileScreenViewWidget();
+
             } else {
               print("notsuth");
               return ProfileScreenViewWidget();
@@ -198,11 +201,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children: [
                                 Container(
                                   width: main_Width * 0.4,
-                                  // child: Text("${widget.fname == "" ? appUserData!.firstName : widget.fname} ${widget.lname == "" ? appUserData!.lastName : widget.lname}",
-                                  child: Text("User Name",
+                                  child: Text("${profileDataListModelData?.firstName} ${profileDataListModelData?.lastName}",
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: main_Height * 0.0218,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: main_Width * 0.4,
+                                  child: Text("${profileDataListModelData?.email}",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: main_Height * 0.0158,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w500
                                     ),

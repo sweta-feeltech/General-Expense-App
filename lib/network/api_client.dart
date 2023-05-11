@@ -106,7 +106,7 @@ class ApiClient {
     var getUrl;
 
 
-    // getUrl = '$baseUrl$apiEndPoint';
+    getUrl = '$baseUrl$endPoint';
 
     Map<String, String> headers;
     //print("herrreeeeee1");
@@ -124,7 +124,7 @@ class ApiClient {
     }else{
       headers = {
         "Content-Type": "application/json",
-        // "Authorization": "$accessToken"
+        "Authorization": "$accessToken"
       };
     }
 

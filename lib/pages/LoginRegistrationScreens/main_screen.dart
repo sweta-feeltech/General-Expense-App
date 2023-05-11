@@ -23,9 +23,11 @@ class MainPageScreen extends StatefulWidget {
 }
 
 class _MainPageScreenState extends State<MainPageScreen> {
+
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   bool _isLoading = false;
+
 
   Future<void> login() async {
     setState(() {

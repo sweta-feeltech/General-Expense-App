@@ -55,4 +55,20 @@ class Repository {
     }
   }
 
+  ///// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SPLASH PAGE APIS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: PROFILE REQUEST FOR SESSION MANAGE~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<UserData> getProfileSplashAPICall({String? access}) async {
+    try {
+      Map<String, dynamic> json = await apiClient.getApiCall(BASEURL, getProfileApiEnd, isAccessToken: access);
+      UserData oneNuBeeCardModelRes = UserData.fromJson(json);
+      return oneNuBeeCardModelRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+
 }

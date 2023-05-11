@@ -2,10 +2,15 @@ import 'dart:io';
 
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:http/http.dart' as http;
 import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
+import '../../blocs/EditProfileScreen/edit_profile_screen_bloc.dart';
+import '../../models/ProfileModel/edit_profile_model.dart';
+import '../../network/api_client.dart';
+import '../../network/repository.dart';
 
 
 class EditProfileScreen extends StatefulWidget {
@@ -21,13 +26,36 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
 
 
+
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
+  EditProfileModel? editeprofiledata;
+
+  Response? getProfileModelData;
+
+
+  EditProfilePageBloc editProBloc = EditProfilePageBloc(Repository.getInstance());
+
+
+
+  String? id,firstName, lastName, email, dob,description;
+  File? profilePic;
 
   final _picker = ImagePicker();
 
-  File? profilePic;
 
+  @override
+  void initState() {
+    index2 = 0;
+    super.initState();
+    // editProBloc.add(PutProfileDataEvent(id,firstName,lastName,email,dob,description,profilePic: profilePic ));
+  }
+
+
+  var index2;
+
+
+  Repository repositoryRepo = Repository(ApiClient(httpClient: http.Client()));
 
   Future getImage() async {
 
@@ -45,11 +73,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
 
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
+
+    return mainAllEditProfileView();
+  }
+
+  Widget mainAllEditProfileView(){
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
 
     return Form(
       key: _formkey,
@@ -248,30 +286,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     color: Colors.white,
                     child: Column(
                       children: [
+
+
                         Row(
                           children: [
-                            Text("User Name",
+                            Text("First Name",
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: main_Height * 0.018,
-                                  fontWeight: FontWeight.w500
+                                  fontSize: main_Height * 0.017,
+                                  fontWeight: FontWeight.w600
                               ),
                             )
                           ],
                         ),
                         const SizedBox(height: 5,),
                         TextFormField(
-                          // initialValue: "${Username}",
                           // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
                           style: TextStyle(
                             fontSize: main_Height * 0.022,
                           ),
-                          // onSaved: (newValue) {
-                          //   firstName = newValue;
-                          // },
-                          // onChanged: (value){
-                          //   firstName = value;
-                          // },
+                          onSaved: (newValue) {
+                            firstName = newValue;
+                          },
+                          onChanged: (value){
+                            firstName = value;
+                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'First Name can\'t be empty';
@@ -282,19 +321,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             contentPadding:
                             const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black38),
+                            enabledBorder: OutlineInputBorder(
 
                             ),
                             // fillColor: ,
-                            hintText: "User Name",
+                            hintText: "First Name",
                             hintStyle:  TextStyle(
                                 color: Colors.grey,
                                 fontSize: main_Height * 0.018
                             ),
-                            border: const OutlineInputBorder(
+                            border: OutlineInputBorder(
                               // borderSide:
-                                  // const BorderSide(color: Colors.white),
+                              //     const BorderSide(color: Colors.transparent),
                               // borderRadius: BorderRadius.circular(10)
 
                             ),
@@ -304,6 +342,60 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           height: 15,
                         ),
 
+
+                        Row(
+                          children: [
+                            Text("Last Name",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: main_Height * 0.017,
+                                  fontWeight: FontWeight.w600
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 5,),
+                        TextFormField(
+                          // initialValue: "${getProfileModelData?.lastName == null ? appUserData!.lastName : getProfileModelData!.lastName}",
+                          style: TextStyle(
+                            fontSize: main_Height * 0.022,
+                          ),
+                          onSaved: (newValue) {
+                            lastName = newValue;
+                          },
+                          onChanged: (value){
+                            lastName = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'First Name can\'t be empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            contentPadding:
+                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                            // filled: true,
+                            enabledBorder: OutlineInputBorder(
+
+                            ),
+                            // fillColor: ,
+                            hintText: "Last Name",
+                            hintStyle:  TextStyle(
+                                color: Colors.grey,
+                                fontSize: main_Height * 0.018
+                            ),
+                            border: OutlineInputBorder(
+                              // borderSide:
+                              //     const BorderSide(color: Colors.transparent),
+                              // borderRadius: BorderRadius.circular(10)
+
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
 
                         Row(
                           children: [
@@ -499,5 +591,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
     );
+
   }
+
+
 }

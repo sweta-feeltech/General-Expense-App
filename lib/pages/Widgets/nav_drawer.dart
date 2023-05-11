@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Dashboard/category_screen.dart';
 import '../LoginRegistrationScreens/splash_screen.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -35,6 +36,10 @@ class _NavDrawerState extends State<NavDrawer> {
 
   @override
   Widget build(BuildContext context) {
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
     return Scaffold(
 
       backgroundColor: Colors.white,
@@ -53,7 +58,6 @@ class _NavDrawerState extends State<NavDrawer> {
               logout();
               // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileScreen(
               //         (){
-              //
               //     }
               // )));
               print("donations press");
@@ -61,7 +65,7 @@ class _NavDrawerState extends State<NavDrawer> {
             },
             child: ListTile(
               title: Row(
-                children: const [
+                children:  [
                   Align(
                     alignment: Alignment.center,
                     child: Icon(Icons.person,
@@ -70,7 +74,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
                   ),
                   SizedBox(width: 10,),
-                  Text("Logout", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+                  Text("Logout", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
                 ],
               ),
             ),
@@ -78,6 +82,40 @@ class _NavDrawerState extends State<NavDrawer> {
 
 
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+
+          InkWell(
+            onTap: () {
+
+              Navigator.of(context, rootNavigator: true).pushNamed(CategoryScreen.routeName);
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.roofing,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("category", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+
+
+
+
+
         ],
       ),
 
