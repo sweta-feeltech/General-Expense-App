@@ -15,3 +15,8 @@ String LogInAPIEnd = "Authentication/login";
 /// ------------------Get Profile PUP API----------------------
 ///
 String getProfileApiEnd = "User/profile";
+
+/// ------------------Update Profile PUP API----------------------
+///
+String updateProfileApiEnd = "user/update-profile";
+

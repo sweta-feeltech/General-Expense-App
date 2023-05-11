@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/LoginRegisterModel/login_model.dart';
+import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
 import 'custom_exception.dart';
 
@@ -36,6 +37,19 @@ class Repository {
       Map<String, dynamic> listData = await apiClient.getApiCall(BASEURL,"$getProfileApiEnd", isAccessToken: accessToken);
       GetProfileModel list = GetProfileModel.fromJson(listData);
       return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT:Update Profile API~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Future<EditProfileModel> putEditProfileData(Map<String, dynamic> putJson, {String? id}) async {
+    try {
+      var json = await apiClient.apiCallMultipartPut(BASEURL,"$updateProfileApiEnd",isAccessToken: accessToken, putJson);
+      print("here put json : $json");
+      EditProfileModel productPut = EditProfileModel.fromJson(json);
+      return productPut;
     } on CustomException {
       rethrow;
     }
