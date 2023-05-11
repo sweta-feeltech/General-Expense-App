@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:http/http.dart' as http;
 import '../../Utils/constants.dart';
 import 'dart:math' as math;
+import '../../blocs/ProfileScreen/profile_screen_bloc.dart';
+import '../../models/ProfileModel/get_profile_model.dart';
+import '../../network/api_client.dart';
+import '../../network/repository.dart';
 import '../LoginRegistrationScreens/splash_screen.dart';
+import '../Widgets/theme_helper.dart';
 import 'edit_profile_screen.dart';
 import 'home_screen.dart';
 
@@ -39,8 +45,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
 
+
+  bool value = false;
+
+  void changeData(){
+    setState(() {
+      value = true;
+    });
+  }
+
+  Repository repositoryRepo = Repository(ApiClient(httpClient: http.Client()));
+
+
+  ProfileScreenBloc profileScreenBloc =
+  ProfileScreenBloc(Repository.getInstance());
+
+  GetProfileModel? profileDataListModelData;
+
+  @override
+  void initState() {
+    super.initState();
+    loadAllProfileScreenApiCalls();
+  }
+
+  void loadAllProfileScreenApiCalls() {
+    profileScreenBloc.add(FetchAllProfileScreenScreenAPIsEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: BlocProvider<ProfileScreenBloc>(
+        create: (context) =>
+        profileScreenBloc..add(ProfileScreenInitialEvent()),
+        child: BlocConsumer<ProfileScreenBloc, ProfileScreenState>(
+          builder: (context, state) {
+            if (state is ProfileScreenLoadingEventState) {
+              return ThemeHelper.buildLoadingWidget();
+            } else if (state is FetchAllProfileScreenAPIsEventState) {
+              profileDataListModelData = state.profileDataListModelData;
+              return ProfileScreenViewWidget();
+            } else {
+              return ProfileScreenViewWidget();
+            }
+          },
+          listener: (context, state) {
+            if (state is ApiFailureState) {
+
+
+              ThemeHelper.customDialogForMessage(
+                  context,
+                  (state.exception.toString().replaceAll('Exception:', ''))
+                      .replaceAll(':', ''),
+                  MediaQuery.of(context).size.width, () {
+                Navigator.of(context, rootNavigator: true).pop();
+                ProfileScreenViewWidget();
+              }, ForSuccess: false);
+
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+
+  Widget ProfileScreenViewWidget(){
+
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -255,13 +329,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               children:  [
                                 SizedBox(width: 20,),
                                 Align(
-                                  alignment: Alignment.center,
-                                  child: Transform(
+                                    alignment: Alignment.center,
+                                    child: Transform(
                                       transform:Matrix4.rotationY(math.pi),
                                       child: const Icon(Icons.logout,
-                                    color: primaryPurple,
-                                  ),
-                                  )
+                                        color: primaryPurple,
+                                      ),
+                                    )
                                 ),
                                 Text("Logout", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500),),
                               ],
@@ -284,5 +358,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
 
     );
+
   }
+
+
 }
