@@ -9,6 +9,7 @@ import '../../Utils/constants.dart';
 import 'dart:math' as math;
 import '../LoginRegistrationScreens/splash_screen.dart';
 import 'edit_profile_screen.dart';
+import 'home_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profileScreen';
@@ -240,7 +241,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: Icon(Icons.book_outlined,color: primaryPurple,),
                                 ),
                                 SizedBox(width: main_Height * 0.020,),
-                                Text("Inventory", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
+                                Text("Rooms", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
                               ],
                             ),
                           ),

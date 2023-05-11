@@ -121,7 +121,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         titleSpacing: 15,
         title: Text(
           "Add Expense",
-          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,

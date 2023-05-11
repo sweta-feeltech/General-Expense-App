@@ -22,36 +22,36 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
     return Scaffold(
       backgroundColor: primaryGrey,
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none_outlined,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              // Add your onPressed logic here
-              ///for notification
-            },
-          ),
-        ],
-        leading: IconButton(
-          padding: EdgeInsets.zero,
-          constraints: BoxConstraints(minHeight: 20, minWidth: 20),
-          onPressed: () {
-            // widget.backPressCallback.call();
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-        ),
-        titleSpacing: 0,
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.notifications_none_outlined,
+        //       color: Colors.black,
+        //     ),
+        //     onPressed: () {
+        //       // Add your onPressed logic here
+        //       ///for notification
+        //     },
+        //   ),
+        // ],
+        // leading: IconButton(
+        //   padding: EdgeInsets.zero,
+        //   constraints: BoxConstraints(minHeight: 20, minWidth: 20),
+        //   onPressed: () {
+        //     // widget.backPressCallback.call();
+        //     Navigator.of(context).pop();
+        //   },
+        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
+        // ),
+        titleSpacing: 15,
         title: Text(
           "Income List",
-          style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: primaryGrey,
+        backgroundColor: primaryPurple,
         elevation: 0,
-        centerTitle: true,
+        // centerTitle: true,
       ),
       bottomSheet: Container(
         height: main_Height * 0.1,
