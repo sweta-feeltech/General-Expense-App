@@ -11,3 +11,7 @@ String apiPreFix = "/api/v1";
 /// ------------------SIGN-IN POST API----------------------
 ///
 String LogInAPIEnd = "Authentication/login";
+
+/// ------------------Get Profile PUP API----------------------
+///
+String getProfileApiEnd = "User/profile";

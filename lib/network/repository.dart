@@ -2,7 +2,9 @@ import 'package:general_expense_app/network/api_client.dart';
 import 'package:http/http.dart' as http;
 
 import '../Utils/api_end_points.dart';
+import '../Utils/constants.dart';
 import '../models/LoginRegisterModel/login_model.dart';
+import '../models/ProfileModel/get_profile_model.dart';
 import 'custom_exception.dart';
 
 
@@ -26,4 +28,17 @@ class Repository {
       rethrow;
     }
   }
+
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: SINGLE COURSE ENROLLED COURSE APIS~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<GetProfileModel> getProfileData() async {
+    try {
+      Map<String, dynamic> listData = await apiClient.getApiCall(BASEURL,"$getProfileApiEnd", isAccessToken: accessToken);
+      GetProfileModel list = GetProfileModel.fromJson(listData);
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
 }
