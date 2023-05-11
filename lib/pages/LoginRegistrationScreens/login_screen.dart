@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
 
 import '../../Utils/colors.dart';
+import '../../Utils/constants.dart';
+import '../Widgets/theme_helper.dart';
 
 class LogInScreen extends StatefulWidget {
   static String routeName = '/loginScreen';
@@ -149,156 +151,131 @@ class _LogInScreenState extends State<LogInScreen> {
               SizedBox(
                 height: 50,
               ),
-              Form(
-                  key: _formkey,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 28, left: 20, right: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("EMAIL"),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                TextFormField(
-                                  initialValue: "admin@gmail.com",
-                                  validator: (value) {
-                                    RegExp regex = RegExp(
-                                        "^[a-zA-Z0-9.a-zA-Z0-9.!#\$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                                    if (value == null || value.isEmpty) {
-                                      return 'Email can\'t be empty';
-                                    } else if (!regex.hasMatch(value)) {
-                                      return ("Please check your email address");
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (onSavedVal) {
-                                    print(onSavedVal);
-                                    email = onSavedVal;
-                                  },
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                  ),
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide.none),
-                                    // fillColor: ,
-                                    hintText: "example@gmail.com",
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFbdc6cf),
-                                    ),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text("PASSWORD"),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                TextFormField(
-                                  initialValue: "Admin@123",
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {}
-                                    return null;
-                                  },
-                                  obscureText: visiblePassowrd,
-                                  onSaved: (onSavedVal) {
-                                    password = onSavedVal;
-                                  },
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                  ),
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide.none),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        visiblePassowrd
-                                            ? Icons.visibility_off
-                                            : Icons.visibility,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          visiblePassowrd = !visiblePassowrd;
-                                        });
-                                      },
-                                    ),
-                                    hintText: "* * * * * * *",
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFbdc6cf),
-                                    ),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                          ],
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
+                child: Form(
+                    key: _formkey,
+                    child: Column(
+                      children: [
+                        ThemeHelper.mainMobileTextFormField(
+                            main_Height * 0.020,
+                            "Email",
+                                (onSavedVal) {
+                              email = onSavedVal;
+                            },
+                            Icons.mail,
+                            TextInputAction.next,
+                            validatingFunc: (value) {
+                              RegExp regex = RegExp(EmailRegex);
+                              if (value == null || value.isEmpty) {
+                                return 'Email can\'t be empty';
+                              } else if (!regex.hasMatch(value)) {
+                                return ("Please check your email address");
+                              }
+                              return null;
+                            },
+                            context: context
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have an account?",
-                              style: TextStyle(
-                                  fontSize: 17, color: Color(0xFF646982)),
-                              textAlign: TextAlign.center,
-                            ),
-                            TextButton(
-                              onPressed: () => {
-                                Navigator.pushNamed(
-                                    context, RegistrationScreen.routeName)
-                              },
-                              child: Text(
-                                "SIGN UP",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  // color: Color(0xFFFF7622),
-                                  color: Color.fromARGB(255, 0, 160, 227),
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic,
+                        SizedBox(
+                          height: main_Height * 0.016,
+                        ),
+                        TextFormField(
+                            obscureText: visiblePassowrd,
+                            onSaved: (onSavedVal) {
+                              password = onSavedVal;
+                            },
+                            onChanged: (value) {
+                              password = value;
+                            },
+                            validator: (value) {
+                              RegExp regex = RegExp(PassWordRegex);
+                              if (value == null || value.isEmpty) {
+                                return 'Password can\'t be empty';
+                              } else
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                              hintText: "Password",
+                              hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: darkGrey,
+                                  fontSize: main_Height * 0.020),
+                              prefixIcon: SizedBox(
+                                  width: 5,
+                                  height: 5,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.key_outlined,
+                                      size: main_Height * 0.03,
+                                      color: primaryPurple,
+                                    ),
+                                    onPressed: null,
+                                    alignment: Alignment.bottomLeft,
+                                  )),
+                              suffixIcon: SizedBox(
+                                height: 5,
+                                width: 5,
+                                child: IconButton(
+                                  icon: Icon(
+                                    visiblePassowrd
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: primaryPurple,
+                                    size: main_Height * 0.03,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      visiblePassowrd = !visiblePassowrd;
+                                    });
+                                  },
+                                  alignment: Alignment.bottomRight,
                                 ),
                               ),
+                              contentPadding:
+                              EdgeInsets.only(top: 18, bottom: 0),
+                              enabledBorder: ThemeHelper.signupMyInputBorder(),
+                              focusedBorder:
+                              ThemeHelper.signupMyFocusedBorder(),
+                              errorStyle: TextStyle(color: Colors.redAccent),
                             ),
-                          ],
+                            textInputAction: TextInputAction.next),
+
+
+
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Don't have an account?",
+                                style: TextStyle(
+                                    fontSize: 17, color: Color(0xFF646982)),
+                                textAlign: TextAlign.center,
+                              ),
+                              TextButton(
+                                onPressed: () => {
+                                  Navigator.pushNamed(
+                                      context, RegistrationScreen.routeName)
+                                },
+                                child: Text(
+                                  "SIGN UP",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    // color: Color(0xFFFF7622),
+                                    color: Color.fromARGB(255, 0, 160, 227),
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  )),
+                      ],
+                    )),
+              ),
             ],
           ),
         ),
