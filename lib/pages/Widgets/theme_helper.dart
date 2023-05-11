@@ -239,6 +239,120 @@ class ThemeHelper {
   }
 
 
+
+  static void customDialogForMessage(
+      BuildContext context,
+      String dialogTitle,
+      double widthData,
+      VoidCallback onOkayPress,
+      {
+        bool? autoRemoveDialog,
+        required bool ForSuccess,
+        InlineSpan? contentMessage,
+        // double? heightData,
+        bool? needMoreLines,
+        bool? isBarrierDismissible,
+      }
+      ) {
+    showDialog(
+        barrierDismissible: isBarrierDismissible ?? true,
+        context: context,
+        builder: (context) {
+          autoRemoveDialog == true
+              ? Future.delayed(Duration(seconds: 2), () {
+            Navigator.of(context).pop(true);
+          })
+              : null ;
+
+
+          var main_Width = MediaQuery.of(context).size.width;
+          var main_Height = MediaQuery.of(context).size.height;
+
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
+
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    // color: Color.fromARGB(255, 217, 231, 250),
+                    color: Colors.white,
+                  ),
+                  width: widthData,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 60, 10, 10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            dialogTitle.trim(),
+                            maxLines: needMoreLines == true ? 4 :  2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: primaryPurple,
+                                // color: darkRed,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 5,),
+                        contentMessage != null
+                            ? RichText(
+                          text: contentMessage,
+                          textAlign: TextAlign.center,
+                        )
+                            : Container(),
+                        SizedBox(height: main_Height * 0.0235,),
+                        TextButton(
+                            onPressed: onOkayPress,
+                            style: ButtonStyle(
+                              // backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 57, 181, 74))
+                                backgroundColor: MaterialStateProperty.all<Color>(primaryPurple)
+                            ),
+                            child: Text("OK", style: TextStyle(
+                              color: Colors.white, fontSize: 14,),
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                Positioned(
+                    top: -30,
+                    // top: -50,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(60),
+                      child: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          radius: 30,
+                          // child: Image.asset("assets/images/app_icon_png.png", width: 60, height: 60,)
+                          child: Container(
+                            // padding: EdgeInsets.all(2),
+                            child: ForSuccess ? Image.asset("assets/images/popup_success.png", width: 250, height: 250,) : Image.asset("assets/images/popup_failure.png", width: 250, height: 250,),
+                          )
+                      ),
+                    )
+                )
+              ],
+            ),
+          );
+        }
+    );
+  }
+
+
+
   static void addGroupDialogBox(
       {
         required BuildContext context,
