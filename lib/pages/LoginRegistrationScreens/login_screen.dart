@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
 
 import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
+import '../../blocs/Login/login_screen_bloc.dart';
+import '../../network/repository.dart';
+import '../Dashboard/bottom_bar.dart';
 import '../Widgets/theme_helper.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -16,6 +21,10 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
+  final toast = FToast();
+
+  LoginScreenBloc loginBloc = LoginScreenBloc(Repository.getInstance());
+
   String? email;
   String? password;
 
@@ -26,7 +35,44 @@ class _LogInScreenState extends State<LogInScreen> {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-    return mainLoginForm();
+    return BlocProvider<LoginScreenBloc>(
+      create: (context) => loginBloc..add(LoginScreenInitialEvent()),
+      child: BlocConsumer<LoginScreenBloc, LoginScreenState>(
+        builder: (context, state) {
+          if (state is LoginScreenLoadingState) {
+            return ThemeHelper.buildLoadingWidget();
+          } else {
+            return mainLoginForm();
+          }
+        },
+        listener: (context, state) async {
+          if (state is APIFailureState) {
+
+            ThemeHelper.toastForAPIFaliure(state.exception.toString());
+
+
+          } else if (state is PostLoginDataEventState) {
+
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => BottomBarScreen()));
+
+            Fluttertoast.showToast(
+              msg: "Success fully Logged In...",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 3,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+
+
+
+            accessToken = state.loginResponseData.accessToken;
+          }
+        },
+      ),
+    );
 
 
   }
@@ -59,6 +105,8 @@ class _LogInScreenState extends State<LogInScreen> {
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
                   if (validateAndSave()) {
+                    loginBloc
+                        .add(PostLoginDataEvent(email!, password!));
 
                     // print(
                     // " details $firstName, $lastName, $email, $password, $confirmPassword");
