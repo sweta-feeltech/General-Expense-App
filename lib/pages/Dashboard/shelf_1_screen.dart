@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import '../../Utils/colors.dart';
+import '../Widgets/theme_helper.dart';
 import 'common_widgets.dart';
 
 
@@ -79,6 +80,7 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
                   InkWell(
                     onTap: (){
 
+                      ThemeHelper.bottomSheetforAddShelfItems(context);
 
                     },
                     child: Container(
@@ -94,9 +96,30 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
               ),
             ),
 
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.01),
+              child: TextFormField(
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: 'Search Shelf Items',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                onChanged: (value) {
+                  // Do something with the search query
+                },
+
+              ),
+
+            ),
+
             Expanded(
               child: ListView.builder(
-                  itemCount: 25,
+                  itemCount: 1,
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,

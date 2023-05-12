@@ -5,16 +5,15 @@ import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
 import '../../Utils/colors.dart';
 import '../Widgets/theme_helper.dart';
 
-class RoomScreen extends StatefulWidget {
-  static String routeName = 'RoomScreen';
-  Function backPressCallback;
-  RoomScreen(this.backPressCallback,{super.key});
+class AddHomeScreen extends StatefulWidget {
+  static String routeName = 'AddHomeScreen';
+  AddHomeScreen({super.key});
 
   @override
-  State<RoomScreen> createState() => _RoomScreenState();
+  State<AddHomeScreen> createState() => _AddHomeScreenState();
 }
 
-class _RoomScreenState extends State<RoomScreen> {
+class _AddHomeScreenState extends State<AddHomeScreen> {
 
 
   @override
@@ -37,7 +36,7 @@ class _RoomScreenState extends State<RoomScreen> {
         // ),
         titleSpacing: 15,
         title: Text(
-          "Rooms",
+          "Home",
           style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
@@ -55,7 +54,7 @@ class _RoomScreenState extends State<RoomScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Add Rooms",
+                Text("Add Home",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -67,12 +66,12 @@ class _RoomScreenState extends State<RoomScreen> {
 
                 InkWell(
                   onTap: (){
-                    ThemeHelper.addRoomDialogBox(
-                      context: context, 
-                      logoutPress: () {}, 
-                      heightData: main_Height, 
-                      popupTitle: "Add a room", 
-                      popupcontent: "popupcontent"
+                    ThemeHelper.addHomeDialogBox(
+                        context: context,
+                        logoutPress: () {},
+                        heightData: main_Height,
+                        popupTitle: "Add a Home",
+                        popupcontent: "popupcontent"
                     );
 
                   },
@@ -100,9 +99,9 @@ class _RoomScreenState extends State<RoomScreen> {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 children: List.generate(
-                    2,
+                    3,
                         (index) {
-                      return CommonWidgets.CommonRoomList(context,index: index,);
+                      return CommonWidgets.CommonHomeList(context,index: index,);
                     }
                 ),
               ),

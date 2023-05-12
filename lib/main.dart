@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:general_expense_app/pages/Dashboard/add_home_Screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_group_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
@@ -133,6 +134,9 @@ class MyApp extends StatelessWidget {
     }
     if(settings.name == GroupScreen.routeName) {
       return getMaterialPageRoute(GroupScreen());
+    }
+    if(settings.name == AddHomeScreen.routeName) {
+      return getMaterialPageRoute(AddHomeScreen());
     }
 
     if(settings.name == EditProfileScreen.routeName) {

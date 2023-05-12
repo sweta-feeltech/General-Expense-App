@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
 import 'common_widgets.dart';
@@ -59,7 +60,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
           children: [
 
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.01),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -75,8 +76,13 @@ class _ShelfScreenState extends State<ShelfScreen> {
 
                   InkWell(
                     onTap: (){
-
-
+                            ThemeHelper.addShelfDialogBox(
+                                context: context,
+                                logoutPress: () {},
+                                heightData: main_Height,
+                                popupTitle: "Add a Shelf",
+                                popupcontent: "popupcontent"
+                            );
                     },
                     child: Container(
                       height: main_Height * 0.05,
@@ -91,9 +97,30 @@ class _ShelfScreenState extends State<ShelfScreen> {
               ),
             ),
 
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.01),
+              child: TextFormField(
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: 'Search Shelf',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                onChanged: (value) {
+                  // Do something with the search query
+                },
+
+              ),
+
+            ),
+
             Expanded(
               child: ListView.builder(
-                  itemCount: 25,
+                  itemCount: 6,
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,

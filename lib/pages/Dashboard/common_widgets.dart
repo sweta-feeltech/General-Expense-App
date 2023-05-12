@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
@@ -433,8 +434,8 @@ class CommonWidgets {
                   // child: items.categoryImg != null ?
                   padding: EdgeInsets.all(5),
               child :
-                    SvgPicture.asset("assets/images/icn.svg",
-                    fit: BoxFit.contain,
+                    Icon(Icons.meeting_room,
+                    size: main_Height * 0.04,
                     ),
                 ),
                 SizedBox(
@@ -443,7 +444,7 @@ class CommonWidgets {
                 Column(
              children: [
                Text(
-                 "Different Places",
+                 " My Room ${index! +1}",
                  maxLines: 1,
                  // items.name.toString(),
                  overflow: TextOverflow.ellipsis,
@@ -454,7 +455,92 @@ class CommonWidgets {
                ),
 
                Text(
-                 "7 Devices",
+                 "Room description",
+                 maxLines: 1,
+                 // items.name.toString(),
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyle(
+                     color: darkGrey,
+                     fontWeight: FontWeight.w500,
+                     fontSize: main_Height * 0.014),
+               ),
+             ],
+             )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+ static Widget CommonHomeList(BuildContext context,
+      {int? index}
+      ) {
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).pushNamed(
+          RoomScreen.routeName
+        );
+
+        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
+      },
+      child: Material(
+        borderRadius: BorderRadius.circular(7),
+        elevation: 3,
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: Container(
+            // padding: EdgeInsets.all(10),
+            height: main_Height * 0.1,
+            width: main_Width * 0.25,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                color: getColor(index!,4)
+
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: main_Height * 0.06,
+                  width: main_Height * 0.06,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                      BorderRadius.circular(15)),
+                  // child: items.categoryImg != null ?
+                  alignment: Alignment.center,
+                    padding: EdgeInsets.all(5),
+              child :
+                    Icon(Icons.home_outlined,
+                    color: Colors.black,
+                    size: main_Height * 0.04,)
+                   // SvgPicture.asset("assets/images/shome.svg",),
+                ),
+                SizedBox(
+                  height: main_Height * 0.02,
+                ),
+                Column(
+             children: [
+               Text(
+                 "Sweet Home ${index! + 1}",
+                 maxLines: 1,
+                 // items.name.toString(),
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyle(
+                     color: Colors.black,
+                     fontWeight: FontWeight.w500,
+                     fontSize: main_Height * 0.014),
+               ),
+
+               Text(
+                 "Our Home description",
                  maxLines: 1,
                  // items.name.toString(),
                  overflow: TextOverflow.ellipsis,
@@ -531,31 +617,15 @@ class CommonWidgets {
                       ),
 
 
-                      Row(
-                        children: [
-                          Text("25 Oct, 2022  ",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
-                                fontSize: main_Height * 0.015
-                            ),
-                          ),
-                          SvgPicture.asset("assets/images/dot1.svg"),
-                          Text(" 09:00 AM",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
-                                fontSize: main_Height * 0.017
-                            ),
-                          ),
-
-                        ],
+                      Text("Description of Shelf ${index + 1 }",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xFF959698),
+                            fontSize: main_Height * 0.015
+                        ),
                       )
 
 
@@ -610,7 +680,7 @@ class CommonWidgets {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: SvgPicture.asset("assets/images/intenetI.svg",
+                    child: SvgPicture.asset("assets/icons/inventory.svg",
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -622,7 +692,7 @@ class CommonWidgets {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Shelfs List ${index! + 1}",
+                      Text("Shelfs Item ${index! + 1}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -633,32 +703,16 @@ class CommonWidgets {
                       ),
 
 
-                      Row(
-                        children: [
-                          Text("25 Oct, 2022  ",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
-                                fontSize: main_Height * 0.015
-                            ),
-                          ),
-                          SvgPicture.asset("assets/images/dot1.svg"),
-                          Text(" 09:00 AM",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
-                                fontSize: main_Height * 0.017
-                            ),
-                          ),
-
-                        ],
-                      )
+                      Text("Shelf Item's ${index! + 1}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xFF959698),
+                            fontSize: main_Height * 0.015
+                        ),
+                      ),
 
 
 
@@ -869,7 +923,7 @@ class CommonWidgets {
                 InkWell(
                   onTap: () {
 
-                    ThemeHelper.bottomSheetforAddItoms(context);
+                    ThemeHelper.bottomSheetforAddItems(context);
 
                   },
                   child: Container(

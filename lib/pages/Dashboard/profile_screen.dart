@@ -13,8 +13,10 @@ import '../../blocs/ProfileScreen/profile_screen_bloc.dart';
 import '../../models/ProfileModel/get_profile_model.dart';
 import '../../network/api_client.dart';
 import '../../network/repository.dart';
+import '../Empty/add_home_screen.dart';
 import '../LoginRegistrationScreens/splash_screen.dart';
 import '../Widgets/theme_helper.dart';
+import 'add_home_Screen.dart';
 import 'edit_profile_screen.dart';
 import 'home_screen.dart';
 
@@ -138,6 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+
                 AppBar(
                   centerTitle: false,
                   titleSpacing: 15,
@@ -263,27 +266,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      child: Row(
-                        children: [
-                          Text("Account Settings ",
-                            style: TextStyle(
-                              letterSpacing: 0.5,
-                              fontSize: main_Height * 0.017,
-                              // fontSize: main_Height * 0.04,
-                              fontWeight: FontWeight.w500,
-                              color: darkGrey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
 
 
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text("Account Settings ",
+                        style: TextStyle(
+                          letterSpacing: 0.5,
+                          fontSize: main_Height * 0.017,
+                          // fontSize: main_Height * 0.04,
+                          fontWeight: FontWeight.w500,
+                          color: darkGrey,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
@@ -337,6 +336,85 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                           ),
+                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+
+                          ListTile(
+                            onTap: (){
+
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHome1Screen()));
+
+                            },
+                            title: Row(
+                              children:  [
+                                SizedBox(width: 20,),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Transform(
+                                      transform:Matrix4.rotationY(math.pi),
+                                      child: const Icon(Icons.hourglass_empty,
+                                        color: primaryPurple,
+                                      ),
+                                    )
+                                ),
+                                Text("Empty", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500),),
+                              ],
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text("Account Settings ",
+                        style: TextStyle(
+                          letterSpacing: 0.5,
+                          fontSize: main_Height * 0.017,
+                          // fontSize: main_Height * 0.04,
+                          fontWeight: FontWeight.w500,
+                          color: darkGrey,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(7),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                      child: Column(
+                        children: [
+
+                          ListTile(
+                            onTap: () async{
+
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen()));
+
+                            },
+                            title: Row(
+                              children:  [
+                                const SizedBox(width: 2),
+                                const Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.home,color: primaryPurple,),
+                                ),
+                                SizedBox(width: main_Height * 0.020,),
+                                Text("Home", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+
                           const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
 
                           ListTile(

@@ -70,172 +70,665 @@ class ThemeHelper {
     }
   ) {
     showDialog(
-      context: context, 
-      builder: (context) {
-        double main_Width = MediaQuery.of(context).size.width;
-        double main_Height = MediaQuery.of(context).size.height;
+        context: context,
+        builder: (context) {
+          double main_Width = MediaQuery.of(context).size.width;
+          double main_Height = MediaQuery.of(context).size.height;
 
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            clipBehavior: Clip.none,
-            children: [
-              Material(
-                elevation: 10,
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    // color: Color.fromARGB(255, 217, 231, 250),
-                    color: Colors.white,
-                  ),
-                  height: main_Height * 0.24,
-                  width: main_Width * 0.7,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 15,),
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Material(
+                  elevation: 10,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      // color: Color.fromARGB(255, 217, 231, 250),
+                      color: Colors.white,
+                    ),
+                    height: main_Height * 0.34,
+                    width: main_Width * 0.7,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 15,),
 
-                        Text(
-                          popupTitle,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500
-                          ),
-                        ),
-                        SizedBox(height: 10,),
-                        // SizedBox(height: main_Height * 0.0235,),
-                        // Image(image: AssetImage("assets/images/logout_reverse.png"), width: 30, height: 30,),
-
-                        TextFormField(
-                            onSaved: (onSavedVal) {
-                              // firstName = onSavedVal;
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'First Name can\'t be empty';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              isDense: true,
-                              floatingLabelBehavior:
-                              FloatingLabelBehavior.never,
-                              hintText: "Enter a room name",
-                              hintStyle: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  color: darkGrey,
-                                  fontSize: main_Height * 0.018),
-                              // prefixIcon: SizedBox(
-                              //     width: 5,
-                              //     height: 5,
-                              //     child: IconButton(
-                              //       icon: Icon(
-                              //         Icons.person,
-                              //         size: main_Height * 0.03,
-                              //         color: primaryPurple,
-                              //       ),
-                              //       onPressed: null,
-                              //       alignment: Alignment.bottomLeft,
-                              //     )
-                              //   ),
-                              contentPadding:
-                              EdgeInsets.only(top: 18, bottom: 0),
-                              enabledBorder:
-                              ThemeHelper.signupMyInputBorder(),
-                              constraints: BoxConstraints(minHeight: 28, maxHeight: 30),
-                              focusedBorder:
-                              ThemeHelper.signupMyFocusedBorder(),
+                          Text(
+                            popupTitle,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500
                             ),
-                            textInputAction: TextInputAction.next
                           ),
+                          SizedBox(height: 10,),
+                          // SizedBox(height: main_Height * 0.0235,),
+                          // Image(image: AssetImage("assets/images/logout_reverse.png"), width: 30, height: 30,),
 
-                        // Text(popupcontent,
-                        // textAlign: TextAlign.center, 
-                        //   style: TextStyle(
-                        //     color: Colors.black,
-                        //     fontWeight: FontWeight.w500,
-                        //     fontSize: main_Height * 0.021
-                        //   ),
-                        // ),
-                        SizedBox(height: main_Height * 0.0235,),
-                        
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
+                          TextFormField(
+                              onSaved: (onSavedVal) {
+                                // firstName = onSavedVal;
                               },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'First Name can\'t be empty';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                isDense: true,
+                                floatingLabelBehavior:
+                                FloatingLabelBehavior.never,
+                                hintText: "Enter a Room name",
+                                hintStyle: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: darkGrey,
+                                    fontSize: main_Height * 0.018),
+                                // prefixIcon: SizedBox(
+                                //     width: 5,
+                                //     height: 5,
+                                //     child: IconButton(
+                                //       icon: Icon(
+                                //         Icons.person,
+                                //         size: main_Height * 0.03,
+                                //         color: primaryPurple,
+                                //       ),
+                                //       onPressed: null,
+                                //       alignment: Alignment.bottomLeft,
+                                //     )
+                                //   ),
+                                contentPadding:
+                                EdgeInsets.only(top: 18, bottom: 0),
+                                enabledBorder:
+                                ThemeHelper.signupMyInputBorder(),
+                                constraints: BoxConstraints(minHeight: 28, maxHeight: 30),
+                                focusedBorder:
+                                ThemeHelper.signupMyFocusedBorder(),
                               ),
-                              child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
-                            ),
-                            SizedBox(width: 5,),
-              
-                            SizedBox(
-                              width: 75,
-                              child: TextButton(
-                                style: ButtonStyle(
-                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
-                                  backgroundColor: MaterialStateProperty.all(primaryPurple)
-                                ),
-                                onPressed: logoutPress,
-                                child: Text("Add",
-                                    overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: main_Height * 0.01872,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500
+                              textInputAction: TextInputAction.next
+                          ),
+                          SizedBox(height: main_Height * 0.0135,),
+
+
+                          TextFormField(
+                              onSaved: (onSavedVal) {
+                                // firstName = onSavedVal;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'First Name can\'t be empty';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                isDense: true,
+                                floatingLabelBehavior:
+                                FloatingLabelBehavior.never,
+                                hintText: "Description",
+                                hintStyle: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: darkGrey,
+                                    fontSize: main_Height * 0.018),
+                                // prefixIcon: SizedBox(
+                                //     width: 5,
+                                //     height: 5,
+                                //     child: IconButton(
+                                //       icon: Icon(
+                                //         Icons.person,
+                                //         size: main_Height * 0.03,
+                                //         color: primaryPurple,
+                                //       ),
+                                //       onPressed: null,
+                                //       alignment: Alignment.bottomLeft,
+                                //     )
+                                //   ),
+                                contentPadding:
+                                EdgeInsets.only(top: 18, bottom: 0),
+                                enabledBorder:
+                                ThemeHelper.signupMyInputBorder(),
+                                constraints: BoxConstraints(minHeight: 28, maxHeight: 30),
+                                focusedBorder:
+                                ThemeHelper.signupMyFocusedBorder(),
+                              ),
+                              textInputAction: TextInputAction.next
+                          ),
+
+                          // Text(popupcontent,
+                          // textAlign: TextAlign.center,
+                          //   style: TextStyle(
+                          //     color: Colors.black,
+                          //     fontWeight: FontWeight.w500,
+                          //     fontSize: main_Height * 0.021
+                          //   ),
+                          // ),
+                          SizedBox(height: main_Height * 0.0235,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
                                   ),
-                                )
+                                  child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
                               ),
-                            ),
-                          ],
-                        ),
-              
-                      ],
+                              SizedBox(width: 5,),
+
+                              SizedBox(
+                                width: 75,
+                                child: TextButton(
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
+                                        backgroundColor: MaterialStateProperty.all(primaryPurple)
+                                    ),
+                                    onPressed: logoutPress,
+                                    child: Text("Add",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: main_Height * 0.01872,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    )
+                                ),
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              Positioned(
-                top: -35,
-                child: Material(
-                  borderRadius: BorderRadius.circular(60),
-                  // elevation: 4,
-                  // elevation: 10,
+                Positioned(
+                    top: -35,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(60),
+                      // elevation: 4,
+                      // elevation: 10,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle
+                        ),
+                        child: CircleAvatar(
+                          // backgroundColor: Colors.white,
+                            backgroundColor: primaryPurple,
+                            radius: 35,
+                            // child: Icon(Icons.home, size: 35,)
+                            child: Icon(Icons.meeting_room,color: Colors.white, size: 40,)
+                          // child: Image.asset("assets/images/app_icon_png.png", width: 80, height: 80,)
+                        ),
+                      ),
+                    )
+                )
+              ],
+            ),
+          );
+        }
+    );
+  }
+
+  static void addHomeDialogBox(
+      {
+        required BuildContext context,
+        required VoidCallback logoutPress,
+        required double heightData,
+        required String popupTitle,
+        required String popupcontent,
+      }
+      ) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          double main_Width = MediaQuery.of(context).size.width;
+          double main_Height = MediaQuery.of(context).size.height;
+
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Material(
+                  elevation: 10,
+                  borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    padding: EdgeInsets.all(2),
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      // color: Color.fromARGB(255, 217, 231, 250),
                       color: Colors.white,
-                      shape: BoxShape.circle
                     ),
-                    child: CircleAvatar(
-                      // backgroundColor: Colors.white,
-                      backgroundColor: primaryPurple,
-                      radius: 35,
-                      // child: Icon(Icons.home, size: 35,)
-                      child: Icon(Icons.home,color: Colors.white, size: 40,)
-                      // child: Image.asset("assets/images/app_icon_png.png", width: 80, height: 80,)
+                    height: main_Height * 0.34,
+                    width: main_Width * 0.7,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 15,),
+
+                          Text(
+                            popupTitle,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          // SizedBox(height: main_Height * 0.0235,),
+                          // Image(image: AssetImage("assets/images/logout_reverse.png"), width: 30, height: 30,),
+
+                          TextFormField(
+                              onSaved: (onSavedVal) {
+                                // firstName = onSavedVal;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'First Name can\'t be empty';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                isDense: true,
+                                floatingLabelBehavior:
+                                FloatingLabelBehavior.never,
+                                hintText: "Enter a Home name",
+                                hintStyle: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: darkGrey,
+                                    fontSize: main_Height * 0.018),
+                                // prefixIcon: SizedBox(
+                                //     width: 5,
+                                //     height: 5,
+                                //     child: IconButton(
+                                //       icon: Icon(
+                                //         Icons.person,
+                                //         size: main_Height * 0.03,
+                                //         color: primaryPurple,
+                                //       ),
+                                //       onPressed: null,
+                                //       alignment: Alignment.bottomLeft,
+                                //     )
+                                //   ),
+                                contentPadding:
+                                EdgeInsets.only(top: 18, bottom: 0),
+                                enabledBorder:
+                                ThemeHelper.signupMyInputBorder(),
+                                constraints: BoxConstraints(minHeight: 28, maxHeight: 30),
+                                focusedBorder:
+                                ThemeHelper.signupMyFocusedBorder(),
+                              ),
+                              textInputAction: TextInputAction.next
+                          ),
+                          SizedBox(height: main_Height * 0.0135,),
+
+
+                          TextFormField(
+                              onSaved: (onSavedVal) {
+                                // firstName = onSavedVal;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'First Name can\'t be empty';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                isDense: true,
+                                floatingLabelBehavior:
+                                FloatingLabelBehavior.never,
+                                hintText: "Description",
+                                hintStyle: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: darkGrey,
+                                    fontSize: main_Height * 0.018),
+                                // prefixIcon: SizedBox(
+                                //     width: 5,
+                                //     height: 5,
+                                //     child: IconButton(
+                                //       icon: Icon(
+                                //         Icons.person,
+                                //         size: main_Height * 0.03,
+                                //         color: primaryPurple,
+                                //       ),
+                                //       onPressed: null,
+                                //       alignment: Alignment.bottomLeft,
+                                //     )
+                                //   ),
+                                contentPadding:
+                                EdgeInsets.only(top: 18, bottom: 0),
+                                enabledBorder:
+                                ThemeHelper.signupMyInputBorder(),
+                                constraints: BoxConstraints(minHeight: 28, maxHeight: 30),
+                                focusedBorder:
+                                ThemeHelper.signupMyFocusedBorder(),
+                              ),
+                              textInputAction: TextInputAction.next
+                          ),
+
+                          // Text(popupcontent,
+                          // textAlign: TextAlign.center,
+                          //   style: TextStyle(
+                          //     color: Colors.black,
+                          //     fontWeight: FontWeight.w500,
+                          //     fontSize: main_Height * 0.021
+                          //   ),
+                          // ),
+                          SizedBox(height: main_Height * 0.0235,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
+                                  ),
+                                  child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
+                              ),
+                              SizedBox(width: 5,),
+
+                              SizedBox(
+                                width: 75,
+                                child: TextButton(
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
+                                        backgroundColor: MaterialStateProperty.all(primaryPurple)
+                                    ),
+                                    onPressed: logoutPress,
+                                    child: Text("Add",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: main_Height * 0.01872,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    )
+                                ),
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      ),
                     ),
                   ),
+                ),
+
+                Positioned(
+                    top: -35,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(60),
+                      // elevation: 4,
+                      // elevation: 10,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle
+                        ),
+                        child: CircleAvatar(
+                          // backgroundColor: Colors.white,
+                            backgroundColor: primaryPurple,
+                            radius: 35,
+                            // child: Icon(Icons.home, size: 35,)
+                            child: Icon(Icons.home,color: Colors.white, size: 40,)
+                          // child: Image.asset("assets/images/app_icon_png.png", width: 80, height: 80,)
+                        ),
+                      ),
+                    )
                 )
-              )
-            ],
-          ),
-        );
+              ],
+            ),
+          );
+        }
+    );
+  }
+
+  static void addShelfDialogBox(
+      {
+        required BuildContext context,
+        required VoidCallback logoutPress,
+        required double heightData,
+        required String popupTitle,
+        required String popupcontent,
       }
+      ) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          double main_Width = MediaQuery.of(context).size.width;
+          double main_Height = MediaQuery.of(context).size.height;
+
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Material(
+                  elevation: 10,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      // color: Color.fromARGB(255, 217, 231, 250),
+                      color: Colors.white,
+                    ),
+                    height: main_Height * 0.34,
+                    width: main_Width * 0.7,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 15,),
+
+                          Text(
+                            popupTitle,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          // SizedBox(height: main_Height * 0.0235,),
+                          // Image(image: AssetImage("assets/images/logout_reverse.png"), width: 30, height: 30,),
+
+                          TextFormField(
+                              onSaved: (onSavedVal) {
+                                // firstName = onSavedVal;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Shelf Name can\'t be empty';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                isDense: true,
+                                floatingLabelBehavior:
+                                FloatingLabelBehavior.never,
+                                hintText: "Enter a Shelf name",
+                                hintStyle: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: darkGrey,
+                                    fontSize: main_Height * 0.018),
+                                // prefixIcon: SizedBox(
+                                //     width: 5,
+                                //     height: 5,
+                                //     child: IconButton(
+                                //       icon: Icon(
+                                //         Icons.person,
+                                //         size: main_Height * 0.03,
+                                //         color: primaryPurple,
+                                //       ),
+                                //       onPressed: null,
+                                //       alignment: Alignment.bottomLeft,
+                                //     )
+                                //   ),
+                                contentPadding:
+                                EdgeInsets.only(top: 18, bottom: 0),
+                                enabledBorder:
+                                ThemeHelper.signupMyInputBorder(),
+                                constraints: BoxConstraints(minHeight: 28, maxHeight: 30),
+                                focusedBorder:
+                                ThemeHelper.signupMyFocusedBorder(),
+                              ),
+                              textInputAction: TextInputAction.next
+                          ),
+                          SizedBox(height: main_Height * 0.0135,),
+
+
+                          TextFormField(
+                              onSaved: (onSavedVal) {
+                                // firstName = onSavedVal;
+                              },
+                              // validator: (value) {
+                              //   if (value == null || value.isEmpty) {
+                              //     return 'Shelf Name can\'t be empty';
+                              //   }
+                              //   return null;
+                              // },
+                              decoration: InputDecoration(
+                                isDense: true,
+                                floatingLabelBehavior:
+                                FloatingLabelBehavior.never,
+                                hintText: "Description",
+                                hintStyle: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: darkGrey,
+                                    fontSize: main_Height * 0.018),
+                                // prefixIcon: SizedBox(
+                                //     width: 5,
+                                //     height: 5,
+                                //     child: IconButton(
+                                //       icon: Icon(
+                                //         Icons.person,
+                                //         size: main_Height * 0.03,
+                                //         color: primaryPurple,
+                                //       ),
+                                //       onPressed: null,
+                                //       alignment: Alignment.bottomLeft,
+                                //     )
+                                //   ),
+                                contentPadding:
+                                EdgeInsets.only(top: 18, bottom: 0),
+                                enabledBorder:
+                                ThemeHelper.signupMyInputBorder(),
+                                constraints: BoxConstraints(minHeight: 28, maxHeight: 30),
+                                focusedBorder:
+                                ThemeHelper.signupMyFocusedBorder(),
+                              ),
+                              textInputAction: TextInputAction.next
+                          ),
+
+                          // Text(popupcontent,
+                          // textAlign: TextAlign.center,
+                          //   style: TextStyle(
+                          //     color: Colors.black,
+                          //     fontWeight: FontWeight.w500,
+                          //     fontSize: main_Height * 0.021
+                          //   ),
+                          // ),
+                          SizedBox(height: main_Height * 0.0235,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
+                                  ),
+                                  child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
+                              ),
+                              SizedBox(width: 5,),
+
+                              SizedBox(
+                                width: 75,
+                                child: TextButton(
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
+                                        backgroundColor: MaterialStateProperty.all(primaryPurple)
+                                    ),
+                                    onPressed: logoutPress,
+                                    child: Text("Add",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: main_Height * 0.01872,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    )
+                                ),
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                Positioned(
+                    top: -35,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(60),
+                      // elevation: 4,
+                      // elevation: 10,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle
+                        ),
+                        child: CircleAvatar(
+                          // backgroundColor: Colors.white,
+                            backgroundColor: primaryPurple,
+                            radius: 35,
+                            // child: Icon(Icons.home, size: 35,)
+                            child: Icon(Icons.night_shelter_outlined,color: Colors.white, size: 40,)
+                          // child: Image.asset("assets/images/app_icon_png.png", width: 80, height: 80,)
+                        ),
+                      ),
+                    )
+                )
+              ],
+            ),
+          );
+        }
     );
   }
 
@@ -626,7 +1119,7 @@ class ThemeHelper {
 
 
 
-  static void bottomSheetforAddItoms(BuildContext context){
+  static void bottomSheetforAddItems(BuildContext context){
 
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
@@ -665,11 +1158,12 @@ class ThemeHelper {
                       ),
 
                       Container(
+                        width: main_Width * 0.08,
                         decoration: BoxDecoration(
                           border: Border(
                             top: BorderSide(
                               color: Colors.black,
-                              width: 2.0,
+                              width: 3.0,
                             ),
                           ),
                         ),
@@ -928,6 +1422,315 @@ class ThemeHelper {
       );
     }
         );
+
+  }
+
+
+  static void bottomSheetforAddShelfItems(BuildContext context){
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    String? _selectedOption;
+
+    List<String> _options = [
+      'Category 1',
+      'Category 2',
+      'Category 3',
+      'Category 4'
+    ];
+
+    @override
+    void initState() {
+      _selectedOption = _options[0];
+      // set initial value to the first option
+    }
+
+    showModalBottomSheet<void>(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+        builder: (BuildContext context) {
+          return Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+
+                )
+            ),
+            padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03),
+            child:Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child:  SingleChildScrollView(
+                    child: Form(
+                      child: Column(
+                        children: [
+
+                          SizedBox(
+                            height: main_Height * 0.01,
+                          ),
+
+                          Container(
+                            width: main_Width * 0.08,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                top: BorderSide(
+                                  color: Colors.black,
+                                  width: 3.0,
+                                ),
+                              ),
+                            ),
+                          ),
+
+
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: main_Width * 0.03,
+                                vertical: main_Height * 0.01
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+
+
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Item Name",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: main_Height * 0.018,
+                                            fontWeight: FontWeight.w500),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextFormField(
+                                    // initialValue: "${Username}",
+                                    // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
+                                    style: TextStyle(
+                                      fontSize: main_Height * 0.022,
+                                    ),
+                                    // onSaved: (newValue) {
+                                    //   firstName = newValue;
+                                    // },
+                                    // onChanged: (value){
+                                    //   firstName = value;
+                                    // },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Item Name can\'t be empty';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                      const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                      // filled: true,
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.black38),
+                                      ),
+                                      // fillColor: ,
+                                      hintText: "Item Name",
+                                      hintStyle: TextStyle(
+                                          color: Colors.grey, fontSize: main_Height * 0.018),
+                                      border: const OutlineInputBorder(
+                                        // borderSide:
+                                        // const BorderSide(color: Colors.white),
+                                        // borderRadius: BorderRadius.circular(10)
+
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+
+
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Category",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: main_Height * 0.018,
+                                            fontWeight: FontWeight.w500),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                      width: main_Width,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1,
+                                            color: Colors.black38,
+                                          ),
+                                          borderRadius: BorderRadius.circular(3)),
+                                      padding: EdgeInsets.symmetric(horizontal: 10),
+                                      child: DropdownButtonHideUnderline(
+                                        child: DropdownButton<String>(
+                                          value: _selectedOption,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _selectedOption = newValue!;
+                                            // });
+                                          },
+                                          items: _options.map((String option) {
+                                            return DropdownMenuItem<String>(
+                                              value: option,
+                                              child: Text(
+                                                option,
+                                                selectionColor: Colors.black,
+                                              ),
+                                            );
+                                          }).toList(),
+                                          underline: null,
+                                        ),
+                                      )
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+
+
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Date Time",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: main_Height * 0.018,
+                                            fontWeight: FontWeight.w500),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  DateTimePicker(
+                                    use24HourFormat: false,
+                                    type: DateTimePickerType.dateTimeSeparate,
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                      const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                      // filled: true,
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: BorderSide(color: Colors.black38),
+                                      ),
+                                      // fillColor: ,
+                                      hintText: "Date of Birth",
+                                      hintStyle: TextStyle(
+                                          color: Colors.grey, fontSize: main_Height * 0.018),
+                                      border: const OutlineInputBorder(
+                                        // borderSide:
+                                        //     const BorderSide(color: Colors.transparent),
+                                        // borderRadius: BorderRadius.circular(10)
+
+                                      ),
+                                    ),
+                                    dateMask: 'd MMM, yyyy',
+                                    initialValue: DateTime.now().toString(),
+                                    firstDate: DateTime(2000),
+                                    lastDate: DateTime(2100),
+
+                                    icon: Icon(Icons.event),
+
+                                    // dateLabelText: 'Date',
+                                    // timeLabelText: "Hour",
+                                    selectableDayPredicate: (date) {
+                                      // Disable weekend days to select from the calendar
+                                      if (date.weekday == 6 || date.weekday == 7) {
+                                        return false;
+                                      }
+
+                                      return true;
+                                    },
+                                    onChanged: (val) => print(val),
+                                    validator: (val) {
+                                      print(val);
+                                      return null;
+                                    },
+                                    onSaved: (val) => print(val),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+
+
+
+
+                                ],
+                              ),
+                            ),
+                          ),
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+
+                Container(
+                  height: main_Height * 0.085,
+                  width: main_Width * 1,
+                  decoration: const BoxDecoration(color: Colors.white),
+                  child: Padding(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
+                    child: Container(
+                      height: main_Height * 0.06,
+                      width: main_Width * 0.75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          primary: primaryPurple,
+                        ),
+                        onPressed: () {
+
+                          Navigator.of(context).pop();
+
+                        },
+                        child: Text("Add Items",
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              fontSize: main_Height * 0.018,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+
+
+
+              ],
+            ),
+
+          );
+        }
+    );
 
   }
 
