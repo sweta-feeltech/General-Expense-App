@@ -310,10 +310,8 @@ class CommonWidgets {
   static Widget CommonGroupList2(BuildContext context,
       {int? index}
       ) {
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
-
     return InkWell(
       onTap: (){
 
@@ -335,18 +333,17 @@ class CommonWidgets {
 
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
 
 
                 Container(
-                  height: main_Height * 0.13,
+                  height: main_Height * 0.14,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius:
                       BorderRadius.circular(5)
-
                   ),
                   // child: items.categoryImg != null ?
                   padding: EdgeInsets.all(main_Height * 0.03),
@@ -392,7 +389,6 @@ class CommonWidgets {
         ),
       ),
     );
-
   }
 
 
@@ -736,39 +732,40 @@ class CommonWidgets {
 
     return Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.03),
       child: Container(
-        height: main_Height * 0.1,
+        height: main_Height * 0.12,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(7),
         ),
         padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
 
-                Container(
-                  height: main_Height * 0.061,
-                  width: main_Height * 0.061,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEFEFF1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset("assets/images/bankI.svg",
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+            Container(
+              height: main_Height * 0.061,
+              width: main_Height * 0.061,
+              decoration: BoxDecoration(
+                color: Color(0xFFEFEFF1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: SvgPicture.asset("assets/images/intenetI.svg",
+                  fit: BoxFit.contain,
                 ),
+              ),
+            ),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Bank Transfer",
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.03),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SingleChildScrollView(
+                    child: Container(
+                      width: main_Width * 0.5,
+                      child: Text("CATEGORY Name ${index! + 1}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -777,84 +774,124 @@ class CommonWidgets {
                             fontSize: main_Height * 0.018
                         ),
                       ),
+                    ),
+                  ),
 
 
-                      Row(
+                  SingleChildScrollView(
+                    child: Container(
+                      width: main_Width * 0.5,
+                      child: Row(
                         children: [
-                          Text("25 Oct, 2022  ",
+                          Text("Name Id : ",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87,
                                 fontSize: main_Height * 0.015
                             ),
                           ),
-                          SvgPicture.asset("assets/images/dot1.svg"),
-                          Text(" 09:00 AM",
+
+
+
+                          Text("Home ",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 letterSpacing: 1,
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xFF959698),
-                                fontSize: main_Height * 0.017
+                                color: Colors.black,
+                                fontSize: main_Height * 0.015
                             ),
                           ),
 
                         ],
-                      )
+                      ),
+                    ),
+                  ),
+
+
+                  SingleChildScrollView(
+                    child: Container(
+                      width: main_Width * 0.5,
+                      child: Row(
+                        children: [
+                          Text("Location : ",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87,
+                                fontSize: main_Height * 0.015
+                            ),
+                          ),
+
+
+
+                          Text(" Location",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                color: Colors.black,
+                                fontSize: main_Height * 0.015
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ),
 
 
 
 
-                    ],
+                ],
+              ),
+            ),
+
+
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: main_Height * 0.05,
+                  width: main_Height * 0.05,
+
+                  decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+
+                  ),
+                  child: Center(
+                    child:SvgPicture.asset("assets/images/edit.svg",
+                      height: main_Height * 0.03,
+                      width: main_Height * 0.03,
+                    ),
                   ),
                 ),
 
 
+                Container(
+                  height: main_Height * 0.05,
+                  width: main_Height * 0.05,
 
-                Column(
-                  children: [
-                    Container(
-                      height: main_Height * 0.04,
-                      width: main_Height * 0.04,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
 
-                      decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-
-                      ),
-                      child: Center(
-                        child:SvgPicture.asset("assets/images/edit.svg",
-                          height: main_Height * 0.03,
-                          width: main_Height * 0.03,
-                        ) ,
-                      ),
+                  ),
+                  child: Center(
+                    child:SvgPicture.asset("assets/images/delete.svg",
+                      height: main_Height * 0.03,
+                      width: main_Height * 0.03,
                     ),
-
-
-                    Container(
-                      height: main_Height * 0.04,
-                      width: main_Height * 0.04,
-
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-
-                      ),
-                      child: Center(
-                        child:SvgPicture.asset("assets/images/delete.svg",
-                          height: main_Height * 0.03,
-                          width: main_Height * 0.03,
-                        ) ,
-                      ),
-                    ),
-
-                  ],
-                )
+                  ),
+                ),
 
               ],
-            ),
+            )
 
           ],
         ),
@@ -862,10 +899,6 @@ class CommonWidgets {
       ),
     ) ;
   }
-
-
-
-
 
 
 

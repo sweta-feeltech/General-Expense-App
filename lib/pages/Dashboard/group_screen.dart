@@ -115,7 +115,7 @@ class _GroupScreenState extends State<GroupScreen> {
                 shrinkWrap: true,
                 // physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
-                childAspectRatio: 5/4.5,
+                childAspectRatio: 5/5,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 children: List.generate(
