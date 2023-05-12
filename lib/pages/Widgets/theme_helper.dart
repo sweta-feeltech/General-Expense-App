@@ -1,4 +1,5 @@
 
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:general_expense_app/Utils/colors.dart';
@@ -621,6 +622,315 @@ class ThemeHelper {
     );
 
   }
+
+
+
+
+  static void bottomSheetforAddItoms(BuildContext context){
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+
+    showModalBottomSheet<void>(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+        builder: (BuildContext context) {
+      return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+
+          )
+        ),
+        padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03),
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child:  SingleChildScrollView(
+                child: Form(
+                  child: Column(
+                    children: [
+
+                      SizedBox(
+                        height: main_Height * 0.02,
+                      ),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: Colors.black,
+                              width: 2.0,
+                            ),
+                          ),
+                        ),
+                      ),
+
+
+
+
+
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: main_Width * 0.03,
+                            vertical: main_Height * 0.01
+                        ),
+                        child: Column(
+                          children: [
+
+
+                            Row(
+                              children: [
+                                Text(
+                                  "Amount",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: main_Height * 0.018,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            TextFormField(
+                              // initialValue: "${Username}",
+                              // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
+                              style: TextStyle(
+                                fontSize: main_Height * 0.022,
+                              ),
+                              // onSaved: (newValue) {
+                              //   firstName = newValue;
+                              // },
+                              // onChanged: (value){
+                              //   firstName = value;
+                              // },
+                              keyboardType: TextInputType.number,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'First Name can\'t be empty';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                contentPadding:
+                                const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                // filled: true,
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black38),
+                                ),
+                                // fillColor: ,
+                                hintText: "Amount",
+                                hintStyle: TextStyle(
+                                    color: Colors.grey, fontSize: main_Height * 0.018),
+                                border: const OutlineInputBorder(
+                                  // borderSide:
+                                  // const BorderSide(color: Colors.white),
+                                  // borderRadius: BorderRadius.circular(10)
+
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+
+
+
+                            Row(
+                              children: [
+                                Text(
+                                  "Date Time",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: main_Height * 0.018,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            DateTimePicker(
+                              use24HourFormat: false,
+                              type: DateTimePickerType.dateTimeSeparate,
+                              decoration: InputDecoration(
+                                contentPadding:
+                                const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                // filled: true,
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black38),
+                                ),
+                                // fillColor: ,
+                                hintText: "Date of Birth",
+                                hintStyle: TextStyle(
+                                    color: Colors.grey, fontSize: main_Height * 0.018),
+                                border: const OutlineInputBorder(
+                                  // borderSide:
+                                  //     const BorderSide(color: Colors.transparent),
+                                  // borderRadius: BorderRadius.circular(10)
+
+                                ),
+                              ),
+                              dateMask: 'd MMM, yyyy',
+                              initialValue: DateTime.now().toString(),
+                              firstDate: DateTime(2000),
+                              lastDate: DateTime(2100),
+
+                              icon: Icon(Icons.event),
+
+                              // dateLabelText: 'Date',
+                              // timeLabelText: "Hour",
+                              selectableDayPredicate: (date) {
+                                // Disable weekend days to select from the calendar
+                                if (date.weekday == 6 || date.weekday == 7) {
+                                  return false;
+                                }
+
+                                return true;
+                              },
+                              onChanged: (val) => print(val),
+                              validator: (val) {
+                                print(val);
+                                return null;
+                              },
+                              onSaved: (val) => print(val),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+
+
+                            Row(
+                              children: [
+                                Text(
+                                  "To Pay",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: main_Height * 0.018,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            TextFormField(
+                              // initialValue: "${Username}",
+                              // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
+                              style: TextStyle(
+                                fontSize: main_Height * 0.022,
+                              ),
+                              // onSaved: (newValue) {
+                              //   firstName = newValue;
+                              // },
+                              // onChanged: (value){
+                              //   firstName = value;
+                              // },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'First Name can\'t be empty';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                contentPadding:
+                                const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                // filled: true,
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black38),
+                                ),
+                                // fillColor: ,
+                                hintText: "To Pay",
+                                hintStyle: TextStyle(
+                                    color: Colors.grey, fontSize: main_Height * 0.018),
+                                border: const OutlineInputBorder(
+                                  // borderSide:
+                                  // const BorderSide(color: Colors.white),
+                                  // borderRadius: BorderRadius.circular(10)
+
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+
+
+
+
+                          ],
+                        ),
+                      ),
+
+
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+
+            Container(
+              height: main_Height * 0.085,
+              width: main_Width * 1,
+              decoration: const BoxDecoration(color: Colors.white),
+              child: Padding(
+                padding:
+                EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
+                child: Container(
+                  height: main_Height * 0.06,
+                  width: main_Width * 0.75,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      primary: primaryPurple,
+                    ),
+                    onPressed: () {
+
+                      Navigator.of(context).pop();
+
+                    },
+                    child: Text("Update",
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.018,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            )
+
+            
+            
+          ],
+        ),
+
+      );
+    }
+        );
+
+  }
+
 
 
 

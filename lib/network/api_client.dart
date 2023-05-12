@@ -309,7 +309,7 @@ class ApiClient {
   }
 
   // PUTAPICALL
-  Future<dynamic> apiCallMultipartPut(String baseUrl, String apiEndPoint,dynamic putBody,{String? isAccessToken}) async {
+  Future<dynamic> apiCallMultipartPut(String baseUrl, String apiEndPoint,dynamic putBody,{bool? isBearer,String? isAccessToken,}) async {
     // Map<String, dynamic> jDecoded = json.decode(putBody);
     putData data = putData.fromJson(putBody);
     // print("${data.email} ${data.image} ${data.dob} ${data.state} ${data.district} ${data.area}");
@@ -323,11 +323,30 @@ class ApiClient {
 
     var request = http.MultipartRequest('PUT', getUrl);
 
-    request.headers.addAll({
-      "Content-Type": "application/json",
-      "isClient": "true",
-      "Authorization": "$accessToken"
-    });
+    // request.headers.addAll({
+    //   "Content-Type": "application/json",
+    //   "isClient": "true",
+    //   "Authorization": "$accessToken"
+    // });
+
+
+    if(isBearer == true){
+      request.headers.addAll({
+        "Content-Type": "application/json",
+        "isClient": "true",
+        "Authorization": "Bearer $accessToken"
+      });
+    }else{
+      request.headers.addAll({
+        "Content-Type": "application/json",
+        "isClient": "true",
+        "Authorization": "$accessToken"
+      });
+    }
+
+
+
+
 
     if(data.profilePic != null) {
       var stream = http.ByteStream(data.profilePic!.openRead());
@@ -339,12 +358,9 @@ class ApiClient {
 
 
 
-
     request.fields['firstName'] = data.firstName!.toString();
     request.fields['lastName'] = data.lastName!.toString();
-    request.fields['email'] = data.email!.toString();
-    request.fields['dob'] = data.dob!.toString();
-    request.fields['description'] = data.description!.toString();
+    request.fields['birthDate'] = data.birthDate!.toString();
 
 
     var response = await request.send();
@@ -464,82 +480,22 @@ class ApiClient {
 
 
 class putData {
-  String? id;
   String? firstName;
   String? lastName;
-  String? mobile;
-  String? email;
-  String? planStartDate;
-  String? planEndDate;
+  String? birthDate;
   File? profilePic;
-  String? dob;
-  String? description;
-  bool? isSubscriber;
-  String? deviceId;
-  String? deviceName;
-  String? deviceModelName;
-  String? deviceProductName;
-  bool? isFirstLogin;
-  String? status;
-  String? createdAt;
-  String? updatedAt;
-  String? deletedAt;
-  String? createdBy;
-  String? updatedBy;
-  String? deletedBy;
-  String? planId;
-
-
   putData(
-      {this.id,
+      {
         this.firstName,
         this.lastName,
-        this.mobile,
-        this.email,
-        this.planStartDate,
-        this.planEndDate,
+        this.birthDate,
         this.profilePic,
-        this.dob,
-        this.description,
-        this.isSubscriber,
-        this.deviceId,
-        this.deviceName,
-        this.deviceModelName,
-        this.deviceProductName,
-        this.isFirstLogin,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.createdBy,
-        this.updatedBy,
-        this.deletedBy,
-        this.planId});
+      });
 
   putData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     firstName = json['firstName'];
     lastName = json['lastName'];
-    mobile = json['mobile'];
-    email = json['email'];
-    planStartDate = json['planStartDate'];
-    planEndDate = json['planEndDate'];
+    birthDate = json['birthDate'];
     profilePic = json['profilePic'];
-    dob = json['dob'];
-    description = json['description'];
-    isSubscriber = json['isSubscriber'];
-    deviceId = json['deviceId'];
-    deviceName = json['deviceName'];
-    deviceModelName = json['deviceModelName'];
-    deviceProductName = json['deviceProductName'];
-    isFirstLogin = json['isFirstLogin'];
-    status = json['status'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    deletedAt = json['deletedAt'];
-    createdBy = json['createdBy'];
-    updatedBy = json['updatedBy'];
-    deletedBy = json['deletedBy'];
-    planId = json['planId'];
   }
 }

@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
+import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
 
@@ -215,6 +217,7 @@ class CommonWidgets {
     ) ;
   }
 
+
   static Widget CommonGroupListView(BuildContext context,
       {int? index}
       ) {
@@ -338,7 +341,7 @@ class CommonWidgets {
 
 
                 Container(
-                  height: main_Height * 0.14,
+                  height: main_Height * 0.15,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -348,15 +351,9 @@ class CommonWidgets {
                   // child: items.categoryImg != null ?
                   padding: EdgeInsets.all(main_Height * 0.03),
                   child : Image.asset("assets/images/grp1.jpg",
-                  fit: BoxFit.contain,
+                    fit: BoxFit.contain,
                   ),
                 ),
-
-
-                SizedBox(
-                  height: main_Height * 0.01,
-                ),
-
 
                 Column(
                   children: [
@@ -382,7 +379,9 @@ class CommonWidgets {
                           fontSize: main_Height * 0.014),
                     ),
                   ],
-                )
+                ),
+
+
               ],
             ),
           ),
@@ -726,7 +725,13 @@ class CommonWidgets {
   }
 
 
-  static Widget masterCategoryCardOfUI(BuildContext context, {int? index}) {
+
+  static Widget masterCategoryCardOfUI(
+      BuildContext context,
+      VoidCallback onOpenBottomSheet,
+      {int? index}
+
+      ) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -778,6 +783,8 @@ class CommonWidgets {
                   ),
 
 
+              Column(
+                children: [
                   SingleChildScrollView(
                     child: Container(
                       width: main_Width * 0.5,
@@ -845,6 +852,8 @@ class CommonWidgets {
                     ),
                   ),
 
+                ],
+              )
 
 
 
@@ -857,35 +866,47 @@ class CommonWidgets {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  height: main_Height * 0.05,
-                  width: main_Height * 0.05,
+                InkWell(
+                  onTap: () {
 
-                  decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                    ThemeHelper.bottomSheetforAddItoms(context);
 
-                  ),
-                  child: Center(
-                    child:SvgPicture.asset("assets/images/edit.svg",
-                      height: main_Height * 0.03,
-                      width: main_Height * 0.03,
+                  },
+                  child: Container(
+                    height: main_Height * 0.05,
+                    width: main_Height * 0.05,
+
+                    decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+
+                    ),
+                    child: Center(
+                      child:SvgPicture.asset("assets/images/edit.svg",
+                        height: main_Height * 0.03,
+                        width: main_Height * 0.03,
+                      ),
                     ),
                   ),
                 ),
 
 
-                Container(
-                  height: main_Height * 0.05,
-                  width: main_Height * 0.05,
+                InkWell(
+                  onTap: (){
 
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
+                  },
+                  child: Container(
+                    height: main_Height * 0.05,
+                    width: main_Height * 0.05,
 
-                  ),
-                  child: Center(
-                    child:SvgPicture.asset("assets/images/delete.svg",
-                      height: main_Height * 0.03,
-                      width: main_Height * 0.03,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+
+                    ),
+                    child: Center(
+                      child:SvgPicture.asset("assets/images/delete.svg",
+                        height: main_Height * 0.03,
+                        width: main_Height * 0.03,
+                      ),
                     ),
                   ),
                 ),

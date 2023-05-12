@@ -12,16 +12,14 @@ class EditProfilePageInitialEvent extends EditProfilePageEvent{}
 
 class PutProfileDataEvent extends EditProfilePageEvent {
 
-  final String? firstName, lastName, email, dob,description;
+  final String? firstName, lastName, birthDate;
 
   final File? profilePic;
 
   PutProfileDataEvent(
       this.firstName,
       this.lastName,
-      this.email,
-      this.dob,
-      this.description,
+      this.birthDate,
       {this.profilePic}
       );
 

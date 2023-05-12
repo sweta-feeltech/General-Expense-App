@@ -46,7 +46,7 @@ class Repository {
 
   Future<EditProfileModel> putEditProfileData(Map<String, dynamic> putJson, {String? id}) async {
     try {
-      var json = await apiClient.apiCallMultipartPut(BASEURL,"$updateProfileApiEnd",isAccessToken: accessToken, putJson);
+      var json = await apiClient.apiCallMultipartPut(BASEURL,"$updateProfileApiEnd",isAccessToken: accessToken,isBearer:true, putJson,);
       print("here put json : $json");
       EditProfileModel productPut = EditProfileModel.fromJson(json);
       return productPut;

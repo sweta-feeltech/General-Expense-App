@@ -1,16 +1,20 @@
 import 'dart:io';
 
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import '../../Utils/api_end_points.dart';
 import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
 import '../../blocs/EditProfileScreen/edit_profile_screen_bloc.dart';
 import '../../models/ProfileModel/edit_profile_model.dart';
 import '../../network/api_client.dart';
 import '../../network/repository.dart';
+import '../Widgets/theme_helper.dart';
 
 
 class EditProfileScreen extends StatefulWidget {
@@ -31,14 +35,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   EditProfileModel? editeprofiledata;
 
-  Response? getProfileModelData;
+  UserData1? getProfileModelData;
 
 
   EditProfilePageBloc editProBloc = EditProfilePageBloc(Repository.getInstance());
 
 
 
-  String? id,firstName, lastName, email,  dob;
+  String? firstName, lastName, birthDate;
   File? profilePic;
 
   final _picker = ImagePicker();
@@ -80,7 +84,95 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-    return mainAllEditProfileView();
+    return Scaffold(
+
+      body: BlocProvider<EditProfilePageBloc>(
+        create: (context) => editProBloc..add(EditProfilePageInitialEvent()),
+        child: BlocConsumer<EditProfilePageBloc, EditProfilePageState>(
+          builder: (context, state) {
+            if (state is EditProfilePageLoadingState) {
+              print("Loading State");
+              return ThemeHelper.buildLoadingWidget();
+            }
+            // else
+            // if (state is AllFetchDataForProfilePageState) {
+            //   getProfileModelData = state.allProfileModelresponse;
+            //   return mainAllEditProfileView();
+            // }
+            else
+            if(state is EditPutProfileDataState){
+
+              print("Put State State1");
+              print("${state.editProfileModelResponse.message}");
+              print("Put State State2");
+              getProfileModelData = state.editProfileModelResponse.userData;
+              print("Put State State3");
+              // appUserData?.firstName = getProfileModelData?.firstName;
+              // appUserData?.lastName = getProfileModelData?.lastName;
+              // appUserData?.email = getProfileModelData?.email;
+              // appUserData?.dob = getProfileModelData?.dob;
+              // appUserData?.profilePic = getProfileModelData?.profilePic;
+              print("Put State State4");
+
+
+
+              // editProBloc.add(AllFetchDataForProfilePageEvent());
+
+              // TextSpan contentMes = TextSpan(
+              //     text: "Profile Data Updated",style: TextStyle(color: Colors.grey, fontSize: 15));
+
+
+
+              // ThemeHelper.customDialogForMessage(
+              //     isBarrierDismissible: false,
+              //     context,
+              //     "Edit Done",
+              //     main_Width,
+              //     contentMessage: contentMes,
+              //         () {
+              //       // Navigator.of(context).pop();
+              //       // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileScreen((){})));
+              //       // Navigator.of(context).pop('refresh');
+              //     },
+              //     ForSuccess: true);
+
+
+              return mainAllEditProfileView();
+            }
+            else {
+              return mainAllEditProfileView();
+            }
+          },
+          listener: (context, state) {
+            if (state is ApiFailureState) {
+              print(state.exception.toString());
+            }
+            // else
+            // if(state is EditPutProfileDataState){
+            //   print("${state.editProfileModelResponse.message}");
+            //
+            //   editProBloc.add(AllFetchDataForProfilePageEvent());
+            //
+            //   TextSpan contentMes = TextSpan(
+            //       text: "Profile Data changed",style: TextStyle(color: Colors.grey, fontSize: 15));
+            //   ThemeHelper.customDialogForMessage(
+            //       isBarrierDismissible: false,
+            //       context,
+            //       "Edit Done",
+            //       main_Width,
+            //       contentMessage: contentMes,
+            //           () {
+            //         Navigator.of(context).pop();
+            //         // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileScreen((){})));
+            //         // Navigator.of(context).pop('refresh');
+            //       },
+            //       ForSuccess: true);
+            //
+            // }
+          },
+        ),
+      ),
+    );
 
 
 
@@ -164,6 +256,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     onPressed: () {
 
+
+                      if(_formkey.currentState!.validate()){
+
+                        _formkey.currentState!.save();
+                        editProBloc.add(PutProfileDataEvent(firstName,lastName,birthDate,profilePic: profilePic));
+
+
+                        TextSpan contentMes = TextSpan(
+                            text: "Profile Data Updated",style: TextStyle(color: Colors.grey, fontSize: 15));
+
+                        ThemeHelper.customDialogForMessage(
+                            isBarrierDismissible: false,
+                            context,
+                            "Profile Updated Successfully",
+                            main_Width,
+                            // contentMessage: contentMes,
+                                () {
+                              Navigator.of(context).pop();
+                              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileScreen((){})));
+                              // Navigator.of(context).pop('refresh');
+                            },
+                            ForSuccess: true);
+
+                      }
+
+
+
                     },
                     child: Text("Update",
                       style: TextStyle(
@@ -240,14 +359,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             ),
                                             child: Material(
                                                 color: Colors.transparent,
-                                                child:
-                                                ProfilePicture != null ?
+                                                child: appUserData?.profilePic != null ?
                                                 profilePic == null ?
                                                 Ink.image(
-                                                  image: NetworkImage("$ProfilePicture"),
+                                                  image: NetworkImage("$BASEIMAGEURL${getProfileModelData?.profilePic}"),
                                                   fit: BoxFit.cover,
-                                                  width: 120,
-                                                  height: 120,
+                                                  width: main_Height * 0.13,
+                                                  height: main_Height * 0.13,
                                                   child: InkWell(
                                                     onTap: () {
                                                       getImage();
@@ -259,18 +377,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     getImage();
                                                   },
                                                   child: Image.file(
-                                                    File(profilePic!.path).absolute,
-                                                    width: 120,
-                                                    height: 120,
+                                                    File("${profilePic!.path}").absolute,
+                                                    width: main_Height * 0.13,
+                                                    height: main_Height * 0.13,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 )
                                                     : profilePic == null ?  Ink.image(
-                                                  image: const AssetImage(
-                                                      "assets/images/profile.png"),
+                                                  image: AssetImage("assets/images/avtar.png"),
+                                                  onImageError: (exception, stackTrace) => AssetImage("assets/images/avtar.png"),
                                                   fit: BoxFit.cover,
-                                                  width: 120,
-                                                  height: 120,
+                                                  width: main_Height * 0.13,
+                                                  height: main_Height * 0.13,
                                                   child: InkWell(
                                                     onTap: () {
                                                       getImage();
@@ -282,9 +400,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     getImage();
                                                   },
                                                   child: Image.file(
-                                                    File(profilePic!.path).absolute,
-                                                    width: 120,
-                                                    height: 120,
+                                                    File("${profilePic!.path}").absolute,
+                                                    width: main_Height * 0.13,
+                                                    height: main_Height * 0.13,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 )
@@ -419,124 +537,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             height: 15,
                           ),
 
-                          Row(
-                            children: [
-                              Text("Email Address",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: main_Height * 0.018,
-                                    fontWeight: FontWeight.w500
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 5,),
-                          TextFormField(
-                            // initialValue: "${Email}",
-                            // initialValue: "${getProfileModelData?.email == null ? appUserData!.email : getProfileModelData!.email}",
-                            style: TextStyle(
-                              fontSize: main_Height * 0.022,
-                            ),
-                            // onSaved: (newValue) {
-                            //   email = newValue;
-                            // },
-                            // onChanged: (value){
-                            //   email = value;
-                            // },
-                            validator: (value) {
-                              RegExp regex = RegExp(
-                                  "^[a-zA-Z0-9.a-zA-Z0-9.!#\$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                              if (value == null || value.isEmpty) {
-                                return 'Email can\'t be empty';
-                              } else if (!regex.hasMatch(value)) {
-                                return ("Please check your email address");
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              contentPadding:
-                              const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                              // filled: true,
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black38),
-
-                              ),
-                              // fillColor: ,
-                              hintText: "Email Address",
-                              hintStyle:  TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: main_Height * 0.018
-                              ),
-                              border: const OutlineInputBorder(
-                                // borderSide:
-                                //     const BorderSide(color: Colors.transparent),
-                                // borderRadius: BorderRadius.circular(10)
-
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-
-
-                          Row(
-                            children: [
-                              Text("Mobile No.",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: main_Height * 0.018,
-                                    fontWeight: FontWeight.w500
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 5,),
-                          TextFormField(
-                            // initialValue: "${Email}",
-                            // initialValue: "${getProfileModelData?.email == null ? appUserData!.email : getProfileModelData!.email}",
-                            style: TextStyle(
-                              fontSize: main_Height * 0.022,
-                            ),
-                            // onSaved: (newValue) {
-                            //   email = newValue;
-                            // },
-                            // onChanged: (value){
-                            //   email = value;
-                            // },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Mobile Number can\'t be empty';
-                              } else if (value.length != 10) {
-                                return 'Mobile Number should have atleast 10 digits';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              contentPadding:
-                              const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                              // filled: true,
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black38),
-
-                              ),
-                              // fillColor: ,
-                              hintText: "Mobile No",
-                              hintStyle:  TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: main_Height * 0.018
-                              ),
-                              border: const OutlineInputBorder(
-                                // borderSide:
-                                //     const BorderSide(color: Colors.transparent),
-                                // borderRadius: BorderRadius.circular(10)
-
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
 
 
                           Row(
@@ -584,14 +584,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             // dateLabelText: 'Date',
                             // timeLabelText: "Hour",
                             onChanged: (val) => print(val),
-                            // validator: (val) {
-                            //   print(val);
-                            //   return null;
-                            // },
-                            // onSaved: (val) {
-                            //   dob = val;
-                            //
-                            // },
+                            validator: (val) {
+                              print(val);
+                              return null;
+                            },
+                            onSaved: (val) {
+                              birthDate = val;
+
+                            },
                           ),
                           const SizedBox(
                             height: 15,

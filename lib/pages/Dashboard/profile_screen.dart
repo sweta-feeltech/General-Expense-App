@@ -6,6 +6,7 @@ import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import '../../Utils/api_end_points.dart';
 import '../../Utils/constants.dart';
 import 'dart:math' as math;
 import '../../blocs/ProfileScreen/profile_screen_bloc.dart';
@@ -132,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
         child: RefreshIndicator(
           onRefresh: () async {
-
+            loadAllProfileScreenApiCalls();
           },
           child: SingleChildScrollView(
             child: Column(
@@ -153,7 +154,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   title:  Text("Profile",
                     style:
                     TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
-
                 ),
                 const Divider(thickness: 0.1,height: 0.1, indent: 0, endIndent: 0,color: primaryGrey,),
                 Container(
@@ -173,23 +173,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shape: BoxShape.circle,
                                 color: primaryGrey,
                               ),
-                              child: ClipOval(
-                                child: Material(
-                                    child: Container(
-                                      height: main_Height * 0.06,
-                                      width: main_Height * 0.06,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                          image:
-                                          const DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/profile.png"),
-                                            fit: BoxFit.cover,
-
-                                          )
-
-                                      ),
-                                    )
+                              child: InkWell(
+                                onTap: (){
+                                  print("object $BASEIMAGEURL${profileDataListModelData?.profilePic}");
+                                  print("object $BASEIMAGEURL");
+                                  print("object ${profileDataListModelData?.profilePic}");
+                                },
+                                child: ClipOval(
+                                  child: Material(
+                                      child: Container(
+                                        height: main_Height * 0.06,
+                                        width: main_Height * 0.06,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10.0),
+                                        ),
+                                        child: FadeInImage(
+                                          placeholder: AssetImage("assets/images/avtar.png"),
+                                          image: NetworkImage("$BASEIMAGEURL${profileDataListModelData?.profilePic}"),
+                                        ),
+                                      )
+                                  ),
                                 ),
                               ),
                             ),
@@ -234,6 +237,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             String refresh = await Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
                                 builder: (context) => EditProfileScreen((){})));
                             if(refresh == "refresh"){
+                              loadAllProfileScreenApiCalls();
                             }
                           },
                             style: ButtonStyle(

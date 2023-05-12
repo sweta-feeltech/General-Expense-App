@@ -15,14 +15,26 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
+
+
+
     return Scaffold(
 
+
       backgroundColor: primaryGrey,
+
+
+
 
       appBar: AppBar(
         titleSpacing: 15,
@@ -35,7 +47,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
         elevation: 0,
         // centerTitle: true,
       ),
-
 
 
 
@@ -60,6 +71,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   onTap: (){
 
 
+
                   },
                   child: Container(
                     height: main_Height * 0.05,
@@ -81,7 +93,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index) {
-                  return CommonWidgets.masterCategoryCardOfUI(context,index: index);
+                  return CommonWidgets.masterCategoryCardOfUI(context,
+
+                      () {
+                        // _openBottomSheet;
+                      }
+                      ,index: index);
                 }),
           ),
 

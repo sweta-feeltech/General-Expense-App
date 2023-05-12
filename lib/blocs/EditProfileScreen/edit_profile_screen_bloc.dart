@@ -26,9 +26,7 @@ class EditProfilePageBloc extends Bloc<EditProfilePageEvent, EditProfilePageStat
         Map<String, dynamic> profilePutData ={
           'firstName': event.firstName,
           'lastName': event.lastName,
-          'email': event.email,
-          'dob': event.dob,
-          'description': event.description,
+          'birthDate': event.birthDate,
           'profilePic': event.profilePic,
         };
 
