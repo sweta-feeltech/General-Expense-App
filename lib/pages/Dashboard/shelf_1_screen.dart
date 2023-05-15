@@ -99,8 +99,9 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.01),
               child: TextFormField(
-                autofocus: true,
+                autofocus: false,
                 decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
                   hintText: 'Search Shelf Items',
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(

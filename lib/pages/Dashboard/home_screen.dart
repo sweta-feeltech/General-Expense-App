@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
 
-                                        Text("\$1,2300.00",
+                                        Text("\$12,300.00",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
