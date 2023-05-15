@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/Utils/colors.dart';
-import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
+import 'package:general_expense_app/pages/Widgets/common_widgets.dart';
 
 import 'add_expense_screen.dart';
 

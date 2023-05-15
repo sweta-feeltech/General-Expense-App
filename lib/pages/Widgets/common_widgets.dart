@@ -401,9 +401,8 @@ class CommonWidgets {
 
     return InkWell(
       onTap: (){
-        Navigator.of(context).pushNamed(
-          ShelfScreen.routeName
-        );
+        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+            builder: (context) => ShelfScreen()));
 
         // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
       },
@@ -484,11 +483,8 @@ class CommonWidgets {
 
     return InkWell(
       onTap: (){
-        Navigator.of(context).pushNamed(
-          RoomScreen.routeName
-        );
-
-        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
+        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+            builder: (context) => RoomScreen((){})));
       },
       child: Material(
         borderRadius: BorderRadius.circular(7),
@@ -567,9 +563,9 @@ class CommonWidgets {
     return Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.03),
       child: InkWell(
         onTap: (){
-          Navigator.of(context).pushNamed(
-              Shelf1Screen.routeName
-          );
+          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+              builder: (context) => Shelf1Screen()));
+
 
         },
         child: Material(
@@ -742,9 +738,9 @@ class CommonWidgets {
         InkWell(
           onTap: (){
 
-            Navigator.of(context).pushNamed(
-                Shelf1Screen.routeName
-            );
+            Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                builder: (context) => Shelf1Screen()));
+
 
           },
           child: Container(

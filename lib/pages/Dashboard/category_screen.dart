@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../Utils/colors.dart';
-import 'common_widgets.dart';
+import '../Widgets/common_widgets.dart';
 
 
 class CategoryScreen extends StatefulWidget {

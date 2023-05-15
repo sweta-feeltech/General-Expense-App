@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
+import 'package:general_expense_app/pages/Widgets/common_widgets.dart';
 
 import '../../Utils/colors.dart';
 import '../Widgets/theme_helper.dart';

@@ -9,7 +9,6 @@ import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
 import '../../blocs/Login/login_screen_bloc.dart';
 import '../../network/repository.dart';
-import '../Dashboard/bottom_bar.dart';
 import '../Dashboard/bottom_nav_bar.dart';
 import '../Widgets/theme_helper.dart';
 

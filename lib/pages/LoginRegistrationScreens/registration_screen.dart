@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
-
 import '../../Utils/constants.dart';
-import '../Dashboard/bottom_bar.dart';
 import '../Dashboard/bottom_nav_bar.dart';
 import '../Widgets/theme_helper.dart';
 

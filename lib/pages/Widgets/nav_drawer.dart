@@ -27,10 +27,8 @@ class _NavDrawerState extends State<NavDrawer> {
     prefs.remove('isLoggedIn');
 
     // Navigate back to login screen
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => SplashScreen()),
-    );
+    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>SplashScreen()), (route) => false);
+
   }
 
 

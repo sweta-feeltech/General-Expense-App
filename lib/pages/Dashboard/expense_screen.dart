@@ -2,7 +2,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/common_widgets.dart';
+import 'package:general_expense_app/pages/Widgets/common_widgets.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

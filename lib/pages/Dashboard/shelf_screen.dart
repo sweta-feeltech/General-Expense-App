@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
-import 'common_widgets.dart';
+import '../Widgets/common_widgets.dart';
 
 
 class ShelfScreen extends StatefulWidget {

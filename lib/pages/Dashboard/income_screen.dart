@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/colors.dart';
 import 'add_expense_screen.dart';
-import 'common_widgets.dart';
+import '../Widgets/common_widgets.dart';
 
 class ListofIncomeScreen extends StatefulWidget {
   static String routeName = '/listofIncomeScreen';

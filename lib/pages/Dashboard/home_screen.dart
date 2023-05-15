@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/colors.dart';
 import '../Widgets/nav_drawer.dart';
 import 'add_group_screen.dart';
-import 'common_widgets.dart';
+import '../Widgets/common_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/homeScreen';
@@ -163,10 +163,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             InkWell(
                               onTap: (){
 
-                                Navigator.of(context).pushNamed(
-                                    GroupScreen.routeName
-                                );
-
+                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                                    builder: (context) => AddGroupScreen()));
 
                               },
                               child: Container(
@@ -192,9 +190,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   InkWell(
                                     onTap : (){
-                                      Navigator.of(context).pushNamed(
-                                          GroupScreen.routeName
-                                      );
+                                      Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                                          builder: (context) => GroupScreen()));
                                     },
                                     child: Container(
                                       child: SvgPicture.asset("assets/images/down.svg",
@@ -242,9 +239,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                     InkWell(
                                       onTap : (){
-                                        Navigator.of(context).pushNamed(
-                                            AddGroupScreen.routeName
-                                        );
+                                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                                            builder: (context) => AddGroupScreen()));
+
                                       },
                                       child: Container(
                                         child: SvgPicture.asset("assets/images/up.svg",

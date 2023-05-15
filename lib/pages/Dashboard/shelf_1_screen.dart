@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import '../../Utils/colors.dart';
 import '../Widgets/theme_helper.dart';
-import 'common_widgets.dart';
+import '../Widgets/common_widgets.dart';
 
 
 class Shelf1Screen extends StatefulWidget {

@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
-import '../Dashboard/bottom_bar.dart';
 import '../Dashboard/bottom_nav_bar.dart';
 import 'login_screen.dart';
 // import '../Dashboard/botton_bar_1.dart';
