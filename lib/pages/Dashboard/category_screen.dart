@@ -30,17 +30,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
 
     return Scaffold(
-
-
       backgroundColor: primaryGrey,
-
-
-
-
       appBar: AppBar(
         titleSpacing: 15,
         title: Text(
-          "CategoryScreen",
+          "Categories",
           style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,
@@ -48,8 +42,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
         elevation: 0,
         // centerTitle: true,
       ),
-
-
 
       body: Column(
         children: [
