@@ -10,6 +10,7 @@ import '../../Utils/constants.dart';
 import '../../blocs/Login/login_screen_bloc.dart';
 import '../../network/repository.dart';
 import '../Dashboard/bottom_bar.dart';
+import '../Dashboard/bottom_nav_bar.dart';
 import '../Widgets/theme_helper.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -96,7 +97,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
 
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => BottomBarScreen()));
+                .push(MaterialPageRoute(builder: (context) => BottomNavBarScreen()));
 
             Fluttertoast.showToast(
               msg: "Success fully Logged In...",

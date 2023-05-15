@@ -105,6 +105,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                       fit: BoxFit.none,
                     ),
                   ),
+
                   InkWell(
                     onTap: () {
                       setState(() {
@@ -125,10 +126,12 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                       fit: BoxFit.none,
                     ),
                   ),
+
                   SizedBox(
                     height: main_Height * 0.065,
                     width: main_Height * 0.065,
                   ),
+
                   InkWell(
                     onTap: () {
                       setState(() {
@@ -149,6 +152,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                       fit: BoxFit.none,
                     ),
                   ),
+
                   InkWell(
                     onTap: () {
                       setState(() {

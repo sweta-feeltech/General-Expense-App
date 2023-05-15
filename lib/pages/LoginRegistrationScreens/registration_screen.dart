@@ -4,6 +4,7 @@ import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.d
 
 import '../../Utils/constants.dart';
 import '../Dashboard/bottom_bar.dart';
+import '../Dashboard/bottom_nav_bar.dart';
 import '../Widgets/theme_helper.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -52,7 +53,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                     print(
                         " details $firstName, $lastName, $email, $password, $confirmPassword");
-                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomBarScreen()));
+                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
 
                   }
 
