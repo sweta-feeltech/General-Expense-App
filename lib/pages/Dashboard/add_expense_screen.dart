@@ -381,7 +381,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       // },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'First Name can\'t be empty';
+                          return 'To Pay can\'t be empty';
                         }
                         return null;
                       },
@@ -634,61 +634,14 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             ),
                           ),
                         ),
-                        // SizedBox(width: 10,),
 
-                        // Flexible(
-                        //   child: InkWell(
-                        //     onTap: () {
-                        //       // selectProfilePic();
-                        //       getImage(3);
-                        //       print("hi");
-                        //     },
-                        //     // child: (userPic == null)
-                        //     child: (fundraiserInnerImage3 == null)
-                        //         ? Image(
-                        //       image: AssetImage(
-                        //           "assets/images/upload_image_holder.png"),
-                        //       width: main_Height * 0.2,
-                        //       height: main_Height * 0.2,
-                        //     )
-                        //         : Stack(
-                        //       alignment: Alignment.topRight,
-                        //       clipBehavior: Clip.none,
-                        //       children: [
-                        //         Padding(
-                        //           padding: const EdgeInsets.symmetric(vertical: 8),
-                        //           child: Image.file(
-                        //             File(fundraiserInnerImage3!.path),
-                        //             // width: main_height < 700 ? 200 : 160,
-                        //             // height: main_height < 700 ? 200 : 140,
-                        //           ),
-                        //         ),
-                        //         Positioned(
-                        //           top: -5,
-                        //           // right: -2,
-                        //           child: GestureDetector(
-                        //             onTap: () {
-                        //               fundraiserInnerImage3 = null;
-                        //               fundraiserInnerImageList[2] = File("");
-                        //               print("fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
-                        //               setState(() {});
-                        //             },
-                        //             child: Container(
-                        //                 padding: EdgeInsets.all(2),
-                        //                 decoration: BoxDecoration(
-                        //                   color: Color.fromARGB(255, 211, 211, 211),
-                        //                   shape: BoxShape.circle,
-                        //                 ),
-                        //                 child: Icon(Icons.clear, size: 18, color: Colors.black,)
-                        //             ),
-                        //           ),
-                        //         )
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
+
+
+
+
+
 
 
                   ],
@@ -732,7 +685,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 style: TextStyle(color: primaryPurple, fontWeight: FontWeight.w500),
               ),
               SizedBox(
-                child: Text("Upload .jpg or .pdf file",
+                child: Text("Upload .pdf file",
                     style: TextStyle(color: Colors.black, fontSize: 10)),
               )
             ],
@@ -780,14 +733,16 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               ),
             ],
           ),
-          uploadedFile.extension == "jpeg" ||
-              uploadedFile.extension == "png" ||
-              uploadedFile.extension == "jpg"
-              ? Image(
-            image: AssetImage("assets/images/picture_pre.jpg"),
-            width: 40,
-          )
-              : Image(
+          // uploadedFile.extension == "jpeg" ||
+          //     uploadedFile.extension == "png" ||
+          //     uploadedFile.extension == "jpg"
+          //     ? Image(
+          //   image: AssetImage("assets/images/picture_pre.jpg"),
+          //   width: 40,
+          // )
+          //     :
+
+          Image(
             image: AssetImage("assets/images/pdf_pre.png"),
             width: 40,
           )
