@@ -159,13 +159,11 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
       items: [
 
         PersistentBottomNavBarItem(
-          icon: SingleChildScrollView(
-            child: SvgPicture.asset(
-              "assets/icons/home_1.svg",
-              height: main_Height * 0.06,
-              width: main_Height * 0.06,
-              fit: BoxFit.none,
-            ),
+          icon: SvgPicture.asset(
+            "assets/icons/home_1.svg",
+            height: main_Height * 0.06,
+            width: main_Height * 0.06,
+            fit: BoxFit.none,
           ),
           // icon: Icon(CupertinoIcons.house_fill),
           inactiveIcon: SvgPicture.asset(
@@ -179,13 +177,11 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
 
 
         PersistentBottomNavBarItem(
-          icon: SingleChildScrollView(
-            child: SvgPicture.asset(
-              "assets/icons/expense_1.svg",
-              height: main_Height * 0.06,
-              width: main_Height * 0.06,
-              fit: BoxFit.none,
-            ),
+          icon: SvgPicture.asset(
+            "assets/icons/expense_1.svg",
+            height: main_Height * 0.06,
+            width: main_Height * 0.06,
+            fit: BoxFit.none,
           ),
           // icon: Icon(CupertinoIcons.house_fill),
           inactiveIcon: SvgPicture.asset(
@@ -211,13 +207,11 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
 
 
         PersistentBottomNavBarItem(
-          icon: SingleChildScrollView(
-            child: SvgPicture.asset(
-              "assets/icons/inventory_1.svg",
-              height: main_Height * 0.06,
-              width: main_Height * 0.06,
-              fit: BoxFit.none,
-            ),
+          icon: SvgPicture.asset(
+            "assets/icons/inventory_1.svg",
+            height: main_Height * 0.06,
+            width: main_Height * 0.06,
+            fit: BoxFit.none,
           ),
           // icon: Icon(CupertinoIcons.house_fill),
           inactiveIcon: SvgPicture.asset(
@@ -231,13 +225,11 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
 
 
         PersistentBottomNavBarItem(
-          icon: SingleChildScrollView(
-            child: SvgPicture.asset(
-              "assets/icons/profile_1.svg",
-              height: main_Height * 0.06,
-              width: main_Height * 0.06,
-              fit: BoxFit.none,
-            ),
+          icon: SvgPicture.asset(
+            "assets/icons/profile_1.svg",
+            height: main_Height * 0.06,
+            width: main_Height * 0.06,
+            fit: BoxFit.none,
           ),
           // icon: Icon(CupertinoIcons.house_fill),
           inactiveIcon: SvgPicture.asset(
