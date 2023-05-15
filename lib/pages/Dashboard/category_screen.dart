@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
 import '../Widgets/common_widgets.dart';
@@ -70,6 +71,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 InkWell(
                   onTap: (){
 
+                    ThemeHelper.bottomSheetforAddItems(context);
 
 
                   },
