@@ -148,12 +148,10 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
       stateManagement: true,
       hideNavigationBarWhenKeyboardShows: true,
       decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(0.0),
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-
-
       // navBarHeight: main_Height /14,
 
       items: [

@@ -20,11 +20,11 @@ bool? AuthorizedUser;
 String? accessToken;
 
 
-UserData? appUserData;
+UserData2? appUserData;
 
 String? userDataForSession;
 
-UserData? sessionParesdData;
+UserData2? sessionParesdData;
 Map<String,dynamic>? UserDatas;
 
 List<String> enrolledCoursesIdList = [];

@@ -337,10 +337,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       child: InkWell(
                         onTap: (){
 
-                          Navigator.of(context).pushNamed(
-                              ListofIncomeScreen.routeName
-                          );
-
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                              builder: (context) => ListofIncomeScreen()));
 
                         },
                         child: Material(
@@ -380,9 +378,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     Expanded(
                       child: InkWell(
                         onTap: (){
-                          Navigator.of(context).pushNamed(
-                              ListOfExpenses.routeName
-                          );
+
+                          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                              builder: (context) => ListOfExpenses()));
+
 
                         },
                         child: Material(

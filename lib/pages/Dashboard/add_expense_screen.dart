@@ -132,8 +132,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         // centerTitle: true,
       ),
 
-
-      bottomSheet: Container(
+      bottomSheet :  Container(
         height: main_Height * 0.13,
         width: main_Width * 1,
         decoration: BoxDecoration(color: Colors.transparent),
@@ -167,6 +166,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
 
       body: SingleChildScrollView(

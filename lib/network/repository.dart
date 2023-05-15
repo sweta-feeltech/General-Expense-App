@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 
 import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
+import '../models/CommonModel/user_data_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
 import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
@@ -59,15 +60,16 @@ class Repository {
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: PROFILE REQUEST FOR SESSION MANAGE~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<UserData> getProfileSplashAPICall({String? access}) async {
+  Future<UserData2> getProfileSplashAPICall({String? access}) async {
     try {
-      Map<String, dynamic> json = await apiClient.getApiCall(BASEURL, getProfileApiEnd, isAccessToken: access);
-      UserData oneNuBeeCardModelRes = UserData.fromJson(json);
+      Map<String, dynamic> json = await apiClient.getApiCall(BASEURL, SplashScreenAPIEnd, isAccessToken: access,isBearer: true);
+      UserData2 oneNuBeeCardModelRes = UserData2.fromJson(json);
       return oneNuBeeCardModelRes;
     } on CustomException {
       rethrow;
     }
   }
+
 
 
 

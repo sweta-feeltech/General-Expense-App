@@ -25,3 +25,10 @@ String getProfileApiEnd = "User/profile";
 ///
 String updateProfileApiEnd = "user/update-profile";
 
+
+///
+/// ------------------SPLASH GET API----------------------
+///
+String SplashScreenAPIEnd = "User/profile";
+///
+
