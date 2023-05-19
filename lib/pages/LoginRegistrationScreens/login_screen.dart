@@ -133,26 +133,25 @@ class _LogInScreenState extends State<LogInScreen> {
 
 
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
+
+
+              Fluttertoast.showToast(
+                msg: "Success fully Logged In...",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 3,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+
+              accessToken = state.loginResponseData.accessToken;
             }
             else {
               print("profile");
-              // await prefs.setString("accessSession", state.loginResponseData.accessToken!);
-              // print("get sess: ${prefs.getString("accessSession")}");
-              // Navigator.of(context).pushNamed(ProfilePageScreen.routeName);
             }
 
 
-            Fluttertoast.showToast(
-              msg: "Success fully Logged In...",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 3,
-              backgroundColor: Colors.green,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-
-            accessToken = state.loginResponseData.accessToken;
           }
         },
       ),
@@ -192,9 +191,6 @@ class _LogInScreenState extends State<LogInScreen> {
                     loginBloc
                         .add(PostLoginDataEvent(email!, password!));
 
-                    // print(
-                    // " details $firstName, $lastName, $email, $password, $confirmPassword");
-                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomBarScreen()));
 
                   }
 
@@ -431,6 +427,11 @@ class _LogInScreenState extends State<LogInScreen> {
                       ],
                     )),
               ),
+              SizedBox(
+                height: main_Height * 0.1,
+              )
+
+
             ],
           ),
         ),
