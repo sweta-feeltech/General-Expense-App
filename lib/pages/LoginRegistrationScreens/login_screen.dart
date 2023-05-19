@@ -314,7 +314,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             },
                             Icons.mail,
                             TextInputAction.next,
-                            initalTxt: "kishan123@outlook.com",
+                            initalTxt: "admin@gmail.com",
                             validatingFunc: (value) {
                               RegExp regex = RegExp(EmailRegex);
                               if (value == null || value.isEmpty) {

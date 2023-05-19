@@ -7,17 +7,17 @@ import '../Widgets/theme_helper.dart';
 import '../Widgets/common_widgets.dart';
 
 
-class Shelf1Screen extends StatefulWidget {
-  static String routeName = '/shelf1Screen';
+class ItemScreen extends StatefulWidget {
+  static String routeName = '/ItemScreen';
 
 
-  const Shelf1Screen({Key? key}) : super(key: key);
+  const ItemScreen({Key? key}) : super(key: key);
 
   @override
-  State<Shelf1Screen> createState() => _Shelf1ScreenState();
+  State<ItemScreen> createState() => _ItemScreenState();
 }
 
-class _Shelf1ScreenState extends State<Shelf1Screen> {
+class _ItemScreenState extends State<ItemScreen> {
 
 
   @override
@@ -50,7 +50,7 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
           // ),
           titleSpacing: 15,
           title: Text(
-            "Shelf 1",
+            "ItemScreen",
             style: TextStyle(color: Colors.white, fontSize: main_Height * 0.025),
           ),
           automaticallyImplyLeading: false,
@@ -67,7 +67,7 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Add Shelf 1",
+                  Text("Add Item",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -102,7 +102,7 @@ class _Shelf1ScreenState extends State<Shelf1Screen> {
                 autofocus: false,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                  hintText: 'Search Shelf Items',
+                  hintText: 'Search Item Items',
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),

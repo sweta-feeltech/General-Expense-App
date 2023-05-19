@@ -3,10 +3,15 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/items_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
+import '../Dashboard/add_home_Screen.dart';
 import '../Dashboard/category_screen.dart';
 import '../LoginRegistrationScreens/main_screen.dart';
 import '../LoginRegistrationScreens/splash_screen.dart';
@@ -55,6 +60,14 @@ class _NavDrawerState extends State<NavDrawer> {
 
 
 
+
+
+
+          ///
+          ///
+          /// FOR CATEGORY CARDS
+          ///
+          ///
           InkWell(
             onTap: () {
 
@@ -65,7 +78,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 children:  [
                   Align(
                     alignment: Alignment.center,
-                    child: Icon(Icons.roofing,
+                    child: Icon(Icons.add_card_outlined,
                       color: primaryPurple,
                     ),
                     // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
@@ -81,7 +94,175 @@ class _NavDrawerState extends State<NavDrawer> {
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
 
 
+          ///
+          ///
+          /// FOR HOME
+          ///
+          ///
+          InkWell(
+            onTap: () {
 
+              Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>AddExpenseScreen()));
+
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.monetization_on_outlined,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Add Expense", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+          ///
+          ///
+          /// FOR HOME
+          ///
+          ///
+          InkWell(
+            onTap: () {
+
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen()));
+
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.roofing,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Add Home", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+          ///
+          ///
+          /// FOR ROOM
+          ///
+          ///
+          InkWell(
+            onTap: () {
+
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen((){})));
+
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.add_business_outlined,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Add Room", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+
+          ///
+          ///
+          /// FOR SHELF
+          ///
+          ///
+          InkWell(
+            onTap: () {
+
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ShelfScreen()));
+
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.add_card_sharp,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Add Shelf", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+
+          ///
+          ///
+          /// FOR ITOMS
+          ///
+          ///
+          InkWell(
+            onTap: () {
+
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemScreen()));
+
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.add_box_outlined,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Add Items", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+
+
+          ///
+          ///
+          /// FOR GROUPS
+          ///
+          ///
           InkWell(
             onTap: () {
               Navigator.of(context, rootNavigator: true).pushNamed(GroupListScreen.routeName);
@@ -108,6 +289,12 @@ class _NavDrawerState extends State<NavDrawer> {
 
 
 
+          ///
+          ///
+          /// FOR LOGOUT
+          ///
+          ///
+
           InkWell(
             onTap: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -122,7 +309,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 children:  [
                   Align(
                     alignment: Alignment.center,
-                    child: Icon(Icons.person,
+                    child: Icon(Icons.logout_rounded,
                       color: primaryPurple,
                     ),
                     // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),

@@ -7,6 +7,7 @@ import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_nav_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/category_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/items_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/income_screen.dart';
@@ -14,7 +15,6 @@ import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
@@ -114,8 +114,8 @@ class MyApp extends StatelessWidget {
     if(settings.name == ShelfScreen.routeName) {
       return getMaterialPageRoute(ShelfScreen());
     }
-    if(settings.name == Shelf1Screen.routeName) {
-      return getMaterialPageRoute(Shelf1Screen());
+    if(settings.name == ItemScreen.routeName) {
+      return getMaterialPageRoute(ItemScreen());
     }
     if(settings.name == ListofIncomeScreen.routeName) {
       return getMaterialPageRoute(ListofIncomeScreen());

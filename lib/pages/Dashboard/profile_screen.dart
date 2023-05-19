@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
