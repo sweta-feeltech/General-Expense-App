@@ -40,10 +40,12 @@ class ApiClient {
       getUrl = "$baseUrl$endPoint";
     }
 
+    print("ases${accessToken}");
+    print("ases${isAccessToken}");
 
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $accessToken"
+      "Authorization": "Bearer $isAccessToken"
     };
 
 
@@ -119,12 +121,12 @@ class ApiClient {
     if(isBearer == true){
       headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer $accessToken"
+        "Authorization": "Bearer $isAccessToken"
       };
     }else{
       headers = {
         "Content-Type": "application/json",
-        "Authorization": "$accessToken"
+        "Authorization": "$isAccessToken"
       };
     }
 

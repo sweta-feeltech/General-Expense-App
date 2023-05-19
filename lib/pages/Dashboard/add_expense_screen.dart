@@ -98,19 +98,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   List<dynamic>? allDocs = [];
 
 
-
-
   @override
   void dispose() {
     amountController.dispose();
     super.dispose();
   }
-
-
-
-
-
-
 
 
   @override

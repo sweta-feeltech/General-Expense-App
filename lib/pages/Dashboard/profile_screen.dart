@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_1_screen.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../Utils/api_end_points.dart';
@@ -33,36 +34,9 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
-  Future<void> logout() async {
-    // Sign out the user from Firebase, if applicable
-    // ...
-
-    // Remove login status from shared preferences
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('isLoggedIn');
-
-    // Navigate back to login screen
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => SplashScreen()),
-    // );
-
-
-    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>SplashScreen()), (route) => false);
-    
-    
-
-  }
 
 
 
-  bool value = false;
-
-  void changeData(){
-    setState(() {
-      value = true;
-    });
-  }
 
   Repository repositoryRepo = Repository(ApiClient(httpClient: http.Client()));
 
@@ -183,26 +157,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shape: BoxShape.circle,
                                 color: primaryGrey,
                               ),
-                              child: InkWell(
-                                onTap: (){
-                                  print("object $BASEIMAGEURL${profileDataListModelData?.profilePic}");
-                                  print("object $BASEIMAGEURL");
-                                  print("object ${profileDataListModelData?.profilePic}");
-                                },
-                                child: ClipOval(
-                                  child: Material(
-                                      child: Container(
-                                        height: main_Height * 0.06,
-                                        width: main_Height * 0.06,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10.0),
+                              child: ClipOval(
+                                child: Material(
+                                    child: Container(
+                                      height: main_Height * 0.06,
+                                      width: main_Height * 0.06,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      child: FadeInImage(
+                                        placeholder: AssetImage("assets/images/avtar.png"),
+                                        image: NetworkImage("$BASEIMAGEURL${profileDataListModelData?.profilePic}",
                                         ),
-                                        child: FadeInImage(
-                                          placeholder: AssetImage("assets/images/avtar.png"),
-                                          image: NetworkImage("$BASEIMAGEURL${profileDataListModelData?.profilePic}"),
-                                        ),
-                                      )
-                                  ),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    )
                                 ),
                               ),
                             ),
@@ -425,8 +394,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
 
                           ListTile(
-                            onTap: (){
-                              logout();
+                            onTap: () async {
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              prefs.remove('accessSession');
+                              accessToken = null;
+                              appUserData = null;
+                              Navigator.of(context,rootNavigator: true)
+                                  .pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>MainPageScreen()), (route) => false);
                             },
                             title: Row(
                               children:  [

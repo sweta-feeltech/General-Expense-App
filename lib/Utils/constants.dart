@@ -27,7 +27,7 @@ String? userDataForSession;
 UserData2? sessionParesdData;
 Map<String,dynamic>? UserDatas;
 
-List<String> enrolledCoursesIdList = [];
+
 
 
 

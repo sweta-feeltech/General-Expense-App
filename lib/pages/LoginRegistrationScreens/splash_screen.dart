@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
+    checkIsAuthorized();
   }
 
   Future<void> checkIsAuthorized() async {
@@ -41,6 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print("val: $val");
 
     try {
+      print("abd ${val}");
       UserData2 splashScreenModelData = await repositoryRepo.getProfileSplashAPICall(access: val);
       // SplashScreenModel splashScreenModelData = await repositoryRepo.getProfileSplashAPICall(access: val);
       print("splashScreenModelData: ${splashScreenModelData}");
@@ -56,25 +57,22 @@ class _SplashScreenState extends State<SplashScreen> {
       String? normal = await prefs.getString("userSessionData");
       print("normal: $normal");
 
-      // bool? isAlredayUser = await prefs.getBool("IsAppUser");
-      // print("isAlredayGuest: $isAlredayUser");
 
       print("val for dash: $val");
       accessToken = val;
-      // isSubscriber = splashScreenModelData.isSubscriber;
-      // IsGuest = false;
-      // IsAppUser = isAlredayUser;
 
       UserDatas = jsonDecode(normal!) as Map<String,dynamic>;
       print("UserDatas splash: $UserDatas");
       sessionParesdData = UserData2.fromJson(UserDatas!);
 
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
-      // Navigator.pushReplacementNamed(context,DashboardScreen.routeName);
+
+
+
     } catch(error) {
       print("error: $error");
       // Navigator.pushNamed(context,LoginScreen.routeName);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogInScreen()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MainPageScreen()));
 
     }
 
