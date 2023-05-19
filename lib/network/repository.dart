@@ -5,6 +5,7 @@ import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
 import '../models/GroupModel/group_list_model.dart';
+import '../models/GroupModel/single_group_view_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
 import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
@@ -88,6 +89,24 @@ class Repository {
   }
 
 
+  ///
+  ///
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: SINGLE GROUP GET APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<List<SingleGroupViewModel>> getSingleGroupViewList(String query) async {
+    try {
+      var listData = await apiClient.getApiCall(
+          BASEURL, "$getGroupbyIdAPIEnd/$query", isAccessToken: accessToken)
+      as List;
+      print("listData: $listData");
+      var list =
+      listData.map((json) => SingleGroupViewModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
 
 
 

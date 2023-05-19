@@ -7,7 +7,7 @@ import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_nav_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/category_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/group_list_screen.dart';
+import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/income_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';

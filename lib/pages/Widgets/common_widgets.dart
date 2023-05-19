@@ -9,6 +9,7 @@ import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
 import '../../models/GroupModel/group_list_model.dart';
+import '../Group/single_group_screen.dart';
 
 class CommonWidgets {
 
@@ -322,7 +323,7 @@ class CommonWidgets {
     return InkWell(
       onTap: (){
 
-        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SingleGroupViewScreen("${getGroupListModel!.id}")));
       },
       child: Material(
         borderRadius: BorderRadius.circular(7),

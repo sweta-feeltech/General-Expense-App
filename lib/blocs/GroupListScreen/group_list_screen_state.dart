@@ -1,4 +1,4 @@
-part of 'group_screen_bloc.dart';
+part of 'group_list_screen_bloc.dart';
 
 @immutable
 abstract class GroupListScreenState {}

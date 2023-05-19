@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
-import 'package:general_expense_app/pages/Dashboard/group_list_screen.dart';
+import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Dashboard/category_screen.dart';

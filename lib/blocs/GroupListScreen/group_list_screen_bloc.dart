@@ -5,8 +5,8 @@ import '../../models/GroupModel/group_list_model.dart';
 import '../../network/repository.dart';
 
 
-part 'group_screen_event.dart';
-part 'group_screen_state.dart';
+part 'group_list_screen_event.dart';
+part 'group_list_screen_state.dart';
 
 class GroupListScreenBloc
     extends Bloc<GroupListScreenEvent, GroupListScreenState> {
