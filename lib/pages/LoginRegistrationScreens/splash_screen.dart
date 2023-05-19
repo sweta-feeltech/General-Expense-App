@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     try {
       print("abd ${val}");
-      UserData2 splashScreenModelData = await repositoryRepo.getProfileSplashAPICall(access: val);
+      UserData splashScreenModelData = await repositoryRepo.getProfileSplashAPICall(access: val);
       // SplashScreenModel splashScreenModelData = await repositoryRepo.getProfileSplashAPICall(access: val);
       print("splashScreenModelData: ${splashScreenModelData}");
 
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       var user_data = jsonDecode(json.encode(splashScreenModelData));
 
-      userDataForSession = json.encode(UserData2.fromJson(user_data));
+      userDataForSession = json.encode(UserData.fromJson(user_data));
       print("userDataForSession: $userDataForSession");
       await prefs.setString("userSessionData", userDataForSession!);
 
@@ -63,7 +63,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
       UserDatas = jsonDecode(normal!) as Map<String,dynamic>;
       print("UserDatas splash: $UserDatas");
-      sessionParesdData = UserData2.fromJson(UserDatas!);
+      sessionParesdData = UserData.fromJson(UserDatas!);
+
+      print("splash :${sessionParesdData!.firstName}");
 
       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
 

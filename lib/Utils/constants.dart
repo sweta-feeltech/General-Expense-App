@@ -20,15 +20,14 @@ bool? AuthorizedUser;
 String? accessToken;
 
 
-UserData2? appUserData;
+
+
+UserData? appUserData;
 
 String? userDataForSession;
 
-UserData2? sessionParesdData;
+UserData? sessionParesdData;
 Map<String,dynamic>? UserDatas;
-
-
-
 
 
 /////

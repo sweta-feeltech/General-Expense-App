@@ -60,12 +60,12 @@ class Repository {
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: PROFILE REQUEST FOR SESSION MANAGE~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<UserData2> getProfileSplashAPICall({String? access}) async {
+  Future<UserData> getProfileSplashAPICall({String? access}) async {
     try {
       print("acss${access}");
       Map<String, dynamic> json = await apiClient.getApiCall(BASEURL, SplashScreenAPIEnd, isAccessToken: access,isBearer: true);
       print("accc${access}");
-      UserData2 oneNuBeeCardModelRes = UserData2.fromJson(json);
+      UserData oneNuBeeCardModelRes = UserData.fromJson(json);
       return oneNuBeeCardModelRes;
     } on CustomException {
       rethrow;

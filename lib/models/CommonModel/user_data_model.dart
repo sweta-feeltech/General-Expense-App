@@ -1,20 +1,23 @@
-class UserData2 {
+class UserData {
   String? email;
-  String? userName;
+  String? firstName;
+  String? lastName;
   String? profilePic;
 
-  UserData2({this.email, this.userName, this.profilePic});
+  UserData({this.email, this.firstName, this.lastName, this.profilePic});
 
-  UserData2.fromJson(Map<String, dynamic> json) {
+  UserData.fromJson(Map<String, dynamic> json) {
     email = json['email'];
-    userName = json['userName'];
+    firstName = json['firstName'];
+    lastName = json['lastName'];
     profilePic = json['profilePic'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['email'] = this.email;
-    data['userName'] = this.userName;
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
     data['profilePic'] = this.profilePic;
     return data;
   }

@@ -226,7 +226,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 },
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
               ),
-              title:    Text("Edit Profile ${appUserData?.userName}",
+              title:    Text("Edit Profile",
                 style:
                 TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:general_expense_app/models/CommonModel/user_data_model.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,7 @@ import '../../Utils/api_end_points.dart';
 import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
 import '../../blocs/Login/login_screen_bloc.dart';
+import '../../models/LoginRegisterModel/login_model.dart';
 import '../../models/ProfileModel/get_profile_model.dart';
 import '../../network/repository.dart';
 import '../Dashboard/bottom_nav_bar.dart';
@@ -63,14 +65,7 @@ class _LogInScreenState extends State<LogInScreen> {
   bool visiblePassowrd = true;
 
 
-
-
-
-
-
-
-
-
+  LoginModel? loginResponseData;
 
 
 
@@ -101,8 +96,25 @@ class _LogInScreenState extends State<LogInScreen> {
 
             final prefs = await SharedPreferences.getInstance();
 
+            loginResponseData = state.loginResponseData;
+
+            print("logindd ${loginResponseData!.accessToken}");
+
             accessToken = state.loginResponseData.accessToken;
             print("acs${accessToken}");
+
+            appUserData = state.loginResponseData.userData;
+
+            print("aappuu${appUserData}");
+
+            var user_data = jsonDecode(json.encode(loginResponseData?.userData));
+
+            userDataForSession = json.encode(UserData.fromJson(user_data));
+
+            await prefs.setString("accessSession", state.loginResponseData.accessToken!);
+
+
+            await prefs.setString("userSessionData", userDataForSession!);
 
             // we are calling here Api of User Profile page so we can match email to redirect user to the category page.
             var userProfileData = await fetchProfileData();
@@ -111,8 +123,15 @@ class _LogInScreenState extends State<LogInScreen> {
             /// 1 = "APPROVED"
             if(userProfileData!.email != null){
               print("cate");
+
               await prefs.setString("accessSession", state.loginResponseData.accessToken!);
               print("get sess: ${prefs.getString("accessSession")}");
+
+
+              // await prefs.setBool('IsAppUser', IsAppUser!);
+              print("appUserData signup: ${appUserData}");
+
+
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
             }
             else {
