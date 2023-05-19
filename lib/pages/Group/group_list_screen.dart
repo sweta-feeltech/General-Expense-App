@@ -5,6 +5,7 @@ import 'package:general_expense_app/models/GroupModel/group_list_model.dart';
 
 import '../../Utils/colors.dart';
 import '../../blocs/GroupListScreen/group_list_screen_bloc.dart';
+import '../../models/GroupModel/add_group_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 import '../Widgets/common_widgets.dart';
@@ -31,16 +32,23 @@ class _GroupListScreenState extends State<GroupListScreen> {
 
   List<GetGroupListModel>? getGroupListModelData;
 
+  AddGroupModel? addGroupModeLData;
+
+
+  String? GroupName;
+  String? Description;
+
+
   DateTime todayDate = DateTime.now();
 
 
   @override
   void initState() {
     super.initState();
-    loadAllDashboardScreenApiCalls();
+    loadAllGroupListScreenApiCalls();
   }
 
-  void loadAllDashboardScreenApiCalls() {
+  void loadAllGroupListScreenApiCalls() {
     //TODO: remove static values
     // dashBoardScreenBloc.add(FetchDashBoardScreenAPICallEvent("sd=2023-04-01&ed=2023-09-05"));
     groupListScreenBloc.add(FetchAllGroupListScreenAPIsEvent());
@@ -71,6 +79,15 @@ class _GroupListScreenState extends State<GroupListScreen> {
 
               return mainViewAllScreenViewWidget();
             }
+            else if (state is PostCreateGroupEventState) {
+
+              addGroupModeLData = state.addGroupModelData;
+
+
+              return mainViewAllScreenViewWidget();
+
+            }
+
             else {
               return Container();
             }
@@ -117,74 +134,79 @@ class _GroupListScreenState extends State<GroupListScreen> {
 
 
 
-      body: Column(
-        children: [
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          loadAllGroupListScreenApiCalls();
+        },
+        child: Column(
+          children: [
 
-          Padding(
-            padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("My Groups",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: main_Height * 0.021,
-                      fontWeight: FontWeight.w500
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("My Groups",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.021,
+                        fontWeight: FontWeight.w500
+                    ),
                   ),
-                ),
 
-                InkWell(
-                  onTap: (){
+                  InkWell(
+                    onTap: (){
 
-                    ThemeHelper.addGroupDialogBox(
-                        context: context,
-                        logoutPress: () {},
-                        heightData: main_Height,
-                        popupTitle: "Add a Group",
-                        popupcontent: "popupcontent");
+                      ThemeHelper.addGroupDialogBox(
+                          context: context,
+                          logoutPress: () {},
+                          heightData: main_Height,
+                          popupTitle: "Add a Group",
+                          popupcontent: "popupcontent");
 
-                  },
-                  child: Container(
-                    height: main_Height * 0.05,
-                    width: main_Height * 0.05,
-                    child: SvgPicture.asset("assets/images/add.svg",
-                      fit: BoxFit.fill,),
-                  ),
-                )
+                    },
+                    child: Container(
+                      height: main_Height * 0.05,
+                      width: main_Height * 0.05,
+                      child: SvgPicture.asset("assets/images/add.svg",
+                        fit: BoxFit.fill,),
+                    ),
+                  )
 
 
-              ],
+                ],
+              ),
             ),
-          ),
 
 
 
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-              child: GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                childAspectRatio: 5/5,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                children: List.generate(
-                    int.parse("${getGroupListModelData?.length}"),
-                        (index) {
-                      return CommonWidgets.CommonGroupList2(context,index: index,
-                      getGroupListModel: getGroupListModelData![index]
-                      );
-                    }
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  childAspectRatio: 5/5,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  children: List.generate(
+                      int.parse("${getGroupListModelData?.length}"),
+                          (index) {
+                        return CommonWidgets.CommonGroupList2(context,index: index,
+                        getGroupListModel: getGroupListModelData![index]
+                        );
+                      }
+                  ),
                 ),
               ),
             ),
-          ),
 
 
-        ],
+          ],
+        ),
       ),
 
 

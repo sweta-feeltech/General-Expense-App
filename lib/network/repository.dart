@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
+import '../models/GroupModel/add_group_model.dart';
 import '../models/GroupModel/group_list_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
@@ -74,7 +75,40 @@ class Repository {
     }
   }
 
-  ///// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DASHBOARD PAGE APIS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  ///// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GROUP PAGE APIS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~POST: ADD GROUP APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+  // Future<AddGroupModel> createGroupPostAPI(String apiEndPoint, dynamic body) async {
+  //   try {
+  //     Map<String, dynamic> json = await apiClient.postApiCall(BASEURL, createGroupAPIEnd, body);
+  //     print("final received json = $json");
+  //     AddGroupModel loginResponse = AddGroupModel.fromJson(json);
+  //     return loginResponse;
+  //   } on CustomException {
+  //     rethrow;
+  //   }
+  // }
+
+
+  Future<AddGroupModel> createGroupPostAPI(dynamic body) async {
+// Future<SignUpModel> postSigUpData(dynamic body, String firebaseToken) async {
+    try {
+      Map<String, dynamic> json = await apiClient.postApiCall(
+          BASEURL, createGroupAPIEnd, body,
+          isAccessToken: accessToken);
+      // print("final received json = $json");
+      AddGroupModel courseSavedRes = AddGroupModel.fromJson(json);
+      return courseSavedRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MODEL REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///

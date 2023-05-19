@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:general_expense_app/models/GroupModel/add_group_model.dart';
 
 import '../../models/GroupModel/group_list_model.dart';
 import '../../network/repository.dart';
@@ -15,6 +16,8 @@ class GroupListScreenBloc
   GroupListScreenBloc(this.repositoryRepo)
       : super(GroupListScreenInitialState()) {
     on<GroupListScreenEvent>((event, emit) async {
+
+
       if (event is FetchAllGroupListScreenAPIsEvent) {
         late List<GetGroupListModel> getGroupListModelData;
 
@@ -29,7 +32,31 @@ class GroupListScreenBloc
           emit(GroupListScreenLoadingEventState(false));
           emit(ApiFailureState(Exception(error.toString())));
         }
+
       }
+
+
+
+      if (event is PostCareateGroupEvent) {
+        late AddGroupModel addGroupModelData;
+
+        try {
+          addGroupModelData =
+          await repositoryRepo.createGroupPostAPI({"email": event.GroupName, "password": event.Description});
+
+
+          emit(PostCreateGroupEventState(addGroupModelData));
+        } catch (error) {
+          emit(GroupListScreenLoadingEventState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
+      }
+
+
+
+
+
+
     });
   }
 }

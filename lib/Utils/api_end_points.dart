@@ -32,13 +32,14 @@ String updateProfileApiEnd = "user/update-profile";
 String SplashScreenAPIEnd = "User/profile";
 ///
 
+
+/// Group's End Points
+
 ///
 /// ------------------CREATE-GROUP POST API----------------------
 ///
 String createGroupAPIEnd = "Group";
 ///
-
-
 
 ///
 /// ------------------GROUP-LIST GET API----------------------

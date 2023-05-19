@@ -22,3 +22,12 @@ class FetchAllGroupListScreenAPIsEventState extends GroupListScreenState {
 
   FetchAllGroupListScreenAPIsEventState(this.getGroupListModelData);
 }
+
+
+class PostCreateGroupEventState extends GroupListScreenState {
+  final AddGroupModel addGroupModelData;
+
+  PostCreateGroupEventState(this.addGroupModelData);
+}
+
+
