@@ -157,22 +157,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shape: BoxShape.circle,
                                 color: primaryGrey,
                               ),
-                              child: ClipOval(
+                              child:  ClipOval(
                                 child: Material(
                                     child: Container(
                                       height: main_Height * 0.06,
                                       width: main_Height * 0.06,
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                      ),
-                                      child: FadeInImage(
-                                        placeholder: AssetImage("assets/images/avtar.png"),
-                                        image: NetworkImage("$BASEIMAGEURL${profileDataListModelData?.profilePic}",
-                                        ),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    )
-                                ),
+                                          borderRadius:
+                                          BorderRadius.circular(10.0),
+                                          image: DecorationImage(
+                                            image: profileDataListModelData
+                                                ?.profilePic ==
+                                                null
+                                                ? AssetImage(
+                                                "assets/images/avtar.png")
+                                            as ImageProvider
+                                                : NetworkImage(
+                                                "$BASEIMAGEURL${profileDataListModelData?.profilePic}"),
+                                            fit: BoxFit.fill,
+                                          )),
+                                    )),
                               ),
                             ),
                             SizedBox(

@@ -52,7 +52,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     index2 = 0;
     super.initState();
-    // editProBloc.add(PutProfileDataEvent(id,firstName,lastName,email,dob,description,profilePic: profilePic ));
   }
 
 
@@ -107,11 +106,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               print("Put State State2");
               getProfileModelData = state.editProfileModelResponse.userData;
               print("Put State State3");
-              // appUserData?.firstName = getProfileModelData?.firstName;
-              // appUserData?.lastName = getProfileModelData?.lastName;
-              // appUserData?.email = getProfileModelData?.email;
-              // appUserData?.dob = getProfileModelData?.dob;
-              // appUserData?.profilePic = getProfileModelData?.profilePic;
+              appUserData?.firstName = getProfileModelData?.firstName;
+              appUserData?.lastName = getProfileModelData?.lastName;
+              appUserData?.birthDate = getProfileModelData?.birthDate;
+              appUserData?.profilePic = getProfileModelData?.profilePic;
               print("Put State State4");
 
 
@@ -189,17 +187,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
       onWillPop: () async {
         Navigator.of(context).pop("refresh");
-        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>ProfileScreen(
-        //
-        //     "${getProfileModelData?.firstName}",
-        //
-        //     "${getProfileModelData?.lastName}",
-        //     "${getProfileModelData?.description}",
-        //     "${getProfileModelData?.profilePic}",
-        //         (){
-        //       print("getdata : ${getProfileModelData?.firstName}");
-        //
-        //     })), (route) => false);
         return true;
       },
       child: Form(
@@ -260,6 +247,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       if(_formkey.currentState!.validate()){
 
                         _formkey.currentState!.save();
+
                         editProBloc.add(PutProfileDataEvent(firstName,lastName,birthDate,profilePic: profilePic));
 
 
@@ -355,60 +343,72 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             width: main_Height * 0.13,
                                             height: main_Height * 0.13,
                                             decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(7)
-                                            ),
+                                                borderRadius:
+                                                BorderRadius.circular(7)),
                                             child: Material(
                                                 color: Colors.transparent,
-                                                child: appUserData?.profilePic != null ?
-                                                profilePic == null ?
-                                                Ink.image(
-                                                  image: NetworkImage("$BASEIMAGEURL${getProfileModelData?.profilePic}"),
+                                                child: appUserData?.profilePic != null
+                                                    ? profilePic == null
+                                                    ? Ink.image(
+                                                  image: NetworkImage(
+                                                      "$BASEIMAGEURL${getProfileModelData?.profilePic == null ? appUserData!.profilePic : getProfileModelData!.profilePic}"),
                                                   fit: BoxFit.cover,
                                                   width: main_Height * 0.13,
-                                                  height: main_Height * 0.13,
+                                                  height:
+                                                  main_Height * 0.13,
                                                   child: InkWell(
                                                     onTap: () {
                                                       getImage();
                                                     },
                                                   ),
-                                                ) :
-                                                GestureDetector(
+                                                )
+                                                    : GestureDetector(
                                                   onTap: () {
                                                     getImage();
                                                   },
                                                   child: Image.file(
-                                                    File("${profilePic!.path}").absolute,
-                                                    width: main_Height * 0.13,
-                                                    height: main_Height * 0.13,
+                                                    File("${profilePic!.path}")
+                                                        .absolute,
+                                                    width:
+                                                    main_Height * 0.13,
+                                                    height:
+                                                    main_Height * 0.13,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 )
-                                                    : profilePic == null ?  Ink.image(
-                                                  image: AssetImage("assets/images/avtar.png"),
-                                                  onImageError: (exception, stackTrace) => AssetImage("assets/images/avtar.png"),
+                                                    : profilePic == null
+                                                    ? Ink.image(
+                                                  image: AssetImage(
+                                                      "assets/images/avtar.png"),
+                                                  onImageError: (exception,
+                                                      stackTrace) =>
+                                                      AssetImage(
+                                                          "assets/images/avtar.png"),
                                                   fit: BoxFit.cover,
                                                   width: main_Height * 0.13,
-                                                  height: main_Height * 0.13,
+                                                  height:
+                                                  main_Height * 0.13,
                                                   child: InkWell(
                                                     onTap: () {
                                                       getImage();
                                                     },
                                                   ),
-                                                ) :
-                                                GestureDetector(
+                                                )
+                                                    : GestureDetector(
                                                   onTap: () {
                                                     getImage();
                                                   },
                                                   child: Image.file(
-                                                    File("${profilePic!.path}").absolute,
-                                                    width: main_Height * 0.13,
-                                                    height: main_Height * 0.13,
+                                                    File("${profilePic!.path}")
+                                                        .absolute,
+                                                    width:
+                                                    main_Height * 0.13,
+                                                    height:
+                                                    main_Height * 0.13,
                                                     fit: BoxFit.cover,
                                                   ),
-                                                )
-                                            ),
-                                          )
-                                      ),
+                                                )),
+                                          )),
                                     ),
                                   ),
 
@@ -440,8 +440,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           const SizedBox(height: 5,),
                           TextFormField(
-                            // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
-                            style: TextStyle(
+                            initialValue:
+                            "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",                            style: TextStyle(
                               fontSize: main_Height * 0.022,
                             ),
                             onSaved: (newValue) {
@@ -495,8 +495,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           const SizedBox(height: 5,),
                           TextFormField(
-                            // initialValue: "${getProfileModelData?.lastName == null ? appUserData!.lastName : getProfileModelData!.lastName}",
-                            style: TextStyle(
+                            initialValue:
+                            "${getProfileModelData?.lastName == null ? appUserData!.lastName : getProfileModelData!.lastName}",                              style: TextStyle(
                               fontSize: main_Height * 0.022,
                             ),
                             onSaved: (newValue) {
@@ -575,9 +575,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             type: DateTimePickerType.date,
                             dateMask: 'dd MMM, yyyy',
-                            // initialValue: "${getProfileModelData?.dob == null ? appUserData?.dob == null ? DateTime.now().toString() : appUserData?.dob : getProfileModelData?.dob}",
-                            // initialValue: "${appUserData!.dob}" == null ? DateTime.now().toString() : "${appUserData!.dob}",
-                            initialValue: DateTime.now().toString(),
+                            initialValue:
+                            "${getProfileModelData?.birthDate == null ? appUserData?.birthDate == null ? DateTime.now().toString() : appUserData?.birthDate : getProfileModelData?.birthDate}",                            // initialValue: "${appUserData!.dob}" == null ? DateTime.now().toString() : "${appUserData!.dob}",
+                            // initialValue: DateTime.now().toString(),
                             firstDate: DateTime(1900),
                             lastDate: DateTime.now(),
                             // icon: Icon(Icons.event),
