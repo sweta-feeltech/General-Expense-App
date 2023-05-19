@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/Dashboard/group_list_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Dashboard/category_screen.dart';
@@ -100,6 +101,32 @@ class _NavDrawerState extends State<NavDrawer> {
                   ),
                   SizedBox(width: 10,),
                   Text("category", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+
+          InkWell(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).pushNamed(GroupListScreen.routeName);
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.group,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Groups", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
                 ],
               ),
             ),

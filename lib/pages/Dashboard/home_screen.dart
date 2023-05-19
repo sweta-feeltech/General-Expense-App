@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/Utils/constants.dart';
 import 'package:general_expense_app/models/CommonModel/user_data_model.dart';
-import 'package:general_expense_app/pages/Dashboard/group_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/group_list_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   InkWell(
                                     onTap : (){
                                       Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                                          builder: (context) => GroupScreen()));
+                                          builder: (context) => GroupListScreen()));
                                     },
                                     child: Container(
                                       child: SvgPicture.asset("assets/images/down.svg",

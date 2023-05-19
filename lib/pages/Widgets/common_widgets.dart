@@ -8,6 +8,7 @@ import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
+import '../../models/GroupModel/group_list_model.dart';
 
 class CommonWidgets {
 
@@ -312,7 +313,9 @@ class CommonWidgets {
 
 
   static Widget CommonGroupList2(BuildContext context,
-      {int? index}
+      {int? index,
+        required GetGroupListModel getGroupListModel
+      }
       ) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
@@ -359,7 +362,7 @@ class CommonWidgets {
                 Column(
                   children: [
                     Text(
-                      "Family Group ${index! + 1}",
+                      "${getGroupListModel?.groupName}",
                       maxLines: 1,
                       // items.name.toString(),
                       overflow: TextOverflow.ellipsis,
@@ -370,7 +373,8 @@ class CommonWidgets {
                     ),
 
                     Text(
-                      "7 Members",
+                      "${getGroupListModel!.description}",
+                      // "7 Members",
                       maxLines: 1,
                       // items.name.toString(),
                       overflow: TextOverflow.ellipsis,

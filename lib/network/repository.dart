@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
+import '../models/GroupModel/group_list_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
 import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
@@ -71,6 +72,21 @@ class Repository {
       rethrow;
     }
   }
+
+  ///// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DASHBOARD PAGE APIS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MODEL REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<List<GetGroupListModel>> getGroupModelData({String? access}) async {
+    try {
+      var listData = await apiClient.getApiCall(BASEURL, getGroupListAPIEnd, isAccessToken: accessToken,isBearer: true) as List;
+      var list = listData.map((json) => GetGroupListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
 
 
 
