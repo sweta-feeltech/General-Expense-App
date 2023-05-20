@@ -1,4 +1,4 @@
-part of 'single_course_view_screen_bloc.dart';
+part of 'single_group_member_screen_bloc.dart';
 
 @immutable
 abstract class SingleGroupViewScreenEvent {}

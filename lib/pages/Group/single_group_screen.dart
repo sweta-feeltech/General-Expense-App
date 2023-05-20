@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:general_expense_app/blocs/SingleGroupViewScreen/single_course_view_screen_bloc.dart';
+import 'package:general_expense_app/blocs/SingleGroupViewScreen/single_group_member_screen_bloc.dart';
 import 'package:general_expense_app/models/GroupModel/single_group_view_model.dart';
 
 import '../../Utils/colors.dart';
@@ -50,35 +50,35 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
 
     return Scaffold(
 
-          body: BlocProvider<SingleGroupViewScreenBloc>(
-            create: (context) =>
-            singleGroupViewScreenBloc..add(SingleGroupViewScreenInitialEvent()),
-            child: BlocConsumer<SingleGroupViewScreenBloc, SingleGroupViewScreenState>(
-              builder: (context, state) {
-                if (state is SingleGroupViewScreenLoadingEventState) {
-                  return ThemeHelper.buildLoadingWidget();
-                }
-                if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
-                  singleGroupViewModelData = state.singleGroupViewModelData;
-                  return mainViewAllCourseCatCourse();
-                } else {
-                  return mainViewAllCourseCatCourse();
-                }
-              },
-              listener: (context, state) {
-                if (state is ApiFailureState) {
-                  print(state.exception.toString());
-                  ThemeHelper.customDialogForMessage(
-                      context,
-                      (state.exception.toString().replaceAll('Exception:', ''))
-                          .replaceAll(':', ''),
-                      MediaQuery.of(context).size.width, () {
-                    Navigator.of(context, rootNavigator: true).pop();
-                  }, ForSuccess: false);
-                }
-              },
-            ),
-          ),
+          // body: BlocProvider<SingleGroupViewScreenBloc>(
+          //   create: (context) =>
+          //   singleGroupViewScreenBloc..add(SingleGroupViewScreenInitialEvent()),
+          //   child: BlocConsumer<SingleGroupViewScreenBloc, SingleGroupViewScreenState>(
+          //     builder: (context, state) {
+          //       if (state is SingleGroupViewScreenLoadingEventState) {
+          //         return ThemeHelper.buildLoadingWidget();
+          //       }
+          //       if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
+          //         singleGroupViewModelData = state.singleGroupViewModelData;
+          //         return mainViewAllCourseCatCourse();
+          //       } else {
+          //         return mainViewAllCourseCatCourse();
+          //       }
+          //     },
+          //     listener: (context, state) {
+          //       if (state is ApiFailureState) {
+          //         print(state.exception.toString());
+          //         ThemeHelper.customDialogForMessage(
+          //             context,
+          //             (state.exception.toString().replaceAll('Exception:', ''))
+          //                 .replaceAll(':', ''),
+          //             MediaQuery.of(context).size.width, () {
+          //           Navigator.of(context, rootNavigator: true).pop();
+          //         }, ForSuccess: false);
+          //       }
+          //     },
+          //   ),
+          // ),
 
     );
   }

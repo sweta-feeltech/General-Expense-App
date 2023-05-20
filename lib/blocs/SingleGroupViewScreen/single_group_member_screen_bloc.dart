@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/models/GroupModel/single_group_view_model.dart';
 
+import '../../models/GroupModel/group_members_model.dart';
 import '../../network/repository.dart';
 
 
-part 'single_course_view_screen_event.dart';
-part 'single_course_view_screen_state.dart';
+part 'single_group_member_screen_event.dart';
+part 'single_group_member_screen_state.dart';
 
 class SingleGroupViewScreenBloc
     extends Bloc<SingleGroupViewScreenEvent, SingleGroupViewScreenState> {
@@ -16,14 +17,14 @@ class SingleGroupViewScreenBloc
       : super(SingleGroupViewScreenInitialState()) {
     on<SingleGroupViewScreenEvent>((event, emit) async {
       if (event is FetchAllSingleGroupViewScreenAPIsEvent) {
-        late List<SingleGroupViewModel> singleGroupViewModelData;
+        late List<GroupMembersModel> getGroupMemberModelData;
 
         try {
           emit(SingleGroupViewScreenLoadingEventState(true));
-          singleGroupViewModelData = await repositoryRepo.getSingleGroupViewList(event.grpQuery);
+          getGroupMemberModelData = await repositoryRepo.getGroupMemberList(event.grpQuery);
           emit(SingleGroupViewScreenLoadingEventState(false));
           emit(FetchAllSingleGroupViewScreenAPIsEventState(
-              singleGroupViewModelData));
+              getGroupMemberModelData));
         } catch (error, stacktrace) {
           print(stacktrace);
           emit(SingleGroupViewScreenLoadingEventState(false));

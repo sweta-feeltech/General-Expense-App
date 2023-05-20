@@ -1,6 +1,6 @@
 
 
-part of 'single_course_view_screen_bloc.dart';
+part of 'single_group_member_screen_bloc.dart';
 
 @immutable
 abstract class SingleGroupViewScreenState {}
@@ -20,7 +20,7 @@ class ApiFailureState extends SingleGroupViewScreenState {
 }
 
 class FetchAllSingleGroupViewScreenAPIsEventState extends SingleGroupViewScreenState {
-  final List<SingleGroupViewModel> singleGroupViewModelData;
+  final List<GroupMembersModel> groupMemberModelData;
 
-  FetchAllSingleGroupViewScreenAPIsEventState(this.singleGroupViewModelData);
+  FetchAllSingleGroupViewScreenAPIsEventState(this.groupMemberModelData);
 }

@@ -46,6 +46,11 @@ String createGroupAPIEnd = "Group";
 ///
 String getGroupListAPIEnd = "Group";
 ///
+///
+/// /// ------------------GROUP-MEMBER-LIST GET API----------------------
+///
+String getGroupMemberListAPIEnd = "GroupMember";
+///
 
 ///
 /// ------------------DELETE-LIST GET API----------------------

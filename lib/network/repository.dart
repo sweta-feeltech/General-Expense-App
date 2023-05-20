@@ -6,6 +6,7 @@ import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
 import '../models/GroupModel/add_group_model.dart';
 import '../models/GroupModel/group_list_model.dart';
+import '../models/GroupModel/group_members_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
 import '../models/ProfileModel/edit_profile_model.dart';
@@ -116,6 +117,23 @@ class Repository {
     try {
       var listData = await apiClient.getApiCall(BASEURL, getGroupListAPIEnd, isAccessToken: accessToken,isBearer: true) as List;
       var list = listData.map((json) => GetGroupListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MODEL REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<List<GroupMembersModel>> getGroupMemberList(String query) async {
+    try {
+      var listData = await apiClient.getApiCall(
+          BASEURL, "$getGroupMemberListAPIEnd/$query", isAccessToken: accessToken)
+      as List;
+      print("listData: $listData");
+      var list =
+      listData.map((json) => GroupMembersModel.fromJson(json)).toList();
       return list;
     } on CustomException {
       rethrow;
