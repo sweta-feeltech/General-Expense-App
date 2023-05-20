@@ -130,7 +130,7 @@ class Repository {
   ///
   Future<List<IncomeListModel>> getIncomeListModelData({String? access}) async {
     try {
-      var listData = await apiClient.getApiCall(BASEURL, getIncomeListAPIEnd, isAccessToken: accessToken,isBearer: true) as List;
+      var listData = await apiClient.getApiCall(BASEURL,getIncomeListAPIEnd, isAccessToken: accessToken,isBearer: true) as List;
       var list = listData.map((json) => IncomeListModel.fromJson(json)).toList();
       return list;
     } on CustomException {

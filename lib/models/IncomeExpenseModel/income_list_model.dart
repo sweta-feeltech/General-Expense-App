@@ -1,8 +1,8 @@
 class IncomeListModel {
   String? id;
   String? incomeDate;
-  int? incomeCategory;
-  int? amount;
+  dynamic incomeCategory;
+  dynamic amount;
   String? description;
   String? createdBy;
   String? createdDate;

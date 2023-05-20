@@ -3,6 +3,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
+import 'package:general_expense_app/models/IncomeExpenseModel/income_list_model.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
@@ -509,7 +510,10 @@ class CommonWidgets {
 
 
 
-  static Widget CommonIncomeListView(BuildContext context) {
+  static Widget CommonIncomeListView(BuildContext context,{
+    required IncomeListModel getIncomeListModelData,
+  }
+      ) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -525,6 +529,8 @@ class CommonWidgets {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
 
+        Row(
+          children: [
             Container(
               height: main_Height * 0.061,
               width: main_Height * 0.061,
@@ -545,7 +551,7 @@ class CommonWidgets {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Bank Transfer",
+                  Text("${getIncomeListModelData!.description}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -556,31 +562,15 @@ class CommonWidgets {
                   ),
 
 
-                  Row(
-                    children: [
-                      Text("25 Oct, 2022  ",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xFF959698),
-                            fontSize: main_Height * 0.015
-                        ),
-                      ),
-                      SvgPicture.asset("assets/images/dot1.svg"),
-                      Text(" 09:00 AM",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xFF959698),
-                            fontSize: main_Height * 0.017
-                        ),
-                      ),
-
-                    ],
+                  Text("${getIncomeListModelData!.createdDate.toString().replaceAll("T",", ").substring(0,20)}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFF959698),
+                        fontSize: main_Height * 0.015
+                    ),
                   )
 
 
@@ -590,17 +580,17 @@ class CommonWidgets {
               ),
             ),
 
+          ],
+        ),
 
-            Container(
-              child: Center(
-                child: Text("+\$2800",
-                  style: TextStyle(
-                      letterSpacing: 0.6,
-                      color: Color(0xFF25B07F),
-                      fontWeight: FontWeight.w500,
-                      fontSize: main_Height * 0.02
-                  ),
-                ),
+            Text("+\$${getIncomeListModelData!.amount.toStringAsFixed(0)}",
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(
+                  letterSpacing: 0.6,
+                  color: Color(0xFF25B07F),
+                  fontWeight: FontWeight.w500,
+                  fontSize: main_Height * 0.018
               ),
             )
 
