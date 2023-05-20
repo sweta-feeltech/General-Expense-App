@@ -9,6 +9,7 @@ import '../models/GroupModel/group_link_model.dart';
 import '../models/GroupModel/group_list_model.dart';
 import '../models/GroupModel/group_members_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
+import '../models/IncomeExpenseModel/income_list_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
 import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
@@ -123,6 +124,20 @@ class Repository {
       rethrow;
     }
   }
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: INCOME LIST  APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<List<IncomeListModel>> getIncomeListModelData({String? access}) async {
+    try {
+      var listData = await apiClient.getApiCall(BASEURL, getIncomeListAPIEnd, isAccessToken: accessToken,isBearer: true) as List;
+      var list = listData.map((json) => IncomeListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
 
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MEMCER REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~

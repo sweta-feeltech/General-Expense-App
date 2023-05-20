@@ -70,3 +70,8 @@ String getGroupLinkAPIEnd = "Group/getlink";
 ///
 String getGroupbyIdAPIEnd = "Group/getby";
 ///
+///
+/// /// ------------------INCOME-LIST GET API----------------------
+///
+String getIncomeListAPIEnd = "Income";
+///
