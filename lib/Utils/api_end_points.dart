@@ -58,6 +58,10 @@ String getGroupMemberListAPIEnd = "GroupMember";
 String deleteGroupListAPIEnd = "Group";
 ///
 
+/// ------------------GROUP-LINK----------------------
+///
+String getGroupLinkAPIEnd = "Group/getlink";
+///
 
 
 ///

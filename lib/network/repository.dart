@@ -5,6 +5,7 @@ import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
 import '../models/GroupModel/add_group_model.dart';
+import '../models/GroupModel/group_link_model.dart';
 import '../models/GroupModel/group_list_model.dart';
 import '../models/GroupModel/group_members_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
@@ -124,7 +125,7 @@ class Repository {
   }
 
   ///
-  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MODEL REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MEMCER REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///
   Future<List<GroupMembersModel>> getGroupMemberList(String query) async {
     try {
@@ -140,6 +141,18 @@ class Repository {
     }
   }
 
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP LINK REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<GroupLinkModel> getPGroupLinkData(String query) async {
+    try {
+      Map<String, dynamic> listData = await apiClient.getApiCall(BASEURL,"$getGroupLinkAPIEnd/$query", isAccessToken: accessToken,isBearer:true);
+      GroupLinkModel list = GroupLinkModel.fromJson(listData);
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
 
   ///
   ///
