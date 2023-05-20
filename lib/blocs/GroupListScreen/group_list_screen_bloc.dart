@@ -44,7 +44,6 @@ class GroupListScreenBloc
           addGroupModelData =
           await repositoryRepo.createGroupPostAPI({"GroupName": event.GroupName,"Description": event.Description});
 
-
           emit(PostCreateGroupEventState(addGroupModelData));
         } catch (error) {
           emit(GroupListScreenLoadingEventState(false));

@@ -93,13 +93,29 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
         appBar: AppBar(
           titleSpacing: 15,
           title: Text(
-            "Group Name : ${singleGroupViewModelData?[0].groupName}",
+            "${singleGroupViewModelData?[0].groupName}",
             style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
           ),
           automaticallyImplyLeading: false,
           backgroundColor: primaryPurple,
           elevation: 0,
           // centerTitle: true,
+        ),
+
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: main_Height * 0.07,
+                width: main_Width,
+                padding: EdgeInsets.symmetric(
+                ),
+                child: Text("Admin :${singleGroupViewModelData?[0].createdBy}"),
+
+              )
+
+            ],
+          ),
         ),
 
 

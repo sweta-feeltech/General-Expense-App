@@ -83,6 +83,7 @@ class _GroupListScreenState extends State<GroupListScreen> {
 
               addGroupModeLData = state.addGroupModelData;
 
+              loadAllGroupListScreenApiCalls();
 
               return mainViewAllScreenViewWidget();
 
