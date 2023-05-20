@@ -7,7 +7,8 @@ String BASEURL = "https://trackventory.teamfeeltech.com/$apiPreFix";
 ///
 /// ~~~~~~~~~~~~~~~BASE IMAGE URL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ///
-String BASEIMAGEURL = "http://192.168.29.253:6969/";
+String BASEIMAGEURL = "https://trackventory.teamfeeltech.com/";
+// String BASEIMAGEURL = "http://192.168.29.253:6969/";
 
 ////// PREFIX OF DOMAIN
 ///

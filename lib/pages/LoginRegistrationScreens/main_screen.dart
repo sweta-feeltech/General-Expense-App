@@ -56,9 +56,10 @@ class _MainPageScreenState extends State<MainPageScreen> {
     return Scaffold(
 
       body: SafeArea(
-        child: Container(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: main_Height * 0.03),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
@@ -131,7 +132,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 50,),
+              SizedBox(height: main_Height * 0.05),
               Container(
                 width: main_Width * 0.75,
                 height: main_Height * 0.30,
@@ -177,8 +178,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 15,),
-
+              SizedBox(height: main_Height * 0.02,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -192,8 +192,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
                    ]
               ),
-              SizedBox(height: 10,),
-
+              SizedBox(height: main_Height * 0.015,),
               Center(
                 child:Container(
                   height: main_Height * 0.085,
