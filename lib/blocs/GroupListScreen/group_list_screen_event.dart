@@ -8,9 +8,9 @@ class GroupListScreenInitialEvent extends GroupListScreenEvent {}
 class FetchAllGroupListScreenAPIsEvent extends GroupListScreenEvent {}
 
 
-class PostCareateGroupEvent extends GroupListScreenEvent {
+class PostCreateGroupEvent extends GroupListScreenEvent {
   final String GroupName;
   final String Description;
 
-  PostCareateGroupEvent(this.GroupName, this.Description);
+  PostCreateGroupEvent(this.GroupName, this.Description);
 }

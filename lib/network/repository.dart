@@ -97,8 +97,8 @@ class Repository {
 // Future<SignUpModel> postSigUpData(dynamic body, String firebaseToken) async {
     try {
       Map<String, dynamic> json = await apiClient.postApiCall(
-          BASEURL, createGroupAPIEnd, body,
-          isAccessToken: accessToken);
+          BASEURL,createGroupAPIEnd,body,
+          isAccessToken: accessToken,isBearer: true);
       // print("final received json = $json");
       AddGroupModel courseSavedRes = AddGroupModel.fromJson(json);
       return courseSavedRes;

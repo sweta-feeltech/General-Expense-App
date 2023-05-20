@@ -37,12 +37,12 @@ class GroupListScreenBloc
 
 
 
-      if (event is PostCareateGroupEvent) {
+      if (event is PostCreateGroupEvent) {
         late AddGroupModel addGroupModelData;
 
         try {
           addGroupModelData =
-          await repositoryRepo.createGroupPostAPI({"email": event.GroupName, "password": event.Description});
+          await repositoryRepo.createGroupPostAPI({"GroupName": event.GroupName,"Description": event.Description});
 
 
           emit(PostCreateGroupEventState(addGroupModelData));
