@@ -418,13 +418,13 @@ class ApiClient {
       print("in bear");
       headers = {
         "Content-Type": "application/json",
-        "Authorization": "$accessToken"
+        "Authorization": "$isAccessToken"
       };
     }
     else if(isAccessToken != null){
       headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer $accessToken"
+        "Authorization": "Bearer $isAccessToken"
       };
     }
     else{

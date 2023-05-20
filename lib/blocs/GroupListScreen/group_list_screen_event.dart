@@ -14,3 +14,10 @@ class PostCreateGroupEvent extends GroupListScreenEvent {
 
   PostCreateGroupEvent(this.GroupName, this.Description);
 }
+
+
+class DeleteGroupEvent extends GroupListScreenEvent{
+  final String? id;
+
+  DeleteGroupEvent(this.id);
+}

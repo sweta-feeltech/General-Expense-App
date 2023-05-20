@@ -48,6 +48,14 @@ String getGroupListAPIEnd = "Group";
 ///
 
 ///
+/// ------------------DELETE-LIST GET API----------------------
+///
+String deleteGroupListAPIEnd = "Group";
+///
+
+
+
+///
 ////
 /// ------------------GROUP-LIST GET API----------------------
 ///

@@ -7,6 +7,7 @@ import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
+import '../../models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
 import '../Dashboard/items_screen.dart';
 import '../Group/single_group_screen.dart';
@@ -315,7 +316,9 @@ class CommonWidgets {
 
   static Widget CommonGroupList2(BuildContext context,
       {int? index,
-        required GetGroupListModel getGroupListModel
+        required GetGroupListModel getGroupListModel,
+        required  VoidCallback? onPressed
+
       }
       ) {
     double main_Width = MediaQuery.of(context).size.width;
@@ -344,21 +347,38 @@ class CommonWidgets {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
 
-
                 Container(
                   height: main_Height * 0.15,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: getColor(index!,index),
                       borderRadius:
                       BorderRadius.circular(5)
                   ),
                   // child: items.categoryImg != null ?
-                  padding: EdgeInsets.all(main_Height * 0.03),
-                  child : Image.asset("assets/images/grp1.jpg",
-                    fit: BoxFit.contain,
+                  child : Center(
+                    child: Text("${getGroupListModel!.groupName!.substring(0,1).toUpperCase()}",
+                      style: TextStyle(
+                        fontSize: main_Height * 0.1
+                      ),
+                    ),
                   ),
                 ),
+
+                // Container(
+                //   height: main_Height * 0.15,
+                //   width: double.infinity,
+                //   decoration: BoxDecoration(
+                //       color: Colors.white,
+                //       borderRadius:
+                //       BorderRadius.circular(5)
+                //   ),
+                //   // child: items.categoryImg != null ?
+                //   padding: EdgeInsets.all(main_Height * 0.03),
+                //   child : Image.asset("assets/images/grp1.jpg",
+                //     fit: BoxFit.contain,
+                //   ),
+                // ),
 
                 Column(
                   children: [

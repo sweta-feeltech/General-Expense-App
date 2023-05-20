@@ -32,7 +32,8 @@ class _GroupListScreenState extends State<GroupListScreen> {
 
   List<GetGroupListModel>? getGroupListModelData;
 
-  AddGroupModel? addGroupModeLData;
+  AddGroupModel? addGroupModelData;
+  AddGroupModel? addGroupModelData1;
 
 
   String? GroupName;
@@ -81,12 +82,19 @@ class _GroupListScreenState extends State<GroupListScreen> {
             }
             else if (state is PostCreateGroupEventState) {
 
-              addGroupModeLData = state.addGroupModelData;
+              addGroupModelData = state.addGroupModelData;
 
               loadAllGroupListScreenApiCalls();
 
               return mainViewAllScreenViewWidget();
 
+            } else if (state is DeleteGroupState) {
+
+              addGroupModelData1 = state.addGroupModelData1;
+
+
+
+              return mainViewAllScreenViewWidget();
             }
 
             else {
@@ -160,12 +168,7 @@ class _GroupListScreenState extends State<GroupListScreen> {
                   InkWell(
                     onTap: (){
 
-
-
                       _displayTextInputDialog(context);
-
-
-
 
                       // showDialog(
                       //     context: context,
@@ -342,9 +345,6 @@ class _GroupListScreenState extends State<GroupListScreen> {
                       //     }
                       // );
 
-
-
-
                     },
                     child: Container(
                       height: main_Height * 0.05,
@@ -375,7 +375,13 @@ class _GroupListScreenState extends State<GroupListScreen> {
                       int.parse("${getGroupListModelData?.length}"),
                           (index) {
                         return CommonWidgets.CommonGroupList2(context,index: index,
-                        getGroupListModel: getGroupListModelData![index]
+                        getGroupListModel: getGroupListModelData![index],onPressed: (){
+
+                              groupListScreenBloc.add(DeleteGroupEvent("${getGroupListModelData![index].id}"));
+
+                            }
+
+
                         );
                       }
                   ),

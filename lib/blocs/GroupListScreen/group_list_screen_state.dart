@@ -30,4 +30,9 @@ class PostCreateGroupEventState extends GroupListScreenState {
   PostCreateGroupEventState(this.addGroupModelData);
 }
 
+class DeleteGroupState extends GroupListScreenState{
+  AddGroupModel addGroupModelData1;
+
+  DeleteGroupState(this.addGroupModelData1);
+}
 

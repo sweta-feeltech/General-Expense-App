@@ -143,5 +143,22 @@ class Repository {
   }
 
 
+  ///
+  ///
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE:GROUP DELETE APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<AddGroupModel>delGroupData({required String id}) async {
+    try {
+      Map<String, dynamic> json = await apiClient.apiCallDel(BASEURL,"$deleteGroupListAPIEnd/$id",isBearer:true);
+      AddGroupModel changePassModelRes = AddGroupModel.fromJson(json);
+      return changePassModelRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+
 
 }

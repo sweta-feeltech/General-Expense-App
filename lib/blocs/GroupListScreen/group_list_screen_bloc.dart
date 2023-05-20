@@ -51,7 +51,20 @@ class GroupListScreenBloc
         }
       }
 
-
+      if (event is DeleteGroupEvent) {
+        late AddGroupModel addGroupModelDAta1;
+        try {
+          emit(GroupListScreenLoadingEventState(true));
+          addGroupModelDAta1 =
+          await repositoryRepo.delGroupData(id: event.id!);
+          emit(GroupListScreenLoadingEventState(false));
+          emit(DeleteGroupState(addGroupModelDAta1));
+        } catch (error, stacktrace) {
+          print("stacktrave: $stacktrace");
+          emit(GroupListScreenLoadingEventState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
+      }
 
 
 
