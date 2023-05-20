@@ -88,38 +88,179 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
       double main_Width = MediaQuery.of(context).size.width;
       double main_Height = MediaQuery.of(context).size.height;
 
-      return Scaffold(
+      return RefreshIndicator(
+        onRefresh: () async {
+        },
+        child: Scaffold(
 
-        appBar: AppBar(
-          titleSpacing: 15,
-          title: Text(
-            "${singleGroupViewModelData?[0].groupName}",
-            style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
+          backgroundColor: Colors.white,
+          // resizeToAvoidBottomInset: false,
+          appBar:AppBar(
+            // centerTitle: false,
+            titleSpacing: 0,
+            backgroundColor: primaryPurple,
+            elevation: 0,
+            leading:   IconButton(
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minHeight: 20, minWidth: 20),
+              onPressed: () {
+                // Navigator.of(context).pop();
+                // widget.backPressCallback.call();
+                Navigator.of(context).pop("refresh");
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+            ),
+            title:    Text("Group Members",
+              style:
+              TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
+
           ),
-          automaticallyImplyLeading: false,
-          backgroundColor: primaryPurple,
-          elevation: 0,
-          // centerTitle: true,
-        ),
 
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: main_Height * 0.07,
-                width: main_Width,
-                padding: EdgeInsets.symmetric(
-                ),
-                child: Text("Admin :${singleGroupViewModelData?[0].createdBy}"),
 
-              )
+          // bottomSheet: Container(
+          //   height: main_Height * 0.085,
+          //   width: main_Width * 1,
+          //   decoration: const BoxDecoration(color: Colors.white),
+          //   child: Padding(
+          //     padding:
+          //     EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
+          //     child: Container(
+          //       height: main_Height * 0.06,
+          //       width: main_Width * 0.75,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(10),
+          //       ),
+          //       child: ElevatedButton(
+          //         style: ElevatedButton.styleFrom(
+          //
+          //           shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(30),
+          //           ),
+          //           primary: primaryPurple,
+          //         ),
+          //         onPressed: () {},
+          //         child: Text("Update",
+          //           style: TextStyle(
+          //               letterSpacing: 1,
+          //               fontSize: main_Height * 0.018,
+          //               fontWeight: FontWeight.w500,
+          //               color: Colors.white),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
 
-            ],
+
+          body: SafeArea(
+            child: SingleChildScrollView(
+              // physics: BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+
+                  Container(
+                    decoration: BoxDecoration(
+                        color: primaryPurple,
+                        border: Border.all(
+                            width: 0,
+                            color: primaryPurple
+                        )
+                    ),
+                    height: main_Height * 0.010,
+                  ),
+                  Container(
+                    color: primaryPurple,
+                    child: Stack(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              decoration: const BoxDecoration(
+                                  color: primaryPurple
+                              ),
+                              height: main_Height * 0.045,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(width: 0,color: Colors.white),
+                                  color: Colors.white
+                              ),
+                              height: main_Height * 0.045,
+                            )
+                          ],
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: main_Width * 0.1,
+                            ),
+                            Container(
+                              padding:  EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                              ),
+                              child: Container(
+                                width: main_Height * 0.08,
+                                height: main_Height * 0.08,
+                                decoration: BoxDecoration(
+                                  color: primaryPurple,
+                                    borderRadius:
+                                    BorderRadius.circular(15)),
+                                child: Container(
+                                  width: main_Height * 0.08,
+                                  height:
+                                  main_Height * 0.08,
+                                child: Center(
+                                  child: Text(
+                                          "T",
+                                    // "${singleGroupViewModelData![0].groupName!.substring(0,1).toUpperCase()}",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: main_Width * 0.1
+                                    ),
+                                  ),
+                                ),
+                                ),
+                              ),
+                            )
+                          ],)
+
+                      ],
+                    ),
+                  ),
+
+                  Padding(padding: EdgeInsets.symmetric(
+                    horizontal: main_Width * 0.1,
+                    vertical: main_Height * 0.016
+                  ),
+                  child: Text("ABC",
+                  // child: Text("${singleGroupViewModelData?[0].groupName}",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: main_Width * 0.06,
+                    fontWeight: FontWeight.w400
+                  ),
+                  ),
+                  ),
+                  Divider(thickness: 2, height: 0,indent: 0, endIndent: 0,),
+
+
+                  SizedBox(
+                    height: main_Height * 0.085,
+                    width: main_Width * 1,
+                  )
+                ],
+              ),
+            ),
           ),
+
         ),
-
-
-    );
+      );
 
 
     }
