@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/blocs/SingleGroupViewScreen/single_group_member_screen_bloc.dart';
+import 'package:general_expense_app/models/GroupModel/group_link_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/models/GroupModel/single_group_view_model.dart';
 import 'package:share_plus/share_plus.dart';
@@ -26,6 +27,10 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
 
   List<GroupMembersModel>? groupMemberModelData;
 
+  GroupLinkModel? groupLinkModeldata;
+
+
+
   SingleGroupViewScreenBloc singleGroupViewScreenBloc =
   SingleGroupViewScreenBloc(Repository.getInstance());
 
@@ -38,6 +43,8 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
   void loadAllGroupdataScreenApiCalls() {
     singleGroupViewScreenBloc
         .add(FetchAllSingleGroupViewScreenAPIsEvent("${widget.id}"));
+    singleGroupViewScreenBloc.add(FetchAllSingleGroupLinkScreenAPIsEvent("${widget.id}"));
+
   }
 
   @override
@@ -61,10 +68,17 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
                 if (state is SingleGroupViewScreenLoadingEventState) {
                   return ThemeHelper.buildLoadingWidget();
                 }
-                if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
+                else  if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
                   groupMemberModelData = state.groupMemberModelData;
                   return mainViewAllCourseCatCourse();
-                } else {
+                }
+                else  if (state is FetchAllSingleGroupLinkScreenAPIsEventState) {
+                  groupLinkModeldata = state.groupLinkModeldata;
+
+                  return mainViewAllCourseCatCourse();
+                }
+
+                else {
                   return mainViewAllCourseCatCourse();
                 }
               },
@@ -107,8 +121,13 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
               IconButton(
                 icon: Icon(Icons.share),
                 onPressed: () {
+
+                  print("grplnk ${groupLinkModeldata?.link}");
+                  print("grplnk ${groupLinkModeldata}");
+
+
                   Share.share(
-                      "https://play.google.com/store/apps/details?id=com.easymba.app");
+                      "${groupLinkModeldata!.link}");
 
                 },
               ),

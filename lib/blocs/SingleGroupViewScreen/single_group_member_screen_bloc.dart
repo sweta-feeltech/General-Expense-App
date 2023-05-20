@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:general_expense_app/models/GroupModel/group_link_model.dart';
 import 'package:general_expense_app/models/GroupModel/single_group_view_model.dart';
 
 import '../../models/GroupModel/group_members_model.dart';
@@ -16,6 +17,8 @@ class SingleGroupViewScreenBloc
   SingleGroupViewScreenBloc(this.repositoryRepo)
       : super(SingleGroupViewScreenInitialState()) {
     on<SingleGroupViewScreenEvent>((event, emit) async {
+
+
       if (event is FetchAllSingleGroupViewScreenAPIsEvent) {
         late List<GroupMembersModel> getGroupMemberModelData;
 
@@ -31,6 +34,27 @@ class SingleGroupViewScreenBloc
           emit(ApiFailureState(Exception(error.toString())));
         }
       }
+
+
+      if (event is FetchAllSingleGroupLinkScreenAPIsEvent) {
+        GroupLinkModel? groupLinkModeldata;
+
+        try {
+          emit(SingleGroupViewScreenLoadingEventState(true));
+          groupLinkModeldata = await repositoryRepo.getPGroupLinkData(event.lnkQuery);
+          emit(SingleGroupViewScreenLoadingEventState(false));
+          emit(FetchAllSingleGroupLinkScreenAPIsEventState(
+              groupLinkModeldata));
+        } catch (error, stacktrace) {
+          print(stacktrace);
+          emit(SingleGroupViewScreenLoadingEventState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
+      }
+
+
+
+
     });
   }
 }

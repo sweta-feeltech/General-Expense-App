@@ -24,3 +24,11 @@ class FetchAllSingleGroupViewScreenAPIsEventState extends SingleGroupViewScreenS
 
   FetchAllSingleGroupViewScreenAPIsEventState(this.groupMemberModelData);
 }
+
+
+class FetchAllSingleGroupLinkScreenAPIsEventState extends SingleGroupViewScreenState {
+  GroupLinkModel? groupLinkModeldata;
+
+  FetchAllSingleGroupLinkScreenAPIsEventState(this.groupLinkModeldata);
+}
+
