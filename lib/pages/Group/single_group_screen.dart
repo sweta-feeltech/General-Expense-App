@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/blocs/SingleGroupViewScreen/single_group_member_screen_bloc.dart';
+import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/models/GroupModel/single_group_view_model.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../Utils/colors.dart';
 import '../../network/repository.dart';
+import '../Widgets/common_widgets.dart';
 import '../Widgets/theme_helper.dart';
 
 class SingleGroupViewScreen extends StatefulWidget {
@@ -21,7 +24,7 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
 
 
 
-  List<SingleGroupViewModel>? singleGroupViewModelData;
+  List<GroupMembersModel>? groupMemberModelData;
 
   SingleGroupViewScreenBloc singleGroupViewScreenBloc =
   SingleGroupViewScreenBloc(Repository.getInstance());
@@ -50,35 +53,35 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
 
     return Scaffold(
 
-          // body: BlocProvider<SingleGroupViewScreenBloc>(
-          //   create: (context) =>
-          //   singleGroupViewScreenBloc..add(SingleGroupViewScreenInitialEvent()),
-          //   child: BlocConsumer<SingleGroupViewScreenBloc, SingleGroupViewScreenState>(
-          //     builder: (context, state) {
-          //       if (state is SingleGroupViewScreenLoadingEventState) {
-          //         return ThemeHelper.buildLoadingWidget();
-          //       }
-          //       if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
-          //         singleGroupViewModelData = state.singleGroupViewModelData;
-          //         return mainViewAllCourseCatCourse();
-          //       } else {
-          //         return mainViewAllCourseCatCourse();
-          //       }
-          //     },
-          //     listener: (context, state) {
-          //       if (state is ApiFailureState) {
-          //         print(state.exception.toString());
-          //         ThemeHelper.customDialogForMessage(
-          //             context,
-          //             (state.exception.toString().replaceAll('Exception:', ''))
-          //                 .replaceAll(':', ''),
-          //             MediaQuery.of(context).size.width, () {
-          //           Navigator.of(context, rootNavigator: true).pop();
-          //         }, ForSuccess: false);
-          //       }
-          //     },
-          //   ),
-          // ),
+          body: BlocProvider<SingleGroupViewScreenBloc>(
+            create: (context) =>
+            singleGroupViewScreenBloc..add(SingleGroupViewScreenInitialEvent()),
+            child: BlocConsumer<SingleGroupViewScreenBloc, SingleGroupViewScreenState>(
+              builder: (context, state) {
+                if (state is SingleGroupViewScreenLoadingEventState) {
+                  return ThemeHelper.buildLoadingWidget();
+                }
+                if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
+                  groupMemberModelData = state.groupMemberModelData;
+                  return mainViewAllCourseCatCourse();
+                } else {
+                  return mainViewAllCourseCatCourse();
+                }
+              },
+              listener: (context, state) {
+                if (state is ApiFailureState) {
+                  print(state.exception.toString());
+                  ThemeHelper.customDialogForMessage(
+                      context,
+                      (state.exception.toString().replaceAll('Exception:', ''))
+                          .replaceAll(':', ''),
+                      MediaQuery.of(context).size.width, () {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }, ForSuccess: false);
+                }
+              },
+            ),
+          ),
 
     );
   }
@@ -100,6 +103,16 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
             titleSpacing: 0,
             backgroundColor: primaryPurple,
             elevation: 0,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () {
+                  Share.share(
+                      "https://play.google.com/store/apps/details?id=com.easymba.app");
+
+                },
+              ),
+            ],
             leading:   IconButton(
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(minHeight: 20, minWidth: 20),
@@ -153,109 +166,111 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
 
 
           body: SafeArea(
-            child: SingleChildScrollView(
-              // physics: BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
 
-                children: [
+              children: [
 
-                  Container(
-                    decoration: BoxDecoration(
-                        color: primaryPurple,
-                        border: Border.all(
-                            width: 0,
-                            color: primaryPurple
-                        )
-                    ),
-                    height: main_Height * 0.010,
+                Container(
+                  decoration: BoxDecoration(
+                      color: primaryPurple,
+                      border: Border.all(
+                          width: 0,
+                          color: primaryPurple
+                      )
                   ),
-                  Container(
-                    color: primaryPurple,
-                    child: Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              decoration: const BoxDecoration(
-                                  color: primaryPurple
-                              ),
-                              height: main_Height * 0.045,
+                  height: main_Height * 0.010,
+                ),
+                Container(
+                  color: primaryPurple,
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                                color: primaryPurple
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(width: 0,color: Colors.white),
-                                  color: Colors.white
-                              ),
-                              height: main_Height * 0.045,
-                            )
-                          ],
-                        ),
+                            height: main_Height * 0.045,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(width: 0,color: Colors.white),
+                                color: Colors.white
+                            ),
+                            height: main_Height * 0.045,
+                          )
+                        ],
+                      ),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: main_Width * 0.1,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: main_Width * 0.1,
+                          ),
+                          Container(
+                            padding:  EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
                             ),
-                            Container(
-                              padding:  EdgeInsets.all(3),
+                            child: Container(
+                              width: main_Height * 0.08,
+                              height: main_Height * 0.08,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                              ),
+                                  color: primaryPurple,
+                                  borderRadius:
+                                  BorderRadius.circular(15)),
                               child: Container(
                                 width: main_Height * 0.08,
-                                height: main_Height * 0.08,
-                                decoration: BoxDecoration(
-                                  color: primaryPurple,
-                                    borderRadius:
-                                    BorderRadius.circular(15)),
-                                child: Container(
-                                  width: main_Height * 0.08,
-                                  height:
-                                  main_Height * 0.08,
+                                height:
+                                main_Height * 0.08,
                                 child: Center(
                                   child: Text(
-                                          "T",
-                                    // "${singleGroupViewModelData![0].groupName!.substring(0,1).toUpperCase()}",
+                                    // "T",
+                                    "${groupMemberModelData?[0].groupName?.toUpperCase().substring(0,1)}",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: main_Width * 0.1
+                                        color: Colors.white,
+                                        fontSize: main_Width * 0.1
                                     ),
                                   ),
                                 ),
-                                ),
                               ),
-                            )
-                          ],)
+                            ),
+                          )
+                        ],)
 
-                      ],
-                    ),
+                    ],
                   ),
-
-                  Padding(padding: EdgeInsets.symmetric(
+                ),
+                Padding(padding: EdgeInsets.symmetric(
                     horizontal: main_Width * 0.1,
                     vertical: main_Height * 0.016
+                ),
+                  child: Text("${groupMemberModelData?[0].groupName}",
+                    // child: Text("${singleGroupViewModelData?[0].groupName}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: main_Width * 0.06,
+                        fontWeight: FontWeight.w400
+                    ),
                   ),
-                  child: Text("ABC",
-                  // child: Text("${singleGroupViewModelData?[0].groupName}",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: main_Width * 0.06,
-                    fontWeight: FontWeight.w400
-                  ),
-                  ),
-                  ),
-                  Divider(thickness: 2, height: 0,indent: 0, endIndent: 0,),
+                ),
+                Divider(thickness: 2, height: 0,indent: 0, endIndent: 0,),
 
 
-                  SizedBox(
-                    height: main_Height * 0.085,
-                    width: main_Width * 1,
-                  )
-                ],
-              ),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: groupMemberModelData?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CommonWidgets.CommonMemberListView(context,groupMembersModelData: groupMemberModelData![index]);
+
+                      }),
+                )
+
+
+              ],
             ),
           ),
 

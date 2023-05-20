@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
@@ -318,7 +319,6 @@ class CommonWidgets {
       {int? index,
         required GetGroupListModel getGroupListModel,
         required  VoidCallback? onPressed
-
       }
       ) {
     double main_Width = MediaQuery.of(context).size.width;
@@ -415,6 +415,98 @@ class CommonWidgets {
       ),
     );
   }
+
+
+  static Widget CommonMemberListView(BuildContext context, {
+    required GroupMembersModel groupMembersModelData,
+  }
+      ) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Padding(padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.03),
+      child: InkWell(
+        onTap: (){
+          Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+              builder: (context) => ItemScreen()));
+
+
+        },
+        child: Material(
+          elevation: 3,
+          borderRadius: BorderRadius.circular(7),
+          child: Container(
+            height: main_Height * 0.09,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+
+                Container(
+                  height: main_Width * 0.12,
+                  width: main_Width * 0.12,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFEFEFF1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text("${groupMembersModelData!.memberName!.toUpperCase().substring(0,1)}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: main_Width * 0.07
+                    ),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: main_Width * 0.03,horizontal: main_Width * 0.05),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("${groupMembersModelData!.memberName}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 0.06,
+                            fontWeight: FontWeight.w500,
+                            fontSize: main_Height * 0.018
+                        ),
+                      ),
+
+
+                      Text("${groupMembersModelData!.isGroupAdmin == true ? "Admin" : "Member"}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xFF959698),
+                            fontSize: main_Height * 0.015
+                        ),
+                      )
+
+
+
+
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
+
+          ),
+        ),
+      ),
+    ) ;
+  }
+
 
 
   static Widget CommonRoomList(BuildContext context,
