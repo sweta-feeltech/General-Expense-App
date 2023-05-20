@@ -232,13 +232,13 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
                             padding:  EdgeInsets.all(3),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.white,
+                              color: primaryOrange,
                             ),
                             child: Container(
                               width: main_Height * 0.08,
                               height: main_Height * 0.08,
                               decoration: BoxDecoration(
-                                  color: primaryPurple,
+                                  color: primaryOrange,
                                   borderRadius:
                                   BorderRadius.circular(15)),
                               child: Container(
