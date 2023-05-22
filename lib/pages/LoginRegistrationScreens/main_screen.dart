@@ -192,7 +192,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
 
                    ]
               ),
-              SizedBox(height: main_Height * 0.015,),
+              SizedBox(height: main_Height * 0.010,),
               Center(
                 child:Container(
                   height: main_Height * 0.085,
@@ -290,8 +290,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: main_Height * 0.065,),
-
+              SizedBox(height: main_Height * 0.045,),
               Center(child:
               Container(
                 child: Row(
