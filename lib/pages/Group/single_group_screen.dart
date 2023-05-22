@@ -1,10 +1,14 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/blocs/SingleGroupViewScreen/single_group_member_screen_bloc.dart';
 import 'package:general_expense_app/models/GroupModel/group_link_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/models/GroupModel/single_group_view_model.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:http/http.dart' as http;
 
 import '../../Utils/colors.dart';
 import '../../network/repository.dart';
@@ -114,34 +118,30 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
           // resizeToAvoidBottomInset: false,
           appBar:AppBar(
             // centerTitle: false,
-            titleSpacing: 0,
+            titleSpacing: 15,
+            automaticallyImplyLeading: false,
             backgroundColor: primaryPurple,
             elevation: 0,
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.share),
                 onPressed: () {
-
-                  print("grplnk ${groupLinkModeldata?.link}");
-                  print("grplnk ${groupLinkModeldata}");
-
-
                   Share.share(
                       "${groupLinkModeldata!.link}");
 
                 },
               ),
             ],
-            leading:   IconButton(
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minHeight: 20, minWidth: 20),
-              onPressed: () {
-                // Navigator.of(context).pop();
-                // widget.backPressCallback.call();
-                Navigator.of(context).pop("refresh");
-              },
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-            ),
+            // leading:   IconButton(
+            //   padding: EdgeInsets.zero,
+            //   constraints: const BoxConstraints(minHeight: 20, minWidth: 20),
+            //   onPressed: () {
+            //     // Navigator.of(context).pop();
+            //     // widget.backPressCallback.call();
+            //     Navigator.of(context).pop("refresh");
+            //   },
+            //   icon: const Icon(Icons.arrow_back, color: Colors.white),
+            // ),
             title:    Text("Group Members",
               style:
               TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
