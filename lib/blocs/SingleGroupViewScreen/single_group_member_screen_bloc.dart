@@ -48,22 +48,22 @@ class SingleGroupViewScreenBloc
         }
       }
 
-
-      if (event is FetchAllSingleGroupLinkScreenAPIsEvent) {
-        GroupLinkModel? groupLinkModeldata;
-
-        try {
-          emit(SingleGroupViewScreenLoadingEventState(true));
-          groupLinkModeldata = await repositoryRepo.getGroupLinkData(event.lnkQuery);
-          emit(SingleGroupViewScreenLoadingEventState(false));
-          emit(FetchAllSingleGroupLinkScreenAPIsEventState(
-              groupLinkModeldata));
-        } catch (error, stacktrace) {
-          print(stacktrace);
-          emit(SingleGroupViewScreenLoadingEventState(false));
-          emit(ApiFailureState(Exception(error.toString())));
-        }
-      }
+      //
+      // if (event is FetchAllSingleGroupLinkScreenAPIsEvent) {
+      //   GroupLinkModel? groupLinkModeldata;
+      //
+      //   try {
+      //     emit(SingleGroupViewScreenLoadingEventState(true));
+      //     groupLinkModeldata = await repositoryRepo.getGroupLinkData(event.lnkQuery);
+      //     emit(SingleGroupViewScreenLoadingEventState(false));
+      //     emit(FetchAllSingleGroupLinkScreenAPIsEventState(
+      //         groupLinkModeldata));
+      //   } catch (error, stacktrace) {
+      //     print(stacktrace);
+      //     emit(SingleGroupViewScreenLoadingEventState(false));
+      //     emit(ApiFailureState(Exception(error.toString())));
+      //   }
+      // }
 
 
 

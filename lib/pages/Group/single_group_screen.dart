@@ -27,7 +27,7 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
 
   List<GroupMembersModel>? groupMemberModelData;
 
-  GroupLinkModel? groupLinkModeldata;
+  // GroupLinkModel? groupLinkModeldata;
 
   SingleGroupViewScreenBloc singleGroupViewScreenBloc =
   SingleGroupViewScreenBloc(Repository.getInstance());
@@ -41,8 +41,9 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
   void loadAllGroupdataScreenApiCalls() {
     singleGroupViewScreenBloc
         .add(FetchAllSingleGroupViewScreenAPIsEvent("${widget.id}"));
-    singleGroupViewScreenBloc
-        .add(FetchAllSingleGroupLinkScreenAPIsEvent("${widget.id}"));
+    // singleGroupViewScreenBloc
+    //     .add(FetchAllSingleGroupLinkScreenAPIsEvent("${widget.id}"));
+
   }
 
   @override
@@ -62,22 +63,34 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
         child:
         BlocConsumer<SingleGroupViewScreenBloc, SingleGroupViewScreenState>(
           builder: (context, state) {
+
             if (state is SingleGroupViewScreenLoadingEventState) {
+
               return ThemeHelper.buildLoadingWidget();
-            } else if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
+            }
+            if (state is FetchAllSingleGroupViewScreenAPIsEventState) {
+              print("abcdsdd");
+
               groupMemberModelData = state.groupMembersModelData;
+
+
               return mainViewSingleGroup();
 
-
             }
-            else if (state is FetchAllSingleGroupLinkScreenAPIsEventState) {
-              groupLinkModeldata = state.groupLinkModeldata;
-
-              return mainViewSingleGroup();
-            }
+            //  if (state is FetchAllSingleGroupLinkScreenAPIsEventState) {
+            //
+            //   groupLinkModeldata = state.groupLinkModeldata;
+            //
+            //   return mainViewSingleGroup();
+            //
+            // }
 
             else {
-              return mainViewSingleGroup();
+
+
+
+               return Container();
+
             }
           },
           listener: (context, state) {
@@ -98,11 +111,12 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
   }
 
   Widget mainViewSingleGroup() {
+
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-    return RefreshIndicator(
-      onRefresh: () async {},
+
+    return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         // resizeToAvoidBottomInset: false,
@@ -116,7 +130,7 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
             IconButton(
               icon: Icon(Icons.share),
               onPressed: () {
-                Share.share("${groupLinkModeldata!.pin}");
+                Share.share("${groupMemberModelData?[0].groupPin}");
               },
             ),
           ],
@@ -128,137 +142,138 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
         ),
 
 
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: primaryPurple,
-                    border: Border.all(width: 0, color: primaryPurple)),
-                height: main_Height * 0.010,
-              ),
-              Container(
-                color: primaryPurple,
-                child: Stack(
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(color: primaryPurple),
-                          height: main_Height * 0.045,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(width: 0, color: Colors.white),
-                              color: Colors.white),
-                          height: main_Height * 0.045,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: main_Width * 0.03,
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                Share.share("${groupLinkModeldata!.pin}");
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    height: main_Width * 0.065,
-                                    width: main_Width * 0.065,
-                                    decoration: BoxDecoration(
-                                      color: primaryGrey,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.link,
-                                        color: primaryPurple,
-                                      ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: primaryPurple,
+                  border: Border.all(width: 0, color: primaryPurple)),
+              height: main_Height * 0.010,
+            ),
+            Container(
+              color: primaryPurple,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(color: primaryPurple),
+                        height: main_Height * 0.045,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 0, color: Colors.white),
+                            color: Colors.white),
+                        height: main_Height * 0.045,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: main_Width * 0.03,
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              Share.share("${groupMemberModelData?[0].groupPin}");
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  height: main_Width * 0.065,
+                                  width: main_Width * 0.065,
+                                  decoration: BoxDecoration(
+                                    color: primaryGrey,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.link,
+                                      color: primaryPurple,
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: main_Width * 0.012,
-                                  ),
-                                  Text(
-                                    "Invite Member via link",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: main_Width * 0.04),
-                                  )
-                                ],
-                              ),
+                                ),
+                                SizedBox(
+                                  width: main_Width * 0.012,
+                                ),
+                                Text(
+                                  "Invite Member via link",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: main_Width * 0.04),
+                                )
+                              ],
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: main_Width * 0.1,
                         ),
-                        Container(
-                          padding: EdgeInsets.all(3),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: main_Width * 0.1,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: primaryOrange,
+                        ),
+                        child: Container(
+                          width: main_Height * 0.08,
+                          height: main_Height * 0.08,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: primaryOrange,
-                          ),
+                              color: primaryOrange,
+                              borderRadius: BorderRadius.circular(15)),
                           child: Container(
                             width: main_Height * 0.08,
                             height: main_Height * 0.08,
-                            decoration: BoxDecoration(
-                                color: primaryOrange,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Container(
-                              width: main_Height * 0.08,
-                              height: main_Height * 0.08,
-                              alignment: Alignment.center,
-                              child: Text(
-                                "${groupMemberModelData?[0].groupName?.toUpperCase().substring(0, 1)}",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: main_Width * 0.07),
-                              ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "${groupMemberModelData?[0].groupName?.toUpperCase().substring(0, 1)}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: main_Width * 0.07),
                             ),
                           ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: main_Width * 0.1,
-                    vertical: main_Height * 0.016),
-                child: Text(
-                  "${groupMemberModelData?[0].groupName}",
-                  // child: Text("${singleGroupViewModelData?[0].groupName}",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: main_Width * 0.06,
-                      fontWeight: FontWeight.w400),
-                ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: main_Width * 0.1,
+                  vertical: main_Height * 0.016),
+              child: Text(
+                "${groupMemberModelData?[0].groupName}",
+                // child: Text("${singleGroupViewModelData?[0].groupName}",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: main_Width * 0.06,
+                    fontWeight: FontWeight.w400),
               ),
-              Divider(
-                thickness: 2,
-                height: 0,
-                indent: 0,
-                endIndent: 0,
-              ),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: groupMemberModelData?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CommonWidgets.CommonMemberListView(context,
-                          groupMembersModelData: groupMemberModelData![index]);
-                    }),
-              )
-            ],
-          ),
+            ),
+            Divider(
+              thickness: 2,
+              height: 0,
+              indent: 0,
+              endIndent: 0,
+            ),
+
+            Expanded(
+              child: ListView.builder(
+                  itemCount: groupMemberModelData?.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CommonWidgets.CommonMemberListView(context,
+                        groupMembersModelData: groupMemberModelData![index]);
+                  }),
+            )
+
+
+          ],
         ),
       ),
     );

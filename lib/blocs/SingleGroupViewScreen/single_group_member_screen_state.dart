@@ -22,11 +22,11 @@ class FetchAllSingleGroupViewScreenAPIsEventState extends SingleGroupViewScreenS
 }
 
 
-class FetchAllSingleGroupLinkScreenAPIsEventState extends SingleGroupViewScreenState {
-  GroupLinkModel? groupLinkModeldata;
-
-  FetchAllSingleGroupLinkScreenAPIsEventState(this.groupLinkModeldata);
-}
+// class FetchAllSingleGroupLinkScreenAPIsEventState extends SingleGroupViewScreenState {
+//   GroupLinkModel? groupLinkModeldata;
+//
+//   FetchAllSingleGroupLinkScreenAPIsEventState(this.groupLinkModeldata);
+// }
 
 
 class ApiFailureState extends SingleGroupViewScreenState {

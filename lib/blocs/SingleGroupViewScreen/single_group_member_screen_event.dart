@@ -13,11 +13,11 @@ class FetchAllSingleGroupViewScreenAPIsEvent implements SingleGroupViewScreenEve
 
 }
 
-
-class FetchAllSingleGroupLinkScreenAPIsEvent implements SingleGroupViewScreenEvent {
-
-  final String lnkQuery;
-
-  FetchAllSingleGroupLinkScreenAPIsEvent(this.lnkQuery);
-
-}
+//
+// class FetchAllSingleGroupLinkScreenAPIsEvent implements SingleGroupViewScreenEvent {
+//
+//   final String lnkQuery;
+//
+//   FetchAllSingleGroupLinkScreenAPIsEvent(this.lnkQuery);
+//
+// }
