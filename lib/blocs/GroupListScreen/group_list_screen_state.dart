@@ -11,11 +11,12 @@ class GroupListScreenLoadingEventState extends GroupListScreenState {
   GroupListScreenLoadingEventState(this.showProgress);
 }
 
-class ApiFailureState extends GroupListScreenState {
+class APIFailureState extends GroupListScreenState {
   final Exception exception;
 
-  ApiFailureState(this.exception);
+  APIFailureState(this.exception);
 }
+
 
 class FetchAllGroupListScreenAPIsEventState extends GroupListScreenState {
   final List<GetGroupListModel> getGroupListModelData;
@@ -23,16 +24,20 @@ class FetchAllGroupListScreenAPIsEventState extends GroupListScreenState {
   FetchAllGroupListScreenAPIsEventState(this.getGroupListModelData);
 }
 
-
 class PostCreateGroupEventState extends GroupListScreenState {
   final AddGroupModel addGroupModelData;
 
   PostCreateGroupEventState(this.addGroupModelData);
 }
 
-class DeleteGroupState extends GroupListScreenState{
+class PostJoinGroupEventState extends GroupListScreenState {
+  final AddGroupModel addGroupModelData;
+
+  PostJoinGroupEventState(this.addGroupModelData);
+}
+
+class DeleteGroupState extends GroupListScreenState {
   AddGroupModel addGroupModelData1;
 
   DeleteGroupState(this.addGroupModelData1);
 }
-

@@ -15,6 +15,13 @@ class PostCreateGroupEvent extends GroupListScreenEvent {
   PostCreateGroupEvent(this.GroupName, this.Description);
 }
 
+class PostJoinGroupEvent extends GroupListScreenEvent {
+  final String pin;
+  final String MemberId;
+
+  PostJoinGroupEvent(this.pin, this.MemberId);
+}
+
 
 class DeleteGroupEvent extends GroupListScreenEvent{
   final String? id;

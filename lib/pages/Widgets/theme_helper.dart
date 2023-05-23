@@ -847,6 +847,17 @@ class ThemeHelper {
 
 
 
+  static void showToastMessage(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      textColor: Colors.white,
+    );
+  }
+
+
+
   static void addGroupDialogBox(
       {
         required BuildContext context,

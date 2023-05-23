@@ -20,29 +20,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       key: _scaffoldKey,
-
       backgroundColor: primaryGrey,
       appBar: AppBar(
-          title: Text(
-            "Home",
-            style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
-          ),
+        title: Text(
+          "Home",
+          style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications_none_outlined,
-            color: Colors.black,),
+            icon: Icon(
+              Icons.notifications_none_outlined,
+              color: Colors.black,
+            ),
             onPressed: () {
               // Add your onPressed logic here
               ///for notification
@@ -50,29 +48,27 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         leading: IconButton(
-          icon: Icon(Icons.menu,
-          color: Colors.black,),
+          icon: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
-          titleSpacing: 0,
+        titleSpacing: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
         elevation: 0,
         backgroundColor: primaryGrey,
       ),
-
       drawer: Drawer(
         width: main_Width * 0.6,
         child: NavDrawer(),
       ),
-
-      body:SingleChildScrollView(
-        child:
-        Column(
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-
             // Padding(
             //   padding: EdgeInsets.symmetric(horizontal: main_Height * 0.02),
             //   child: Row(
@@ -110,157 +106,102 @@ class _HomeScreenState extends State<HomeScreen> {
             //   ),
             // ),
 
-            Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Stack(
                 children: [
-
                   Container(
-                        height: main_Height * 0.21,
-                    child: SvgPicture.asset("assets/images/Card1.svg",
+                    height: main_Height * 0.21,
+                    width: main_Width,
+                    child: SvgPicture.asset(
+                      "assets/images/Card1.svg",
                       clipBehavior: Clip.antiAlias,
                       fit: BoxFit.fill,
                     ),
                   ),
-
-
                   Container(
                     height: main_Height * 0.2,
                     padding: EdgeInsets.symmetric(
-                      vertical: main_Height * 0.018,
-                      horizontal:  main_Height * 0.023
-                    ),
+                        vertical: main_Height * 0.018,
+                        horizontal: main_Height * 0.023),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Total Balance",
+                                Text(
+                                  "Total Balance",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Color(0xFFCED6EC),
                                     fontSize: main_Height * 0.018,
                                   ),
                                 ),
-
-                                Text("\$4,680.00 ",
+                                Text(
+                                  "\$4,680.00 ",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: main_Height * 0.028,
                                   ),
                                 ),
-
-
-
                               ],
                             ),
-
                             InkWell(
-                              onTap: (){
-
-                                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                                    builder: (context) => AddGroupScreen()));
-
+                              onTap: () {
+                                Navigator.of(context, rootNavigator: true).push(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AddGroupScreen()));
                               },
                               child: Container(
                                   height: main_Height * 0.027,
                                   width: main_Height * 0.027,
-                                  child: SvgPicture.asset("assets/images/dot.svg")),
+                                  child: SvgPicture.asset(
+                                      "assets/images/dot.svg")),
                             )
-
                           ],
                         ),
-
                         SizedBox(
                           height: main_Height * 0.04,
                         ),
-
                         Container(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  InkWell(
-                                    onTap : (){
-                                      Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                                          builder: (context) => GroupListScreen()));
-                                    },
-                                    child: Container(
-                                      child: SvgPicture.asset("assets/images/down.svg",
-                                        clipBehavior: Clip.antiAlias,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-
-                                  SizedBox(
-                                    width: main_Width * 0.02,
-                                  ),
-
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Income",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          color: Color(0xFFCED6EC),
-                                          fontSize: main_Height * 0.014,
-                                        ),
-                                      ),
-
-                                      Text("\$3,500.00",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: main_Height * 0.018
-                                        ),
-                                      ),
-
-                                    ],),
-
-                                ],
-                              ),
-                            ),
-
-
                               Expanded(
                                 child: Row(
                                   children: [
-
                                     InkWell(
-                                      onTap : (){
-                                        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-                                            builder: (context) => AddGroupScreen()));
-
+                                      onTap: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    GroupListScreen()));
                                       },
                                       child: Container(
-                                        child: SvgPicture.asset("assets/images/up.svg",
+                                        child: SvgPicture.asset(
+                                          "assets/images/down.svg",
                                           clipBehavior: Clip.antiAlias,
                                           fit: BoxFit.fill,
                                         ),
                                       ),
                                     ),
-
                                     SizedBox(
-                                      width: main_Width * 0.03,
+                                      width: main_Width * 0.02,
                                     ),
-
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text("Expense",
+                                        Text(
+                                          "Income",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
@@ -268,67 +209,106 @@ class _HomeScreenState extends State<HomeScreen> {
                                             fontSize: main_Height * 0.014,
                                           ),
                                         ),
-
-                                        Text("\$12,300.00",
+                                        Text(
+                                          "\$3,500.00",
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: main_Height * 0.018
+                                              fontSize: main_Height * 0.018),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddGroupScreen()));
+                                      },
+                                      child: Container(
+                                        child: SvgPicture.asset(
+                                          "assets/images/up.svg",
+                                          clipBehavior: Clip.antiAlias,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: main_Width * 0.03,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Expense",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Color(0xFFCED6EC),
+                                            fontSize: main_Height * 0.014,
                                           ),
                                         ),
-
-                                      ],),
-
+                                        Text(
+                                          "\$12,300.00",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: main_Height * 0.018),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               )
                             ],
                           ),
                         ),
-
                       ],
                     ),
                   ),
-
-
                 ],
               ),
             ),
-
 
             ///
             /// Heading
             ///
 
-
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                Text("Last Added",
-                  style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: main_Height * 0.018,
-                      fontWeight: FontWeight.w500
+                  Text(
+                    "Last Added",
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.018,
+                        fontWeight: FontWeight.w500),
                   ),
-                ),
-
-                Text("See All",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.black,
-                      letterSpacing: 1,
-                      fontSize: main_Height * 0.016,
-                      fontWeight: FontWeight.w200
-                  ),
-                )
-              ],),
+                  Text(
+                    "See All",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Colors.black,
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.016,
+                        fontWeight: FontWeight.w200),
+                  )
+                ],
+              ),
             ),
-
-
 
             ListView.builder(
                 itemCount: 7,
@@ -336,10 +316,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index) {
-                  return   CommonWidgets.CommonListView(context);
+                  return CommonWidgets.CommonListView(context);
                 })
-
-
           ],
         ),
       ),

@@ -1,15 +1,15 @@
 class GroupLinkModel {
-  String? link;
+  String? pin;
 
-  GroupLinkModel({this.link});
+  GroupLinkModel({this.pin});
 
   GroupLinkModel.fromJson(Map<String, dynamic> json) {
-    link = json['link'];
+    pin = json['pin'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['link'] = this.link;
+    data['pin'] = this.pin;
     return data;
   }
 }

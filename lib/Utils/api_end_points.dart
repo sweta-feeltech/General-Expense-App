@@ -1,14 +1,14 @@
 /// ~~~~~~~~~~~~~~~BASE URL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ///
-// String BASEURL = "http://192.168.29.253:6969/$apiPreFix";
+String BASEURL = "http://192.168.29.253:6969/$apiPreFix";
 
-String BASEURL = "https://trackventory.teamfeeltech.com/$apiPreFix";
+// String BASEURL = "https://trackventory.teamfeeltech.com/$apiPreFix";
 //
 ///
 /// ~~~~~~~~~~~~~~~BASE IMAGE URL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ///
-String BASEIMAGEURL = "https://trackventory.teamfeeltech.com/";
-// String BASEIMAGEURL = "http://192.168.29.253:6969/";
+// String BASEIMAGEURL = "https://trackventory.teamfeeltech.com/";
+String BASEIMAGEURL = "http://192.168.29.253:6969/";
 
 ////// PREFIX OF DOMAIN
 ///
@@ -28,13 +28,12 @@ String getProfileApiEnd = "User/profile";
 ///
 String updateProfileApiEnd = "user/update-profile";
 
-
 ///
 /// ------------------SPLASH GET API----------------------
 ///
 String SplashScreenAPIEnd = "User/profile";
-///
 
+///
 
 /// Group's End Points
 
@@ -42,39 +41,53 @@ String SplashScreenAPIEnd = "User/profile";
 /// ------------------CREATE-GROUP POST API----------------------
 ///
 String createGroupAPIEnd = "Group";
+
 ///
 
 ///
 /// ------------------GROUP-LIST GET API----------------------
 ///
 String getGroupListAPIEnd = "Group";
+
 ///
 ///
 /// /// ------------------GROUP-MEMBER-LIST GET API----------------------
 ///
 String getGroupMemberListAPIEnd = "GroupMember";
+
 ///
+
+///
+///
+/// /// ------------------GROUP-MEMBER-LIST GET API----------------------
+///
+String addGroupMemberAPIEndPost = "GroupMember";
+
+
 
 ///
 /// ------------------DELETE-LIST GET API----------------------
 ///
 String deleteGroupListAPIEnd = "Group";
+
 ///
 
 /// ------------------GROUP-LINK----------------------
 ///
-String getGroupLinkAPIEnd = "Group/getlink";
-///
+String getGroupLinkAPIEnd = "Group/getpin";
 
+///
 
 ///
 ////
 /// ------------------GROUP-LIST GET API----------------------
 ///
 String getGroupbyIdAPIEnd = "Group/getby";
+
 ///
 ///
 /// /// ------------------INCOME-LIST GET API----------------------
 ///
 String getIncomeListAPIEnd = "Income";
+
 ///

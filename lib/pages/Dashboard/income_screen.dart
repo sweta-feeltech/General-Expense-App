@@ -64,9 +64,11 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
 
           builder: (context, state) {
             if(state is IncomeListScreenLoadingEventState) {
+
               return ThemeHelper.buildLoadingWidget();
             }
             else if(state is FetchAllIncomeListScreenAPIsEventState) {
+
               getIncomeListModelData = state.getIncomeListModelData;
 
 

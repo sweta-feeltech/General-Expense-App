@@ -16,18 +16,31 @@ class SingleGroupViewScreenBloc
 
   SingleGroupViewScreenBloc(this.repositoryRepo)
       : super(SingleGroupViewScreenInitialState()) {
+
     on<SingleGroupViewScreenEvent>((event, emit) async {
 
 
       if (event is FetchAllSingleGroupViewScreenAPIsEvent) {
-        late List<GroupMembersModel> getGroupMemberModelData;
+
+        late List<GroupMembersModel> groupMembersModelData;
 
         try {
+          print("ldst1");
+
           emit(SingleGroupViewScreenLoadingEventState(true));
-          getGroupMemberModelData = await repositoryRepo.getGroupMemberList(event.grpQuery);
+          print("ldst2");
+
+          groupMembersModelData = await repositoryRepo.getGroupMemberList(event.grpQuery);
+
+
+          print("ldst3");
+
           emit(SingleGroupViewScreenLoadingEventState(false));
+          print("ldst4");
           emit(FetchAllSingleGroupViewScreenAPIsEventState(
-              getGroupMemberModelData));
+              groupMembersModelData));
+          print("ldst5");
+
         } catch (error, stacktrace) {
           print(stacktrace);
           emit(SingleGroupViewScreenLoadingEventState(false));
@@ -41,7 +54,7 @@ class SingleGroupViewScreenBloc
 
         try {
           emit(SingleGroupViewScreenLoadingEventState(true));
-          groupLinkModeldata = await repositoryRepo.getPGroupLinkData(event.lnkQuery);
+          groupLinkModeldata = await repositoryRepo.getGroupLinkData(event.lnkQuery);
           emit(SingleGroupViewScreenLoadingEventState(false));
           emit(FetchAllSingleGroupLinkScreenAPIsEventState(
               groupLinkModeldata));

@@ -5,7 +5,6 @@ import 'package:general_expense_app/models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
 import '../../network/repository.dart';
 
-
 part 'group_list_screen_event.dart';
 part 'group_list_screen_state.dart';
 
@@ -25,29 +24,39 @@ class GroupListScreenBloc
           emit(GroupListScreenLoadingEventState(true));
           getGroupListModelData = await repositoryRepo.getGroupModelData();
           emit(GroupListScreenLoadingEventState(false));
-          emit(FetchAllGroupListScreenAPIsEventState(
-              getGroupListModelData));
+          emit(FetchAllGroupListScreenAPIsEventState(getGroupListModelData));
         } catch (error, stacktrace) {
           print(stacktrace);
           emit(GroupListScreenLoadingEventState(false));
-          emit(ApiFailureState(Exception(error.toString())));
+          emit(APIFailureState(Exception(error.toString())));
         }
-
       }
-
-
 
       if (event is PostCreateGroupEvent) {
         late AddGroupModel addGroupModelData;
 
         try {
-          addGroupModelData =
-          await repositoryRepo.createGroupPostAPI({"GroupName": event.GroupName,"Description": event.Description});
+          addGroupModelData = await repositoryRepo.createGroupPostAPI(
+              {"GroupName": event.GroupName, "Description": event.Description});
 
           emit(PostCreateGroupEventState(addGroupModelData));
         } catch (error) {
           emit(GroupListScreenLoadingEventState(false));
-          emit(ApiFailureState(Exception(error.toString())));
+          emit(APIFailureState(Exception(error.toString())));
+        }
+      }
+
+      if (event is PostJoinGroupEvent) {
+        late AddGroupModel addGroupModelData;
+
+        try {
+          addGroupModelData = await repositoryRepo
+              .joinGroupPostAPI({"pin": event.pin, "MemberId": event.MemberId});
+
+          emit(PostJoinGroupEventState(addGroupModelData));
+        } catch (error) {
+          emit(GroupListScreenLoadingEventState(false));
+          emit(APIFailureState(Exception(error.toString())));
         }
       }
 
@@ -55,20 +64,15 @@ class GroupListScreenBloc
         late AddGroupModel addGroupModelDAta1;
         try {
           emit(GroupListScreenLoadingEventState(true));
-          addGroupModelDAta1 =
-          await repositoryRepo.delGroupData(id: event.id!);
+          addGroupModelDAta1 = await repositoryRepo.delGroupData(id: event.id!);
           emit(GroupListScreenLoadingEventState(false));
           emit(DeleteGroupState(addGroupModelDAta1));
         } catch (error, stacktrace) {
           print("stacktrave: $stacktrace");
           emit(GroupListScreenLoadingEventState(false));
-          emit(ApiFailureState(Exception(error.toString())));
+          emit(APIFailureState(Exception(error.toString())));
         }
       }
-
-
-
-
     });
   }
 }

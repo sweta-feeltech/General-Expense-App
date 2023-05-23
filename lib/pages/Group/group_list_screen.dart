@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/Utils/constants.dart';
 import 'package:general_expense_app/models/GroupModel/group_list_model.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../Utils/colors.dart';
 import '../../blocs/GroupListScreen/group_list_screen_bloc.dart';
@@ -10,9 +14,7 @@ import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 import '../Widgets/common_widgets.dart';
 
-
 class GroupListScreen extends StatefulWidget {
-
   static String routeName = '/GroupListScreen';
 
   const GroupListScreen({Key? key}) : super(key: key);
@@ -22,24 +24,18 @@ class GroupListScreen extends StatefulWidget {
 }
 
 class _GroupListScreenState extends State<GroupListScreen> {
-
-
-  GroupListScreenBloc groupListScreenBloc = GroupListScreenBloc(Repository.getInstance());
+  GroupListScreenBloc groupListScreenBloc =
+      GroupListScreenBloc(Repository.getInstance());
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-
 
   List<GetGroupListModel>? getGroupListModelData;
 
   AddGroupModel? addGroupModelData;
   AddGroupModel? addGroupModelData1;
 
-
   String? GroupName;
   String? Description;
-
-
 
   @override
   void initState() {
@@ -52,82 +48,68 @@ class _GroupListScreenState extends State<GroupListScreen> {
     groupListScreenBloc.add(FetchAllGroupListScreenAPIsEvent());
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-
-
-
-
     return BlocProvider<GroupListScreenBloc>(
-        create: (context) => groupListScreenBloc..add(GroupListScreenInitialEvent()),
-
+        create: (context) =>
+            groupListScreenBloc..add(GroupListScreenInitialEvent()),
         child: BlocConsumer<GroupListScreenBloc, GroupListScreenState>(
-
           builder: (context, state) {
-            if(state is GroupListScreenLoadingEventState) {
+            if (state is GroupListScreenLoadingEventState) {
               return ThemeHelper.buildLoadingWidget();
-            }
-            else if(state is FetchAllGroupListScreenAPIsEventState) {
+            } else if (state is FetchAllGroupListScreenAPIsEventState) {
               getGroupListModelData = state.getGroupListModelData;
 
-
               return mainViewAllScreenViewWidget();
-            }
-            else if (state is PostCreateGroupEventState) {
-
+            } else if (state is PostCreateGroupEventState) {
               addGroupModelData = state.addGroupModelData;
 
               loadAllGroupListScreenApiCalls();
 
               return mainViewAllScreenViewWidget();
+            } else if (state is PostJoinGroupEventState) {
+              addGroupModelData = state.addGroupModelData;
 
-            } else if (state is DeleteGroupState) {
-
-              addGroupModelData1 = state.addGroupModelData1;
-
-
+              loadAllGroupListScreenApiCalls();
 
               return mainViewAllScreenViewWidget();
-            }
-
-            else {
+            } else if (state is DeleteGroupState) {
+              addGroupModelData1 = state.addGroupModelData1;
+              loadAllGroupListScreenApiCalls();
+              return mainViewAllScreenViewWidget();
+            } else {
               return Container();
             }
           },
-
           listener: (context, state) {
-            if(state is ApiFailureState) {
-              print(state.exception.toString());
-              ThemeHelper.customDialogForMessage(context, (state.exception.toString().replaceAll('Exception:', '')).replaceAll(':',''), MediaQuery.of(context).size.width,
-                      () {
-                    Navigator.of(context, rootNavigator: true).pop();
-                  },
-                  ForSuccess: false
-              );
+            if (state is APIFailureState) {
+
+              ThemeHelper.customDialogForMessage(
+                  context,
+                  (state.exception.toString().replaceAll('Exception:', ''))
+                      .replaceAll(':', ''),
+                  MediaQuery.of(context).size.width, () {
+
+                Navigator.of(context).pop();
+                loadAllGroupListScreenApiCalls();
+              }, ForSuccess: false);
+
+
 
             }
           },
-        )
-    );
+        ));
   }
 
-
-  Widget mainViewAllScreenViewWidget(){
+  Widget mainViewAllScreenViewWidget() {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-
     return Scaffold(
-
       backgroundColor: primaryGrey,
-
       appBar: AppBar(
         titleSpacing: 15,
         title: Text(
@@ -139,37 +121,39 @@ class _GroupListScreenState extends State<GroupListScreen> {
         elevation: 0,
         // centerTitle: true,
       ),
-
-
-
-
       body: RefreshIndicator(
-        onRefresh: () async{
+        onRefresh: () async {
           loadAllGroupListScreenApiCalls();
         },
         child: Column(
           children: [
-
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+              padding: EdgeInsets.symmetric(
+                  horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("My Groups",
+                  Text(
+                    "My Groups",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         letterSpacing: 1,
                         fontSize: main_Height * 0.021,
-                        fontWeight: FontWeight.w500
-                    ),
+                        fontWeight: FontWeight.w500),
                   ),
-
                   InkWell(
-                    onTap: (){
+                    onTap: () {
+                      final RenderBox appBarRenderBox =
+                          context.findRenderObject() as RenderBox;
+                      final Offset appBarOffset =
+                          appBarRenderBox.localToGlobal(Offset.zero);
+                      final Size appBarSize = appBarRenderBox.size;
 
-                      _displayTextInputDialog(context);
+                      _showPopupMenu(context, appBarOffset, appBarSize);
 
+                      // _displayTextInputDialog(context);
+                      ///
                       // showDialog(
                       //     context: context,
                       //     builder: (context) {
@@ -344,23 +328,19 @@ class _GroupListScreenState extends State<GroupListScreen> {
                       //       );
                       //     }
                       // );
-
                     },
                     child: Container(
                       height: main_Height * 0.05,
                       width: main_Height * 0.05,
-                      child: SvgPicture.asset("assets/images/add.svg",
-                        fit: BoxFit.fill,),
+                      child: SvgPicture.asset(
+                        "assets/images/add.svg",
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   )
-
-
                 ],
               ),
             ),
-
-
-
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
@@ -368,49 +348,33 @@ class _GroupListScreenState extends State<GroupListScreen> {
                   crossAxisCount: 2,
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  childAspectRatio: 5/5,
+                  childAspectRatio: 5 / 5,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   children: List.generate(
-                      int.parse("${getGroupListModelData?.length}"),
-                          (index) {
-                        return CommonWidgets.CommonGroupList2(context,index: index,
-                        getGroupListModel: getGroupListModelData![index],onPressed: (){
-
-                              groupListScreenBloc.add(DeleteGroupEvent("${getGroupListModelData![index].id}"));
-
-                            }
-
-
-                        );
-                      }
-                  ),
+                      int.parse("${getGroupListModelData?.length}"), (index) {
+                    return CommonWidgets.CommonGroupList2(context,
+                        index: index,
+                        getGroupListModel: getGroupListModelData![index],
+                        onPressed: () {
+                      groupListScreenBloc.add(DeleteGroupEvent(
+                          "${getGroupListModelData![index].id}"));
+                    });
+                  }),
                 ),
               ),
             ),
-
-
-
           ],
         ),
       ),
-
-
-
-
     );
-
   }
 
-
   Future<void> _displayTextInputDialog(BuildContext context) async {
-
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
     final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
 
     return showDialog(
         context: context,
@@ -418,72 +382,63 @@ class _GroupListScreenState extends State<GroupListScreen> {
           return Form(
             key: _formkey,
             child: AlertDialog(
-              title: Text('Add a Group',
-              style: TextStyle(
-
-              ),
+              title: Text(
+                'Add a Group',
+                style: TextStyle(),
               ),
               content: Container(
                 height: main_Height * 0.12,
                 width: main_Width * 0.08,
-                child: Column(
-                  children: [
-
-                    TextFormField(
-                        onSaved: (onSavedVal) {
-                          GroupName = onSavedVal;
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Group Name can\'t be empty';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          isDense: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                          hintText: "Enter a Group name",
-                          hintStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: darkGrey,
-                              fontSize: main_Height * 0.018),
-                        ),
-                        textInputAction: TextInputAction.next
-                    ),
-
-                    SizedBox(
-                      height: main_Height * 0.01,
-                    ),
-                    TextFormField(
-                        onSaved: (onSavedVal) {
-                          Description = onSavedVal;
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Description Name can\'t be empty';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          isDense: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                          hintText: "Enter a Description name",
-                          hintStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              color: darkGrey,
-                              fontSize: main_Height * 0.018),
-                        ),
-                        textInputAction: TextInputAction.next
-                    ),
-
-
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                          onSaved: (onSavedVal) {
+                            GroupName = onSavedVal;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Group Name can\'t be empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            isDense: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            hintText: "Enter a Group name",
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                color: darkGrey,
+                                fontSize: main_Height * 0.018),
+                          ),
+                          textInputAction: TextInputAction.next),
+                      SizedBox(
+                        height: main_Height * 0.01,
+                      ),
+                      TextFormField(
+                          onSaved: (onSavedVal) {
+                            Description = onSavedVal;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Description Name can\'t be empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            isDense: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            hintText: "Enter a Description name",
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                color: darkGrey,
+                                fontSize: main_Height * 0.018),
+                          ),
+                          textInputAction: TextInputAction.next),
+                    ],
+                  ),
                 ),
               ),
-
-
               actions: <Widget>[
                 SizedBox(
                   width: main_Width * 0.2,
@@ -492,38 +447,45 @@ class _GroupListScreenState extends State<GroupListScreen> {
                         Navigator.pop(context);
                       },
                       style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
-                      ),
-                      child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
-                  ),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(color: primaryPurple)))),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          color: primaryPurple,
+                          fontSize: main_Height * 0.01872,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      )),
                 ),
-
                 SizedBox(
                   width: main_Width * 0.2,
                   child: TextButton(
                       style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
-                          backgroundColor: MaterialStateProperty.all(primaryPurple)
-                      ),
-                      onPressed: (){
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(color: primaryPurple))),
+                          backgroundColor:
+                              MaterialStateProperty.all(primaryPurple)),
+                      onPressed: () {
                         if (_formkey.currentState!.validate()) {
                           _formkey.currentState!.save();
-                          groupListScreenBloc
-                              .add(PostCreateGroupEvent(GroupName!, Description!));
+                          groupListScreenBloc.add(
+                              PostCreateGroupEvent(GroupName!, Description!));
                         }
-
                         Navigator.of(context).pop();
-
                       },
-                      child: Text("Add",
+                      child: Text(
+                        "Add",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: main_Height * 0.01872,
                             color: Colors.white,
-                            fontWeight: FontWeight.w500
-                        ),
-                      )
-                  ),
+                            fontWeight: FontWeight.w500),
+                      )),
                 ),
               ],
             ),
@@ -531,5 +493,184 @@ class _GroupListScreenState extends State<GroupListScreen> {
         });
   }
 
+  Future<void> _displayTextInputDialog2forpin(BuildContext context) async {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
 
+    final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+    bool? isOtpfieldEmpty;
+    String? smsCode;
+
+    final defaultPinTheme = PinTheme(
+      width: main_Width * 0.15,
+      height: main_Height * 0.07,
+      textStyle: TextStyle(
+          fontSize: main_Height * 0.0237,
+          color: Color.fromRGBO(30, 60, 87, 1),
+          fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+
+    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+      borderRadius: BorderRadius.circular(8),
+    );
+
+    final submittedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration?.copyWith(
+        color: Color.fromRGBO(234, 239, 243, 1),
+      ),
+    );
+
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Form(
+            key: _formkey,
+            child: AlertDialog(
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+              title: Text(
+                'Pin put here to Join group',
+                style: TextStyle(),
+              ),
+              content: Container(
+                height: main_Height * 0.08,
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: Pinput(
+                      onChanged: (pin) {
+                        setState(() {
+                          smsCode = pin;
+                          isOtpfieldEmpty = false;
+                        });
+                      },
+                      forceErrorState: isOtpfieldEmpty == true ? true : false,
+                      onCompleted: (pin) {
+                        print("complete: $pin");
+                        setState(() {
+                          smsCode = pin;
+                          isOtpfieldEmpty = false;
+                        });
+                      },
+                      focusedPinTheme: focusedPinTheme,
+                      submittedPinTheme: submittedPinTheme,
+                      showCursor: true,
+                      length: 6,
+                      keyboardType: TextInputType.number,
+                    ))
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                SizedBox(
+                  width: main_Width * 0.2,
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(color: primaryPurple)))),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          color: primaryPurple,
+                          fontSize: main_Height * 0.01872,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                ),
+                SizedBox(
+                  width: main_Width * 0.2,
+                  child: TextButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(color: primaryPurple))),
+                          backgroundColor:
+                              MaterialStateProperty.all(primaryPurple)),
+                      onPressed: () {
+                        if (_formkey.currentState!.validate()) {
+                          _formkey.currentState!.save();
+
+                          print("datafor join ${smsCode} ${appUserData!.id}");
+                          groupListScreenBloc.add(PostJoinGroupEvent(
+                              smsCode!, "${appUserData!.id}"));
+                        }
+
+                        print("ssss${smsCode}");
+
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "Join",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: main_Height * 0.01872,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      )),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  void _showPopupMenu(
+      BuildContext context, Offset appBarOffset, Size appBarSize) {
+    final popupPosition = RelativeRect.fromLTRB(
+      appBarOffset.dx + appBarSize.width - 10,
+      appBarOffset.dy - appBarSize.height - 10,
+      appBarOffset.dx + appBarSize.width + 10,
+      appBarOffset.dy - 10,
+    );
+
+    showMenu(
+      context: context,
+      position: popupPosition,
+      items: [
+        PopupMenuItem(
+          child: Text('Create Group'),
+          value: '1',
+          onTap: () {},
+        ),
+        PopupMenuItem(
+          child: Text('Join Group'),
+          value: '2',
+          onTap: () {},
+        ),
+      ],
+      elevation: 8.0,
+    ).then((value) {
+      if (value == '1') {
+        // Handle selected option
+        print('Selected: $value');
+        _displayTextInputDialog(context);
+      } else if (value == '2') {
+        print('Selected: $value');
+        _displayTextInputDialog2forpin(context);
+      }
+
+      // if (value == null) {
+      //   // Handle selected option
+      //   print('Selected: $value');
+      //   _displayTextInputDialog(context);
+      // }else if(value != null){
+      //   print('Selected: $value');
+      //   _displayTextInputDialog2forpin(context);
+      // }
+    });
+  }
 }

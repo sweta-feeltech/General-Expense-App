@@ -7,22 +7,18 @@ abstract class SingleGroupViewScreenState {}
 
 class SingleGroupViewScreenInitialState extends SingleGroupViewScreenState {}
 
+
 class SingleGroupViewScreenLoadingEventState extends SingleGroupViewScreenState {
   final bool showProgress;
 
   SingleGroupViewScreenLoadingEventState(this.showProgress);
 }
 
-class ApiFailureState extends SingleGroupViewScreenState {
-  final Exception exception;
-
-  ApiFailureState(this.exception);
-}
 
 class FetchAllSingleGroupViewScreenAPIsEventState extends SingleGroupViewScreenState {
-  final List<GroupMembersModel> groupMemberModelData;
+  final List<GroupMembersModel> groupMembersModelData;
 
-  FetchAllSingleGroupViewScreenAPIsEventState(this.groupMemberModelData);
+  FetchAllSingleGroupViewScreenAPIsEventState(this.groupMembersModelData);
 }
 
 
@@ -32,3 +28,9 @@ class FetchAllSingleGroupLinkScreenAPIsEventState extends SingleGroupViewScreenS
   FetchAllSingleGroupLinkScreenAPIsEventState(this.groupLinkModeldata);
 }
 
+
+class ApiFailureState extends SingleGroupViewScreenState {
+  final Exception exception;
+
+  ApiFailureState(this.exception);
+}

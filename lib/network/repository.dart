@@ -15,20 +15,19 @@ import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
 import 'custom_exception.dart';
 
-
 class Repository {
   final ApiClient apiClient;
 
   Repository(this.apiClient);
 
-  static Repository getInstance () {
+  static Repository getInstance() {
     return Repository(ApiClient(httpClient: http.Client()));
   }
 
-
   Future<LoginModel> loginPostAPI(String apiEndPoint, dynamic body) async {
     try {
-      Map<String, dynamic> json = await apiClient.postApiCall(BASEURL, apiEndPoint, body);
+      Map<String, dynamic> json =
+          await apiClient.postApiCall(BASEURL, apiEndPoint, body);
       print("final received json = $json");
       LoginModel loginResponse = LoginModel.fromJson(json);
       return loginResponse;
@@ -41,7 +40,9 @@ class Repository {
   ///
   Future<GetProfileModel> getProfileData() async {
     try {
-      Map<String, dynamic> listData = await apiClient.getApiCall(BASEURL,"$getProfileApiEnd", isAccessToken: accessToken,isBearer:true);
+      Map<String, dynamic> listData = await apiClient.getApiCall(
+          BASEURL, "$getProfileApiEnd",
+          isAccessToken: accessToken, isBearer: true);
       GetProfileModel list = GetProfileModel.fromJson(listData);
       return list;
     } on CustomException {
@@ -51,9 +52,16 @@ class Repository {
 
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~PUT:Update Profile API~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Future<EditProfileModel> putEditProfileData(Map<String, dynamic> putJson, {String? id}) async {
+  Future<EditProfileModel> putEditProfileData(Map<String, dynamic> putJson,
+      {String? id}) async {
     try {
-      var json = await apiClient.apiCallMultipartPut(BASEURL,"$updateProfileApiEnd",isAccessToken: accessToken,isBearer:true, putJson,);
+      var json = await apiClient.apiCallMultipartPut(
+        BASEURL,
+        "$updateProfileApiEnd",
+        isAccessToken: accessToken,
+        isBearer: true,
+        putJson,
+      );
       print("here put json : $json");
       EditProfileModel productPut = EditProfileModel.fromJson(json);
       return productPut;
@@ -69,7 +77,9 @@ class Repository {
   Future<UserData> getProfileSplashAPICall({String? access}) async {
     try {
       print("acss${access}");
-      Map<String, dynamic> json = await apiClient.getApiCall(BASEURL, SplashScreenAPIEnd, isAccessToken: access,isBearer: true);
+      Map<String, dynamic> json = await apiClient.getApiCall(
+          BASEURL, SplashScreenAPIEnd,
+          isAccessToken: access, isBearer: true);
       print("accc${access}");
       UserData oneNuBeeCardModelRes = UserData.fromJson(json);
       return oneNuBeeCardModelRes;
@@ -77,7 +87,6 @@ class Repository {
       rethrow;
     }
   }
-
 
   ///// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GROUP PAGE APIS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ///
@@ -95,13 +104,12 @@ class Repository {
   //   }
   // }
 
-
   Future<AddGroupModel> createGroupPostAPI(dynamic body) async {
 // Future<SignUpModel> postSigUpData(dynamic body, String firebaseToken) async {
     try {
       Map<String, dynamic> json = await apiClient.postApiCall(
-          BASEURL,createGroupAPIEnd,body,
-          isAccessToken: accessToken,isBearer: true);
+          BASEURL, createGroupAPIEnd, body,
+          isAccessToken: accessToken, isBearer: true);
       // print("final received json = $json");
       AddGroupModel courseSavedRes = AddGroupModel.fromJson(json);
       return courseSavedRes;
@@ -110,15 +118,33 @@ class Repository {
     }
   }
 
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~POST: JOIN GROUP APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
 
+  Future<AddGroupModel> joinGroupPostAPI(dynamic body) async {
+// Future<SignUpModel> postSigUpData(dynamic body, String firebaseToken) async {
+    try {
+      Map<String, dynamic> json = await apiClient.postApiCall(
+          BASEURL, addGroupMemberAPIEndPost, body,
+          isAccessToken: accessToken, isBearer: true);
+      // print("final received json = $json");
+      AddGroupModel GroupJoinRes = AddGroupModel.fromJson(json);
+      return GroupJoinRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
 
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MODEL REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///
   Future<List<GetGroupListModel>> getGroupModelData({String? access}) async {
     try {
-      var listData = await apiClient.getApiCall(BASEURL, getGroupListAPIEnd, isAccessToken: accessToken,isBearer: true) as List;
-      var list = listData.map((json) => GetGroupListModel.fromJson(json)).toList();
+      var listData = await apiClient.getApiCall(BASEURL, getGroupListAPIEnd,
+          isAccessToken: accessToken, isBearer: true) as List;
+      var list =
+          listData.map((json) => GetGroupListModel.fromJson(json)).toList();
       return list;
     } on CustomException {
       rethrow;
@@ -130,14 +156,15 @@ class Repository {
   ///
   Future<List<IncomeListModel>> getIncomeListModelData({String? access}) async {
     try {
-      var listData = await apiClient.getApiCall(BASEURL,getIncomeListAPIEnd, isAccessToken: accessToken,isBearer: true) as List;
-      var list = listData.map((json) => IncomeListModel.fromJson(json)).toList();
+      var listData = await apiClient.getApiCall(BASEURL, getIncomeListAPIEnd,
+          isAccessToken: accessToken, isBearer: true) as List;
+      var list =
+          listData.map((json) => IncomeListModel.fromJson(json)).toList();
       return list;
     } on CustomException {
       rethrow;
     }
   }
-
 
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MEMCER REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
@@ -145,11 +172,11 @@ class Repository {
   Future<List<GroupMembersModel>> getGroupMemberList(String query) async {
     try {
       var listData = await apiClient.getApiCall(
-          BASEURL, "$getGroupMemberListAPIEnd/$query", isAccessToken: accessToken)
-      as List;
-      print("listData: $listData");
+          BASEURL, "$getGroupMemberListAPIEnd/$query",
+          isAccessToken: accessToken) as List;
+      // print("listData: $listData");
       var list =
-      listData.map((json) => GroupMembersModel.fromJson(json)).toList();
+          listData.map((json) => GroupMembersModel.fromJson(json)).toList();
       return list;
     } on CustomException {
       rethrow;
@@ -159,9 +186,11 @@ class Repository {
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP LINK REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<GroupLinkModel> getPGroupLinkData(String query) async {
+  Future<GroupLinkModel> getGroupLinkData(String query) async {
     try {
-      Map<String, dynamic> listData = await apiClient.getApiCall(BASEURL,"$getGroupLinkAPIEnd/$query", isAccessToken: accessToken,isBearer:true);
+      Map<String, dynamic> listData = await apiClient.getApiCall(
+          BASEURL, "$getGroupLinkAPIEnd/$query",
+          isAccessToken: accessToken, isBearer: true);
       GroupLinkModel list = GroupLinkModel.fromJson(listData);
       return list;
     } on CustomException {
@@ -174,37 +203,34 @@ class Repository {
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: SINGLE GROUP GET APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<List<SingleGroupViewModel>> getSingleGroupViewList(String query) async {
+  Future<List<SingleGroupViewModel>> getSingleGroupViewList(
+      String query) async {
     try {
       var listData = await apiClient.getApiCall(
-          BASEURL, "$getGroupbyIdAPIEnd/$query", isAccessToken: accessToken)
-      as List;
+              BASEURL, "$getGroupbyIdAPIEnd/$query", isAccessToken: accessToken)
+          as List;
       print("listData: $listData");
       var list =
-      listData.map((json) => SingleGroupViewModel.fromJson(json)).toList();
+          listData.map((json) => SingleGroupViewModel.fromJson(json)).toList();
       return list;
     } on CustomException {
       rethrow;
     }
   }
 
-
   ///
   ///
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DELETE:GROUP DELETE APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<AddGroupModel>delGroupData({required String id}) async {
+  Future<AddGroupModel> delGroupData({required String id}) async {
     try {
-      Map<String, dynamic> json = await apiClient.apiCallDel(BASEURL,"$deleteGroupListAPIEnd/$id",isBearer:true);
+      Map<String, dynamic> json = await apiClient
+          .apiCallDel(BASEURL, "$deleteGroupListAPIEnd/$id", isBearer: true);
       AddGroupModel changePassModelRes = AddGroupModel.fromJson(json);
       return changePassModelRes;
     } on CustomException {
       rethrow;
     }
   }
-
-
-
-
 }
