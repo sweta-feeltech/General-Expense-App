@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/colors.dart';
 import '../Widgets/nav_drawer.dart';
-import 'add_group_screen.dart';
 import '../Widgets/common_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -152,19 +151,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context, rootNavigator: true).push(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddGroupScreen()));
-                              },
-                              child: Container(
-                                  height: main_Height * 0.027,
-                                  width: main_Height * 0.027,
-                                  child: SvgPicture.asset(
-                                      "assets/images/dot.svg")),
-                            )
+                            Container(
+                                height: main_Height * 0.027,
+                                width: main_Height * 0.027,
+                                child: SvgPicture.asset(
+                                    "assets/images/dot.svg"))
                           ],
                         ),
                         SizedBox(
@@ -177,20 +168,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               Expanded(
                                 child: Row(
                                   children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    GroupListScreen()));
-                                      },
-                                      child: Container(
-                                        child: SvgPicture.asset(
-                                          "assets/images/down.svg",
-                                          clipBehavior: Clip.antiAlias,
-                                          fit: BoxFit.fill,
-                                        ),
+                                    Container(
+                                      child: SvgPicture.asset(
+                                        "assets/images/down.svg",
+                                        clipBehavior: Clip.antiAlias,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                     SizedBox(
@@ -225,20 +207,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               Expanded(
                                 child: Row(
                                   children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AddGroupScreen()));
-                                      },
-                                      child: Container(
-                                        child: SvgPicture.asset(
-                                          "assets/images/up.svg",
-                                          clipBehavior: Clip.antiAlias,
-                                          fit: BoxFit.fill,
-                                        ),
+                                    Container(
+                                      child: SvgPicture.asset(
+                                        "assets/images/up.svg",
+                                        clipBehavior: Clip.antiAlias,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                     SizedBox(
