@@ -414,25 +414,27 @@ class ApiClient {
     Map<String, String> headers;
 
     print("herrreeeeee2");
-    if(isBearer == true){
-      print("in bear");
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": "$isAccessToken"
-      };
-    }
-    else if(isAccessToken != null){
-      headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $isAccessToken"
-      };
-    }
-    else{
-      headers = {
-        "Content-Type": "application/json",
-        // "Authorization": "$accessToken"
-      };
-    }
+    headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $accessToken"
+    };
+
+    // if(isBearer == true){
+    //   print("in bear");
+    //   headers = {
+    //     "Content-Type": "application/json",
+    //     "Authorization": "$accessToken"
+    //   };
+    // }
+    // else if(isAccessToken != null){
+    //
+    // }
+    // else{
+    //   headers = {
+    //     "Content-Type": "application/json",
+    //     // "Authorization": "$accessToken"
+    //   };
+    // }
 
     // Map<String, String> headers = {
     //   "Content-Type": "application/json",

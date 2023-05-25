@@ -289,7 +289,12 @@ class CommonWidgets {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
     return InkWell(
+      ///
+      /// For Delete Group
+      ///
+      /// onTap: onPressed,
       onTap: () {
+        onPressed;
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 SingleGroupViewScreen("${getGroupListModel!.id}")));

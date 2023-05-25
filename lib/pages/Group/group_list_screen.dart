@@ -429,6 +429,7 @@ class _GroupListScreenState extends State<GroupListScreen> {
                         index: index,
                         getGroupListModel: getGroupListModelData![index],
                         onPressed: () {
+                      print("print");
                       groupListScreenBloc.add(DeleteGroupEvent(
                           "${getGroupListModelData![index].id}"));
                     });
