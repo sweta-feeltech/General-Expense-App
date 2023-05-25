@@ -5,9 +5,8 @@ import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Widgets/common_widgets.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../Utils/colors.dart';
-import 'income_screen.dart';
+import '../Income_Expense/income_screen.dart';
 import 'list_screen.dart';
 
 class ExpenseScreen extends StatefulWidget {

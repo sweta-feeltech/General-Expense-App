@@ -3,7 +3,6 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
-import 'package:general_expense_app/models/IncomeExpenseModel/income_list_model.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
@@ -11,6 +10,7 @@ import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 import '../../Utils/colors.dart';
 import '../../models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
+import '../../models/IncomeListModel/income_list_model.dart';
 import '../Dashboard/items_screen.dart';
 import '../Group/single_group_screen.dart';
 
@@ -294,7 +294,7 @@ class CommonWidgets {
       ///
       /// onTap: onPressed,
       onTap: () {
-        onPressed;
+        // onPressed;
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 SingleGroupViewScreen("${getGroupListModel!.id}")));
