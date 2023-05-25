@@ -294,7 +294,7 @@ class CommonWidgets {
       ///
       /// onTap: onPressed,
       onTap: () {
-        onPressed;
+        // onPressed;
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
                 SingleGroupViewScreen("${getGroupListModel!.id}")));
