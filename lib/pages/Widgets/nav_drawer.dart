@@ -9,10 +9,10 @@ import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Utils/constants.dart';
 import '../Dashboard/add_home_Screen.dart';
 import '../Dashboard/category_screen.dart';
+import '../Income_Expense/income_screen.dart';
 import '../LoginRegistrationScreens/main_screen.dart';
 import '../LoginRegistrationScreens/splash_screen.dart';
 
@@ -59,10 +59,6 @@ class _NavDrawerState extends State<NavDrawer> {
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
 
 
-
-
-
-
           ///
           ///
           /// FOR CATEGORY CARDS
@@ -92,6 +88,66 @@ class _NavDrawerState extends State<NavDrawer> {
 
 
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+          ///
+          ///
+          /// FOR GROUPS
+          ///
+          ///
+          InkWell(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).pushNamed(GroupListScreen.routeName);
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.group,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Groups", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
+
+          ///
+          ///
+          /// FOR INCOME
+          ///
+          ///
+          InkWell(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).pushNamed(ListofIncomeScreen.routeName);
+            },
+            child: ListTile(
+              title: Row(
+                children:  [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.money_sharp,
+                      color: primaryPurple,
+                    ),
+                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Add Income", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+                ],
+              ),
+            ),
+          ),
+
+
+          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+
 
 
           ///
@@ -257,38 +313,6 @@ class _NavDrawerState extends State<NavDrawer> {
 
 
 
-
-          ///
-          ///
-          /// FOR GROUPS
-          ///
-          ///
-          InkWell(
-            onTap: () {
-              Navigator.of(context, rootNavigator: true).pushNamed(GroupListScreen.routeName);
-            },
-            child: ListTile(
-              title: Row(
-                children:  [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.group,
-                      color: primaryPurple,
-                    ),
-                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Groups", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
-                ],
-              ),
-            ),
-          ),
-
-
-          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
-
-
-
           ///
           ///
           /// FOR LOGOUT
@@ -322,10 +346,6 @@ class _NavDrawerState extends State<NavDrawer> {
           ),
 
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
-
-
-
-
 
 
 

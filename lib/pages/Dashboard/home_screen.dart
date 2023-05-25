@@ -270,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    "See All",
+                    "See All  > ",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
