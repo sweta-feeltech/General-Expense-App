@@ -21,3 +21,9 @@ class FetchAllIncomeListScreenAPIsEventState extends IncomeListScreenState {
 
   FetchAllIncomeListScreenAPIsEventState(this.getIncomeListModelData);
 }
+
+class PostAddIncomeEventState extends IncomeListScreenState {
+  final MessageModel addIncomeModelData;
+
+  PostAddIncomeEventState(this.addIncomeModelData);
+}

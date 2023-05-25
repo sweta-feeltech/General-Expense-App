@@ -1,7 +1,8 @@
 class IncomeListModel {
   String? id;
+  String? memberId;
+  bool? isGroupAdmin;
   String? incomeDate;
-  dynamic incomeCategory;
   dynamic amount;
   String? description;
   String? createdBy;
@@ -11,8 +12,9 @@ class IncomeListModel {
 
   IncomeListModel(
       {this.id,
+        this.memberId,
+        this.isGroupAdmin,
         this.incomeDate,
-        this.incomeCategory,
         this.amount,
         this.description,
         this.createdBy,
@@ -22,8 +24,9 @@ class IncomeListModel {
 
   IncomeListModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    memberId = json['memberId'];
+    isGroupAdmin = json['isGroupAdmin'];
     incomeDate = json['incomeDate'];
-    incomeCategory = json['incomeCategory'];
     amount = json['amount'];
     description = json['description'];
     createdBy = json['createdBy'];
@@ -35,8 +38,9 @@ class IncomeListModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['memberId'] = this.memberId;
+    data['isGroupAdmin'] = this.isGroupAdmin;
     data['incomeDate'] = this.incomeDate;
-    data['incomeCategory'] = this.incomeCategory;
     data['amount'] = this.amount;
     data['description'] = this.description;
     data['createdBy'] = this.createdBy;
@@ -46,5 +50,4 @@ class IncomeListModel {
     return data;
   }
 }
-
 

@@ -1,3 +1,4 @@
+import 'package:general_expense_app/models/CommonModel/message_model.dart';
 import 'package:general_expense_app/network/api_client.dart';
 import 'package:http/http.dart' as http;
 
@@ -233,4 +234,22 @@ class Repository {
       rethrow;
     }
   }
+
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~POST: ADD INCOME APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+
+  Future<MessageModel> addIncomePostAPI(dynamic body) async {
+    try {
+      Map<String, dynamic> json = await apiClient.postApiCall(
+          BASEURL, addIncomeAPIEnd, body,
+          isAccessToken: accessToken, isBearer: true);
+      // print("final received json = $json");
+      MessageModel courseSavedRes = MessageModel.fromJson(json);
+      return courseSavedRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
 }

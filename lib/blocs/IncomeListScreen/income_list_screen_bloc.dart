@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/models/IncomeExpenseModel/income_list_model.dart';
 import 'package:general_expense_app/network/repository.dart';
 
+import '../../models/CommonModel/message_model.dart';
+
 part 'income_list_screen_event.dart';
 part 'income_list_screen_state.dart';
 
@@ -27,6 +29,20 @@ class IncomeListScreenBloc extends Bloc<IncomeListScreenEvent, IncomeListScreenS
           emit(ApiFailureState(Exception(error.toString())));
         }
 
+      }
+
+      if (event is PostAddIncomeEvent) {
+        late MessageModel getIncomeListModelData;
+
+        try {
+          getIncomeListModelData = await repositoryRepo.addIncomePostAPI(
+              {"IncomeDate": event.IncomeDate, "Amount": event.Amount, "Description": event.Description});
+
+          emit(PostAddIncomeEventState(getIncomeListModelData));
+        } catch (error) {
+          emit(IncomeListScreenLoadingEventState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
       }
 
     });
