@@ -103,7 +103,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 children:  [
                   Align(
                     alignment: Alignment.center,
-                    child: Icon(Icons.group,
+                    child: Icon(Icons.group_add,
                       color: primaryPurple,
                     ),
                     // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
@@ -133,7 +133,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 children:  [
                   Align(
                     alignment: Alignment.center,
-                    child: Icon(Icons.money_sharp,
+                    child: Icon(Icons.add_chart,
                       color: primaryPurple,
                     ),
                     // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),

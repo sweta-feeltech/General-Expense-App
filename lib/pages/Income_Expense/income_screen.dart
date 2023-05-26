@@ -1,5 +1,6 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -208,7 +209,77 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
           ),
         ),
       ),
-      body: RefreshIndicator(
+      body:
+
+          getIncomeListModelData?.isEmpty == true ?
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: SvgPicture.asset("assets/icons/group.svg",
+                    height: main_Height * 0.4,
+                  ),
+                ),
+
+
+
+                Text(
+                  "You don't have any Groups !",
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    // color: Color.fromARGB(255, 158, 158, 158),
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                    fontSize: main_Height * 0.0239,
+                  ),
+                ),
+
+                SizedBox(
+                  height: main_Height * 0.04,
+                ),
+
+                Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(30),
+                  child: SizedBox(
+                    height: main_Height * 0.060,
+                    width: main_Width * 0.5,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)
+                        ),
+                        side: BorderSide(
+                            style: BorderStyle.none
+                        ),
+                        backgroundColor: primaryPurple,
+                      ),
+                      onPressed: () {
+
+                        bottomSheetforAddShelfItems(context);
+
+                      },
+                      child: Text(
+                        "Add Income",
+                        style: TextStyle(
+                            fontSize: main_Height < 700 ? 12 : 15,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
+                )
+
+              ],
+            ),
+          ) :
+
+          RefreshIndicator(
         onRefresh: () async {
           loadAllIncomeListScreenApiCalls();
 
@@ -342,8 +413,8 @@ void bottomSheetforAddShelfItems(BuildContext context){
                       vertical: main_Height * 0.01),
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: main_Height * 0.01,
                       ),
 
                       Row(
@@ -357,11 +428,14 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: main_Height * 0.01,
                       ),
-
                       TextFormField(
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                         style: TextStyle(fontSize: main_Height * 0.022),
                         onSaved: (newValue) {
                           textField1Value = newValue!;
@@ -388,9 +462,10 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: main_Height * 0.01,
                       ),
+
 
                       Row(
                         children: [
@@ -403,10 +478,9 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: main_Height * 0.01,
                       ),
-                      // Text Field 2
                       TextFormField(
                         style: TextStyle(fontSize: main_Height * 0.022),
                         onSaved: (newValue) {
@@ -437,6 +511,10 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: main_Height * 0.01,
+                      ),
+
                       Row(
                         children: [
                           Text(
@@ -448,8 +526,8 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: main_Height * 0.01,
                       ),
                       DateTimePicker(
                         type: DateTimePickerType.dateTimeSeparate,
@@ -485,10 +563,9 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           // print("daaaate${val}");
                         },
                       ),
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: main_Height * 0.01,
                       ),
-
 
 
 
