@@ -93,7 +93,7 @@ class CommonWidgets {
             Container(
               child: Center(
                 child: Text(
-                  "+\$2800",
+                  "+\u20B92800",
                   style: TextStyle(
                       letterSpacing: 0.6,
                       color: Color(0xFF25B07F),
@@ -186,7 +186,7 @@ class CommonWidgets {
             Container(
               child: Center(
                 child: Text(
-                  "-\$1700",
+                  "-\u20B91700",
                   style: TextStyle(
                       letterSpacing: 0.6,
                       color: Colors.red,
@@ -515,7 +515,7 @@ class CommonWidgets {
               ],
             ),
             Text(
-              "+\$${getIncomeListModelData!.amount.toStringAsFixed(0)}",
+              "+\u20B9${getIncomeListModelData!.amount.toStringAsFixed(0)}",
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: TextStyle(

@@ -113,7 +113,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             ),
                             ),
                             SizedBox(height: main_Height * 0.01,),
-                            Text("\$7,750.00",
+                            Text("\u20B97,750.00",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -159,7 +159,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             SizedBox(
                               height: main_Height * 0.01,
                             ),
-                            Text("\$4,390.00",
+                            Text("\u20B94,390.00",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             style: TextStyle(
