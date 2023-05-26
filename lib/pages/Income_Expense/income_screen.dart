@@ -146,8 +146,358 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
               Expanded(
                 child: InkWell(
                   onTap: (){
-                    bottomSheetforAddShelfItems(context);
+                    showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                          ),
+                        ),
+                        builder: (BuildContext context) {
+                          final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
+                          return Form(
+                            key: _formkey,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                bottom: MediaQuery.of(context).viewInsets.bottom,
+                              ),
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20),
+
+                                      )
+                                  ),
+                                  padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03),
+                                  child:Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        child:  SingleChildScrollView(
+                                          child: Form(
+                                            child: Column(
+                                              children: [
+
+                                                SizedBox(
+                                                  height: main_Height * 0.01,
+                                                ),
+
+                                                Container(
+                                                  width: main_Width * 0.08,
+                                                  decoration: BoxDecoration(
+                                                    border: Border(
+                                                      top: BorderSide(
+                                                        color: Colors.black,
+                                                        width: 3.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+
+
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: main_Width * 0.03,
+                                                      vertical: main_Height * 0.01
+                                                  ),
+                                                  child: SingleChildScrollView(
+                                                    child: Column(
+                                                      children: [
+
+
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              "Amount",
+                                                              overflow: TextOverflow.ellipsis,
+                                                              style: TextStyle(
+                                                                  fontSize: main_Height * 0.018,
+                                                                  fontWeight: FontWeight.w500),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        TextFormField(
+                                                          // initialValue: "${Username}",
+                                                          // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
+                                                          style: TextStyle(
+                                                            fontSize: main_Height * 0.022,
+                                                          ),
+                                                          onSaved: (newValue) {
+                                                            Amount = newValue;
+                                                          },
+                                                          // onChanged: (value){
+                                                          //   Amount = value;
+                                                          // },
+                                                          validator: (value) {
+                                                            if (value == null || value.isEmpty) {
+                                                              return 'Amount can\'t be empty';
+                                                            }
+                                                            return null;
+                                                          },
+                                                          decoration: InputDecoration(
+                                                            contentPadding:
+                                                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                                            // filled: true,
+                                                            enabledBorder: const OutlineInputBorder(
+                                                              borderSide: BorderSide(color: Colors.black38),
+                                                            ),
+                                                            // fillColor: ,
+                                                            hintText: "Amount",
+                                                            hintStyle: TextStyle(
+                                                                color: Colors.grey, fontSize: main_Height * 0.018),
+                                                            border: const OutlineInputBorder(
+                                                              // borderSide:
+                                                              // const BorderSide(color: Colors.white),
+                                                              // borderRadius: BorderRadius.circular(10)
+
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 15,
+                                                        ),
+
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              "Description",
+                                                              overflow: TextOverflow.ellipsis,
+                                                              style: TextStyle(
+                                                                  fontSize: main_Height * 0.018,
+                                                                  fontWeight: FontWeight.w500),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        TextFormField(
+                                                          // initialValue: "${Username}",
+                                                          // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
+                                                          style: TextStyle(
+                                                            fontSize: main_Height * 0.022,
+                                                          ),
+                                                          onSaved: (newValue) {
+                                                            Description = newValue;
+                                                          },
+                                                          // onChanged: (value){
+                                                          //   Description = value;
+                                                          // },
+                                                          validator: (value) {
+                                                            if (value == null || value.isEmpty) {
+                                                              return 'Description Name can\'t be empty';
+                                                            }
+                                                            return null;
+                                                          },
+                                                          decoration: InputDecoration(
+                                                            contentPadding:
+                                                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                                            // filled: true,
+                                                            enabledBorder: const OutlineInputBorder(
+                                                              borderSide: BorderSide(color: Colors.black38),
+                                                            ),
+                                                            // fillColor: ,
+                                                            hintText: "Description",
+                                                            hintStyle: TextStyle(
+                                                                color: Colors.grey, fontSize: main_Height * 0.018),
+                                                            border: const OutlineInputBorder(
+                                                              // borderSide:
+                                                              // const BorderSide(color: Colors.white),
+                                                              // borderRadius: BorderRadius.circular(10)
+
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 15,
+                                                        ),
+
+
+
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              "Date Time",
+                                                              overflow: TextOverflow.ellipsis,
+                                                              style: TextStyle(
+                                                                  fontSize: main_Height * 0.018,
+                                                                  fontWeight: FontWeight.w500),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        // DateTimePicker(
+                                                        //   use24HourFormat: false,
+                                                        //   type: DateTimePickerType.dateTimeSeparate,
+                                                        //   decoration: InputDecoration(
+                                                        //     contentPadding:
+                                                        //     const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                                        //     filled: true,
+                                                        //     enabledBorder: const OutlineInputBorder(
+                                                        //       borderSide: BorderSide(color: Colors.black38),
+                                                        //     ),
+                                                        //     // fillColor: ,
+                                                        //     hintText: "Date of Birth",
+                                                        //     hintStyle: TextStyle(
+                                                        //         color: Colors.grey, fontSize: main_Height * 0.018),
+                                                        //     border: const OutlineInputBorder(
+                                                        //       // borderSide:
+                                                        //       //     const BorderSide(color: Colors.transparent),
+                                                        //       // borderRadius: BorderRadius.circular(10)
+                                                        //
+                                                        //     ),
+                                                        //   ),
+                                                        //   dateMask: 'd MMM, yyyy',
+                                                        //   initialValue: DateTime.now().toString(),
+                                                        //   firstDate: DateTime(2000),
+                                                        //   lastDate: DateTime(2100),
+                                                        //   icon: Icon(Icons.event),
+                                                        //   // dateLabelText: 'Date',
+                                                        //   // timeLabelText: "Hour",
+                                                        //   selectableDayPredicate: (date) {
+                                                        //     // Disable weekend days to select from the calendar
+                                                        //     if (date.weekday == 6 || date.weekday == 7) {
+                                                        //       return false;
+                                                        //     }
+                                                        //
+                                                        //     return true;
+                                                        //   },
+                                                        //   onChanged: (val) => print(val),
+                                                        //   validator: (val) {
+                                                        //     print("dateval${val}");
+                                                        //     return null;
+                                                        //   },
+                                                        //   onSaved: (val){
+                                                        //     IncomeDate = val;
+                                                        //   },
+                                                        // ),
+                                                        DateTimePicker(
+                                                          type: DateTimePickerType.dateTimeSeparate,
+                                                          dateMask: 'd MMM, yyyy',
+                                                          initialValue: DateTime.now().toString(),
+                                                          firstDate: DateTime(2000),
+                                                          lastDate: DateTime(2100),
+                                                          icon: Icon(Icons.event),
+                                                          dateLabelText: 'Date',
+                                                          timeLabelText: "Hour",
+                                                          selectableDayPredicate: (date) {
+                                                            // Disable weekend days to select from the calendar
+                                                            if (date.weekday == 6 || date.weekday == 7) {
+                                                              return false;
+                                                            }
+
+                                                            return true;
+                                                          },
+                                                          // onChanged: (val){
+                                                          //   IncomeDate = val;
+                                                          // },
+                                                          validator: (val) {
+                                                            print(val);
+                                                            return null;
+                                                          },
+                                                          onSaved: (val){
+                                                            IncomeDate = val;
+                                                            print("daaaate${IncomeDate}");
+                                                            print("daaaate${val}");
+                                                          },
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 15,
+                                                        ),
+
+
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+
+                                      Container(
+                                        height: main_Height * 0.085,
+                                        width: main_Width * 1,
+                                        decoration: const BoxDecoration(color: Colors.white),
+                                        child: Padding(
+                                          padding:
+                                          EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
+                                          child: Container(
+                                            height: main_Height * 0.06,
+                                            width: main_Width * 0.75,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(30),
+                                                ),
+                                                primary: primaryPurple,
+                                              ),
+                                              onPressed: () {
+
+                                                if (_formkey.currentState!.validate()) {
+                                                  _formkey.currentState!.save();
+                                                  // print("aaa ${Amount},${Description},${IncomeDate}");
+
+                                                  final test22 = "${IncomeDate == null ? DateTime.now() : IncomeDate}";
+
+                                                  final testDate = "${test22?.replaceAll(" ","T")}:00.900Z";
+
+                                                  // print("testdate${testDate}");
+                                                  // print("bbb ${Amount},${Description},${IncomeDate}");
+
+
+                                                  // incomeListScreenBloc.add(
+                                                  //     PostAddIncomeEvent("${testDate}","${Amount}","${Description}"));
+
+
+                                                }
+
+
+                                                Navigator.of(context).pop();
+
+                                              },
+                                              child: Text("Add Income",
+                                                style: TextStyle(
+                                                    letterSpacing: 1,
+                                                    fontSize: main_Height * 0.018,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+
+
+
+                                    ],
+                                  ),
+
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                    );
                   },
                   child: Container(
                     height: main_Height * 0.052,
@@ -230,8 +580,11 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
                       fontWeight: FontWeight.w500),
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
+
                     bottomSheetforAddShelfItems(context);
+
+                    ///
                   },
                   child: Container(
                     height: main_Height * 0.05,
@@ -279,357 +632,91 @@ void bottomSheetforAddShelfItems(BuildContext context){
   double main_Height = MediaQuery.of(context).size.height;
 
   showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
+    context: context,
+    isScrollControlled: true,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20.0),
+        topRight: Radius.circular(20.0),
       ),
-      builder: (BuildContext context) {
-        final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+    ),
+    builder: (BuildContext context) {
+      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+      String? textField1Value;
+      String? textField2Value;
 
-        return Form(
-          key: _formkey,
-          child: Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
+      return Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
             ),
-            child: SingleChildScrollView(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-
-                    )
-                ),
-                padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03),
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child:  SingleChildScrollView(
-                        child: Form(
-                          child: Column(
-                            children: [
-
-                              SizedBox(
-                                height: main_Height * 0.01,
-                              ),
-
-                              Container(
-                                width: main_Width * 0.08,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    top: BorderSide(
-                                      color: Colors.black,
-                                      width: 3.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: main_Width * 0.03,
-                                    vertical: main_Height * 0.01
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-
-
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Amount",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: main_Height * 0.018,
-                                                fontWeight: FontWeight.w500),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      TextFormField(
-                                        // initialValue: "${Username}",
-                                        // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
-                                        style: TextStyle(
-                                          fontSize: main_Height * 0.022,
-                                        ),
-                                        onSaved: (newValue) {
-                                          Amount = newValue;
-                                        },
-                                        // onChanged: (value){
-                                        //   Amount = value;
-                                        // },
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Amount can\'t be empty';
-                                          }
-                                          return null;
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                                          // filled: true,
-                                          enabledBorder: const OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.black38),
-                                          ),
-                                          // fillColor: ,
-                                          hintText: "Amount",
-                                          hintStyle: TextStyle(
-                                              color: Colors.grey, fontSize: main_Height * 0.018),
-                                          border: const OutlineInputBorder(
-                                            // borderSide:
-                                            // const BorderSide(color: Colors.white),
-                                            // borderRadius: BorderRadius.circular(10)
-
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Description",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: main_Height * 0.018,
-                                                fontWeight: FontWeight.w500),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      TextFormField(
-                                        // initialValue: "${Username}",
-                                        // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
-                                        style: TextStyle(
-                                          fontSize: main_Height * 0.022,
-                                        ),
-                                        onSaved: (newValue) {
-                                          Description = newValue;
-                                        },
-                                        // onChanged: (value){
-                                        //   Description = value;
-                                        // },
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Description Name can\'t be empty';
-                                          }
-                                          return null;
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding:
-                                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                                          // filled: true,
-                                          enabledBorder: const OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.black38),
-                                          ),
-                                          // fillColor: ,
-                                          hintText: "Description",
-                                          hintStyle: TextStyle(
-                                              color: Colors.grey, fontSize: main_Height * 0.018),
-                                          border: const OutlineInputBorder(
-                                            // borderSide:
-                                            // const BorderSide(color: Colors.white),
-                                            // borderRadius: BorderRadius.circular(10)
-
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-
-
-
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Date Time",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: main_Height * 0.018,
-                                                fontWeight: FontWeight.w500),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      // DateTimePicker(
-                                      //   use24HourFormat: false,
-                                      //   type: DateTimePickerType.dateTimeSeparate,
-                                      //   decoration: InputDecoration(
-                                      //     contentPadding:
-                                      //     const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                                      //     filled: true,
-                                      //     enabledBorder: const OutlineInputBorder(
-                                      //       borderSide: BorderSide(color: Colors.black38),
-                                      //     ),
-                                      //     // fillColor: ,
-                                      //     hintText: "Date of Birth",
-                                      //     hintStyle: TextStyle(
-                                      //         color: Colors.grey, fontSize: main_Height * 0.018),
-                                      //     border: const OutlineInputBorder(
-                                      //       // borderSide:
-                                      //       //     const BorderSide(color: Colors.transparent),
-                                      //       // borderRadius: BorderRadius.circular(10)
-                                      //
-                                      //     ),
-                                      //   ),
-                                      //   dateMask: 'd MMM, yyyy',
-                                      //   initialValue: DateTime.now().toString(),
-                                      //   firstDate: DateTime(2000),
-                                      //   lastDate: DateTime(2100),
-                                      //   icon: Icon(Icons.event),
-                                      //   // dateLabelText: 'Date',
-                                      //   // timeLabelText: "Hour",
-                                      //   selectableDayPredicate: (date) {
-                                      //     // Disable weekend days to select from the calendar
-                                      //     if (date.weekday == 6 || date.weekday == 7) {
-                                      //       return false;
-                                      //     }
-                                      //
-                                      //     return true;
-                                      //   },
-                                      //   onChanged: (val) => print(val),
-                                      //   validator: (val) {
-                                      //     print("dateval${val}");
-                                      //     return null;
-                                      //   },
-                                      //   onSaved: (val){
-                                      //     IncomeDate = val;
-                                      //   },
-                                      // ),
-                                      DateTimePicker(
-                                  type: DateTimePickerType.dateTimeSeparate,
-                                  dateMask: 'd MMM, yyyy',
-                                  initialValue: DateTime.now().toString(),
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(2100),
-                                  icon: Icon(Icons.event),
-                                  dateLabelText: 'Date',
-                                  timeLabelText: "Hour",
-                                  selectableDayPredicate: (date) {
-                                    // Disable weekend days to select from the calendar
-                                    if (date.weekday == 6 || date.weekday == 7) {
-                                      return false;
-                                    }
-
-                                    return true;
-                                  },
-                                  // onChanged: (val){
-                                  //   IncomeDate = val;
-                                  // },
-                                  validator: (val) {
-                                    print(val);
-                                    return null;
-                                  },
-                                  onSaved: (val){
-                                   IncomeDate = val;
-                                    print("daaaate${IncomeDate}");
-                                    print("daaaate${val}");
-                                  },
-                                ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-
-                            ],
-                          ),
-                        ),
-                      ),
+            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Text Field 1
+                  TextFormField(
+                    style: TextStyle(fontSize: main_Height * 0.022),
+                    onSaved: (newValue) {
+                      textField1Value = newValue!;
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Field cannot be empty';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Text Field 1',
                     ),
-
-
-                    Container(
-                      height: main_Height * 0.085,
-                      width: main_Width * 1,
-                      decoration: const BoxDecoration(color: Colors.white),
-                      child: Padding(
-                        padding:
-                        EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
-                        child: Container(
-                          height: main_Height * 0.06,
-                          width: main_Width * 0.75,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              primary: primaryPurple,
-                            ),
-                            onPressed: () {
-
-                              if (_formkey.currentState!.validate()) {
-                                _formkey.currentState!.save();
-                                   // print("aaa ${Amount},${Description},${IncomeDate}");
-
-                                   final test22 = "${IncomeDate == null ? DateTime.now() : IncomeDate}";
-
-                                   final testDate = "${test22?.replaceAll(" ","T")}:00.900Z";
-
-                                   // print("testdate${testDate}");
-                                // print("bbb ${Amount},${Description},${IncomeDate}");
-
-
-                                incomeListScreenBloc.add(
-                                    PostAddIncomeEvent("${testDate}","${Amount}","${Description}"));
-
-
-                              }
-
-
-                              Navigator.of(context).pop();
-
-                            },
-                            child: Text("Add Income",
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  fontSize: main_Height * 0.018,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
-
-
-
-                  ],
-                ),
-
+                  ),
+                  SizedBox(height: 20),
+                  // Text Field 2
+                  TextFormField(
+                    style: TextStyle(fontSize: main_Height * 0.022),
+                    onSaved: (newValue) {
+                      textField2Value = newValue!;
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Field cannot be empty';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Text Field 2',
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  // Save Button
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        print("tttf ${textField1Value} ${textField2Value}");
+                        // Perform save action with textField1Value and textField2Value
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Text('Save'),
+                  ),
+                ],
               ),
             ),
           ),
-        );
-      }
+        ),
+      );
+    },
   );
+
 
 }
 }
