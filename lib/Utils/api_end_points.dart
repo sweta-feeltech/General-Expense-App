@@ -97,3 +97,13 @@ String getIncomeListAPIEnd = "Income";
 String addIncomeAPIEnd = "Income";
 //
 // ///
+/// /// /// ------------------GET EXP CAT API----------------------
+// ///
+String getExpCatAPIEnd = "ExpenseCategory";
+//
+// ///
+/// /// /// ------------------POST EXP CAT API----------------------
+// ///
+String addExpCatAPIEnd = "ExpenseCategory";
+//
+// ///

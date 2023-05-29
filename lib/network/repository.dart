@@ -1,3 +1,5 @@
+import 'package:general_expense_app/models/Category/add_expense_category_model.dart';
+import 'package:general_expense_app/models/Category/get_expense_category_model.dart';
 import 'package:general_expense_app/models/CommonModel/message_model.dart';
 import 'package:general_expense_app/network/api_client.dart';
 import 'package:http/http.dart' as http;
@@ -246,6 +248,37 @@ class Repository {
           isAccessToken: accessToken, isBearer: true);
       // print("final received json = $json");
       MessageModel courseSavedRes = MessageModel.fromJson(json);
+      return courseSavedRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: EXPENSE CATEGORY APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<List<GetExpenseCatModel>> getExpenseCatModelData({String? access}) async {
+    try {
+      var listData = await apiClient.getApiCall(BASEURL, getExpCatAPIEnd,
+          isAccessToken: accessToken, isBearer: true) as List;
+      var list =
+      listData.map((json) => GetExpenseCatModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~POST: ADD EXP CAT~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+  Future<AddExpenseCatModel> addExpenseCatModelData(dynamic body) async {
+    try {
+      Map<String, dynamic> json = await apiClient.postApiCall(
+          BASEURL, addExpCatAPIEnd, body,
+          isAccessToken: accessToken, isBearer: true);
+      AddExpenseCatModel courseSavedRes = AddExpenseCatModel.fromJson(json);
       return courseSavedRes;
     } on CustomException {
       rethrow;
