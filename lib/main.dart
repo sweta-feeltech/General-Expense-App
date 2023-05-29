@@ -125,7 +125,9 @@ class MyApp extends StatelessWidget {
     }
 
     if(settings.name == AddExpenseScreen.routeName) {
-      return getMaterialPageRoute(AddExpenseScreen());
+      return getMaterialPageRoute(AddExpenseScreen((){
+
+      }));
     }
     if(settings.name == GroupListScreen.routeName) {
       return getMaterialPageRoute(GroupListScreen());

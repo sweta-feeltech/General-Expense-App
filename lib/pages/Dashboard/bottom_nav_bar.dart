@@ -152,6 +152,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
+      // hideNavigationBar: true,
       // navBarHeight: main_Height /14,
 
       items: [
@@ -250,7 +251,11 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
           Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
         }),
 
-        AddExpenseScreen(),
+        AddExpenseScreen(
+                (){
+              Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
+            }
+        ),
 
         RoomScreen((){
           Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
@@ -293,7 +298,13 @@ class TabNavigator extends StatelessWidget {
           }
       );}
     else if (tabItem == "Page3"){
-      child = AddExpenseScreen();
+      child = AddExpenseScreen(
+          (){
+            tabManualCallback("Page1", 0);
+
+
+          }
+      );
     }
     else if (tabItem == "Page4"){
       child = RoomScreen(

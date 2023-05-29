@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -16,10 +17,16 @@ import '../../models/Category/get_expense_category_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 
+
+
+
+
 class AddExpenseScreen extends StatefulWidget {
   static String routeName = '/addExpenseScreen';
+  Function backPressCallback;
 
-  const AddExpenseScreen({Key? key}) : super(key: key);
+
+  AddExpenseScreen(this.backPressCallback,{super.key});
 
   @override
   State<AddExpenseScreen> createState() => _AddExpenseScreenState();
@@ -30,90 +37,24 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   String? _selectedOption;
 
 
-  // List<String> _options = [
-  //   'Category 1',
-  //   'Category 2',
-  //   'Category 3',
-  //   'Category 4'
-  // ];
 
-  String? CategoryExpense;
+  PlatformFile? PIimage;
 
-  final amountController = TextEditingController();
+  String? Amount,CategoryExpense,DateTime1,ToPay,Remarks;
+
 
   @override
   void initState() {
     super.initState();
-    // _selectedOption = expenseCatListForFilter![0];
-    // _selectedOption = [0];
-    // set initial value to the first option
 
     loadAllCATListScreenApiCalls();
   }
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-  /////
-  /// HERE WE CREATE A INSTANCE OF IMAGE PICKER PACKAGE
-  /////
-  final _picker = ImagePicker();
-  File? featureImage;
-  final fundraiserInnerImageList = List<File>.filled(2, File(""));
-  // List<dynamic>? fundraiserInnerImageList = [];
-  File? fundraiserInnerImage1, fundraiserInnerImage2, fundraiserInnerImage3;
 
-  Future getImage(int ind) async {
-    final pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
-
-    if (pickedFile != null) {
-      if (ind == 0) {
-        featureImage = File(pickedFile.path);
-      }
-      // if(ind == 1 || ind == 2 || ind == 3) {
-      if (ind == 1 || ind == 2) {
-        for (int i = 0; i < 2; i++) {
-          if (fundraiserInnerImageList.length < 3) {
-            if (ind == 1) {
-              // fundraiserInnerImageList[0] = File(pickedFile.toString());
-              fundraiserInnerImageList[0] = File(pickedFile.path);
-            }
-            if (ind == 2) {
-              // fundraiserInnerImageList[1] = File(pickedFile.toString());
-              fundraiserInnerImageList[1] = File(pickedFile.path);
-            }
-            // if(ind == 3) {
-            //   // fundraiserInnerImageList[2] = File(pickedFile.toString());
-            //   fundraiserInnerImageList[2] = File(pickedFile.path);
-            // }
-          }
-          break;
-        }
-        if (ind == 1) {
-          fundraiserInnerImage1 = File(pickedFile.path);
-        }
-        if (ind == 2) {
-          fundraiserInnerImage2 = File(pickedFile.path);
-        }
-        // if (ind == 3) {
-        //   fundraiserInnerImage3 = File(pickedFile.path);
-        // }
-        print("fundraiserInnerImageList: $fundraiserInnerImageList");
-      }
-      setState(() {});
-      print(featureImage);
-    } else {
-      print("No Image Selected");
-    }
-  }
 
   List<dynamic>? allDocs = [];
-
-  @override
-  void dispose() {
-    amountController.dispose();
-    super.dispose();
-  }
 
 
 
@@ -181,95 +122,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         ));
   }
 
-  Widget cardOfDocBeforeUploadWidget(BuildContext context) {
-    double main_Width = MediaQuery.of(context).size.width;
-    double main_Height = MediaQuery.of(context).size.height;
-
-    return Container(
-      height: main_Height * 0.072,
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black38, width: 1),
-          borderRadius: BorderRadius.circular(3)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Click to upload",
-                style: TextStyle(
-                    color: primaryPurple, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                child: Text("Upload .pdf file",
-                    style: TextStyle(color: Colors.black, fontSize: 10)),
-              )
-            ],
-          ),
-          Image(
-            image: AssetImage("assets/images/add_doc.png"),
-            width: 40,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget cardOfDocAfterUploadSuccessWidget(
-      PlatformFile uploadedFile, BuildContext context,
-      {double? cardTextWidth}) {
-    double main_Width = MediaQuery.of(context).size.width;
-    double main_Height = MediaQuery.of(context).size.height;
-
-    return Container(
-      height: main_Height * 0.072,
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black38, width: 1),
-        borderRadius: BorderRadius.circular(3),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: cardTextWidth ?? null,
-                child: RichText(
-                    softWrap: true,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    text: TextSpan(
-                      text: "${uploadedFile.name}\n",
-                      style: TextStyle(
-                          color: primaryPurple, fontWeight: FontWeight.w500),
-                    )),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-            ],
-          ),
-          // uploadedFile.extension == "jpeg" ||
-          //     uploadedFile.extension == "png" ||
-          //     uploadedFile.extension == "jpg"
-          //     ? Image(
-          //   image: AssetImage("assets/images/picture_pre.jpg"),
-          //   width: 40,
-          // )
-          //     :
-
-          Image(
-            image: AssetImage("assets/images/pdf_pre.png"),
-            width: 40,
-          )
-        ],
-      ),
-    );
-  }
 
 
   Widget mainViewAllScreenViewWidget(){
@@ -280,10 +132,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     List<String> expenseCatListForFilter = [];
 
     getExpenseCatModelData!.map((e) => expenseCatListForFilter.add(e.expenseCategoryName.toString())).toList();
-
-    print("eeeeee${expenseCatListForFilter}");
-
-
 
     // for(int i=0; i < getExpenseCatModelData!.length; i++) {
     //
@@ -296,8 +144,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     // }
     // List<String> expenseCat =  getExpenseCatModelData![];
 
-
     return Scaffold(
+      // resizeToAvoidBottomInset:false,
       backgroundColor: primaryGrey,
       appBar: AppBar(
         titleSpacing: 15,
@@ -310,7 +158,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         elevation: 0,
         // centerTitle: true,
       ),
-      bottomSheet: Container(
+      floatingActionButton: Container(
         height: main_Height * 0.13,
         width: main_Width * 1,
         decoration: BoxDecoration(color: Colors.transparent),
@@ -329,7 +177,19 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               ),
               primary: primaryPurple,
             ),
-            onPressed: () {},
+            onPressed: () {
+              if (_formkey.currentState!.validate()) {
+                _formkey.currentState!.save();
+
+                final testDate =  DateTime1 == DateTime.now().toString().substring(0,16) ? "${ DateTime1?.replaceAll(" ","T")}.900Z" : "${ DateTime1?.replaceAll(" ","T")}:00.900Z";
+                print("td${testDate}");
+
+
+                print("check Expense : ${Amount} ${_selectedOption} ${testDate} ${ToPay} ${Remarks} ${PIimage!.name}");
+                loadAllCATListScreenApiCalls();
+
+              }
+            },
             child: Text(
               "Add Expense",
               style: TextStyle(
@@ -341,8 +201,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
+        // reverse: true,
         child: Form(
           key: _formkey,
           child: Column(
@@ -373,9 +234,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       style: TextStyle(
                         fontSize: main_Height * 0.022,
                       ),
-                      // onSaved: (newValue) {
-                      //   firstName = newValue;
-                      // },
+                      onSaved: (newValue1) {
+                        Amount = newValue1;
+                      },
                       // onChanged: (value){
                       //   firstName = value;
                       // },
@@ -493,7 +354,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       height: 5,
                     ),
                     DateTimePicker(
-                      use24HourFormat: false,
+                      // use24HourFormat: false,
                       type: DateTimePickerType.dateTimeSeparate,
                       decoration: InputDecoration(
                         contentPadding:
@@ -517,11 +378,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       initialValue: DateTime.now().toString(),
                       firstDate: DateTime(2000),
                       lastDate: DateTime(2100),
-
                       icon: Icon(Icons.event),
-
-                      // dateLabelText: 'Date',
-                      // timeLabelText: "Hour",
+                      dateLabelText: 'Date',
+                      timeLabelText: "Hour",
                       selectableDayPredicate: (date) {
                         // Disable weekend days to select from the calendar
                         if (date.weekday == 6 || date.weekday == 7) {
@@ -530,12 +389,22 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
                         return true;
                       },
-                      onChanged: (val) => print(val),
+                      // onChanged: (val){
+                      //   IncomeDate = val;
+                      // },
                       validator: (val) {
                         print(val);
                         return null;
                       },
-                      onSaved: (val) => print(val),
+                      onSaved: (val){
+                        print("val ${val}");
+                        print("val ${DateTime.now().toString()}");
+                        print("ddn${DateTime.now().toString().substring(0,19)}");
+                        DateTime1 = val.toString().substring(0,16) == DateTime.now().toString().substring(0,16) ? "${DateTime.now().toString().substring(0,19)}" : val;
+                        print("val${DateTime1}");
+                        // print("daaaate${IncomeDate}");
+                        // print("daaaate${val}");
+                      },
                     ),
                     const SizedBox(
                       height: 15,
@@ -560,9 +429,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       style: TextStyle(
                         fontSize: main_Height * 0.022,
                       ),
-                      // onSaved: (newValue) {
-                      //   firstName = newValue;
-                      // },
+                      onSaved: (newValue2) {
+                        ToPay = newValue2;
+                      },
                       // onChanged: (value){
                       //   firstName = value;
                       // },
@@ -622,9 +491,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         style: TextStyle(
                           fontSize: main_Height * 0.022,
                         ),
-                        // onSaved: (newValue) {
-                        //   description = newValue;
-                        // },
+                        onSaved: (newValue) {
+                          Remarks = newValue;
+                        },
                         // onChanged: (value){
                         //   description = value;
                         // },
@@ -671,166 +540,25 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     ),
                     SizedBox(
                       height: main_Height * 0.1,
-                      child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: 1,
-                          itemBuilder: (context, index) {
-                            var abc = 1;
-                            PlatformFile? single;
+                      child: InkWell(
+                        onTap: () async {
+                          PlatformFile? aIamge = await UploadDocumets.selectFile();
 
-                            allDocs?.forEach((value) {
-                              // print("hello: ${value['name']}");
-                              if (value['name'] == abc) {
-                                single = value['file'];
-                              }
-                            });
+                          PIimage = aIamge;
+                          print("sssssimage${PIimage}");
+                          print("sssssimage${aIamge}");
 
-                            return InkWell(
-                              onTap: () async {
-                                PlatformFile? a =
-                                await UploadDocumets.selectFile();
-
-                                setState(() {
-                                  var b = {"name": abc, "file": a};
-                                  allDocs = [...?allDocs, b];
-                                  // docObject.addEntries({"${kycDocListModelData![index].id}" : "${a}"}.entries);
-                                  // docObject = {
-                                  //   ...docObject,
-                                  //   "${kycDocListModelData![index].id}": "${a}"
-                                  // };
-                                });
-                              },
-                              child: Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: (single != null)
-                                      ? cardOfDocAfterUploadSuccessWidget(
-                                      single!, context,
-                                      cardTextWidth: 200)
-                                      : cardOfDocBeforeUploadWidget(context)),
-                            );
-                          }),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Flexible(
-                          child: InkWell(
-                            onTap: () {
-                              // selectProfilePic();
-                              getImage(1);
-                              print("hi");
-                            },
-                            // child: (userPic == null)
-                            child: (fundraiserInnerImage1 == null)
-                                ? Image(
-                              image: AssetImage(
-                                  "assets/images/upload_image_holder.png"),
-                              width: main_Height * 0.2,
-                              height: main_Height * 0.2,
-                            )
-                                : Stack(
-                              alignment: Alignment.topRight,
-                              clipBehavior: Clip.none,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8),
-                                  child: Image.file(
-                                    File(fundraiserInnerImage1!.path),
-                                    // width: main_height < 700 ? 100 : 160,
-                                    // height: main_height < 700 ? 100 : 140,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: -5,
-                                  right: -7,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      fundraiserInnerImage1 = null;
-                                      fundraiserInnerImageList[0] =
-                                          File("");
-                                      print(
-                                          "fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
-                                      print("first inner image");
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                        padding: EdgeInsets.all(2),
-                                        decoration: BoxDecoration(
-                                          color: Color.fromARGB(
-                                              255, 211, 211, 211),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Icon(
-                                          Icons.clear,
-                                          size: 18,
-                                          color: Colors.black,
-                                        )),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Flexible(
-                          child: InkWell(
-                            onTap: () {
-                              getImage(2);
-                            },
-                            child: (fundraiserInnerImage2 == null)
-                                ? Image(
-                              image: AssetImage(
-                                  "assets/images/upload_image_holder.png"),
-                              width: main_Height * 0.2,
-                              height: main_Height * 0.2,
-                            )
-                                : Stack(
-                              alignment: Alignment.topRight,
-                              clipBehavior: Clip.none,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8),
-                                  child: Image.file(
-                                    File(fundraiserInnerImage2!.path),
-                                    // width: main_height < 700 ? 200 : 160,
-                                    // height: main_height < 700 ? 200 : 140,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: -5,
-                                  right: -7,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      fundraiserInnerImage2 = null;
-                                      fundraiserInnerImageList[1] =
-                                          File("");
-                                      print(
-                                          "fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                        padding: EdgeInsets.all(2),
-                                        decoration: BoxDecoration(
-                                          color: Color.fromARGB(
-                                              255, 211, 211, 211),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Icon(
-                                          Icons.clear,
-                                          size: 18,
-                                          color: Colors.black,
-                                        )),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                          setState(() {
+                            PIimage = aIamge;
+                            print("sssssimage${PIimage!.name}");
+                          });
+                        },
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: (PIimage != null)
+                                ? cardOfDocAfterUploadSuccessWidget(PIimage!, cardTextWidth: 200)
+                                : cardOfDocBeforeUploadWidget(PIimage?.identifier,context)),
+                      ),
                     ),
                   ],
                 ),
@@ -843,6 +571,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
           ),
         ),
       ),
+
+
     );
   }
 
@@ -950,6 +680,99 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             ),
           );
         });
+  }
+
+
+  Widget cardOfDocBeforeUploadWidget(String? docToUpload, BuildContext context) {
+
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+
+    return Container(
+      padding: EdgeInsets.all(main_Width * 0.015),
+      decoration: BoxDecoration(border: Border.all(color: primaryPurple)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Click to upload",
+                style: TextStyle(color: primaryPurple, fontWeight: FontWeight.w500,
+                  fontSize:
+                    main_Height * 0.018
+                ),
+              ),
+              Text("${docToUpload == null ? "" : docToUpload}",
+                  style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                      letterSpacing: 0.8,
+                      fontSize:
+                      main_Height * 0.015
+                  )),
+
+              Text("Upload .jpg or .pdf file",
+                  style: TextStyle(color: Colors.black,
+                      fontSize:
+                      main_Height * 0.012
+                  ))
+            ],
+          ),
+          Image(
+            image: AssetImage("assets/images/add_doc.png"),
+            width: 40,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget cardOfDocAfterUploadSuccessWidget(PlatformFile uploadedFile,{double? cardTextWidth}) {
+    return Container(
+      height: 70,
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(border: Border.all(color: primaryPurple)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: cardTextWidth ?? null,
+                child: RichText(
+                    softWrap: true,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      text: "${uploadedFile.name == "null" ? "" : uploadedFile.name}\n",
+                      style: TextStyle(
+                          color: primaryPurple, fontWeight: FontWeight.w500),
+                    )),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
+          uploadedFile.extension == "jpeg" ||
+              uploadedFile.extension == "png" ||
+              uploadedFile.extension == "jpg"
+              ? Image(
+            image: AssetImage("assets/images/picture_pre.jpg"),
+            width: 40,
+          )
+              : Image(
+            image: AssetImage("assets/images/pdf_pre.png"),
+            width: 40,
+          )
+        ],
+      ),
+    );
   }
 
 
