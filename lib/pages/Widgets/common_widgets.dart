@@ -500,7 +500,7 @@ class CommonWidgets {
                             fontSize: main_Height * 0.018),
                       ),
                       Text(
-                        "${getIncomeListModelData!.createdDate.toString().replaceAll("T", ", ").substring(0, 20)}",
+                        "${getIncomeListModelData!.incomeDate.toString().replaceAll("T", ", ").substring(0, 20)}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

@@ -556,8 +556,8 @@ void bottomSheetforAddShelfItems(BuildContext context){
                         onSaved: (val){
                           print("val ${val}");
                           print("val ${DateTime.now().toString()}");
-                          print("ddn${DateTime.now().toString().substring(0,16)}");
-                          textField3Value = val == DateTime.now().toString() ? "${DateTime.now().toString().substring(0,16)}" : val;
+                          print("ddn${DateTime.now().toString().substring(0,19)}");
+                          textField3Value = val.toString().substring(0,16) == DateTime.now().toString().substring(0,16) ? "${DateTime.now().toString().substring(0,19)}" : val;
                           print("val${textField3Value}");
                           // print("daaaate${IncomeDate}");
                           // print("daaaate${val}");
@@ -597,15 +597,15 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           onPressed: (){
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              print("tttf ${textField1Value} ${textField2Value} ${textField3Value}");
+                              // print("tttf ${textField1Value} ${textField2Value} ${textField3Value}");
 
                               // final test22 = "${textField3Value == null ? DateTime.now().toString().substring(0,16) : textField3Value}";
 
-                              final testDate = "${textField3Value?.replaceAll(" ","T")}:00.900Z";
+                              final testDate =  textField3Value == DateTime.now().toString().substring(0,16) ? "${ textField3Value?.replaceAll(" ","T")}.900Z" : "${ textField3Value?.replaceAll(" ","T")}:00.900Z";
                               print("td${testDate}");
 
 
-                              incomeListScreenBloc.add(PostAddIncomeEvent( "${testDate.toString().substring(0,24)}","${textField1Value}","${textField2Value}",));
+                              incomeListScreenBloc.add(PostAddIncomeEvent( "${testDate.toString()}","${textField1Value}","${textField2Value}",));
 
                               // Perform save action with textField1Value and textField2Value
                               Navigator.of(context).pop();

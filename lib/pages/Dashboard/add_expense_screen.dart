@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:date_time_picker/date_time_picker.dart';
@@ -29,9 +28,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     'Category 4'
   ];
 
+  String? CategoryExpense;
 
   final amountController = TextEditingController();
-
 
   @override
   void initState() {
@@ -52,21 +51,22 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   File? fundraiserInnerImage1, fundraiserInnerImage2, fundraiserInnerImage3;
 
   Future getImage(int ind) async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+    final pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
 
     if (pickedFile != null) {
-      if(ind == 0){
+      if (ind == 0) {
         featureImage = File(pickedFile.path);
       }
       // if(ind == 1 || ind == 2 || ind == 3) {
-      if(ind == 1 || ind == 2 ) {
-        for(int i = 0; i < 2; i++) {
-          if(fundraiserInnerImageList.length < 3) {
-            if(ind == 1){
+      if (ind == 1 || ind == 2) {
+        for (int i = 0; i < 2; i++) {
+          if (fundraiserInnerImageList.length < 3) {
+            if (ind == 1) {
               // fundraiserInnerImageList[0] = File(pickedFile.toString());
               fundraiserInnerImageList[0] = File(pickedFile.path);
             }
-            if(ind == 2){
+            if (ind == 2) {
               // fundraiserInnerImageList[1] = File(pickedFile.toString());
               fundraiserInnerImageList[1] = File(pickedFile.path);
             }
@@ -77,7 +77,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
           }
           break;
         }
-        if(ind == 1) {
+        if (ind == 1) {
           fundraiserInnerImage1 = File(pickedFile.path);
         }
         if (ind == 2) {
@@ -97,13 +97,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   List<dynamic>? allDocs = [];
 
-
   @override
   void dispose() {
     amountController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -123,8 +121,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         elevation: 0,
         // centerTitle: true,
       ),
-
-      bottomSheet :  Container(
+      bottomSheet: Container(
         height: main_Height * 0.13,
         width: main_Width * 1,
         decoration: BoxDecoration(color: Colors.transparent),
@@ -143,10 +140,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               ),
               primary: primaryPurple,
             ),
-            onPressed: () {
-
-
-            },
+            onPressed: () {},
             child: Text(
               "Add Expense",
               style: TextStyle(
@@ -159,8 +153,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-
       body: SingleChildScrollView(
         child: Form(
           key: _formkey,
@@ -168,13 +160,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: main_Width * 0.03,
-                  vertical: main_Height * 0.01
-                ),
+                    horizontal: main_Width * 0.03,
+                    vertical: main_Height * 0.01),
                 child: Column(
                   children: [
-
-
                     Row(
                       children: [
                         Text(
@@ -204,7 +193,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'First Name can\'t be empty';
+                          return 'Amount can\'t be empty';
                         }
                         return null;
                       },
@@ -230,8 +219,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-
-
                     Row(
                       children: [
                         Text(
@@ -246,41 +233,60 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     const SizedBox(
                       height: 5,
                     ),
-                    Container(
-                      width: main_Width,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1,
-                            color: Colors.black38,
-                          ),
-                          borderRadius: BorderRadius.circular(3)),
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: _selectedOption,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedOption = newValue!;
-                            });
-                          },
-                          items: _options.map((String option) {
-                            return DropdownMenuItem<String>(
-                              value: option,
-                              child: Text(
-                                option,
-                                selectionColor: Colors.black,
-                              ),
-                            );
-                          }).toList(),
-                          underline: null,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                              // width: main_Width,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Colors.black38,
+                                  ),
+                                  borderRadius: BorderRadius.circular(3)),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  value: _selectedOption,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selectedOption = newValue!;
+                                    });
+                                  },
+                                  items: _options.map((String option) {
+                                    return DropdownMenuItem<String>(
+                                      value: option,
+                                      child: Text(
+                                        option,
+                                        selectionColor: Colors.black,
+                                      ),
+                                    );
+                                  }).toList(),
+                                  underline: null,
+                                ),
+                              )),
                         ),
-                      )
+                        SizedBox(
+                          width: main_Width * 0.02,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            _displayAddCatInputDialog(context);
+                          },
+                          child: Container(
+                            height: main_Height * 0.05,
+                            width: main_Height * 0.05,
+                            child: SvgPicture.asset(
+                              "assets/images/add.svg",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-
-
                     Row(
                       children: [
                         Text(
@@ -343,8 +349,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-
-
                     Row(
                       children: [
                         Text(
@@ -399,11 +403,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-
-
                     Row(
                       children: [
-                        Text("Remarks",
+                        Text(
+                          "Remarks",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: main_Height * 0.018,
@@ -411,7 +414,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Container(
                       height: main_Height * 0.2,
                       child: TextFormField(
@@ -441,39 +446,36 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         decoration: InputDecoration(
                           hintText: "Remarks",
                           contentPadding:
-                          EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                              EdgeInsets.only(top: 5, bottom: 5, left: 10),
                           // filled: true,
                           enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black38),
                           ),
                           // fillColor: ,
 
-                          hintStyle:  TextStyle(
+                          hintStyle: TextStyle(
                               color: Colors.grey,
-                              fontSize: main_Height * 0.018
-                          ),
+                              fontSize: main_Height * 0.018),
                           border: OutlineInputBorder(
-                            // borderSide:
-                            //     const BorderSide(color: Colors.transparent),
-                            // borderRadius: BorderRadius.circular(10)
-                          ),
+                              // borderSide:
+                              //     const BorderSide(color: Colors.transparent),
+                              // borderRadius: BorderRadius.circular(10)
+                              ),
                         ),
                       ),
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-
-
                     Row(
                       children: [
-                        Text("Add File Or Images",
+                        Text(
+                          "Add File Or Images",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: main_Height * 0.018,
                               fontWeight: FontWeight.w500),
                         )
-                        
                       ],
                     ),
                     SizedBox(
@@ -495,13 +497,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             return InkWell(
                               onTap: () async {
                                 PlatformFile? a =
-                                await UploadDocumets.selectFile();
+                                    await UploadDocumets.selectFile();
 
                                 setState(() {
-                                  var b = {
-                                    "name": abc,
-                                    "file": a
-                                  };
+                                  var b = {"name": abc, "file": a};
                                   allDocs = [...?allDocs, b];
                                   // docObject.addEntries({"${kycDocListModelData![index].id}" : "${a}"}.entries);
                                   // docObject = {
@@ -513,9 +512,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                               child: Padding(
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: (single != null)
-                                      ? cardOfDocAfterUploadSuccessWidget(single!,
-                                      context,
-                                      cardTextWidth: 200)
+                                      ? cardOfDocAfterUploadSuccessWidget(
+                                          single!, context,
+                                          cardTextWidth: 200)
                                       : cardOfDocBeforeUploadWidget(context)),
                             );
                           }),
@@ -533,51 +532,58 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             // child: (userPic == null)
                             child: (fundraiserInnerImage1 == null)
                                 ? Image(
-                              image: AssetImage(
-                                  "assets/images/upload_image_holder.png"),
-                              width: main_Height * 0.2 ,
-                              height: main_Height * 0.2,
-                            )
+                                    image: AssetImage(
+                                        "assets/images/upload_image_holder.png"),
+                                    width: main_Height * 0.2,
+                                    height: main_Height * 0.2,
+                                  )
                                 : Stack(
-                              alignment: Alignment.topRight,
-                              clipBehavior: Clip.none,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
-                                  child: Image.file(
-                                    File(fundraiserInnerImage1!.path),
-                                    // width: main_height < 700 ? 100 : 160,
-                                    // height: main_height < 700 ? 100 : 140,
-
-                                  ),
-                                ),
-                                Positioned(
-                                  top: -5,
-                                  right: -7,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      fundraiserInnerImage1 = null;
-                                      fundraiserInnerImageList[0] = File("");
-                                      print("fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
-                                      print("first inner image");
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                        padding: EdgeInsets.all(2),
-                                        decoration: BoxDecoration(
-                                          color: Color.fromARGB(255, 211, 211, 211),
-                                          shape: BoxShape.circle,
+                                    alignment: Alignment.topRight,
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8),
+                                        child: Image.file(
+                                          File(fundraiserInnerImage1!.path),
+                                          // width: main_height < 700 ? 100 : 160,
+                                          // height: main_height < 700 ? 100 : 140,
                                         ),
-                                        child: Icon(Icons.clear, size: 18, color: Colors.black,)
-                                    ),
+                                      ),
+                                      Positioned(
+                                        top: -5,
+                                        right: -7,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            fundraiserInnerImage1 = null;
+                                            fundraiserInnerImageList[0] =
+                                                File("");
+                                            print(
+                                                "fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
+                                            print("first inner image");
+                                            setState(() {});
+                                          },
+                                          child: Container(
+                                              padding: EdgeInsets.all(2),
+                                              decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 211, 211, 211),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Icons.clear,
+                                                size: 18,
+                                                color: Colors.black,
+                                              )),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
                           ),
                         ),
-                        SizedBox(width: 10,),
-
+                        SizedBox(
+                          width: 10,
+                        ),
                         Flexible(
                           child: InkWell(
                             onTap: () {
@@ -585,66 +591,63 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                             },
                             child: (fundraiserInnerImage2 == null)
                                 ? Image(
-                              image: AssetImage(
-                                  "assets/images/upload_image_holder.png"),
-                              width: main_Height * 0.2,
-                              height: main_Height * 0.2,
-                            )
+                                    image: AssetImage(
+                                        "assets/images/upload_image_holder.png"),
+                                    width: main_Height * 0.2,
+                                    height: main_Height * 0.2,
+                                  )
                                 : Stack(
-                              alignment: Alignment.topRight,
-                              clipBehavior: Clip.none,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
-                                  child: Image.file(
-                                    File(fundraiserInnerImage2!.path),
-                                    // width: main_height < 700 ? 200 : 160,
-                                    // height: main_height < 700 ? 200 : 140,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: -5,
-                                  right: -7,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      fundraiserInnerImage2 = null;
-                                      fundraiserInnerImageList[1] = File("");
-                                      print("fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                        padding: EdgeInsets.all(2),
-                                        decoration: BoxDecoration(
-                                          color: Color.fromARGB(255, 211, 211, 211),
-                                          shape: BoxShape.circle,
+                                    alignment: Alignment.topRight,
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8),
+                                        child: Image.file(
+                                          File(fundraiserInnerImage2!.path),
+                                          // width: main_height < 700 ? 200 : 160,
+                                          // height: main_height < 700 ? 200 : 140,
                                         ),
-                                        child: Icon(Icons.clear, size: 18, color: Colors.black,)
-                                    ),
+                                      ),
+                                      Positioned(
+                                        top: -5,
+                                        right: -7,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            fundraiserInnerImage2 = null;
+                                            fundraiserInnerImageList[1] =
+                                                File("");
+                                            print(
+                                                "fundraiserInnerImageList after removing image: $fundraiserInnerImageList");
+                                            setState(() {});
+                                          },
+                                          child: Container(
+                                              padding: EdgeInsets.all(2),
+                                              decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 211, 211, 211),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Icons.clear,
+                                                size: 18,
+                                                color: Colors.black,
+                                              )),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
                           ),
                         ),
-
                       ],
                     ),
-
-
-
-
-
-
-
                   ],
                 ),
               ),
-
               Container(
                 height: main_Height * 0.13,
                 width: main_Width * 1,
               )
-
             ],
           ),
         ),
@@ -652,20 +655,16 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     );
   }
 
-
-
   Widget cardOfDocBeforeUploadWidget(BuildContext context) {
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
-
 
     return Container(
       height: main_Height * 0.072,
       padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(border: Border.all(color: Colors.black38,width:1),
-      borderRadius: BorderRadius.circular(3)
-      ),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black38, width: 1),
+          borderRadius: BorderRadius.circular(3)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -674,7 +673,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             children: [
               Text(
                 "Click to upload",
-                style: TextStyle(color: primaryPurple, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: primaryPurple, fontWeight: FontWeight.w500),
               ),
               SizedBox(
                 child: Text("Upload .pdf file",
@@ -691,15 +691,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     );
   }
 
-
-  Widget cardOfDocAfterUploadSuccessWidget(PlatformFile uploadedFile,BuildContext context,{double? cardTextWidth}) {
+  Widget cardOfDocAfterUploadSuccessWidget(
+      PlatformFile uploadedFile, BuildContext context,
+      {double? cardTextWidth}) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
     return Container(
       height: main_Height * 0.072,
       padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(border: Border.all(color: Colors.black38,width:1),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black38, width: 1),
         borderRadius: BorderRadius.circular(3),
       ),
       child: Row(
@@ -743,5 +745,108 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     );
   }
 
+  Future<void> _displayAddCatInputDialog(BuildContext context) async {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Form(
+            key: _formkey,
+            child: AlertDialog(
+              title: Text(
+                'Add Expense Category',
+                style: TextStyle(),
+              ),
+              content: Container(
+                height: main_Height * 0.05,
+                width: main_Width * 0.08,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                          onSaved: (onSavedVal) {
+                            CategoryExpense = onSavedVal;
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Category Name can\'t be empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            isDense: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            hintText: "Enter Expense Category",
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                color: darkGrey,
+                                fontSize: main_Height * 0.018),
+                          ),
+                          textInputAction: TextInputAction.next),
+                      SizedBox(
+                        height: main_Height * 0.01,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              actions: <Widget>[
+                SizedBox(
+                  width: main_Width * 0.2,
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(color: primaryPurple)))),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          color: primaryPurple,
+                          fontSize: main_Height * 0.01872,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                ),
+                SizedBox(
+                  width: main_Width * 0.2,
+                  child: TextButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: BorderSide(color: primaryPurple))),
+                          backgroundColor:
+                              MaterialStateProperty.all(primaryPurple)),
+                      onPressed: () {
+                        if (_formkey.currentState!.validate()) {
+                          _formkey.currentState!.save();
+
+                          print("Catttt${CategoryExpense}");
+
+                        }
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "Add",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: main_Height * 0.01872,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      )),
+                ),
+              ],
+            ),
+          );
+        });
+  }
 
 }
