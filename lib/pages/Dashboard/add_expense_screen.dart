@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/CustomModel/expense_cat_filter_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../Utils/colors.dart';
@@ -17,31 +18,23 @@ import '../../models/Category/get_expense_category_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 
-
-
-
-
 class AddExpenseScreen extends StatefulWidget {
   static String routeName = '/addExpenseScreen';
   Function backPressCallback;
 
-
-  AddExpenseScreen(this.backPressCallback,{super.key});
+  AddExpenseScreen(this.backPressCallback, {super.key});
 
   @override
   State<AddExpenseScreen> createState() => _AddExpenseScreenState();
 }
 
 class _AddExpenseScreenState extends State<AddExpenseScreen> {
-
-  String? _selectedOption;
-
-
+  String? selectedOption;
+  String? SelectedDropDownItem;
 
   PlatformFile? PIimage;
 
-  String? Amount,CategoryExpense,DateTime1,ToPay,Remarks;
-
+  String? Amount, CategoryExpense, DateTime1, ToPay, Remarks;
 
   @override
   void initState() {
@@ -52,26 +45,18 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
-
-
   List<dynamic>? allDocs = [];
 
-
-
   ExpenseScreenBloc expenseScreenBloc =
-  ExpenseScreenBloc(Repository.getInstance());
-
+      ExpenseScreenBloc(Repository.getInstance());
 
   List<GetExpenseCatModel>? getExpenseCatModelData;
 
   AddExpenseCatModel? addExpenseCatModelData;
 
-  loadAllCATListScreenApiCalls(){
+  loadAllCATListScreenApiCalls() {
     expenseScreenBloc.add(FetchAllExpenseCatScreenListScreenAPIsEvent());
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +65,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
     return BlocProvider<ExpenseScreenBloc>(
         create: (context) =>
-        expenseScreenBloc..add(ExpenseScreenListInitialEvent()),
+            expenseScreenBloc..add(ExpenseScreenListInitialEvent()),
         child: BlocConsumer<ExpenseScreenBloc, ExpenseScreenState>(
           builder: (context, state) {
             if (state is ExpenseScreenLoadingEventState) {
@@ -89,49 +74,43 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               getExpenseCatModelData = state.getExpenseCatModelData;
 
               return mainViewAllScreenViewWidget();
-            }
-            else if(state is PostAddExpenseCatEventState){
-
+            } else if (state is PostAddExpenseCatEventState) {
               addExpenseCatModelData = state.addExpenseCatModelData;
 
               loadAllCATListScreenApiCalls();
               return mainViewAllScreenViewWidget();
-
-            }
-
-
-            else {
+            } else {
               return Container();
             }
           },
           listener: (context, state) {
             if (state is ApiFailureState) {
-
               ThemeHelper.customDialogForMessage(
                   context,
                   (state.exception.toString().replaceAll('Exception:', ''))
                       .replaceAll(':', ''),
                   MediaQuery.of(context).size.width, () {
-
                 Navigator.of(context).pop();
                 loadAllCATListScreenApiCalls();
               }, ForSuccess: false);
-
             }
           },
         ));
   }
 
-
-
-  Widget mainViewAllScreenViewWidget(){
+  Widget mainViewAllScreenViewWidget() {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
+    List<ExpenseCatFilterModel> expenseCatListForFilter = [];
 
-    List<String> expenseCatListForFilter = [];
+    getExpenseCatModelData!
+        .map((e) =>
+            expenseCatListForFilter.add(ExpenseCatFilterModel(e.id.toString(),e.expenseCategoryName.toString())))
+        .toList();
 
-    getExpenseCatModelData!.map((e) => expenseCatListForFilter.add(e.expenseCategoryName.toString())).toList();
+
+
 
     // for(int i=0; i < getExpenseCatModelData!.length; i++) {
     //
@@ -158,7 +137,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         elevation: 0,
         // centerTitle: true,
       ),
-      floatingActionButton: Container(
+      bottomSheet: Container(
         height: main_Height * 0.13,
         width: main_Width * 1,
         decoration: BoxDecoration(color: Colors.transparent),
@@ -181,13 +160,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               if (_formkey.currentState!.validate()) {
                 _formkey.currentState!.save();
 
-                final testDate =  DateTime1 == DateTime.now().toString().substring(0,16) ? "${ DateTime1?.replaceAll(" ","T")}.900Z" : "${ DateTime1?.replaceAll(" ","T")}:00.900Z";
-                print("td${testDate}");
+                final testDate =
+                    DateTime1 == DateTime.now().toString().substring(0, 16)
+                        ? "${DateTime1?.replaceAll(" ", "T")}.900Z"
+                        : "${DateTime1?.replaceAll(" ", "T")}:00.900Z";
 
+                print(
+                    "check Expense : ${Amount} ${testDate} ${selectedOption} ${ToPay} ${Remarks} ");
 
-                print("check Expense : ${Amount} ${_selectedOption} ${testDate} ${ToPay} ${Remarks} ${PIimage!.name}");
+                print("ddddddd : ${selectedOption} ");
+
                 loadAllCATListScreenApiCalls();
-
               }
             },
             child: Text(
@@ -249,7 +232,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       },
                       decoration: InputDecoration(
                         contentPadding:
-                        const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                         // filled: true,
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black38),
@@ -259,11 +242,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         hintStyle: TextStyle(
                             color: Colors.grey, fontSize: main_Height * 0.018),
                         border: const OutlineInputBorder(
-                          // borderSide:
-                          // const BorderSide(color: Colors.white),
-                          // borderRadius: BorderRadius.circular(10)
+                            // borderSide:
+                            // const BorderSide(color: Colors.white),
+                            // borderRadius: BorderRadius.circular(10)
 
-                        ),
+                            ),
                       ),
                     ),
                     const SizedBox(
@@ -287,7 +270,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       children: [
                         Expanded(
                           child: Container(
-                            // width: main_Width,
+                              // width: main_Width,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                     width: 1,
@@ -295,27 +278,51 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                                   ),
                                   borderRadius: BorderRadius.circular(3)),
                               padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  value: _selectedOption,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selectedOption = newValue!;
-                                      print("sssop${_selectedOption}");
-                                    });
-                                  },
-                                  hint: Text("Select Category"),
-                                  items: expenseCatListForFilter.map((String option) {
-                                    return DropdownMenuItem<String>(
-                                      value: option,
-                                      child: Text(
-                                        option,
-                                        selectionColor: Colors.black,
-                                      ),
-                                    );
-                                  }).toList(),
-                                  underline: null,
+                              child:  DropdownButtonFormField<dynamic>(
+                                isExpanded: true,
+                                value: selectedOption ?? SelectedDropDownItem,
+                                style:  TextStyle(
+                                    color: Colors.black
                                 ),
+                                validator: (value) {
+                                  if(value == null) {
+                                    return "Select Category First";
+                                  }
+                                  return null;
+                                },
+
+                                items: expenseCatListForFilter.map((ExpenseCatFilterModel value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value.id.toString(),
+                                    child: Text(
+                                      value.expenseCategoryName.toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style:  TextStyle(
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                                decoration: InputDecoration(
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  hintText: "Select Category"
+                                ),
+
+                                onChanged: (val) {
+                                  setState(() {
+                                    SelectedDropDownItem = val;
+                                  });
+                                  print("aaaa${SelectedDropDownItem} ");
+
+                                },
+
+                                onSaved: (val) {
+                                  setState(() {
+                                    selectedOption = val;
+                                  });
+                                },
                               )),
                         ),
                         SizedBox(
@@ -358,7 +365,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       type: DateTimePickerType.dateTimeSeparate,
                       decoration: InputDecoration(
                         contentPadding:
-                        const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                         // filled: true,
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black38),
@@ -368,11 +375,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         hintStyle: TextStyle(
                             color: Colors.grey, fontSize: main_Height * 0.018),
                         border: const OutlineInputBorder(
-                          // borderSide:
-                          //     const BorderSide(color: Colors.transparent),
-                          // borderRadius: BorderRadius.circular(10)
+                            // borderSide:
+                            //     const BorderSide(color: Colors.transparent),
+                            // borderRadius: BorderRadius.circular(10)
 
-                        ),
+                            ),
                       ),
                       dateMask: 'd MMM, yyyy',
                       initialValue: DateTime.now().toString(),
@@ -396,11 +403,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         print(val);
                         return null;
                       },
-                      onSaved: (val){
+                      onSaved: (val) {
                         print("val ${val}");
                         print("val ${DateTime.now().toString()}");
-                        print("ddn${DateTime.now().toString().substring(0,19)}");
-                        DateTime1 = val.toString().substring(0,16) == DateTime.now().toString().substring(0,16) ? "${DateTime.now().toString().substring(0,19)}" : val;
+                        print(
+                            "ddn${DateTime.now().toString().substring(0, 19)}");
+                        DateTime1 = val.toString().substring(0, 16) ==
+                                DateTime.now().toString().substring(0, 16)
+                            ? "${DateTime.now().toString().substring(0, 19)}"
+                            : val;
                         print("val${DateTime1}");
                         // print("daaaate${IncomeDate}");
                         // print("daaaate${val}");
@@ -443,7 +454,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       },
                       decoration: InputDecoration(
                         contentPadding:
-                        const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                         // filled: true,
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black38),
@@ -453,11 +464,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         hintStyle: TextStyle(
                             color: Colors.grey, fontSize: main_Height * 0.018),
                         border: const OutlineInputBorder(
-                          // borderSide:
-                          // const BorderSide(color: Colors.white),
-                          // borderRadius: BorderRadius.circular(10)
+                            // borderSide:
+                            // const BorderSide(color: Colors.white),
+                            // borderRadius: BorderRadius.circular(10)
 
-                        ),
+                            ),
                       ),
                     ),
                     const SizedBox(
@@ -506,7 +517,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         decoration: InputDecoration(
                           hintText: "Remarks",
                           contentPadding:
-                          EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                              EdgeInsets.only(top: 5, bottom: 5, left: 10),
                           // filled: true,
                           enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black38),
@@ -517,10 +528,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                               color: Colors.grey,
                               fontSize: main_Height * 0.018),
                           border: OutlineInputBorder(
-                            // borderSide:
-                            //     const BorderSide(color: Colors.transparent),
-                            // borderRadius: BorderRadius.circular(10)
-                          ),
+                              // borderSide:
+                              //     const BorderSide(color: Colors.transparent),
+                              // borderRadius: BorderRadius.circular(10)
+                              ),
                         ),
                       ),
                     ),
@@ -542,7 +553,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       height: main_Height * 0.1,
                       child: InkWell(
                         onTap: () async {
-                          PlatformFile? aIamge = await UploadDocumets.selectFile();
+                          PlatformFile? aIamge =
+                              await UploadDocumets.selectFile();
 
                           PIimage = aIamge;
                           print("sssssimage${PIimage}");
@@ -556,23 +568,23 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         child: Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: (PIimage != null)
-                                ? cardOfDocAfterUploadSuccessWidget(PIimage!, cardTextWidth: 200)
-                                : cardOfDocBeforeUploadWidget(PIimage?.identifier,context)),
+                                ? cardOfDocAfterUploadSuccessWidget(PIimage!,
+                                    cardTextWidth: 200)
+                                : cardOfDocBeforeUploadWidget(
+                                    PIimage?.identifier, context)),
                       ),
                     ),
                   ],
                 ),
               ),
               Container(
-                height: main_Height * 0.13,
+                height: main_Height * 0.4,
                 width: main_Width * 1,
               )
             ],
           ),
         ),
       ),
-
-
     );
   }
 
@@ -655,15 +667,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                                   borderRadius: BorderRadius.circular(5),
                                   side: BorderSide(color: primaryPurple))),
                           backgroundColor:
-                          MaterialStateProperty.all(primaryPurple)),
+                              MaterialStateProperty.all(primaryPurple)),
                       onPressed: () {
                         if (_formkey.currentState!.validate()) {
                           _formkey.currentState!.save();
 
                           print("Catttt${CategoryExpense}");
 
-                          expenseScreenBloc.add(PostAddExpenseCatEvent("${CategoryExpense}"));
-
+                          expenseScreenBloc.add(
+                              PostAddExpenseCatEvent("${CategoryExpense}"));
                         }
                         Navigator.of(context).pop();
                       },
@@ -682,12 +694,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         });
   }
 
-
-  Widget cardOfDocBeforeUploadWidget(String? docToUpload, BuildContext context) {
-
+  Widget cardOfDocBeforeUploadWidget(
+      String? docToUpload, BuildContext context) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
-
 
     return Container(
       padding: EdgeInsets.all(main_Width * 0.015),
@@ -701,25 +711,20 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             children: [
               Text(
                 "Click to upload",
-                style: TextStyle(color: primaryPurple, fontWeight: FontWeight.w500,
-                  fontSize:
-                    main_Height * 0.018
-                ),
+                style: TextStyle(
+                    color: primaryPurple,
+                    fontWeight: FontWeight.w500,
+                    fontSize: main_Height * 0.018),
               ),
               Text("${docToUpload == null ? "" : docToUpload}",
                   style: TextStyle(
                       fontWeight: FontWeight.normal,
                       color: Colors.black,
                       letterSpacing: 0.8,
-                      fontSize:
-                      main_Height * 0.015
-                  )),
-
+                      fontSize: main_Height * 0.015)),
               Text("Upload .jpg or .pdf file",
-                  style: TextStyle(color: Colors.black,
-                      fontSize:
-                      main_Height * 0.012
-                  ))
+                  style: TextStyle(
+                      color: Colors.black, fontSize: main_Height * 0.012))
             ],
           ),
           Image(
@@ -731,7 +736,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     );
   }
 
-  Widget cardOfDocAfterUploadSuccessWidget(PlatformFile uploadedFile,{double? cardTextWidth}) {
+  Widget cardOfDocAfterUploadSuccessWidget(PlatformFile uploadedFile,
+      {double? cardTextWidth}) {
     return Container(
       height: 70,
       padding: EdgeInsets.all(8),
@@ -749,7 +755,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     text: TextSpan(
-                      text: "${uploadedFile.name == "null" ? "" : uploadedFile.name}\n",
+                      text:
+                          "${uploadedFile.name == "null" ? "" : uploadedFile.name}\n",
                       style: TextStyle(
                           color: primaryPurple, fontWeight: FontWeight.w500),
                     )),
@@ -760,21 +767,18 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             ],
           ),
           uploadedFile.extension == "jpeg" ||
-              uploadedFile.extension == "png" ||
-              uploadedFile.extension == "jpg"
+                  uploadedFile.extension == "png" ||
+                  uploadedFile.extension == "jpg"
               ? Image(
-            image: AssetImage("assets/images/picture_pre.jpg"),
-            width: 40,
-          )
+                  image: AssetImage("assets/images/picture_pre.jpg"),
+                  width: 40,
+                )
               : Image(
-            image: AssetImage("assets/images/pdf_pre.png"),
-            width: 40,
-          )
+                  image: AssetImage("assets/images/pdf_pre.png"),
+                  width: 40,
+                )
         ],
       ),
     );
   }
-
-
-
 }
