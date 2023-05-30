@@ -145,8 +145,6 @@ class ApiClient {
   }
 
 
-
-
   Future<dynamic> postApiCallWithoutBody(String baseUrl, String endPoint, {String? isAccessToken, String? isFireBaseToken}) async {
     var postResponseJson;
     var getUrl;
@@ -189,6 +187,97 @@ class ApiClient {
 
     return postResponseJson;
   }
+  ///
+  ///
+  /// POST REQUEST FOR MULTIPART [form-data]
+  ///
+  ///
+  Future<dynamic> apiCallMultipartPost(String baseUrl, String apiEndPoint,dynamic postBody,{bool? isBearer,String? isAccessToken,}) async {
+
+    postData data = postData.fromJson(postBody);
+
+    var getUrl;
+
+    getUrl = Uri.parse('$baseUrl$apiEndPoint');
+    print("postUrl $getUrl");
+
+    var request = http.MultipartRequest('POST', getUrl);
+
+    // request.headers.addAll({
+    //   "Content-Type": "application/json",
+    //   "isClient": "true",
+    //   "Authorization": "$accessToken"
+    // });
+
+
+    if(isBearer == true){
+      request.headers.addAll({
+        "Content-Type": "application/json",
+        "isClient": "true",
+        "Authorization": "Bearer $accessToken"
+      });
+    }else{
+      request.headers.addAll({
+        "Content-Type": "application/json",
+        "isClient": "true",
+        "Authorization": "$accessToken"
+      });
+    }
+
+
+
+
+
+    if(data.Receipt != null) {
+      var stream = http.ByteStream(data.Receipt!.openRead());
+      stream.cast();
+      var length = await data.Receipt!.length();
+      var multiport = await http.MultipartFile.fromPath("Receipt",data.Receipt!.path, contentType: MediaType('image', 'jpg'));
+      request.files.add(multiport);
+    }
+
+    print("testres");
+
+
+
+    request.fields['ExpenseCategoryId'] = data.ExpenseCategoryId!.toString();
+    request.fields['ExpenseDate'] = data.ExpenseDate!.toString();
+    request.fields['Amount'] = data.Amount!.toString();
+    request.fields['ToPay'] = data.ToPay!.toString();
+    request.fields['Remarks'] = data.Remarks!.toString();
+
+
+    var response = await request.send();
+
+    var stringResponse = await response.stream.bytesToString();
+    print("string response ${stringResponse}");
+    print(response.request);
+    print(response.statusCode);
+    switch (response.statusCode) {
+      case 200:
+        var jDecode = json.decode(stringResponse);
+        return jDecode;
+
+    // case 400:
+    //   Map<String, dynamic> jsonD = json.decode(stringResponse);
+    //   ChangePassModel changePassModelRes = ChangePassModel.fromJson(jsonD);
+    //   throw ServerValidationError(changePassModelRes.message);
+
+      case 400:
+        throw ServerValidationError("Server validation error : 404");
+
+      case 401:
+        throw UnAuthorizedException("Unauthorized access or Invalid credentials");
+
+      case 404:
+        throw DoesNotExistException("User Does Not Exist");
+
+      default:
+        throw Exception("Something went Wrong");
+    }
+  }
+
+
 
   //////
   ///
@@ -241,6 +330,12 @@ class ApiClient {
         throw Exception(postResponseJson["message"]);
     }
   }
+
+
+
+
+
+
   ///
   ///
   ///
@@ -501,5 +596,35 @@ class putData {
     lastName = json['lastName'];
     birthDate = json['birthDate'];
     profilePic = json['profilePic'];
+  }
+}
+
+
+
+
+class postData {
+  String? ExpenseCategoryId;
+  String? ExpenseDate;
+  String? Amount;
+  String? ToPay;
+  String? Remarks;
+  File? Receipt;
+  postData(
+      {
+        this.ExpenseCategoryId,
+        this.ExpenseDate,
+        this.Amount,
+        this.ToPay,
+        this.Remarks,
+        this.Receipt,
+      });
+
+postData.fromJson(Map<String, dynamic> json) {
+  ExpenseCategoryId = json['ExpenseCategoryId'];
+  ExpenseDate = json['ExpenseDate'];
+  Amount = json['Amount'];
+  ToPay = json['ToPay'];
+  Remarks = json['Remarks'];
+  Receipt = json['Receipt'];
   }
 }

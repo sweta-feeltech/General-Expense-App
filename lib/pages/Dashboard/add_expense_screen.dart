@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/CommonModel/message_model.dart';
 import 'package:general_expense_app/models/CustomModel/expense_cat_filter_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -53,6 +54,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   List<GetExpenseCatModel>? getExpenseCatModelData;
 
   AddExpenseCatModel? addExpenseCatModelData;
+  MessageModel? messageModelData;
 
   loadAllCATListScreenApiCalls() {
     expenseScreenBloc.add(FetchAllExpenseCatScreenListScreenAPIsEvent());
@@ -79,7 +81,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
               loadAllCATListScreenApiCalls();
               return mainViewAllScreenViewWidget();
-            } else {
+            }
+
+            else if (state is PostAddExpenseFormEventState) {
+              messageModelData = state.messageModelData;
+              PIimage = null;
+
+              loadAllCATListScreenApiCalls();
+              return mainViewAllScreenViewWidget();
+            }
+
+            else {
               return Container();
             }
           },
@@ -108,9 +120,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         .map((e) =>
             expenseCatListForFilter.add(ExpenseCatFilterModel(e.id.toString(),e.expenseCategoryName.toString())))
         .toList();
-
-
-
 
     // for(int i=0; i < getExpenseCatModelData!.length; i++) {
     //
@@ -162,15 +171,22 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
                 final testDate =
                     DateTime1 == DateTime.now().toString().substring(0, 16)
-                        ? "${DateTime1?.replaceAll(" ", "T")}.900Z"
-                        : "${DateTime1?.replaceAll(" ", "T")}:00.900Z";
+                        ? "${DateTime1?.replaceAll(" ", "T")}"
+                        : "${DateTime1?.replaceAll(" ", "T")}:00";
 
                 print(
                     "check Expense : ${Amount} ${testDate} ${selectedOption} ${ToPay} ${Remarks} ");
 
                 print("ddddddd : ${selectedOption} ");
 
-                loadAllCATListScreenApiCalls();
+                PIimage == null ?
+                    ThemeHelper.showToastMessage(
+                      "Add File or Image"
+                    )
+                    :
+                expenseScreenBloc.add(PostAddExpenseFormEvent("${selectedOption}","${testDate}","${Amount}","${ToPay}","${Remarks}",File(PIimage!.path.toString())));
+
+
               }
             },
             child: Text(
@@ -390,9 +406,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       timeLabelText: "Hour",
                       selectableDayPredicate: (date) {
                         // Disable weekend days to select from the calendar
-                        if (date.weekday == 6 || date.weekday == 7) {
-                          return false;
-                        }
+                        // if (date.weekday == 6 || date.weekday == 7) {
+                        //   return false;
+                        // }
 
                         return true;
                       },

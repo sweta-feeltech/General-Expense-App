@@ -28,3 +28,10 @@ class PostAddExpenseCatEventState extends ExpenseScreenState {
 
   PostAddExpenseCatEventState(this.addExpenseCatModelData);
 }
+
+
+class PostAddExpenseFormEventState extends ExpenseScreenState {
+  final MessageModel messageModelData;
+
+  PostAddExpenseFormEventState(this.messageModelData);
+}

@@ -107,3 +107,15 @@ String getExpCatAPIEnd = "ExpenseCategory";
 String addExpCatAPIEnd = "ExpenseCategory";
 //
 // ///
+//
+// ///
+/// /// /// ------------------GET EXP CAT API----------------------
+// ///
+String PostExpFormAPIEnd = "Expense";
+//
+// ///
+/// /// /// ------------------POST EXP CAT API----------------------
+// ///
+String addExpformAPIEnd = "Expense";
+//
+// ///
