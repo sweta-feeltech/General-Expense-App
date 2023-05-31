@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Widgets/common_widgets.dart';
 
-import 'add_expense_screen.dart';
+import '../Dashboard/add_expense_screen.dart';
 
 
 class ListOfExpenses extends StatefulWidget {
@@ -151,16 +151,36 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
 
 
               Padding(
-                padding: EdgeInsets.symmetric(vertical: main_Height * 0.008,horizontal: main_Width * 0.03),
-                child: Row(children: [
-                  Text("Last Added",
-                  style: TextStyle(
-                    letterSpacing: 1,
-                    fontSize: main_Height * 0.018,
-                    fontWeight: FontWeight.w500
-                  ),
-                  )
-                ],),
+                padding: EdgeInsets.symmetric(
+                    horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Add Income",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.021,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    InkWell(
+                      onTap: () {
+
+                        ///
+                      },
+                      child: Container(
+                        height: main_Height * 0.05,
+                        width: main_Height * 0.05,
+                        child: SvgPicture.asset(
+                          "assets/images/add.svg",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
 
               ///
@@ -170,9 +190,12 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
               Container(
                 height: main_Height * 0.735,
                 child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: 1,
                     itemBuilder: (BuildContext context, int index) {
-                      return   CommonWidgets.CommonListView2(context);
+                      return   CommonWidgets.masterCategoryCardOfUI2(context,
+                            () {},
+                        index: 1
+                      );
 
                     }),
               ),

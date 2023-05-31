@@ -174,10 +174,10 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         ? "${DateTime1?.replaceAll(" ", "T")}"
                         : "${DateTime1?.replaceAll(" ", "T")}:00";
 
-                print(
-                    "check Expense : ${Amount} ${testDate} ${selectedOption} ${ToPay} ${Remarks} ");
-
-                print("ddddddd : ${selectedOption} ");
+                // print(
+                //     "check Expense : ${Amount} ${testDate} ${selectedOption} ${ToPay} ${Remarks} ");
+                //
+                // print("ddddddd : ${selectedOption} ");
 
                 PIimage == null ?
                     ThemeHelper.showToastMessage(
