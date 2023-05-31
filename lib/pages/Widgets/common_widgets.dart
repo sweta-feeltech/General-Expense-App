@@ -1136,7 +1136,8 @@ class CommonWidgets {
 
                                       )),
                                 )
-                                    : Container(
+                                    :
+                                Container(
                                   height: main_Height * 0.3,
                                   width: main_Width * 0.6,
                                   decoration: BoxDecoration(
@@ -1159,8 +1160,6 @@ class CommonWidgets {
                                     ),
                                   ),
                                 ),
-
-
 
 
                                 Positioned(
