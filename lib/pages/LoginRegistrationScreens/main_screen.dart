@@ -58,10 +58,11 @@ class _MainPageScreenState extends State<MainPageScreen> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: main_Height * 0.03),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+            Column(
               children: [
                 Container(
                   child: Column(
@@ -133,19 +134,31 @@ class _MainPageScreenState extends State<MainPageScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: main_Height * 0.05),
-                Container(
-                  width: main_Width * 0.75,
-                  height: main_Height * 0.30,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/cover.png",),
-                          fit: BoxFit.fill
-                      )
-                  ),
+              ],
+            ),
+
+
+              Container(
+                width: main_Width * 0.75,
+                height: main_Height * 0.30,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/cover.png",),
+                        fit: BoxFit.fill
+                    )
                 ),
-                SizedBox(height: main_Height * 0.085,),
-                Material(
+              ),
+
+                SizedBox(
+                  height: main_Height * 0.02,
+                ),
+
+                Container(
+                  height: main_Height * 0.18,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Material(
                   elevation: 3,
                   borderRadius: BorderRadius.circular(30),
                   child: SizedBox(
@@ -165,7 +178,7 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       ),
                       onPressed: () {
                         Navigator.of(context).pushNamed(
-                          RegistrationScreen.routeName);
+                            RegistrationScreen.routeName);
 
 
                       },
@@ -178,10 +191,9 @@ class _MainPageScreenState extends State<MainPageScreen> {
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: main_Height * 0.02,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Or Signin With Google",
                         style: TextStyle(
@@ -191,141 +203,135 @@ class _MainPageScreenState extends State<MainPageScreen> {
                         ),
                       ),
 
-                     ]
+                    ]
+              ),
+              Container(
+                height: main_Height * 0.060,
+                width: main_Width * 0.9,
+                decoration: BoxDecoration(
+                  color: primaryPurple,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                SizedBox(height: main_Height * 0.010,),
-                Center(
-                  child:Container(
-                    height: main_Height * 0.085,
-                    width: main_Width * 1,
-                    child: Padding(
-                      padding:
-                      EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
-                      child: Container(
-                        height: main_Height * 0.06,
-                        width: main_Width * 0.75,
-                        decoration: BoxDecoration(
-                          color: primaryPurple,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
 
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            primary: Colors.white,
-                          ),
-                          onPressed: () {
-
-                            _googleSignIn.signIn().then((value) {
-
-                              try{
-                                setState(() {
-
-                                  login();
-
-                                  String username = value!.displayName!;
-                                  String? email = value.email;
-                                  String? serviceAuth = value.serverAuthCode;
-                                  String? profilePicture = value.photoUrl;
-                                  String? id = value.id;
-                                  print("serviceAuth;   $serviceAuth");
-                                  print("id;   $id");
-                                  // print("profile;   $profilePicture");
-                                  // print("profile;   $profilePicture");
-
-                                  AuthorizedUser = true;
-
-                                  Username = username;
-                                  Email  = email;
-                                  ServiceAuth = serviceAuth;
-                                  ProfilePicture = profilePicture;
-                                  ID = id;
-
-                                }
-                                );
-
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
-                              }catch(e){
-                                print(" ${e}");
-                              }
-
-                            });
-
-
-
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-
-
-                                  Container(
-                                    height: main_Height * 0.04,
-                                    width: main_Height * 0.04,
-                                    child: Image.asset("assets/images/g.png",
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-
-
-                                  Text("Google",
-                                    style: TextStyle(
-                                        letterSpacing: 1,
-                                        fontSize: main_Height * 0.018,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black),
-                                  ),
-
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-
-                      ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
+                    primary: Colors.white,
                   ),
-                ),
-                SizedBox(height: main_Height * 0.045,),
-                Center(child:
-                Container(
+                  onPressed: () {
+
+                    _googleSignIn.signIn().then((value) {
+
+                      try{
+                        setState(() {
+
+                          login();
+
+                          String username = value!.displayName!;
+                          String? email = value.email;
+                          String? serviceAuth = value.serverAuthCode;
+                          String? profilePicture = value.photoUrl;
+                          String? id = value.id;
+                          print("serviceAuth;   $serviceAuth");
+                          print("id;   $id");
+                          // print("profile;   $profilePicture");
+                          // print("profile;   $profilePicture");
+
+                          AuthorizedUser = true;
+
+                          Username = username;
+                          Email  = email;
+                          ServiceAuth = serviceAuth;
+                          ProfilePicture = profilePicture;
+                          ID = id;
+
+                        }
+                        );
+
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
+                      }catch(e){
+                        print(" ${e}");
+                      }
+
+                    });
+
+
+
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Text(
-                        "Already have an account ?",
-                        style: TextStyle(
-                          fontSize: main_Height * 0.0165,
-                          color: Colors.black,),
-                        textAlign: TextAlign.center,
-                      ),
-                      TextButton(
-                        onPressed: () => {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogInScreen()))
-                        },
-                        child:  Text(
-                          "Log In",
-                          style: TextStyle(
-                            fontSize: main_Height * 0.0165,
-                            // color: Color(0xFFFF7622),
-                            color: primaryPurple,
-                            fontWeight: FontWeight.w500,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+
+                          Container(
+                            height: main_Height * 0.04,
+                            width: main_Height * 0.04,
+                            child: Image.asset("assets/images/g.png",
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                        ),
+
+
+                          Text("Google",
+                            style: TextStyle(
+                                letterSpacing: 1,
+                                fontSize: main_Height * 0.018,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+
+                        ],
                       ),
                     ],
                   ),
                 ),
 
-                )
+              ),
 
-              ],
-            ),
+            ],
+          ),
+                ),
+
+
+
+              Center(child:
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                     Text(
+                      "Already have an account ?",
+                      style: TextStyle(
+                        fontSize: main_Height * 0.0165,
+                        color: Colors.black,),
+                      textAlign: TextAlign.center,
+                    ),
+                    TextButton(
+                      onPressed: () => {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogInScreen()))
+                      },
+                      child:  Text(
+                        "Log In",
+                        style: TextStyle(
+                          fontSize: main_Height * 0.0165,
+                          // color: Color(0xFFFF7622),
+                          color: primaryPurple,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              )
+
+            ],
           ),
         ),
       ),
