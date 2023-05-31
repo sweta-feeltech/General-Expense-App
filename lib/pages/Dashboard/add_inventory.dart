@@ -29,7 +29,7 @@ class _AddInventoryScreenState extends State<AddInventoryScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: primaryPurple,
           elevation: 0,
-          // centerTitle: true,
+          centerTitle: false,
         ),
 
 

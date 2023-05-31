@@ -122,7 +122,7 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
       bottomSheet: Container(
         height: main_Height * 0.1,

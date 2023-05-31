@@ -55,7 +55,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),

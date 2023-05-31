@@ -53,7 +53,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: primaryPurple,
           elevation: 0,
-          // centerTitle: true,
+          centerTitle: false,
         ),
 
         body:   Column(

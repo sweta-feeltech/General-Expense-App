@@ -46,7 +46,7 @@ class _AddHome1ScreenState extends State<AddHome1Screen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
 
 

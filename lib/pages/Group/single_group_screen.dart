@@ -121,7 +121,7 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
         backgroundColor: Colors.white,
         // resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          // centerTitle: false,
+          centerTitle: false,
           titleSpacing: 15,
           automaticallyImplyLeading: false,
           backgroundColor: primaryPurple,

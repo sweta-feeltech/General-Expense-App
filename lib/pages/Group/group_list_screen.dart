@@ -120,7 +120,7 @@ class _GroupListScreenState extends State<GroupListScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
       body:
       getGroupListModelData?.isEmpty == true ?

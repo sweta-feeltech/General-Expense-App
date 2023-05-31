@@ -47,7 +47,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
 
 

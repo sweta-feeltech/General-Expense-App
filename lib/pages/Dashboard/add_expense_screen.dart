@@ -144,7 +144,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
       bottomSheet: Container(
         height: main_Height * 0.13,

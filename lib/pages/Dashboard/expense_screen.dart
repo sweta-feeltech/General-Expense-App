@@ -48,27 +48,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       backgroundColor: primaryGrey,
 
       appBar: AppBar(
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(
-        //       Icons.notifications_none_outlined,
-        //       color: Colors.white,
-        //     ),
-        //     onPressed: () {
-        //       // Add your onPressed logic here
-        //       ///for notification
-        //     },
-        //   ),
-        // ],
-        // leading: IconButton(
-        //   padding: EdgeInsets.zero,
-        //   constraints: BoxConstraints(minHeight: 20, minWidth: 20),
-        //   onPressed: () {
-        //     widget.backPressCallback.call();
-        //     // Navigator.of(context).pop();
-        //   },
-        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
-        // ),
         titleSpacing: 15,
         title: Text(
           "Expense",
@@ -77,7 +56,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
 
       body: SingleChildScrollView(

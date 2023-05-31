@@ -46,7 +46,7 @@ class _AddRoomScreenState extends State<AddRoomScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
 
 

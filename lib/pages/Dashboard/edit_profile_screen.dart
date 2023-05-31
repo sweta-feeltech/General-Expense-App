@@ -199,7 +199,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             backgroundColor: Colors.white,
             // resizeToAvoidBottomInset: false,
             appBar:AppBar(
-              // centerTitle: false,
+              centerTitle: false,
               titleSpacing: 0,
               backgroundColor: primaryPurple,
               elevation: 0,

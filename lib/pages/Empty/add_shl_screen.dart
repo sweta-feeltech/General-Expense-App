@@ -46,7 +46,7 @@ class _AddShelfScreenState extends State<AddShelfScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryPurple,
         elevation: 0,
-        // centerTitle: true,
+        centerTitle: false,
       ),
 
 
