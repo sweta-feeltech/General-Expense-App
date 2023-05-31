@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:general_expense_app/Utils/api_end_points.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 
@@ -65,7 +66,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
           canShowScrollStatus: true,
           pageSpacing: 5,
           pageLayoutMode: PdfPageLayoutMode.continuous,
-          '${widget.path}',
+          '${BASEIMAGEURL}${widget.path}',
           key: _pdfViewerKey,
         ),
       ),

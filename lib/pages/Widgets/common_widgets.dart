@@ -1088,7 +1088,6 @@ class CommonWidgets {
                   onTap: () {
 
 
-
                     showDialog(
                       context: context,
                       builder: (_) => Column(
@@ -1109,22 +1108,34 @@ class CommonWidgets {
 
 
                                 Container(
-                                    height: main_Height * 0.3,
-                                    width: main_Width * 0.6,
+                                  height: main_Height * 0.3,
+                                  width: main_Width * 0.6,
 
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                        BorderRadius.circular(10)),
-                                    // color: Colors.white,
-                                    child: Center(child:
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(10)),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15)
+                                        )// Set the desired color
+                                      ),
+                                    onPressed: (){
 
-                                    Image.asset("assets/images/pdf_pre.png",
-                                      height: main_Height * 0.15,
-                                      width: main_Height * 0.15,
-                                    )
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PdfViewerScreen(path: "${getExpenseListModelData!.receipt}")));
 
-                                    ))
+                                                },
+                                      child: Center(child:
+
+                                      Image.asset("assets/images/pdf_pre.png",
+                                        height: main_Height * 0.15,
+                                        width: main_Height * 0.15,
+                                      )
+
+                                      )),
+                                )
                                     : Container(
                                   height: main_Height * 0.3,
                                   width: main_Width * 0.6,
@@ -1282,4 +1293,6 @@ class CommonWidgets {
       ),
     );
   }
+
+
 }
