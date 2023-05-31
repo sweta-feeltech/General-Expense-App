@@ -1075,17 +1075,15 @@ class CommonWidgets {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      letterSpacing: 1,
                       fontWeight: FontWeight.w300,
                       color: Color(0xFF959698),
-                      fontSize: main_Height * 0.015),
+                      fontSize: main_Height * 0.017),
                 ),
                 Text(
                   "${getExpenseListModelData.expenseDate.toString().substring(11,19)}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      letterSpacing: 1,
                       fontWeight: FontWeight.w300,
                       color: Color(0xFF959698),
                       fontSize: main_Height * 0.017),
@@ -1111,19 +1109,17 @@ class CommonWidgets {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  letterSpacing: 1,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black87,
-                                  fontSize: main_Height * 0.015),
+                                  fontSize: main_Height * 0.017),
                             ),
                             Text(
                               "${getExpenseListModelData.expenseCategoryName}",
-                              maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   letterSpacing: 1,
                                   color: Colors.black,
-                                  fontSize: main_Height * 0.015),
+                                  fontSize: main_Height * 0.017),
                             ),
                           ],
                         ),
@@ -1139,19 +1135,17 @@ class CommonWidgets {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  letterSpacing: 1,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black87,
-                                  fontSize: main_Height * 0.015),
+                                  fontSize: main_Height * 0.017),
                             ),
                             Text(
-                              "${getExpenseListModelData.amount}",
+                              "\u{20B9} ${getExpenseListModelData.amount}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  letterSpacing: 1,
                                   color: Colors.black,
-                                  fontSize: main_Height * 0.015),
+                                  fontSize: main_Height * 0.017),
                             ),
                           ],
                         ),
@@ -1167,19 +1161,17 @@ class CommonWidgets {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  letterSpacing: 1,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black87,
-                                  fontSize: main_Height * 0.015),
+                                  fontSize: main_Height * 0.017),
                             ),
                             Text(
                               "${getExpenseListModelData.toPay}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  letterSpacing: 1,
                                   color: Colors.black,
-                                  fontSize: main_Height * 0.015),
+                                  fontSize: main_Height * 0.017),
                             ),
                           ],
                         ),
@@ -1187,19 +1179,24 @@ class CommonWidgets {
                     ),
                   ],
                 ),
-                Container(
-                  height: main_Height * 0.04,
-                  width: main_Height * 0.04,
-                  decoration: BoxDecoration(
-                    // shape: BoxShape.circle,
-                    // color: Color(0xFFE0F9FB),
-                    // borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      "assets/images/eye.svg",
-                      height: main_Height * 0.04,
-                      width: main_Height * 0.04,
+                InkWell(
+                  onTap: (){
+
+                  },
+                  child: Container(
+                    height: main_Height * 0.04,
+                    width: main_Height * 0.04,
+                    decoration: BoxDecoration(
+                      // shape: BoxShape.circle,
+                      // color: Color(0xFFE0F9FB),
+                      // borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        "assets/images/eye.svg",
+                        height: main_Height * 0.04,
+                        width: main_Height * 0.04,
+                      ),
                     ),
                   ),
                 ),
