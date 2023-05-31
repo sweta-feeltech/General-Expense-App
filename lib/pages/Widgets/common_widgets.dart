@@ -6,8 +6,10 @@ import 'package:general_expense_app/models/Expense/get_expense_list_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
+import 'package:general_expense_app/pages/Income_Expense/pdf_viewer_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
+import '../../Utils/api_end_points.dart';
 import '../../Utils/colors.dart';
 import '../../models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
@@ -1045,12 +1047,12 @@ class CommonWidgets {
     );
   }
 
-
   static Widget masterCategoryCardOfUI2(
-      BuildContext context, VoidCallback onOpenBottomSheet,
-      {int? index,
-        required GetExpenseListModel getExpenseListModelData,
-      }) {
+    BuildContext context,
+    VoidCallback onOpenBottomSheet, {
+    int? index,
+    required GetExpenseListModel getExpenseListModelData,
+  }) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -1063,26 +1065,115 @@ class CommonWidgets {
           color: Colors.white,
           borderRadius: BorderRadius.circular(7),
         ),
-        padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,vertical: main_Height * 0.01),
+        padding: EdgeInsets.symmetric(
+            horizontal: main_Width * 0.025, vertical: main_Height * 0.01),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "${getExpenseListModelData.expenseDate.toString().replaceAll("T"," ~ ")}",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFF959698),
-                      fontSize: main_Height * 0.017),
+                Flexible(
+                  child: Text(
+                    "${getExpenseListModelData.expenseDate.toString().replaceAll("T", " ~ ")}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFF959698),
+                        fontSize: main_Height * 0.017),
+                  ),
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
 
 
+
+                    showDialog(
+                      context: context,
+                      builder: (_) => Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:  EdgeInsets.all(15.0),
+                            child: Stack(
+                              children: <Widget>[
+
+                                getExpenseListModelData?.receipt?.substring(
+                                    getExpenseListModelData!.receipt
+                                        .toString()
+                                        .length! -
+                                        4) ==
+                                    ".pdf"
+                                    ?
+
+
+                                Container(
+                                    height: main_Height * 0.3,
+                                    width: main_Width * 0.6,
+
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                        BorderRadius.circular(10)),
+                                    // color: Colors.white,
+                                    child: Center(child:
+
+                                    Image.asset("assets/images/pdf_pre.png",
+                                      height: main_Height * 0.15,
+                                      width: main_Height * 0.15,
+                                    )
+
+                                    ))
+                                    : Container(
+                                  height: main_Height * 0.3,
+                                  width: main_Width * 0.6,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(10)),
+                                  // color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder:
+                                      "assets/images/inf.jpg",
+                                      image:
+                                      "$BASEIMAGEURL${getExpenseListModelData.receipt}",
+                                      imageErrorBuilder:
+                                      ((context, error, stackTrace) {
+                                        return Image.asset(
+                                            "assets/images/inf.jpg");
+                                      }),
+                                    ),
+                                  ),
+                                ),
+
+
+
+
+                                Positioned(
+                                  top: 0.0,
+                                  right: 0.0,
+                                  child: FloatingActionButton(
+                                    child: Image.asset("assets/images/q.png"),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(80)),
+                                    backgroundColor: Colors.white,
+                                    mini: true,
+                                    elevation: 5.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                   child: SvgPicture.asset(
                     "assets/images/eye.svg",
@@ -1090,7 +1181,6 @@ class CommonWidgets {
                     width: main_Height * 0.035,
                   ),
                 ),
-
               ],
             ),
             Column(
@@ -1136,8 +1226,7 @@ class CommonWidgets {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: Colors.black,
-                            fontSize: main_Height * 0.018),
+                            color: Colors.black, fontSize: main_Height * 0.018),
                       ),
                     ),
                   ],
@@ -1159,8 +1248,7 @@ class CommonWidgets {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: Colors.black,
-                            fontSize: main_Height * 0.018),
+                            color: Colors.black, fontSize: main_Height * 0.018),
                       ),
                     ),
                   ],
@@ -1178,26 +1266,20 @@ class CommonWidgets {
                     ),
                     Flexible(
                       child: Text(
-                        "${getExpenseListModelData.remarks}fdhgafdgbafdfd nfdvnl jsfdmv llknl;k lkjl;k ",
+                        "${getExpenseListModelData.remarks}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: Colors.black,
-                            fontSize: main_Height * 0.018),
+                            color: Colors.black, fontSize: main_Height * 0.018),
                       ),
                     ),
                   ],
                 ),
               ],
             )
-
           ],
         ),
       ),
     );
   }
-
-
-
-
 }

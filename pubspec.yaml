@@ -88,6 +88,9 @@ dependencies:
   ##for opt Group Ad
   pinput: ^2.2.31
 
+  ## pdf viewer
+  syncfusion_flutter_pdfviewer: ^20.4.54
+
 
 
 
