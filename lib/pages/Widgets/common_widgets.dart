@@ -1043,4 +1043,201 @@ class CommonWidgets {
       ),
     );
   }
+
+
+  static Widget masterCategoryCardOfUI2(
+      BuildContext context, VoidCallback onOpenBottomSheet,
+      {int? index}) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: main_Height * 0.005, horizontal: main_Width * 0.025),
+      child: Container(
+        height: main_Height * 0.14,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(7),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,vertical: main_Height * 0.01),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "25 Oct, 2022  ",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xFF959698),
+                      fontSize: main_Height * 0.015),
+                ),
+                Text(
+                  " 09:00 AM",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xFF959698),
+                      fontSize: main_Height * 0.017),
+                ),
+              ],
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SingleChildScrollView(
+                      child: Container(
+                        width: main_Width * 0.5,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Category : ",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                  fontSize: main_Height * 0.015),
+                            ),
+                            Text(
+                              "Home ",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: Colors.black,
+                                  fontSize: main_Height * 0.015),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      child: Container(
+                        width: main_Width * 0.5,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Amount : ",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                  fontSize: main_Height * 0.015),
+                            ),
+                            Text(
+                              "Home ",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: Colors.black,
+                                  fontSize: main_Height * 0.015),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      child: Container(
+                        width: main_Width * 0.5,
+                        child: Row(
+                          children: [
+                            Text(
+                              "To Pay : ",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                  fontSize: main_Height * 0.015),
+                            ),
+                            Text(
+                              " Location",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  color: Colors.black,
+                                  fontSize: main_Height * 0.015),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+
+                    Container(
+                      height: main_Height * 0.04,
+                      width: main_Height * 0.04,
+                      decoration: BoxDecoration(
+                        // shape: BoxShape.circle,
+                        // color: Color(0xFFE0F9FB),
+                        // borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          "assets/images/eye.svg",
+                          height: main_Height * 0.04,
+                          width: main_Height * 0.04,
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: main_Height * 0.008,
+                    ),
+
+                    Container(
+                      height: main_Height * 0.04,
+                      width: main_Height * 0.04,
+                      decoration: BoxDecoration(
+                        // shape: BoxShape.circle,
+                        // color: Color(0xFFFBEBED),
+                        // borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          "assets/images/delete.svg",
+                          height: main_Height * 0.032,
+                          width: main_Height * 0.032,
+                        ),
+                      ),
+                    ),
+
+
+
+                  ],
+                ),
+              ],
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+
 }
