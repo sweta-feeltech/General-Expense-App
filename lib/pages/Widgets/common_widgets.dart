@@ -1058,7 +1058,7 @@ class CommonWidgets {
       padding: EdgeInsets.symmetric(
           vertical: main_Height * 0.005, horizontal: main_Width * 0.025),
       child: Container(
-        height: main_Height * 0.125,
+        height: main_Height * 0.17,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(7),
@@ -1071,137 +1071,125 @@ class CommonWidgets {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${getExpenseListModelData.expenseDate.toString().substring(0,10)}",
+                  "${getExpenseListModelData.expenseDate.toString().replaceAll("T"," ~ ")}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       fontWeight: FontWeight.w300,
                       color: Color(0xFF959698),
                       fontSize: main_Height * 0.017),
-                ),
-                Text(
-                  "${getExpenseListModelData.expenseDate.toString().substring(11,19)}",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFF959698),
-                      fontSize: main_Height * 0.017),
-                ),
-              ],
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SingleChildScrollView(
-                      child: Container(
-                        width: main_Width * 0.5,
-                        child: Row(
-                          children: [
-                            Text(
-                              "Category : ",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
-                                  fontSize: main_Height * 0.017),
-                            ),
-                            Text(
-                              "${getExpenseListModelData.expenseCategoryName}",
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  letterSpacing: 1,
-                                  color: Colors.black,
-                                  fontSize: main_Height * 0.017),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: Container(
-                        width: main_Width * 0.5,
-                        child: Row(
-                          children: [
-                            Text(
-                              "Amount : ",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
-                                  fontSize: main_Height * 0.017),
-                            ),
-                            Text(
-                              "\u{20B9} ${getExpenseListModelData.amount}",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: main_Height * 0.017),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: Container(
-                        width: main_Width * 0.5,
-                        child: Row(
-                          children: [
-                            Text(
-                              "To Pay : ",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
-                                  fontSize: main_Height * 0.017),
-                            ),
-                            Text(
-                              "${getExpenseListModelData.toPay}",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: main_Height * 0.017),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 InkWell(
                   onTap: (){
 
+
                   },
-                  child: Container(
-                    height: main_Height * 0.04,
-                    width: main_Height * 0.04,
-                    decoration: BoxDecoration(
-                      // shape: BoxShape.circle,
-                      // color: Color(0xFFE0F9FB),
-                      // borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        "assets/images/eye.svg",
-                        height: main_Height * 0.04,
-                        width: main_Height * 0.04,
-                      ),
-                    ),
+                  child: SvgPicture.asset(
+                    "assets/images/eye.svg",
+                    height: main_Height * 0.035,
+                    width: main_Height * 0.035,
                   ),
                 ),
+
               ],
             ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Category : ",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          fontSize: main_Height * 0.018),
+                    ),
+                    Flexible(
+                      child: Text(
+                        "${getExpenseListModelData.expenseCategoryName}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: main_Height * 0.018),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Amount : ",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          fontSize: main_Height * 0.018),
+                    ),
+                    Flexible(
+                      child: Text(
+                        "\u{20B9} ${getExpenseListModelData.amount}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: main_Height * 0.018),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "To Pay : ",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          fontSize: main_Height * 0.018),
+                    ),
+                    Flexible(
+                      child: Text(
+                        "${getExpenseListModelData.toPay}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: main_Height * 0.018),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Remarks : ",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          fontSize: main_Height * 0.018),
+                    ),
+                    Flexible(
+                      child: Text(
+                        "${getExpenseListModelData.remarks}fdhgafdgbafdfd nfdvnl jsfdmv llknl;k lkjl;k ",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: main_Height * 0.018),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
 
           ],
         ),

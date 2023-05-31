@@ -278,10 +278,10 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
         },
         child: Column(
           children: [
+
             ///
             /// Heading
             ///
-
 
             Padding(
               padding: EdgeInsets.symmetric(
@@ -290,7 +290,7 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Add Income",
+                    "Add Expense",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
