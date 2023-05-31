@@ -3,8 +3,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/models/CommonModel/message_model.dart';
-import '../../models/Category/add_expense_category_model.dart';
-import '../../models/Category/get_expense_category_model.dart';
+import 'package:general_expense_app/models/Expense/get_expense_list_model.dart';
+import '../../models/Expense/add_expense_category_model.dart';
+import '../../models/Expense/get_expense_category_model.dart';
 import '../../network/repository.dart';
 part 'expense_screen_state.dart';
 part 'expense_screen_event.dart';
@@ -44,6 +45,23 @@ class ExpenseScreenBloc extends Bloc<ExpenseScreenEvent, ExpenseScreenState> {
           emit(ExpenseScreenLoadingEventState(false));
           emit(ApiFailureState(Exception(error.toString())));
         }
+      }
+
+      if (event is FetchAllExpenseScreenListScreenAPIsEvent) {
+        late List<GetExpenseListModel> getIncomeListModelData;
+
+        try {
+          emit(ExpenseScreenLoadingEventState(true));
+          getIncomeListModelData = await repositoryRepo.getExpenseListModelData();
+          emit(ExpenseScreenLoadingEventState(false));
+          emit(FetchAllExpenseListScreenAPIsEventState(
+              getIncomeListModelData));
+        } catch (error, stacktrace) {
+          print(stacktrace);
+          emit(ExpenseScreenLoadingEventState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
+
       }
 
 

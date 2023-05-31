@@ -136,7 +136,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
 
               Fluttertoast.showToast(
-                msg: "Success fully Logged In...",
+                msg: "Successfully Logged In...",
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 3,

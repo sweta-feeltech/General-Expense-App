@@ -8,6 +8,9 @@ class ExpenseScreenListInitialEvent extends ExpenseScreenEvent {}
 
 class FetchAllExpenseCatScreenListScreenAPIsEvent extends ExpenseScreenEvent {}
 
+class FetchAllExpenseScreenListScreenAPIsEvent extends ExpenseScreenEvent {}
+
+
 class PostAddExpenseCatEvent extends ExpenseScreenEvent {
   final String ExpenseCategoryName;
 
@@ -22,9 +25,6 @@ class PostAddExpenseFormEvent extends ExpenseScreenEvent {
   final String ToPay;
   final String Remarks;
   final File? Receipt;
-
-
-
 
   PostAddExpenseFormEvent(this.ExpenseCategoryId,this.ExpenseDate,this.Amount,this.ToPay,this.Remarks,this.Receipt);
 }

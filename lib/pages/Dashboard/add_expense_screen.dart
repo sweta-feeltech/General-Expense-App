@@ -14,8 +14,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../Utils/colors.dart';
 import '../../Utils/document_upload.dart';
 import '../../blocs/ExpenseScreen/expense_screen_bloc.dart';
-import '../../models/Category/add_expense_category_model.dart';
-import '../../models/Category/get_expense_category_model.dart';
+import '../../models/Expense/add_expense_category_model.dart';
+import '../../models/Expense/get_expense_category_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 

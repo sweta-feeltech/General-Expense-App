@@ -29,6 +29,11 @@ class PostAddExpenseCatEventState extends ExpenseScreenState {
   PostAddExpenseCatEventState(this.addExpenseCatModelData);
 }
 
+class FetchAllExpenseListScreenAPIsEventState extends ExpenseScreenState {
+  final List<GetExpenseListModel> getExpenseListModelData;
+
+  FetchAllExpenseListScreenAPIsEventState(this.getExpenseListModelData);
+}
 
 class PostAddExpenseFormEventState extends ExpenseScreenState {
   final MessageModel messageModelData;

@@ -1,5 +1,3 @@
-import 'package:general_expense_app/models/Category/add_expense_category_model.dart';
-import 'package:general_expense_app/models/Category/get_expense_category_model.dart';
 import 'package:general_expense_app/models/CommonModel/message_model.dart';
 import 'package:general_expense_app/network/api_client.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +5,9 @@ import 'package:http/http.dart' as http;
 import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
+import '../models/Expense/add_expense_category_model.dart';
+import '../models/Expense/get_expense_category_model.dart';
+import '../models/Expense/get_expense_list_model.dart';
 import '../models/GroupModel/add_group_model.dart';
 import '../models/GroupModel/group_link_model.dart';
 import '../models/GroupModel/group_list_model.dart';
@@ -300,6 +301,22 @@ class Repository {
       rethrow;
     }
   }
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: EXPENSE LIST  APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<List<GetExpenseListModel>> getExpenseListModelData({String? access}) async {
+    try {
+      var listData = await apiClient.getApiCall(BASEURL, getExpListAPIEnd,
+          isAccessToken: accessToken, isBearer: true) as List;
+      var list =
+      listData.map((json) => GetExpenseListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
 
 
 
