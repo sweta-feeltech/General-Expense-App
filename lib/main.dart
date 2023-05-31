@@ -11,7 +11,7 @@ import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
-import 'package:general_expense_app/pages/Income_Expense/list_screen.dart';
+import 'package:general_expense_app/pages/Income_Expense/expense_list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
