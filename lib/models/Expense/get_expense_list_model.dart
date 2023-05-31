@@ -3,7 +3,7 @@ class GetExpenseListModel {
   String? expenseCategoryId;
   String? expenseCategoryName;
   String? expenseDate;
-  int? amount;
+  dynamic amount;
   String? receipt;
   String? toPay;
   String? remarks;

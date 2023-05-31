@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/Expense/get_expense_list_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
@@ -1047,7 +1048,9 @@ class CommonWidgets {
 
   static Widget masterCategoryCardOfUI2(
       BuildContext context, VoidCallback onOpenBottomSheet,
-      {int? index}) {
+      {int? index,
+        required GetExpenseListModel getExpenseListModelData,
+      }) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -1055,7 +1058,7 @@ class CommonWidgets {
       padding: EdgeInsets.symmetric(
           vertical: main_Height * 0.005, horizontal: main_Width * 0.025),
       child: Container(
-        height: main_Height * 0.14,
+        height: main_Height * 0.125,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(7),
@@ -1068,7 +1071,7 @@ class CommonWidgets {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "25 Oct, 2022  ",
+                  "${getExpenseListModelData.expenseDate.toString().substring(0,10)}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -1078,7 +1081,7 @@ class CommonWidgets {
                       fontSize: main_Height * 0.015),
                 ),
                 Text(
-                  " 09:00 AM",
+                  "${getExpenseListModelData.expenseDate.toString().substring(11,19)}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -1092,6 +1095,7 @@ class CommonWidgets {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1113,7 +1117,7 @@ class CommonWidgets {
                                   fontSize: main_Height * 0.015),
                             ),
                             Text(
-                              "Home ",
+                              "${getExpenseListModelData.expenseCategoryName}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -1141,7 +1145,7 @@ class CommonWidgets {
                                   fontSize: main_Height * 0.015),
                             ),
                             Text(
-                              "Home ",
+                              "${getExpenseListModelData.amount}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -1169,7 +1173,7 @@ class CommonWidgets {
                                   fontSize: main_Height * 0.015),
                             ),
                             Text(
-                              " Location",
+                              "${getExpenseListModelData.toPay}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -1183,50 +1187,21 @@ class CommonWidgets {
                     ),
                   ],
                 ),
-                Column(
-                  children: [
-
-                    Container(
+                Container(
+                  height: main_Height * 0.04,
+                  width: main_Height * 0.04,
+                  decoration: BoxDecoration(
+                    // shape: BoxShape.circle,
+                    // color: Color(0xFFE0F9FB),
+                    // borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      "assets/images/eye.svg",
                       height: main_Height * 0.04,
                       width: main_Height * 0.04,
-                      decoration: BoxDecoration(
-                        // shape: BoxShape.circle,
-                        // color: Color(0xFFE0F9FB),
-                        // borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          "assets/images/eye.svg",
-                          height: main_Height * 0.04,
-                          width: main_Height * 0.04,
-                        ),
-                      ),
                     ),
-
-                    SizedBox(
-                      height: main_Height * 0.008,
-                    ),
-
-                    Container(
-                      height: main_Height * 0.04,
-                      width: main_Height * 0.04,
-                      decoration: BoxDecoration(
-                        // shape: BoxShape.circle,
-                        // color: Color(0xFFFBEBED),
-                        // borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          "assets/images/delete.svg",
-                          height: main_Height * 0.032,
-                          width: main_Height * 0.032,
-                        ),
-                      ),
-                    ),
-
-
-
-                  ],
+                  ),
                 ),
               ],
             ),
