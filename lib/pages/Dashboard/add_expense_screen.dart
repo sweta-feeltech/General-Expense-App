@@ -19,6 +19,10 @@ import '../../models/Expense/get_expense_category_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 
+
+
+
+
 class AddExpenseScreen extends StatefulWidget {
   static String routeName = '/addExpenseScreen';
   Function backPressCallback;
@@ -573,12 +577,13 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                               await UploadDocumets.selectFile();
 
                           PIimage = aIamge;
-                          print("sssssimage${PIimage}");
-                          print("sssssimage${aIamge}");
+
+                          // print("sssssimage${PIimage}");
+                          // print("sssssimage${aIamge}");
 
                           setState(() {
                             PIimage = aIamge;
-                            print("sssssimage${PIimage!.name}");
+                            // print("sssssimage${PIimage!.name}");
                           });
                         },
                         child: Padding(
@@ -594,13 +599,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 ),
               ),
               Container(
-                height: main_Height * 0.4,
+                height: main_Height * 0.13,
                 width: main_Width * 1,
               )
             ],
           ),
         ),
       ),
+
+
     );
   }
 

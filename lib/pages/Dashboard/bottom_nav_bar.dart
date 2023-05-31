@@ -141,18 +141,19 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
       context,
       controller: _controller,
       navBarStyle: NavBarStyle.style15,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       confineInSafeArea: true,
       backgroundColor: Colors.white,
       handleAndroidBackButtonPress: true,
       stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: true,
+      hideNavigationBarWhenKeyboardShows: false,
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(0.0),
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       // hideNavigationBar: true,
+      // hideNavigationBar: _selectedIndex == 1 ? true :false,
       // navBarHeight: main_Height /14,
 
       items: [
@@ -196,6 +197,13 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
         PersistentBottomNavBarItem(
           icon: Icon(Icons.add,
           color: Colors.white,),
+            routeAndNavigatorSettings: RouteAndNavigatorSettings(
+              onGenerateRoute: (settings) {
+                  Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+                      builder: (context) => AddExpenseScreen((){})));
+              },
+            ),
+
           // icon: Icon(CupertinoIcons.house_fill),
           // inactiveIcon: Icon(Icons.add,
           //   color: Colors.white,),
@@ -248,11 +256,15 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
         HomeScreen(),
 
         ExpenseScreen((){
+
           Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
         }),
 
+
+        // NevigatescreenforNav(),
         AddExpenseScreen(
                 (){
+
               Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
             }
         ),
@@ -289,6 +301,7 @@ class TabNavigator extends StatelessWidget {
     // else if(tabItem == "Page4")
     //   child = Text("person");
 
+
     if (tabItem == "Page1")
       child = HomeScreen();
     else if (tabItem == "Page2"){
@@ -301,18 +314,14 @@ class TabNavigator extends StatelessWidget {
       child = AddExpenseScreen(
           (){
             tabManualCallback("Page1", 0);
-
-
           }
       );
     }
     else if (tabItem == "Page4"){
       child = RoomScreen(
-
               () {
             tabManualCallback("Page1", 0);
           }
-
       );
     }
     else if (tabItem == "Page5"){
