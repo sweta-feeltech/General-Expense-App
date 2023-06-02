@@ -5,8 +5,10 @@ import 'package:general_expense_app/Utils/constants.dart';
 import 'package:general_expense_app/blocs/HomeScreen/home_screen_bloc.dart';
 import 'package:general_expense_app/models/CommonModel/user_data_model.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
+import 'package:general_expense_app/models/IncomeListModel/income_list_model.dart';
 import 'package:general_expense_app/pages/Dashboard/search_feild_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
+import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
@@ -331,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GroupListScreen()));
                       },
                       child: Text(
-                        "View All  > ",
+                        getGroupListModelData?.isEmpty == true ?  "Add Group  > " : "View All  > ",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -344,6 +346,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+
+
+              getGroupListModelData?.isEmpty == true ?
+              Container(
+                height: main_Height * 0.2,
+                width: main_Width,
+                child: Center(
+                  child: Text(
+                    "You don't have any Groups !",
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      // color: Color.fromARGB(255, 158, 158, 158),
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: main_Height * 0.0239,
+                    ),
+                  ),
+                ),
+              )
+
+
+                  :
               Container(
                 height: main_Height * 0.2,
                 width: main_Width,
@@ -449,19 +475,44 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: main_Height * 0.018,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text(
-                      "View All  > ",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.black,
-                          letterSpacing: 1,
-                          fontSize: main_Height * 0.016,
-                          fontWeight: FontWeight.w200),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ListofIncomeScreen()));
+                      },
+                      child: Text(
+                        dashboardModelData?.incomeAndExpense?.isEmpty == true ? "Add Income  > "  :  "View All  > ",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            letterSpacing: 1,
+                            fontSize: main_Height * 0.016,
+                            fontWeight: FontWeight.w200),
+                      ),
                     )
                   ],
                 ),
               ),
+              dashboardModelData?.incomeAndExpense?.isEmpty == true ?
+              Container(
+                height: main_Height * 0.2,
+                width: main_Width,
+                child: Center(
+                  child: Text(
+                    "You don't have any Income or Expense !",
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      // color: Color.fromARGB(255, 158, 158, 158),
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: main_Height * 0.0239,
+                    ),
+                  ),
+                ),
+              ) :
+
               ListView.builder(
                   itemCount: dashbordFilterList!.length,
                   physics: const BouncingScrollPhysics(),

@@ -558,13 +558,8 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           return null;
                         },
                         onSaved: (val){
-                          print("val ${val}");
-                          print("val ${DateTime.now().toString()}");
-                          print("ddn${DateTime.now().toString().substring(0,19)}");
-                          textField3Value = val.toString().substring(0,16) == DateTime.now().toString().substring(0,16) ? "${DateTime.now().toString().substring(0,19)}" : val;
-                          print("val${textField3Value}");
-                          // print("daaaate${IncomeDate}");
-                          // print("daaaate${val}");
+                          textField3Value = val;
+
                         },
                       ),
                       SizedBox(
@@ -601,17 +596,18 @@ void bottomSheetforAddShelfItems(BuildContext context){
                           onPressed: (){
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              // print("tttf ${textField1Value} ${textField2Value} ${textField3Value}");
+                              print("tttf ${textField1Value} ${textField2Value} ${textField3Value}");
 
-                              // final test22 = "${textField3Value == null ? DateTime.now().toString().substring(0,16) : textField3Value}";
+/// 2023-06-02 11:50:11.735992  NOW
+/// 2023-06-08 06:50  change
+/// 2023-06-08t06:50:00
 
-                              final testDate =  textField3Value == DateTime.now().toString().substring(0,16) ? "${ textField3Value?.replaceAll(" ","T")}.900Z" : "${ textField3Value?.replaceAll(" ","T")}:00.900Z";
-                              print("td${testDate}");
+                              print("${textField3Value!.length}");
+                              final testdate = textField3Value.toString().length == 16 ? "${textField3Value.toString().replaceAll(" ", "T")}:00.946Z" : "${textField3Value.toString().substring(0,16).replaceAll(" ", "T")}:00.946Z";
 
+                              print("${testdate}");
+                              incomeListScreenBloc.add(PostAddIncomeEvent( "${testdate.toString()}","${textField1Value}","${textField2Value}",));
 
-                              incomeListScreenBloc.add(PostAddIncomeEvent( "${testDate.toString()}","${textField1Value}","${textField2Value}",));
-
-                              // Perform save action with textField1Value and textField2Value
                               Navigator.of(context).pop();
 
 

@@ -181,10 +181,12 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               if (_formkey.currentState!.validate()) {
                 _formkey.currentState!.save();
 
-                final testDate =
-                    DateTime1 == DateTime.now().toString().substring(0, 16)
-                        ? "${DateTime1?.replaceAll(" ", "T")}"
-                        : "${DateTime1?.replaceAll(" ", "T")}:00";
+                // final testDate =
+                //     DateTime1 == DateTime.now().toString().substring(0, 16)
+                //         ? "${DateTime1?.replaceAll(" ", "T")}"
+                //         : "${DateTime1?.replaceAll(" ", "T")}:00";
+                final testdate = DateTime1.toString().length == 16 ? "${DateTime1.toString().replaceAll(" ", "T")}:00.946Z" : "${DateTime1.toString().substring(0,16).replaceAll(" ", "T")}:00.946Z";
+
 
                 // print(
                 //     "check Expense : ${Amount} ${testDate} ${selectedOption} ${ToPay} ${Remarks} ");
@@ -196,7 +198,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                       "Add File or Image"
                     )
                     :
-                expenseScreenBloc.add(PostAddExpenseFormEvent("${selectedOption}","${testDate}","${Amount}","${ToPay}","${Remarks}",File(PIimage!.path.toString())));
+                expenseScreenBloc.add(PostAddExpenseFormEvent("${selectedOption}","${testdate}","${Amount}","${ToPay}","${Remarks}",File(PIimage!.path.toString())));
 
 
               }
@@ -432,14 +434,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                         return null;
                       },
                       onSaved: (val) {
-                        print("val ${val}");
-                        print("val ${DateTime.now().toString()}");
-                        print(
-                            "ddn${DateTime.now().toString().substring(0, 19)}");
-                        DateTime1 = val.toString().substring(0, 16) ==
-                                DateTime.now().toString().substring(0, 16)
-                            ? "${DateTime.now().toString().substring(0, 19)}"
-                            : val;
+                        // print("val ${val}");
+                        // print("val ${DateTime.now().toString()}");
+                        // print(
+                        //     "ddn${DateTime.now().toString().substring(0, 19)}");
+                        // DateTime1 = val.toString().substring(0, 16) ==
+                        //         DateTime.now().toString().substring(0, 16)
+                        //     ? "${DateTime.now().toString().substring(0, 19)}"
+                        //     : val;
+
+                        DateTime1 = val;
+
                         print("val${DateTime1}");
                         // print("daaaate${IncomeDate}");
                         // print("daaaate${val}");
