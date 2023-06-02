@@ -161,6 +161,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
 
+              ///
+              /// Cards
+              ///
+
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
                 child: Stack(
@@ -315,7 +319,6 @@ class _HomeScreenState extends State<HomeScreen> {
               /// Groups
               ///
 
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.005),
                 child: Row(
@@ -346,8 +349,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-
-
               getGroupListModelData?.isEmpty == true ?
               Container(
                 height: main_Height * 0.2,
@@ -366,10 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-              )
-
-
-                  :
+              ) :
               Container(
                 height: main_Height * 0.2,
                 width: main_Width,
@@ -389,7 +387,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     }),
               ),
-
 
 
               ///
@@ -440,7 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                      hintText: 'Search Items .. ',
+                      hintText: 'Search Items . . ',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -512,7 +509,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ) :
-
               ListView.builder(
                   itemCount: dashbordFilterList!.length,
                   physics: const BouncingScrollPhysics(),

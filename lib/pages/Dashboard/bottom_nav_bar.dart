@@ -110,7 +110,10 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
               _buildOffstageNavigator("Page5"),
             ],
           ),
-          bottomNavigationBar : BottomNavigation(context),
+          bottomNavigationBar : Padding(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: BottomNavigation(context)),
+          resizeToAvoidBottomInset: true,
         ),
       ),
     );
@@ -132,29 +135,25 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
 
 
   Widget BottomNavigation(BuildContext context) {
-    // double main_Height = MediaQuery.of(context).size.height;
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
+    // print("fffff ${_currentPage}  ${_controller} ${pageKeys} ${_selectedIndex}  ${_navigatorKeys}");
 
     return PersistentTabView(
       context,
       controller: _controller,
       navBarStyle: NavBarStyle.style15,
-      resizeToAvoidBottomInset: false,
-      confineInSafeArea: true,
+      confineInSafeArea: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       handleAndroidBackButtonPress: true,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: false,
+      hideNavigationBarWhenKeyboardShows: true,
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(0.0),
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      // hideNavigationBar: true,
-      // hideNavigationBar: _selectedIndex == 1 ? true :false,
-      // navBarHeight: main_Height /14,
 
       items: [
 
@@ -277,6 +276,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
           Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
         }),
       ],
+
     );
   }
 }
@@ -329,10 +329,8 @@ class TabNavigator extends StatelessWidget {
               () {
             tabManualCallback("Page1", 0);
           }
-
       );
     }
-
 
     // if (tabItem == "Page1")
     //   child = DashboardScreen();
@@ -343,9 +341,6 @@ class TabNavigator extends StatelessWidget {
     // }else if (tabItem == "Page2"){
     //   child = ProfileScreen();
     // }
-
-
-
 
     return Navigator(
       key: navigatorKey,

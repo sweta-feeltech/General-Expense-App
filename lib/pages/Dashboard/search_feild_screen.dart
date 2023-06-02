@@ -37,9 +37,10 @@ class _SearchFeildScreenState extends State<SearchFeildScreen> {
                 padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
                 child: TextFormField(
                   autofocus: true,
+                  keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                    hintText: 'Search Items .. ',
+                    hintText: 'Search Items . . ',
                     prefixIcon: Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),

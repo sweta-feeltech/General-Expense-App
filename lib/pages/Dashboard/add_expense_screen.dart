@@ -131,8 +131,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
     print("arrr ${arrr}");
 
-
-
     // for(int i=0; i < getExpenseCatModelData!.length; i++) {
     //
     //
@@ -145,7 +143,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     // List<String> expenseCat =  getExpenseCatModelData![];
 
     return Scaffold(
-      // resizeToAvoidBottomInset:false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: primaryGrey,
       appBar: AppBar(
         titleSpacing: 15,
@@ -619,8 +617,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
           ),
         ),
       ),
-
-
     );
   }
 
