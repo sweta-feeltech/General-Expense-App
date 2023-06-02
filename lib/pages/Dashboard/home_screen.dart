@@ -378,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Search for Itoms",
+                      "Search for Items",
                       style: TextStyle(
                           letterSpacing: 1,
                           fontSize: main_Height * 0.018,
@@ -414,7 +414,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                      hintText: 'Search Itoms .. ',
+                      hintText: 'Search Items .. ',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),

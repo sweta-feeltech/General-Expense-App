@@ -285,7 +285,7 @@ class _NavDrawerState extends State<NavDrawer> {
 
           ///
           ///
-          /// FOR ITOMS
+          /// FOR ITEMS
           ///
           ///
           InkWell(
