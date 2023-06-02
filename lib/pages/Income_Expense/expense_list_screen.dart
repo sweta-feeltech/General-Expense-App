@@ -289,14 +289,16 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Add Expense",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: main_Height * 0.021,
-                        fontWeight: FontWeight.w500),
+                  Flexible(
+                    child: Text(
+                      "Add Expense",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.021,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                   InkWell(
                     onTap: () {

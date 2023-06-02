@@ -2,13 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
 import 'package:general_expense_app/models/Expense/get_expense_list_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/pdf_viewer_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
-
+import 'package:intl/intl.dart';
 import '../../Utils/api_end_points.dart';
 import '../../Utils/colors.dart';
 import '../../models/GroupModel/add_group_model.dart';
@@ -18,7 +19,8 @@ import '../Dashboard/items_screen.dart';
 import '../Group/single_group_screen.dart';
 
 class CommonWidgets {
-  static Widget CommonListView(BuildContext context) {
+  static Widget CommonListView(BuildContext context,
+      ) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -111,37 +113,29 @@ class CommonWidgets {
     );
   }
 
-  static Widget CommonListView2(BuildContext context) {
+  static Widget CommonDashboardListView(BuildContext context,
+      {required IncomeAndExpense dashboardModelData,
+      }
+      ) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
+
+
+
 
     return Padding(
       padding: EdgeInsets.symmetric(
           vertical: main_Height * 0.005, horizontal: main_Width * 0.03),
       child: Container(
-        height: main_Height * 0.09,
+        height: main_Height * 0.1,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(7),
         ),
         padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              height: main_Height * 0.061,
-              width: main_Height * 0.061,
-              decoration: BoxDecoration(
-                color: Color(0xFFEFEFF1),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  "assets/images/bankI.svg",
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
             Padding(
               padding: EdgeInsets.symmetric(
                   vertical: main_Width * 0.03, horizontal: main_Width * 0.03),
@@ -149,50 +143,37 @@ class CommonWidgets {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Flexible(
+                    child: Text(
+                      "${(dashboardModelData!.description == null ? dashboardModelData!.remarks : dashboardModelData!.description ).toString()}",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          letterSpacing: 0.06,
+                          fontWeight: FontWeight.w500,
+                          fontSize: main_Height * 0.018),
+                    ),
+                  ),
                   Text(
-                    "Bank Transfer",
+                    "${(dashboardModelData!.incomeDate == null ? dashboardModelData!.expenseDate : dashboardModelData!.incomeDate).toString().substring(0,19).replaceAll("T"," ")}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        letterSpacing: 0.06,
-                        fontWeight: FontWeight.w500,
-                        fontSize: main_Height * 0.018),
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFF959698),
+                        fontSize: main_Height * 0.015),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "25 Oct, 2022  ",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xFF959698),
-                            fontSize: main_Height * 0.015),
-                      ),
-                      SvgPicture.asset("assets/images/dot1.svg"),
-                      Text(
-                        " 09:00 AM",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xFF959698),
-                            fontSize: main_Height * 0.017),
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),
             Container(
               child: Center(
                 child: Text(
-                  "-\u20B91700",
+                  "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.amount))}",
                   style: TextStyle(
                       letterSpacing: 0.6,
-                      color: Colors.red,
+                      color: dashboardModelData?.remarks == null ?  Color(0xFF25B07F) : Colors.red,
                       fontWeight: FontWeight.w500,
                       fontSize: main_Height * 0.02),
                 ),
@@ -204,86 +185,6 @@ class CommonWidgets {
     );
   }
 
-  static Widget CommonGroupListView(BuildContext context, {int? index}) {
-    double main_Width = MediaQuery.of(context).size.width;
-    double main_Height = MediaQuery.of(context).size.height;
-
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          vertical: main_Height * 0.005, horizontal: main_Width * 0.03),
-      child: Column(
-        children: [
-          Container(
-            height: main_Height * 0.09,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(7),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: main_Height * 0.061,
-                  width: main_Height * 0.061,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEFEFF1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(main_Height * 0.008),
-                  child: Center(
-                    child: Image.asset("assets/images/grp1.jpg"),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: main_Width * 0.03,
-                      horizontal: main_Width * 0.03),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Family Group ${index! + 1}",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                letterSpacing: 0.06,
-                                fontWeight: FontWeight.w500,
-                                fontSize: main_Height * 0.018),
-                          ),
-                          Text("5 Members")
-                        ],
-                      ),
-                      Text(
-                        "Member 1, Member 2 , Member 3, Member 4, Member 5",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xFF959698),
-                            fontSize: main_Height * 0.015),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.black,
-            endIndent: 1,
-            thickness: 0.7,
-          )
-        ],
-      ),
-    );
-  }
 
   static Widget CommonGroupList2(BuildContext context,
       {int? index,
@@ -361,6 +262,95 @@ class CommonWidgets {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+  static Widget CommonGroupList3(BuildContext context,
+      {int? index,
+        required GetGroupListModel getGroupListModel,
+        required VoidCallback? onPressed}) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+    return InkWell(
+      ///
+      /// For Delete Group
+      ///
+      /// onTap: onPressed,
+      onTap: () {
+        // onPressed;
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                SingleGroupViewScreen("${getGroupListModel!.id}")));
+      },
+      child: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.01,vertical: main_Height * 0.005),
+        child: Material(
+          borderRadius: BorderRadius.circular(7),
+          elevation: 3,
+          child: Padding(
+            padding: EdgeInsets.all(5),
+            child: Container(
+              width: main_Width * 0.35,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7), color: primaryGrey
+                // color: getColor(index!,4)
+
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: getColor(index!, index),
+                          borderRadius: BorderRadius.circular(5)),
+                      // child: items.categoryImg != null ?
+                      child: Center(
+                        child: Text(
+                          "${getGroupListModel!.groupName!.substring(0, 1).toUpperCase()}",
+                          style: TextStyle(fontSize: main_Height * 0.1),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: main_Height * 0.05,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "${getGroupListModel?.groupName}",
+                          maxLines: 1,
+                          // items.name.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: main_Height * 0.014),
+                        ),
+                        Text(
+                          "${getGroupListModel!.description}",
+                          // "7 Members",
+                          maxLines: 1,
+                          // items.name.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: darkGrey,
+                              fontWeight: FontWeight.w500,
+                              fontSize: main_Height * 0.014),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -466,68 +456,74 @@ class CommonWidgets {
           borderRadius: BorderRadius.circular(7),
         ),
         padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: main_Height * 0.061,
-                  width: main_Height * 0.061,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEFEFF1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      "assets/images/bankI.svg",
-                      fit: BoxFit.contain,
+        child: Flexible(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    height: main_Height * 0.061,
+                    width: main_Height * 0.061,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFEFEFF1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        "assets/images/bankI.svg",
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: main_Width * 0.03,
-                      horizontal: main_Width * 0.03),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "${getIncomeListModelData!.description}",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 0.06,
-                            fontWeight: FontWeight.w500,
-                            fontSize: main_Height * 0.018),
-                      ),
-                      Text(
-                        "${getIncomeListModelData!.incomeDate.toString().replaceAll("T", ", ").substring(0, 20)}",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xFF959698),
-                            fontSize: main_Height * 0.015),
-                      )
-                    ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: main_Width * 0.03,
+                        horizontal: main_Width * 0.03),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${getIncomeListModelData!.description}",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              letterSpacing: 0.06,
+                              fontWeight: FontWeight.w500,
+                              fontSize: main_Height * 0.018),
+                        ),
+
+
+                        Text(
+                          "${getIncomeListModelData!.incomeDate.toString().replaceAll("T", ", ").substring(0, 20)}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w300,
+                              color: Color(0xFF959698),
+                              fontSize: main_Height * 0.015),
+                        )
+                      ],
+                    ),
                   ),
+                ],
+              ),
+              Flexible(
+                child: Text(
+                  "+\u20B9${getIncomeListModelData!.amount.toStringAsFixed(0)}",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                      letterSpacing: 0.6,
+                      color: Color(0xFF25B07F),
+                      fontWeight: FontWeight.w500,
+                      fontSize: main_Height * 0.018),
                 ),
-              ],
-            ),
-            Text(
-              "+\u20B9${getIncomeListModelData!.amount.toStringAsFixed(0)}",
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: TextStyle(
-                  letterSpacing: 0.6,
-                  color: Color(0xFF25B07F),
-                  fontWeight: FontWeight.w500,
-                  fontSize: main_Height * 0.018),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -837,51 +833,6 @@ class CommonWidgets {
     );
   }
 
-  static Widget CommonShelfListView(BuildContext context) {
-    double main_Width = MediaQuery.of(context).size.width;
-    double main_Height = MediaQuery.of(context).size.height;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.of(context, rootNavigator: true)
-                .push(MaterialPageRoute(builder: (context) => ItemScreen()));
-          },
-          child: Container(
-            height: main_Height * 0.05,
-            decoration: BoxDecoration(
-              color: primaryGrey,
-              // color: Colors.white,
-              // borderRadius: BorderRadius.circular(13),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-            child: Center(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Places : Some Demo Text",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      letterSpacing: 0.06,
-                      fontWeight: FontWeight.w500,
-                      fontSize: main_Height * 0.018),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Divider(
-          height: 3,
-          color: Colors.black,
-          endIndent: 0,
-          indent: 0,
-        )
-      ],
-    );
-  }
 
   static Widget masterCategoryCardOfUI(
       BuildContext context, VoidCallback onOpenBottomSheet,
@@ -1276,7 +1227,7 @@ class CommonWidgets {
                     ),
                     Flexible(
                       child: Text(
-                        "${getExpenseListModelData.remarks}",
+                        "${getExpenseListModelData.remarks.toString().replaceAll("\n", " ")}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

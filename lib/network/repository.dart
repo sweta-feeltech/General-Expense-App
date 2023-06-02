@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
+import '../models/DashboardModel/dashboard_model.dart';
 import '../models/Expense/add_expense_category_model.dart';
 import '../models/Expense/get_expense_category_model.dart';
 import '../models/Expense/get_expense_list_model.dart';
@@ -318,7 +319,19 @@ class Repository {
   }
 
 
-
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: SINGLE COURSE ENROLLED COURSE APIS~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<DashboardModel> getDashboardData() async {
+    try {
+      Map<String, dynamic> listData = await apiClient.getApiCall(
+          BASEURL, "$dashboardListAPIEnd",
+          isAccessToken: accessToken, isBearer: true);
+      DashboardModel list = DashboardModel.fromJson(listData);
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
 
 
 

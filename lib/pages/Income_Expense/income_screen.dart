@@ -33,6 +33,9 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
 
 
   List<IncomeListModel>? getIncomeListModelData;
+  List<IncomeListModel>? reversegetIncomeListModelData;
+
+
 
   MessageModel? messageModelData;
 
@@ -78,7 +81,8 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
             }
             else if(state is FetchAllIncomeListScreenAPIsEventState) {
 
-              getIncomeListModelData = state.getIncomeListModelData;
+              getIncomeListModelData = state.getIncomeListModelData.reversed.toList();
+              // getIncomeListModelData = state.getIncomeListModelData;
 
 
               return mainViewAllIncomeList();

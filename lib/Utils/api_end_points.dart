@@ -124,3 +124,10 @@ String addExpformAPIEnd = "Expense";
 String getExpListAPIEnd = "Expense";
 //
 // ///
+///// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DASHBOARD END POINTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+///
+///
+String dashboardListAPIEnd = "Income/getDashboardData";
+///
+///
+///

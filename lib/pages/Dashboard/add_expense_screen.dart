@@ -125,6 +125,14 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             expenseCatListForFilter.add(ExpenseCatFilterModel(e.id.toString(),e.expenseCategoryName.toString())))
         .toList();
 
+    List<String> arrr = [];
+
+    getExpenseCatModelData!.map((e) => arrr.add(e.createdDate.toString())).toList();
+
+    print("arrr ${arrr}");
+
+
+
     // for(int i=0; i < getExpenseCatModelData!.length; i++) {
     //
     //
