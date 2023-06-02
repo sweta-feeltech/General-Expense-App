@@ -430,10 +430,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Padding(
                   padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
                   child: TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.none,
+                    // autofocus: false,
+                    readOnly: true,
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchFeildScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchFeildScreen())).then((value){
+                        // FocusManager.instance.primaryFocus?.unfocus();
+                      }
+                      );
                     },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding

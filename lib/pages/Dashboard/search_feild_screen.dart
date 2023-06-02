@@ -15,6 +15,9 @@ class _SearchFeildScreenState extends State<SearchFeildScreen> {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: primaryGrey,
+
+
       appBar: AppBar(
         titleSpacing: 15,
         title: Text(
@@ -36,8 +39,8 @@ class _SearchFeildScreenState extends State<SearchFeildScreen> {
               child: Padding(
                 padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
                 child: TextFormField(
-                  autofocus: true,
-                  keyboardType: TextInputType.name,
+                  autofocus: false,
+                  // keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
                     hintText: 'Search Items . . ',
