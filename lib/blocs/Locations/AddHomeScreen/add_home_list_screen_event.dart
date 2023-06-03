@@ -1,5 +1,5 @@
 
-part of 'add_home_screen_list_bloc.dart';
+part of 'add_home_list_screen_bloc.dart';
 
 abstract class HomeListScreenEvent {}
 

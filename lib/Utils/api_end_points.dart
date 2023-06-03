@@ -142,8 +142,22 @@ String dashboardListAPIEnd = "Income/getDashboardData";
 String getHomeListAPIEnd = "HomeLocation";
 //
 //
-/// /// /// ------------------GET HOME LIST API----------------------
+/// /// /// ------------------Post HOME LIST API----------------------
 ///
 String addHomeAPIEnd = "HomeLocation";
 //
 //
+
+///
+///
+/// /// /// ------------------GET HOME LIST API----------------------
+///
+String getRoomListAPIEnd = "LocationCascade/roomLocation/";
+//
+//
+/// /// /// ------------------Post HOME LIST API----------------------
+///
+String addRoomAPIEnd = "RoomLocation";
+//
+//
+

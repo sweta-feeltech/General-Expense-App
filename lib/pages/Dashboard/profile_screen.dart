@@ -301,7 +301,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           ListTile(
                             onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen((){})));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen("")));
                             },
                             title: Row(
                               children:  [

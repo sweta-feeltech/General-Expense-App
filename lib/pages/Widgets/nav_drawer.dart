@@ -229,7 +229,7 @@ class _NavDrawerState extends State<NavDrawer> {
           InkWell(
             onTap: () {
 
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen((){})));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen("")));
 
             },
             child: ListTile(

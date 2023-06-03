@@ -15,7 +15,8 @@ import '../models/GroupModel/group_list_model.dart';
 import '../models/GroupModel/group_members_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
 import '../models/IncomeListModel/income_list_model.dart';
-import '../models/Locations/Home/home_list_model.dart';
+import '../models/Locations/home_list_model.dart';
+import '../models/Locations/room_list_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
 import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
@@ -373,6 +374,48 @@ class Repository {
       rethrow;
     }
   }
+
+
+
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~GET : ROOM LOCATION LIST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+  Future<List<GetRoomListModel>> getRoomListData(String query,{String? access}) async {
+    try {
+      var listData = await apiClient.getApiCall(BASEURL,"${getRoomListAPIEnd}${query}",
+          isAccessToken: accessToken, isBearer: true) as List;
+      var list =
+      listData.map((json) => GetRoomListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~POST : ROOM HOME  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+  Future<MessageModel> createRoomPostAPI(dynamic body) async {
+    try {
+      Map<String, dynamic> json = await apiClient.postApiCall(
+          BASEURL, addRoomAPIEnd, body,
+          isAccessToken: accessToken, isBearer: true);
+      print("final received json = $json");
+      MessageModel courseSavedRes = MessageModel.fromJson(json);
+      return courseSavedRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+
+
+
+
 
 
 }

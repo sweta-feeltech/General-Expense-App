@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
       return getMaterialPageRoute(CategoryScreen());
     }
     if(settings.name == RoomScreen.routeName) {
-      return getMaterialPageRoute(RoomScreen((){}));
+      return getMaterialPageRoute(RoomScreen(""));
     }
     if(settings.name == AddInventoryScreen.routeName) {
       return getMaterialPageRoute(AddInventoryScreen());

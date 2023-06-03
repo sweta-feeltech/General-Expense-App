@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:general_expense_app/blocs/Locations/AddHomeScreen/add_home_screen_list_bloc.dart';
 import 'package:general_expense_app/models/CommonModel/message_model.dart';
-import 'package:general_expense_app/models/Locations/Home/home_list_model.dart';
+import 'package:general_expense_app/models/Locations/home_list_model.dart';
 import 'package:general_expense_app/pages/Widgets/common_widgets.dart';
 import '../../Utils/colors.dart';
+import '../../blocs/Locations/AddHomeScreen/add_home_list_screen_bloc.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 
@@ -167,7 +167,7 @@ class _AddHomeScreenState extends State<AddHomeScreen> {
                   shrinkWrap: true,
                   // physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  childAspectRatio: 6/4.5,
+                  childAspectRatio: 6/5,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   padding: EdgeInsets.only(bottom: main_Height * 0.005),
@@ -183,8 +183,6 @@ class _AddHomeScreenState extends State<AddHomeScreen> {
               ),
 
             ),
-
-
 
           ],
         ),
@@ -226,7 +224,7 @@ class _AddHomeScreenState extends State<AddHomeScreen> {
                         // color: Color.fromARGB(255, 217, 231, 250),
                         color: Colors.white,
                       ),
-                      height: main_Height * 0.34,
+                      height: main_Height * 0.35,
                       width: main_Width * 0.7,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
