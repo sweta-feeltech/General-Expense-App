@@ -185,7 +185,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 //         : "${DateTime1?.replaceAll(" ", "T")}:00";
                 final testdate = DateTime1.toString().length == 16 ? "${DateTime1.toString().replaceAll(" ", "T")}:00.946Z" : "${DateTime1.toString().substring(0,16).replaceAll(" ", "T")}:00.946Z";
 
-
                 // print(
                 //     "check Expense : ${Amount} ${testDate} ${selectedOption} ${ToPay} ${Remarks} ");
                 //

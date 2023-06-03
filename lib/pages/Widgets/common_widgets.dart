@@ -124,35 +124,37 @@ class CommonWidgets {
 
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-          vertical: main_Height * 0.005, horizontal: main_Width * 0.03),
+      padding: EdgeInsets.symmetric(horizontal: main_Width * 0.02,vertical: main_Height * 0.005),
       child: Container(
-        height: main_Height * 0.1,
+            height: main_Height * 0.1,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(7),
+          borderRadius: BorderRadius.circular(10),
         ),
-        padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+          padding: EdgeInsets.only(
+              top: main_Height * 0.007,
+              bottom: main_Height * 0.007,
+              right: main_Width * 0.02,
+              left: main_Width * 0.04
+          ),
+        width: main_Width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: main_Width * 0.03, horizontal: main_Width * 0.03),
+            Expanded(
+              flex: 3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(
-                    child: Text(
-                      "${(dashboardModelData!.description == null ? dashboardModelData!.remarks : dashboardModelData!.description ).toString()}",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          letterSpacing: 0.06,
-                          fontWeight: FontWeight.w500,
-                          fontSize: main_Height * 0.018),
-                    ),
+                  Text(
+                    "${(dashboardModelData!.description == null ? dashboardModelData!.remarks : dashboardModelData!.description ).toString()}",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 0.06,
+                        fontWeight: FontWeight.w500,
+                        fontSize: main_Height * 0.018),
                   ),
                   Text(
                     "${(dashboardModelData!.incomeDate == null ? dashboardModelData!.expenseDate : dashboardModelData!.incomeDate).toString().substring(0,19).replaceAll("T"," ")}",
@@ -163,14 +165,18 @@ class CommonWidgets {
                         fontWeight: FontWeight.w300,
                         color: Color(0xFF959698),
                         fontSize: main_Height * 0.015),
-                  ),
+                  )
                 ],
               ),
             ),
-            Container(
-              child: Center(
+            Expanded(
+              flex: 1,
+              child: Align(
+                alignment: Alignment.centerRight,
                 child: Text(
-                  "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.amount))}",
+                  "${(dashboardModelData!.incomeDate == null ? "-":"+")}${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.amount)).replaceAll(".00","")}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       letterSpacing: 0.6,
                       color: dashboardModelData?.remarks == null ?  Color(0xFF25B07F) : Colors.red,
@@ -178,13 +184,12 @@ class CommonWidgets {
                       fontSize: main_Height * 0.02),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
 
   static Widget CommonGroupList2(BuildContext context,
       {int? index,
@@ -268,8 +273,6 @@ class CommonWidgets {
       ),
     );
   }
-
-
 
   static Widget CommonGroupList3(BuildContext context,
       {int? index,

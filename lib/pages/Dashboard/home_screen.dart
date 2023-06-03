@@ -426,7 +426,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Hero(
-                tag: "search",
+                tag: "search_screen_a",
                 child: Padding(
                   padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
                   child: TextFormField(
