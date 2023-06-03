@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/Utils/colors.dart';
-import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
+import 'package:general_expense_app/pages/Locations/room_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +17,7 @@ import '../../network/repository.dart';
 import '../Empty/add_home_screen.dart';
 import '../LoginRegistrationScreens/splash_screen.dart';
 import '../Widgets/theme_helper.dart';
-import 'add_home_Screen.dart';
+import '../Locations/add_home_Screen.dart';
 import 'edit_profile_screen.dart';
 import 'home_screen.dart';
 
@@ -378,7 +378,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ListTile(
                             onTap: () async{
 
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen(
+                                  (){
+
+                                  }
+                              )));
 
                             },
                             title: Row(

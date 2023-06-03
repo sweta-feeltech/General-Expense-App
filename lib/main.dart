@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:general_expense_app/pages/Dashboard/add_home_Screen.dart';
+import 'package:general_expense_app/pages/Locations/add_home_Screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_nav_bar.dart';
@@ -9,11 +9,11 @@ import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/items_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
+import 'package:general_expense_app/pages/Locations/room_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/expense_list_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
+import 'package:general_expense_app/pages/Locations/shelf_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
@@ -133,7 +133,7 @@ class MyApp extends StatelessWidget {
       return getMaterialPageRoute(GroupListScreen());
     }
     if(settings.name == AddHomeScreen.routeName) {
-      return getMaterialPageRoute(AddHomeScreen());
+      return getMaterialPageRoute(AddHomeScreen((){}));
     }
 
     if(settings.name == EditProfileScreen.routeName) {

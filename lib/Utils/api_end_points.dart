@@ -129,5 +129,21 @@ String getExpListAPIEnd = "Expense";
 ///
 String dashboardListAPIEnd = "Income/getDashboardData";
 ///
+
+
 ///
 ///
+/// /// /// ~~~~~~~~~~~~~~~~~~~~~LOCATIONS FOR ITEMS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+///
+///
+/// /// /// ------------------GET HOME LIST API----------------------
+///
+String getHomeListAPIEnd = "HomeLocation";
+//
+//
+/// /// /// ------------------GET HOME LIST API----------------------
+///
+String addHomeAPIEnd = "HomeLocation";
+//
+//

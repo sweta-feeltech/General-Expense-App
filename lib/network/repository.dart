@@ -15,6 +15,7 @@ import '../models/GroupModel/group_list_model.dart';
 import '../models/GroupModel/group_members_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
 import '../models/IncomeListModel/income_list_model.dart';
+import '../models/Locations/Home/home_list_model.dart';
 import '../models/LoginRegisterModel/login_model.dart';
 import '../models/ProfileModel/edit_profile_model.dart';
 import '../models/ProfileModel/get_profile_model.dart';
@@ -333,7 +334,45 @@ class Repository {
     }
   }
 
+///
+///
+///~~~~~~~~~~~~~~~~~~~~~~~~~~~~ LOCATIONS API ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+///
+///
 
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~GET : HOME LOCATION LIST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+  Future<List<GetHomeListModel>> getHomeListData({String? access}) async {
+    try {
+      var listData = await apiClient.getApiCall(BASEURL,getHomeListAPIEnd,
+          isAccessToken: accessToken, isBearer: true) as List;
+      var list =
+      listData.map((json) => GetHomeListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~POST : ADD HOME  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+  Future<MessageModel> createHomePostAPI(dynamic body) async {
+    try {
+      Map<String, dynamic> json = await apiClient.postApiCall(
+          BASEURL, addHomeAPIEnd, body,
+          isAccessToken: accessToken, isBearer: true);
+      print("final received json = $json");
+      MessageModel courseSavedRes = MessageModel.fromJson(json);
+      return courseSavedRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
 
 
 }

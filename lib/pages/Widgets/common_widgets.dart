@@ -5,8 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
 import 'package:general_expense_app/models/Expense/get_expense_list_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
-import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
+import 'package:general_expense_app/pages/Locations/room_screen.dart';
+import 'package:general_expense_app/pages/Locations/shelf_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/pdf_viewer_screen.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +15,7 @@ import '../../Utils/colors.dart';
 import '../../models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
 import '../../models/IncomeListModel/income_list_model.dart';
+import '../../models/Locations/Home/home_list_model.dart';
 import '../Dashboard/items_screen.dart';
 import '../Group/single_group_screen.dart';
 
@@ -606,7 +607,10 @@ class CommonWidgets {
     );
   }
 
-  static Widget CommonHomeList(BuildContext context, {int? index}) {
+  static Widget CommonHomeList(BuildContext context,
+      {int? index,
+        required GetHomeListModel getHomeListModelData,
+      }) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -652,7 +656,7 @@ class CommonWidgets {
                 Column(
                   children: [
                     Text(
-                      "Sweet Home ${index! + 1}",
+                      "${getHomeListModelData!.homeLocationName}",
                       maxLines: 1,
                       // items.name.toString(),
                       overflow: TextOverflow.ellipsis,
@@ -662,7 +666,7 @@ class CommonWidgets {
                           fontSize: main_Height * 0.014),
                     ),
                     Text(
-                      "Our Home description",
+                      "${getHomeListModelData!.description}",
                       maxLines: 1,
                       // items.name.toString(),
                       overflow: TextOverflow.ellipsis,

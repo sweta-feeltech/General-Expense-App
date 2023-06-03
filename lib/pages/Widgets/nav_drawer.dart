@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/items_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/shelf_screen.dart';
+import 'package:general_expense_app/pages/Locations/room_screen.dart';
+import 'package:general_expense_app/pages/Locations/shelf_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/constants.dart';
-import '../Dashboard/add_home_Screen.dart';
+import '../Locations/add_home_Screen.dart';
 import '../Dashboard/category_screen.dart';
 import '../Income_Expense/income_screen.dart';
 import '../LoginRegistrationScreens/main_screen.dart';
@@ -193,7 +193,11 @@ class _NavDrawerState extends State<NavDrawer> {
           InkWell(
             onTap: () {
 
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen(
+                  (){
+
+                  }
+              )));
 
             },
             child: ListTile(

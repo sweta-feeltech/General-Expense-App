@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/room_screen.dart';
+import 'package:general_expense_app/pages/Locations/room_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../Utils/colors.dart';
+import '../Locations/add_home_Screen.dart';
 import 'add_expense_screen.dart';
 import 'expense_screen.dart';
 import 'home_screen.dart';
@@ -268,7 +269,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
             }
         ),
 
-        RoomScreen((){
+        AddHomeScreen((){
           Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
         }),
 
@@ -318,7 +319,7 @@ class TabNavigator extends StatelessWidget {
       );
     }
     else if (tabItem == "Page4"){
-      child = RoomScreen(
+      child = AddHomeScreen(
               () {
             tabManualCallback("Page1", 0);
           }
