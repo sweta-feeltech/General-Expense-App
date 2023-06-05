@@ -25,6 +25,9 @@ class _AddHomeScreenState extends State<AddHomeScreen> {
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  String searchQuery = '';
+  List<GetHomeListModel> searchResults = [];
+
   List<GetHomeListModel>? getHomeListModelData;
   MessageModel? messageModelData;
 
@@ -94,6 +97,10 @@ class _AddHomeScreenState extends State<AddHomeScreen> {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
+
+
+
+
     return Scaffold(
       backgroundColor: primaryGrey,
 
@@ -122,7 +129,75 @@ class _AddHomeScreenState extends State<AddHomeScreen> {
         onRefresh: () async {
           loadAllHomeListScreenApiCalls();
         },
-        child: Column(
+        child:
+        getHomeListModelData?.isEmpty == true ?
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: SvgPicture.asset("assets/icons/group.svg",
+                  height: main_Height * 0.4,
+                ),
+              ),
+
+
+
+              Text(
+                "You don't have any Home !",
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  // color: Color.fromARGB(255, 158, 158, 158),
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500,
+                  fontSize: main_Height * 0.0239,
+                ),
+              ),
+
+              SizedBox(
+                height: main_Height * 0.04,
+              ),
+
+              Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(30),
+                child: SizedBox(
+                  height: main_Height * 0.060,
+                  width: main_Width * 0.5,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      side: BorderSide(
+                          style: BorderStyle.none
+                      ),
+                      backgroundColor: primaryPurple,
+                    ),
+                    onPressed: () {
+
+                      _displayTextInputDialog(context);
+
+                    },
+                    child: Text(
+                      "Add Home",
+                      style: TextStyle(
+                          fontSize: main_Height < 700 ? 12 : 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              )
+
+            ],
+          ),
+        ) :
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
@@ -158,6 +233,37 @@ class _AddHomeScreenState extends State<AddHomeScreen> {
                 ],
               ),
             ),
+
+            // Padding(
+            //   padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
+            //   child: TextFormField(
+            //     autofocus: false,
+            //     decoration: InputDecoration(
+            //       contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
+            //       hintText: 'Search Home',
+            //       prefixIcon: Icon(Icons.search),
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.circular(25.0),
+            //       ),
+            //       filled: true,
+            //       fillColor: Colors.white,
+            //     ),
+            //     onChanged: (value) {
+            //
+            //       setState(() {
+            //         searchQuery = value;
+            //
+            //         searchResults = getHomeListModelData!.where((item) =>
+            //             item.description!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+            //                 item.homeLocationName!.toLowerCase().contains(searchQuery.toLowerCase())
+            //         ).toList();
+            //       });
+            //
+            //     },
+            //
+            //   ),
+            //
+            // ),
 
             Expanded(
               child: Padding(

@@ -17,6 +17,7 @@ import '../../models/GroupModel/group_list_model.dart';
 import '../../models/IncomeListModel/income_list_model.dart';
 import '../../models/Locations/home_list_model.dart';
 import '../../models/Locations/room_list_model.dart';
+import '../../models/Locations/shelf_list_model.dart';
 import '../Dashboard/items_screen.dart';
 import '../Group/single_group_screen.dart';
 
@@ -544,7 +545,7 @@ class CommonWidgets {
     return InkWell(
       onTap: () {
         Navigator.of(context, rootNavigator: true)
-            .push(MaterialPageRoute(builder: (context) => ShelfScreen()));
+            .push(MaterialPageRoute(builder: (context) => ShelfScreen("${getRoomListModelData!.id}")));
 
         // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InventoryScreen2()));
       },
@@ -689,7 +690,10 @@ class CommonWidgets {
     );
   }
 
-  static Widget CommonListShelf(BuildContext context, {int? index}) {
+  static Widget CommonListShelf(BuildContext context,
+      {int? index,
+        required GetShelfListModel getShelfListModelData,
+      }) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -737,7 +741,7 @@ class CommonWidgets {
                     // mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "Shelfs List ${index! + 1}",
+                        "${getShelfListModelData!.shelfLocationName}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -746,7 +750,7 @@ class CommonWidgets {
                             fontSize: main_Height * 0.018),
                       ),
                       Text(
-                        "Description of Shelf ${index + 1}",
+                        "${getShelfListModelData!.description}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

@@ -111,7 +111,7 @@ class MyApp extends StatelessWidget {
     }
 
     if(settings.name == ShelfScreen.routeName) {
-      return getMaterialPageRoute(ShelfScreen());
+      return getMaterialPageRoute(ShelfScreen(""));
     }
     if(settings.name == ItemScreen.routeName) {
       return getMaterialPageRoute(ItemScreen());

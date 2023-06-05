@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 
 import '../../Utils/colors.dart';
+import '../../blocs/Locations/AddShelfScreen/add_shelf_list_screen_bloc.dart';
+import '../../models/CommonModel/message_model.dart';
+import '../../models/Locations/shelf_list_model.dart';
+import '../../network/repository.dart';
 import '../Widgets/common_widgets.dart';
 
 
 class ShelfScreen extends StatefulWidget {
   static String routeName = '/ShelfScreen';
-  const ShelfScreen({Key? key}) : super(key: key);
+  final String roomId;
+  ShelfScreen(this.roomId,{super.key});
 
   @override
   State<ShelfScreen> createState() => _ShelfScreenState();
@@ -16,6 +22,30 @@ class ShelfScreen extends StatefulWidget {
 
 class _ShelfScreenState extends State<ShelfScreen> {
 
+  ShelfListScreenBloc shelfListScreenBloc =
+  ShelfListScreenBloc(Repository.getInstance());
+
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String searchQuery = '';
+  List<GetShelfListModel> searchResults = [];
+
+
+  List<GetShelfListModel>? getShelfListModelData;
+  MessageModel? messageModelData;
+
+  String? shelfLocationName;
+  String? Description;
+
+  @override
+  void initState() {
+    super.initState();
+    loadAllShelfListScreenApiCalls();
+  }
+
+  void loadAllShelfListScreenApiCalls() {
+    //TODO: remove static values
+    shelfListScreenBloc.add(FetchAllShelfListScreenAPIsEvent("${widget.roomId}"));
+  }
 
 
   @override
@@ -24,6 +54,54 @@ class _ShelfScreenState extends State<ShelfScreen> {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
+    return BlocProvider<ShelfListScreenBloc>(
+        create: (context) =>
+        shelfListScreenBloc..add(shelfListScreenInitialEvent()),
+        child: BlocConsumer<ShelfListScreenBloc, ShelfListScreenState>(
+          builder: (context, state) {
+            if (state is ShelfListScreenLoadingEventState) {
+              return ThemeHelper.buildLoadingWidget();
+            } else if (state is FetchAllShelfListScreenAPIsEventState) {
+              getShelfListModelData = state.getShelfListModelData;
+
+              return mainViewRoomListScreenViewWidget();
+            }
+            else if (state is PostCreateShelfEventState){
+              messageModelData = state.messageModelData;
+              loadAllShelfListScreenApiCalls();
+              return mainViewRoomListScreenViewWidget();
+            }
+            else {
+              return Container();
+            }
+          },
+          listener: (context, state) {
+            if (state is APIFailureState) {
+
+              ThemeHelper.customDialogForMessage(
+                  context,
+                  (state.exception.toString().replaceAll('Exception:', ''))
+                      .replaceAll(':', ''),
+                  MediaQuery.of(context).size.width, () {
+
+                Navigator.of(context).pop();
+                loadAllShelfListScreenApiCalls();
+              }, ForSuccess: false);
+
+
+
+            }
+          },
+        ));
+
+  }
+
+
+
+
+  Widget  mainViewRoomListScreenViewWidget(){
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
 
     return WillPopScope(
 
@@ -56,7 +134,9 @@ class _ShelfScreenState extends State<ShelfScreen> {
           centerTitle: false,
         ),
 
-        body:   Column(
+        body:
+
+        Column(
           children: [
 
             Padding(
@@ -76,13 +156,10 @@ class _ShelfScreenState extends State<ShelfScreen> {
 
                   InkWell(
                     onTap: (){
-                            ThemeHelper.addShelfDialogBox(
-                                context: context,
-                                logoutPress: () {},
-                                heightData: main_Height,
-                                popupTitle: "Add a Shelf",
-                                popupcontent: "popupcontent"
-                            );
+
+                      _displayTextInputDialog(context);
+
+
                     },
                     child: Container(
                       height: main_Height * 0.05,
@@ -112,6 +189,15 @@ class _ShelfScreenState extends State<ShelfScreen> {
                   fillColor: Colors.white,
                 ),
                 onChanged: (value) {
+                        setState(() {
+                          searchQuery = value;
+                          searchResults = getShelfListModelData!.where((item) =>
+                              item.description!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+                                  item.shelfLocationName!.toLowerCase().contains(searchQuery.toLowerCase())
+
+                          ).toList();
+                        });
+
                   // Do something with the search query
                 },
 
@@ -119,21 +205,258 @@ class _ShelfScreenState extends State<ShelfScreen> {
 
             ),
 
+            getShelfListModelData?.isEmpty == true ?
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                
+                children: [
+                  SizedBox(
+                    height: main_Height * 0.1,
+                  ),
+
+                  Text(
+                    "Empty Shelf !",
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      // color: Color.fromARGB(255, 158, 158, 158),
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: main_Height * 0.0239,
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: main_Height * 0.04,
+                  ),
+
+
+                ],
+              ),
+            )
+                :
             Expanded(
               child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: searchResults!.length,
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (BuildContext context, int index) {
-                    return CommonWidgets.CommonListShelf(context,index: index);
+                    return CommonWidgets.CommonListShelf(context,index: index,
+                    getShelfListModelData: searchResults![index]
+                    );
                   }),
             ),
+
+
+
           ],
         ),
-        
+
 
       ),
     );
+
+
   }
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+    return showDialog(
+        context: context,
+        builder: (context) {
+          double main_Width = MediaQuery.of(context).size.width;
+          double main_Height = MediaQuery.of(context).size.height;
+
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Form(
+              key: _formkey,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                clipBehavior: Clip.none,
+                children: [
+                  Material(
+                    elevation: 10,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        // color: Color.fromARGB(255, 217, 231, 250),
+                        color: Colors.white,
+                      ),
+                      height: main_Height * 0.35,
+                      width: main_Width * 0.7,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 15,),
+
+                              Text(
+                                "Add Shelf",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              // SizedBox(height: main_Height * 0.0235,),
+                              // Image(image: AssetImage("assets/images/logout_reverse.png"), width: 30, height: 30,),
+
+                              TextFormField(
+                                  onSaved: (onSavedVal1) {
+                                    shelfLocationName = onSavedVal1;
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Shelf Name can\'t be empty';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      isDense: true,
+                                      hintText: "Enter a Shelf name",
+                                      hintStyle: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: darkGrey,
+                                          fontSize: main_Height * 0.018),
+                                      // enabledBorder: UnderlineInputBorder(
+                                      //   borderSide: BorderSide(color: primaryPurple)
+                                      // ),
+                                      focusedBorder:UnderlineInputBorder(
+                                          borderSide: BorderSide(color: primaryPurple,width: 2)
+                                      )
+                                  ),
+                                  textInputAction: TextInputAction.next
+                              ),
+                              SizedBox(height: main_Height * 0.0135,),
+
+                              TextFormField(
+                                  onSaved: (onSavedVal2) {
+                                    Description = onSavedVal2;
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Description can\'t be empty';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      isDense: true,
+                                      hintText: "Description",
+                                      hintStyle: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: darkGrey,
+                                          fontSize: main_Height * 0.018),
+                                      // enabledBorder: UnderlineInputBorder(
+                                      //   borderSide: BorderSide(color: primaryPurple)
+                                      // ),
+                                      focusedBorder:UnderlineInputBorder(
+                                          borderSide: BorderSide(color: primaryPurple,width: 2)
+                                      )
+                                  ),
+                                  textInputAction: TextInputAction.next
+                              ),
+                              SizedBox(height: main_Height * 0.0235,),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      style: ButtonStyle(
+                                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: primaryPurple)))
+                                      ),
+                                      child: Text("Cancel", style: TextStyle(color: primaryPurple, fontSize: main_Height * 0.01872,),overflow: TextOverflow.ellipsis,)
+                                  ),
+                                  SizedBox(width: 5,),
+
+                                  SizedBox(
+                                    width: 75,
+                                    child: TextButton(
+                                        style: ButtonStyle(
+                                            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color:primaryPurple))),
+                                            backgroundColor: MaterialStateProperty.all(primaryPurple)
+                                        ),
+                                        onPressed: (){
+                                          if (_formkey.currentState!.validate()) {
+                                            _formkey.currentState!.save();
+
+                                            print("hhname${shelfLocationName} ${Description}   ${widget.roomId}");
+
+
+                                            shelfListScreenBloc.add(PostCreateShelfEvent("${shelfLocationName}","${Description}","${widget.roomId}"));
+                                            // roomListScreenBloc.add(PostCreateRoomEvent("${RoomLocationName}","${Description}","${widget.homeId}"));
+
+                                            Navigator.of(context).pop();
+                                          }
+                                        },
+                                        child: Text("Add",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: main_Height * 0.01872,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500
+                                          ),
+                                        )
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Positioned(
+                      top: -35,
+                      child: Material(
+                        borderRadius: BorderRadius.circular(60),
+                        // elevation: 4,
+                        // elevation: 10,
+                        child: Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle
+                          ),
+                          child: CircleAvatar(
+                            // backgroundColor: Colors.white,
+                              backgroundColor: primaryPurple,
+                              radius: 35,
+                              // child: Icon(Icons.home, size: 35,)
+                              child: Icon(Icons.dashboard,color: Colors.white, size: 40,)
+                            // child: Image.asset("assets/images/app_icon_png.png", width: 80, height: 80,)
+                          ),
+                        ),
+                      )
+                  )
+                ],
+              ),
+            ),
+          );
+        }
+    );
+  }
+
+
 }

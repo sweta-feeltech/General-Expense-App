@@ -161,3 +161,16 @@ String addRoomAPIEnd = "RoomLocation";
 //
 //
 
+///
+///
+/// /// /// ------------------GET HOME LIST API----------------------
+///
+String getShelfListAPIEnd = "LocationCascade/shelfLocation/";
+//
+//
+/// /// /// ------------------Post HOME LIST API----------------------
+///
+String addShelfAPIEnd = "shelfLocation";
+//
+//
+

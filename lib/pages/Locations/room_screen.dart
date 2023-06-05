@@ -34,7 +34,6 @@ class _RoomScreenState extends State<RoomScreen> {
   String? Description;
   String? HomeLocationId;
 
-
   @override
   void initState() {
     super.initState();
@@ -45,7 +44,6 @@ class _RoomScreenState extends State<RoomScreen> {
     //TODO: remove static values
     roomListScreenBloc.add(FetchAllRoomListScreenAPIsEvent("${widget.homeId}"));
   }
-
 
 
   @override
@@ -115,69 +113,144 @@ class _RoomScreenState extends State<RoomScreen> {
         centerTitle: false,
       ),
 
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          loadAllRoomListScreenApiCalls();
+        },
+        child:
 
-          Padding(
-            padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Add Rooms",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: main_Height * 0.021,
-                      fontWeight: FontWeight.w500
-                  ),
-                ),
-
-                InkWell(
-                  onTap: (){
-
-                    _displayTextInputDialog(context);
-
-
-                  },
-                  child: Container(
-                    height: main_Height * 0.05,
-                    width: main_Height * 0.05,
-                    child: SvgPicture.asset("assets/images/add.svg",
-                      fit: BoxFit.fill,),
-                  ),
-                )
-
-
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-              child: GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                // physics: const NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                childAspectRatio: 6/5,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                padding: EdgeInsets.only(bottom: main_Height * 0.005),
-                children: List.generate(
-                    getRoomListModelData!.length,
-                        (index) {
-                      return CommonWidgets.CommonRoomList(context,index: index,
-                        getRoomListModelData: getRoomListModelData![index]
-                      );
-                    }
+        getRoomListModelData?.isEmpty == true ?
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: SvgPicture.asset("assets/icons/group.svg",
+                  height: main_Height * 0.4,
                 ),
               ),
-            ),
 
+
+
+              Text(
+                "You don't have any Room !",
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  // color: Color.fromARGB(255, 158, 158, 158),
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500,
+                  fontSize: main_Height * 0.0239,
+                ),
+              ),
+
+              SizedBox(
+                height: main_Height * 0.04,
+              ),
+
+              Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(30),
+                child: SizedBox(
+                  height: main_Height * 0.060,
+                  width: main_Width * 0.5,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      side: BorderSide(
+                          style: BorderStyle.none
+                      ),
+                      backgroundColor: primaryPurple,
+                    ),
+                    onPressed: () {
+
+                      _displayTextInputDialog(context);
+
+                    },
+                    child: Text(
+                      "Add Room",
+                      style: TextStyle(
+                          fontSize: main_Height < 700 ? 12 : 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+              )
+
+            ],
           ),
-        ],
+        ) :
+
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Add Rooms",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.021,
+                        fontWeight: FontWeight.w500
+                    ),
+                  ),
+
+                  InkWell(
+                    onTap: (){
+
+                      _displayTextInputDialog(context);
+
+
+                    },
+                    child: Container(
+                      height: main_Height * 0.05,
+                      width: main_Height * 0.05,
+                      child: SvgPicture.asset("assets/images/add.svg",
+                        fit: BoxFit.fill,),
+                    ),
+                  )
+
+
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  childAspectRatio: 6/5,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  padding: EdgeInsets.only(bottom: main_Height * 0.005),
+                  children: List.generate(
+                      getRoomListModelData!.length,
+                          (index) {
+                        return CommonWidgets.CommonRoomList(context,index: index,
+                          getRoomListModelData: getRoomListModelData![index]
+                        );
+                      }
+                  ),
+                ),
+              ),
+
+            ),
+          ],
+        ),
       ),
 
     );

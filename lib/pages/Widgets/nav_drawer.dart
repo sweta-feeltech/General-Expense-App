@@ -262,7 +262,7 @@ class _NavDrawerState extends State<NavDrawer> {
           InkWell(
             onTap: () {
 
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ShelfScreen()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ShelfScreen("")));
 
             },
             child: ListTile(
@@ -282,9 +282,7 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
 
-
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
-
 
 
           ///
@@ -315,10 +313,7 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
 
-
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
-
-
 
           ///
           ///
