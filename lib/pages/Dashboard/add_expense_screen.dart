@@ -25,9 +25,9 @@ import '../Widgets/theme_helper.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   static String routeName = '/addExpenseScreen';
-  Function backPressCallback;
 
-  AddExpenseScreen(this.backPressCallback, {super.key});
+
+  AddExpenseScreen({super.key});
 
   @override
   State<AddExpenseScreen> createState() => _AddExpenseScreenState();
@@ -145,17 +145,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: primaryGrey,
-      appBar: AppBar(
-        titleSpacing: 15,
-        title: Text(
-          "Add Expense",
-          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
-        ),
-        automaticallyImplyLeading: false,
-        backgroundColor: primaryPurple,
-        elevation: 0,
-        centerTitle: false,
-      ),
+      // appBar: AppBar(
+      //   titleSpacing: 15,
+      //   title: Text(
+      //     "Add Expense",
+      //     style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
+      //   ),
+      //   automaticallyImplyLeading: false,
+      //   backgroundColor: primaryPurple,
+      //   elevation: 0,
+      //   centerTitle: false,
+      // ),
       bottomSheet: Container(
         height: main_Height * 0.13,
         width: main_Width * 1,

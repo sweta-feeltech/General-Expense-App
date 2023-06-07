@@ -5,6 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
 import 'package:general_expense_app/models/Expense/get_expense_list_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
+import 'package:general_expense_app/models/Locations/Item_list_model.dart';
+import 'package:general_expense_app/pages/Locations/item_list_screen.dart';
 import 'package:general_expense_app/pages/Locations/room_screen.dart';
 import 'package:general_expense_app/pages/Locations/shelf_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/pdf_viewer_screen.dart';
@@ -702,7 +704,7 @@ class CommonWidgets {
       child: InkWell(
         onTap: () {
           Navigator.of(context, rootNavigator: true)
-              .push(MaterialPageRoute(builder: (context) => ItemScreen()));
+              .push(MaterialPageRoute(builder: (context) => ItemListScreen("${getShelfListModelData!.id}")));
         },
         child: Material(
           elevation: 1,
@@ -1257,6 +1259,212 @@ class CommonWidgets {
       ),
     );
   }
+
+
+
+  static Widget masterCardforItem(
+      BuildContext context,
+       {
+        int? index,
+        required GetItemListModel getItemListModelData,
+      }) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: main_Height * 0.005, horizontal: main_Width * 0.025),
+      child: Container(
+        height: main_Height * 0.12,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(7),
+        ),
+        padding: EdgeInsets.symmetric(
+            horizontal: main_Width * 0.025, vertical: main_Height * 0.01),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
+                    "\u{20B9} ${getItemListModelData!.price}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Colors.black, fontSize: main_Height * 0.018),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+
+
+                    showDialog(
+                      context: context,
+                      builder: (_) => Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:  EdgeInsets.all(15.0),
+                            child: Stack(
+                              children: <Widget>[
+
+                                getItemListModelData?.receipt?.substring(
+                                    getItemListModelData!.receipt
+                                        .toString()
+                                        .length! -
+                                        4) ==
+                                    ".pdf"
+                                    ?
+
+
+                                Container(
+                                  height: main_Height * 0.3,
+                                  width: main_Width * 0.6,
+
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(10)),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(15)
+                                          )// Set the desired color
+                                      ),
+                                      onPressed: (){
+
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PdfViewerScreen(path: "${getItemListModelData!.receipt}")));
+
+                                      },
+                                      child: Center(child:
+
+                                      Image.asset("assets/images/pdf_pre.png",
+                                        height: main_Height * 0.15,
+                                        width: main_Height * 0.15,
+                                      )
+
+                                      )),
+                                )
+                                    :
+                                Container(
+                                  height: main_Height * 0.3,
+                                  width: main_Width * 0.6,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(10)),
+                                  // color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder:
+                                      "assets/images/inf.jpg",
+                                      image:
+                                      "$BASEIMAGEURL${getItemListModelData.receipt}",
+                                      imageErrorBuilder:
+                                      ((context, error, stackTrace) {
+                                        return Image.asset(
+                                            "assets/images/inf.jpg");
+                                      }),
+                                    ),
+                                  ),
+                                ),
+
+
+                                Positioned(
+                                  top: 0.0,
+                                  right: 0.0,
+                                  child: FloatingActionButton(
+                                    child: Image.asset("assets/images/q.png"),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(80)),
+                                    backgroundColor: Colors.white,
+                                    mini: true,
+                                    elevation: 5.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  child: SvgPicture.asset(
+                    "assets/images/eye.svg",
+                    height: main_Height * 0.035,
+                    width: main_Height * 0.035,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Item Name : ",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          fontSize: main_Height * 0.018),
+                    ),
+                    Flexible(
+                      child: Text(
+                        "${getItemListModelData!.itemName}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            color: Colors.black,
+                            fontSize: main_Height * 0.018),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Text(
+                      "Remarks : ",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          fontSize: main_Height * 0.018),
+                    ),
+                    Flexible(
+                      child: Text(
+                        "${getItemListModelData.description.toString().replaceAll("\n", " ")}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black, fontSize: main_Height * 0.018),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
 
 
 }

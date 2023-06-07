@@ -15,6 +15,7 @@ import '../models/GroupModel/group_list_model.dart';
 import '../models/GroupModel/group_members_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
 import '../models/IncomeListModel/income_list_model.dart';
+import '../models/Locations/Item_list_model.dart';
 import '../models/Locations/home_list_model.dart';
 import '../models/Locations/room_list_model.dart';
 import '../models/Locations/shelf_list_model.dart';
@@ -448,8 +449,21 @@ class Repository {
 
 
 
+  ///
+  /// ~~~~~~~~~~~~~~~~~GET : ROOM LOCATION LIST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
 
-
+  Future<List<GetItemListModel>> getItemListData(String query,{String? access}) async {
+    try {
+      var listData = await apiClient.getApiCall(BASEURL,"${getItemListAPIEnd}/${query}",
+          isAccessToken: accessToken, isBearer: true) as List;
+      var list =
+      listData.map((json) => GetItemListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
 
 
 

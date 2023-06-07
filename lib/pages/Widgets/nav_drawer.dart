@@ -158,10 +158,7 @@ class _NavDrawerState extends State<NavDrawer> {
           InkWell(
             onTap: () {
 
-              Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>AddExpenseScreen(
-                  (){}
-
-              )));
+              Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>AddExpenseScreen()));
 
             },
             child: ListTile(

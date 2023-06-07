@@ -174,3 +174,18 @@ String addShelfAPIEnd = "shelfLocation";
 //
 //
 
+
+
+///
+///
+/// /// /// ------------------GET HOME LIST API----------------------
+///
+String getItemListAPIEnd = "Item";
+//
+//
+/// /// /// ------------------Post HOME LIST API----------------------
+///
+String addItemAPIEnd = "Item";
+//
+//
+

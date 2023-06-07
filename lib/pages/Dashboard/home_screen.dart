@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:general_expense_app/Utils/constants.dart';
 import 'package:general_expense_app/blocs/HomeScreen/home_screen_bloc.dart';
-import 'package:general_expense_app/models/CommonModel/user_data_model.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
-import 'package:general_expense_app/models/IncomeListModel/income_list_model.dart';
-import 'package:general_expense_app/pages/Dashboard/search_feild_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
-import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:general_expense_app/pages/Locations/item_list_screen.dart';
 import 'package:intl/intl.dart';
 import '../../Utils/colors.dart';
 import '../../models/GroupModel/group_list_model.dart';
@@ -423,14 +418,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Hero(
-                tag: "search_screen_a",
+                tag: "search",
                 child: Padding(
                   padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
                   child: TextFormField(
                     // autofocus: false,
                     readOnly: true,
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchFeildScreen())).then((value){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen(""))).then((value){
                         // FocusManager.instance.primaryFocus?.unfocus();
                       }
                       );
@@ -446,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fillColor: Colors.white,
                     ),
                     onChanged: (value) {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchFeildScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen("")));
                       // Do something with the search query
                     },
 

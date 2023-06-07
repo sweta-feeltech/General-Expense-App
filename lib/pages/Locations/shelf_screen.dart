@@ -66,12 +66,12 @@ class _ShelfScreenState extends State<ShelfScreen> {
               return ThemeHelper.buildLoadingWidget();
             } else if (state is FetchAllShelfListScreenAPIsEventState) {
               getShelfListModelData = state.getShelfListModelData;
-              return mainViewRoomListScreenViewWidget();
+              return mainViewShelfListScreenViewWidget();
             }
             else if (state is PostCreateShelfEventState){
               messageModelData = state.messageModelData;
               loadAllShelfListScreenApiCalls();
-              return mainViewRoomListScreenViewWidget();
+              return mainViewShelfListScreenViewWidget();
             }
             else {
 
@@ -102,7 +102,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
 
 
 
-  Widget  mainViewRoomListScreenViewWidget(){
+  Widget  mainViewShelfListScreenViewWidget(){
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -147,7 +147,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Add Shelf ${allData}",
+                  Text("Add Shelf",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
