@@ -376,8 +376,7 @@ class CommonWidgets {
           vertical: main_Height * 0.005, horizontal: main_Width * 0.03),
       child: InkWell(
         onTap: () {
-          Navigator.of(context, rootNavigator: true)
-              .push(MaterialPageRoute(builder: (context) => ItemScreen()));
+
         },
         child: Material(
           elevation: 3,

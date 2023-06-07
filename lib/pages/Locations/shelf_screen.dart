@@ -36,9 +36,12 @@ class _ShelfScreenState extends State<ShelfScreen> {
   String? shelfLocationName;
   String? Description;
 
+  bool? allData;
+
   @override
   void initState() {
     super.initState();
+    allData = false;
     loadAllShelfListScreenApiCalls();
   }
 
@@ -63,7 +66,6 @@ class _ShelfScreenState extends State<ShelfScreen> {
               return ThemeHelper.buildLoadingWidget();
             } else if (state is FetchAllShelfListScreenAPIsEventState) {
               getShelfListModelData = state.getShelfListModelData;
-
               return mainViewRoomListScreenViewWidget();
             }
             else if (state is PostCreateShelfEventState){
@@ -72,6 +74,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
               return mainViewRoomListScreenViewWidget();
             }
             else {
+
               return Container();
             }
           },
@@ -144,7 +147,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Add Shelf",
+                  Text("Add Shelf ${allData}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -188,16 +191,21 @@ class _ShelfScreenState extends State<ShelfScreen> {
                   filled: true,
                   fillColor: Colors.white,
                 ),
+                onTap: (){
+                  allData = true;
+
+                },
                 onChanged: (value) {
+                  print("ccc");
                         setState(() {
+                          print("ccc");
+                          allData = true;
                           searchQuery = value;
                           searchResults = getShelfListModelData!.where((item) =>
                               item.description!.toLowerCase().contains(searchQuery.toLowerCase()) ||
                                   item.shelfLocationName!.toLowerCase().contains(searchQuery.toLowerCase())
-
                           ).toList();
                         });
-
                   // Do something with the search query
                 },
 
@@ -239,13 +247,13 @@ class _ShelfScreenState extends State<ShelfScreen> {
                 :
             Expanded(
               child: ListView.builder(
-                  itemCount: searchResults!.length,
+                  itemCount: allData == false ? getShelfListModelData!.length : searchResults!.length,
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (BuildContext context, int index) {
                     return CommonWidgets.CommonListShelf(context,index: index,
-                    getShelfListModelData: searchResults![index]
+                    getShelfListModelData:   allData == false ?  getShelfListModelData![index] : searchResults![index]
                     );
                   }),
             ),
