@@ -178,22 +178,17 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             onPressed: () {
               if (_formkey.currentState!.validate()) {
                 _formkey.currentState!.save();
-
                 // final testDate =
                 //     DateTime1 == DateTime.now().toString().substring(0, 16)
                 //         ? "${DateTime1?.replaceAll(" ", "T")}"
                 //         : "${DateTime1?.replaceAll(" ", "T")}:00";
                 final testdate = DateTime1.toString().length == 16 ? "${DateTime1.toString().replaceAll(" ", "T")}:00.946Z" : "${DateTime1.toString().substring(0,16).replaceAll(" ", "T")}:00.946Z";
-
                 // print(
                 //     "check Expense : ${Amount} ${testDate} ${selectedOption} ${ToPay} ${Remarks} ");
                 //
                 // print("ddddddd : ${selectedOption} ");
-
                 PIimage == null ?
-                    ThemeHelper.showToastMessage(
-                      "Add File or Image"
-                    )
+                    ThemeHelper.showToastMessage("Add File or Image First")
                     :
                 expenseScreenBloc.add(PostAddExpenseFormEvent("${selectedOption}","${testdate}","${Amount}","${ToPay}","${Remarks}",File(PIimage!.path.toString())));
 
