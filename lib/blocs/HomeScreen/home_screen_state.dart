@@ -28,3 +28,10 @@ class FetchAllHomeScreenAPIsEventState extends HomeScreenState {
   FetchAllHomeScreenAPIsEventState(this.getGroupListModelData,this.dashboardModelData);
 
 }
+
+
+class PostAddIncomeEventState extends HomeScreenState {
+  final MessageModel addIncomeModelData;
+
+  PostAddIncomeEventState(this.addIncomeModelData);
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../models/CommonModel/message_model.dart';
 import '../../models/DashboardModel/dashboard_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
 import '../../network/repository.dart';
@@ -35,6 +36,21 @@ class HomeScreenBloc
           emit(APIFailureState(Exception(error.toString())));
         }
       }
+
+
+      if (event is PostAddIncomeEvent) {
+        late MessageModel getIncomeListModelData;
+
+        try {
+          getIncomeListModelData = await repositoryRepo.addIncomePostAPI(
+              {"IncomeDate": event.IncomeDate, "Amount": event.Amount, "Description": event.Description});
+          emit(PostAddIncomeEventState(getIncomeListModelData));
+        } catch (error) {
+          emit(HomeScreenLoadingEventState(false));
+          emit(APIFailureState(Exception(error.toString())));
+        }
+      }
+
 
 
     });
