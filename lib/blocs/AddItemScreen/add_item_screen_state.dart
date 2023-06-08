@@ -23,3 +23,13 @@ class PostAddItemFormEventState extends ItemScreenState {
 
   PostAddItemFormEventState(this.messageModelData);
 }
+
+
+
+class FetchAllListScreenAPIsEventState extends ItemScreenState {
+  final List<GetHomeListModel> getHomeListModelData;
+  final List<GetRoomLocationModel>  getRoomLocationModelData;
+  final List<GetShelfLocationModel> getShelfLocationModelData;
+
+  FetchAllListScreenAPIsEventState(this.getHomeListModelData,this.getRoomLocationModelData,this.getShelfLocationModelData);
+}

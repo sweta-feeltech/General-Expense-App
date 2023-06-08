@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:general_expense_app/models/DropDown/room_data_model.dart';
+import 'package:general_expense_app/models/DropDown/shelf_data_model.dart';
+import 'package:general_expense_app/models/Locations/home_list_model.dart';
 
 import '../../Utils/colors.dart';
 import '../../Utils/document_upload.dart';
@@ -22,11 +25,69 @@ class AddItemScreen extends StatefulWidget {
 
 class _AddItemScreenState extends State<AddItemScreen> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _Homekey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _Roomkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _Shelfkey = GlobalKey<FormState>();
+
 
 
   PlatformFile? PIimage;
 
-  String? Amount, Remarks, ItemName;
+  String? Amount, Remarks, ItemName , HomeN, RoomN, ShelfN;
+
+  String? value;
+
+  List<GetRoomLocationModel> RoomLocationList = List.empty(growable: true);
+  List<GetShelfLocationModel> ShelfLocationList = List.empty(growable: true);
+
+
+  bool disabledRoomListDropDown = true;
+  bool disabledShelfListDropDown = true;
+
+
+  void homeValueChanged(_value) {
+    print("state val: $_value");
+    getRoomLocationModelData?.forEach((key) {
+      // print("dis val: ${key.stateId}");
+      // print(key.state!.stateName);
+      if(key.homeLocationId == _value) {
+        RoomLocationList.add(key);
+      }
+    });
+    print("rrrrrr${RoomLocationList![0].homeLocationName}");
+    setState(() {
+      value = _value;
+      print("setState: $value");
+      disabledRoomListDropDown = false;
+      print(disabledRoomListDropDown);
+    });
+  }
+
+
+  void RoomValueChanged(_value) {
+    print(_value);
+
+    getShelfLocationModelData?.forEach((key) => {
+      if(key.roomLocationId == _value){
+        // print("district Id: ${key.districtId}"),
+        // print("${key.district!.districtName}"),
+        ShelfLocationList.add(key)
+      }
+    });
+    // print(CitiesNewList);
+    setState(() {
+      value = _value;
+      disabledShelfListDropDown = false;
+    });
+  }
+
+  // This function will call only when user change value of the city dropdown
+  void shelfValueChanged(_value) {
+    print(_value);
+    setState(() {
+      value = _value;
+    });
+  }
 
 
   @override
@@ -44,9 +105,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
   MessageModel? messageModelData;
 
+  List<GetHomeListModel>? getHomeListModelData;
+  List<GetRoomLocationModel>? getRoomLocationModelData;
+  List<GetShelfLocationModel>? getShelfLocationModelData;
+
+
   loadAllItemListScreenApiCalls() {
-    itemScreenBloc.add(ItemScreenListInitialEvent());
+    itemScreenBloc.add(FetchAllItemScreenListScreenAPIsEvent());
   }
+
+
 
 
   @override
@@ -62,9 +130,21 @@ class _AddItemScreenState extends State<AddItemScreen> {
               if (state is ItemScreenLoadingEventState) {
                 return ThemeHelper.buildLoadingWidget();
               }
+              else if(state is FetchAllListScreenAPIsEventState){
+
+                getHomeListModelData = state.getHomeListModelData;
+                getRoomLocationModelData = state.getRoomLocationModelData;
+                getShelfLocationModelData = state.getShelfLocationModelData;
+
+                return mainViewAllItemScreenViewWidget();
+              }
               else if (state is PostAddItemFormEventState) {
                 messageModelData = state.messageModelData;
                 PIimage = null;
+                ShelfLocationList = [];
+                RoomLocationList = [];
+                disabledShelfListDropDown = true;
+                disabledRoomListDropDown = true;
 
                 loadAllItemListScreenApiCalls();
                 return mainViewAllItemScreenViewWidget();
@@ -127,13 +207,13 @@ class _AddItemScreenState extends State<AddItemScreen> {
                   _formkey.currentState!.save();
 
 
-                  print("additmresult :n ${ItemName}  a${Amount} r ${Remarks} s: ${widget.shelfId} i ${PIimage}");
+                  print("additmresult :n ${ItemName}  a${Amount} r ${Remarks} s: ${widget.apbar == "0"  ? "aaa${widget.shelfId}"  : "bbb${ShelfN}"} i ${PIimage}");
 
 
                   PIimage == null ?
                   ThemeHelper.showToastMessage("Add File or Image First")
                       :
-                  itemScreenBloc.add(PostAddItemFormEvent("${ItemName}","${Amount}","${Remarks}","${widget.shelfId}",File(PIimage!.path.toString())));
+                  itemScreenBloc.add(PostAddItemFormEvent("${ItemName}","${Amount}","${Remarks}","${widget.apbar == "0"  ? widget.shelfId : ShelfN}", File(PIimage!.path.toString())));
 
 
                 }
@@ -182,6 +262,264 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 vertical: main_Height * 0.01),
                   child: Column(
                     children: [
+
+                      widget.apbar == "0"  ?
+                      Container():
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Home",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: main_Height * 0.018,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            // width: main_Width,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.black38,
+                                ),
+                                borderRadius: BorderRadius.circular(3)),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButtonFormField<dynamic>(
+                                key: _Homekey,
+
+                                // value: user.stateId,
+
+                                onTap: () {
+                                  // _districtDrop.currentState!.reset();
+                                  // _cityDropDown.currentState!.reset();
+                                  // DistrictsList.clear();
+                                  // CitiesList.clear();
+                                },
+                                isExpanded: true,
+                                // validator: (value) {
+                                //   if (value == null) {
+                                //     return 'Please select your state';
+                                //   }
+                                //   return null;
+                                // },
+                                alignment: Alignment.centerLeft,
+
+                                decoration: InputDecoration(
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    hintText: "Select Category"
+                                ),
+
+                                hint: FittedBox(
+                                  child: Text(
+                                    "Select Home",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+
+                                onSaved: (onSavedVal) {
+                                  HomeN = onSavedVal;
+                                  print("HomeN : ${HomeN}");
+                                },
+
+                                onChanged: (_value) => homeValueChanged(_value),
+
+                                items: getHomeListModelData?.map((GetHomeListModel item) {
+                                  return DropdownMenuItem<dynamic>(
+                                      value: item.id,
+                                      child: FittedBox(child: Text("${item.homeLocationName}")));
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+
+
+                          Row(
+                            children: [
+                              Text(
+                                "Room",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: main_Height * 0.018,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            // width: main_Width,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.black38,
+                                ),
+                                borderRadius: BorderRadius.circular(3)),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButtonFormField<dynamic>(
+                                key: _Roomkey,
+
+                                // value: user.stateId,
+
+                                onTap: () {
+                                  // _districtDrop.currentState!.reset();
+                                  // _cityDropDown.currentState!.reset();
+                                  // DistrictsList.clear();
+                                  // CitiesList.clear();
+                                },
+                                isExpanded: true,
+                                // validator: (value) {
+                                //   if (value == null) {
+                                //     return 'Please select your state';
+                                //   }
+                                //   return null;
+                                // },
+                                alignment: Alignment.centerLeft,
+
+                                decoration: InputDecoration(
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    hintText: "Select Category"
+                                ),
+
+                                hint: FittedBox(
+                                  child: Text(
+                                    "Select Room",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+
+                                onSaved: (onSavedVal) {
+                                  RoomN = onSavedVal;
+                                  print("HomeN : ${HomeN}");
+                                },
+
+                                onChanged: disabledRoomListDropDown ? null : (_value) => RoomValueChanged(_value),
+                                items: RoomLocationList?.map((GetRoomLocationModel item) {
+                                  return DropdownMenuItem<dynamic>(
+                                      value: item.id,
+                                      child: FittedBox(child: Text("${item.roomLocationName}")));
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+
+
+                          Row(
+                            children: [
+                              Text(
+                                "Shelf",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: main_Height * 0.018,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            // width: main_Width,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Colors.black38,
+                                ),
+                                borderRadius: BorderRadius.circular(3)),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: ButtonTheme(
+                              alignedDropdown: true,
+                              child: DropdownButtonFormField<dynamic>(
+                                key: _Shelfkey,
+                                // value: user.stateId,
+
+
+                                onTap: () {
+                                  // _districtDrop.currentState!.reset();
+                                  // _cityDropDown.currentState!.reset();
+                                  // DistrictsList.clear();
+                                  // CitiesList.clear();
+                                },
+                                isExpanded: true,
+                                // validator: (value) {
+                                //   if (value == null) {
+                                //     return 'Please select your Shelf';
+                                //   }
+                                //   return null;
+                                // },
+                                alignment: Alignment.centerLeft,
+
+                                decoration: InputDecoration(
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    hintText: "Select Shelf"
+                                ),
+
+                                hint: FittedBox(
+                                  child: Text(
+                                    "Select Shelf",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+
+                                onSaved: (onSavedVal) {
+                                  ShelfN = onSavedVal;
+                                  print("HomeN : ${HomeN}");
+                                },
+
+                                onChanged: disabledShelfListDropDown ? null : (_value) => shelfValueChanged(_value),
+                                items: ShelfLocationList?.map((GetShelfLocationModel item) {
+                                  return DropdownMenuItem<dynamic>(
+                                      value: item.id,
+                                      child: FittedBox(child: Text("${item.shelfLocationName}")));
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+
+
+
+                        ],
+                      ),
+
+
+
+
+
+
 
 
                       Row(

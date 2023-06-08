@@ -150,16 +150,27 @@ String addHomeAPIEnd = "HomeLocation";
 
 ///
 ///
-/// /// /// ------------------GET HOME LIST API----------------------
+/// /// /// ------------------GET ROOM LIST API----------------------
 ///
 String getRoomListAPIEnd = "LocationCascade/roomLocation/";
+
 //
 //
-/// /// /// ------------------Post HOME LIST API----------------------
+/// /// /// ------------------Post ROOM LIST API----------------------
 ///
 String addRoomAPIEnd = "RoomLocation";
 //
-//
+/////
+// ///
+// /// /// /// ------------------GET HOME LIST API----------------------
+// ///
+///
+///    FOR DROP DOWN
+///
+///
+String getRoomLocationAPIEnd = "RoomLocation";
+String getShelfLocationAPIEnd = "ShelfLocation";
+
 
 ///
 ///

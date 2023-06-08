@@ -19,3 +19,4 @@ class PostAddItemFormEvent extends ItemScreenEvent {
 }
 
 
+class FetchAllItemScreenListScreenAPIsEvent extends ItemScreenEvent {}

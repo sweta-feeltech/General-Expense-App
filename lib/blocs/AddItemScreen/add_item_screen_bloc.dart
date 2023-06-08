@@ -4,8 +4,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:general_expense_app/models/DropDown/shelf_data_model.dart';
 
 import '../../models/CommonModel/message_model.dart';
+import '../../models/DropDown/room_data_model.dart';
+import '../../models/Locations/home_list_model.dart';
 import '../../network/repository.dart';
 
 part 'add_item_screen_event.dart';
@@ -47,6 +50,35 @@ class ItemScreenBloc extends Bloc<ItemScreenEvent, ItemScreenState> {
           emit(ApiFailureState(Exception(error.toString())));
         }
       }
+
+
+
+      if (event is FetchAllItemScreenListScreenAPIsEvent) {
+        late List<GetHomeListModel> getHomeListModelData;
+        late List<GetRoomLocationModel>  getRoomLocationModelData;
+        late List<GetShelfLocationModel> getShelfLocationModelData;
+
+
+        try {
+          emit(ItemScreenLoadingEventState(true));
+          getHomeListModelData = await repositoryRepo.getHomeListData();
+          getRoomLocationModelData = await repositoryRepo.getRoomLocationListData();
+          getShelfLocationModelData = await repositoryRepo.getShelfLocationListData();
+          emit(ItemScreenLoadingEventState(false));
+          emit(FetchAllListScreenAPIsEventState(
+              getHomeListModelData,
+              getRoomLocationModelData,
+            getShelfLocationModelData
+          ));
+        } catch (error, stacktrace) {
+          print(stacktrace);
+          emit(ItemScreenLoadingEventState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
+
+      }
+
+
 
 
 

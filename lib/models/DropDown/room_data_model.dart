@@ -1,0 +1,52 @@
+class GetRoomLocationModel {
+  String? id;
+  String? homeLocationId;
+  String? homeLocationName;
+  String? roomLocationName;
+  String? description;
+  bool? status;
+  String? createdBy;
+  String? createdDate;
+  String? updatedBy;
+  String? updatedDate;
+
+  GetRoomLocationModel(
+      {this.id,
+        this.homeLocationId,
+        this.homeLocationName,
+        this.roomLocationName,
+        this.description,
+        this.status,
+        this.createdBy,
+        this.createdDate,
+        this.updatedBy,
+        this.updatedDate});
+
+  GetRoomLocationModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    homeLocationId = json['homeLocationId'];
+    homeLocationName = json['homeLocationName'];
+    roomLocationName = json['roomLocationName'];
+    description = json['description'];
+    status = json['status'];
+    createdBy = json['createdBy'];
+    createdDate = json['createdDate'];
+    updatedBy = json['updatedBy'];
+    updatedDate = json['updatedDate'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['homeLocationId'] = this.homeLocationId;
+    data['homeLocationName'] = this.homeLocationName;
+    data['roomLocationName'] = this.roomLocationName;
+    data['description'] = this.description;
+    data['status'] = this.status;
+    data['createdBy'] = this.createdBy;
+    data['createdDate'] = this.createdDate;
+    data['updatedBy'] = this.updatedBy;
+    data['updatedDate'] = this.updatedDate;
+    return data;
+  }
+}
