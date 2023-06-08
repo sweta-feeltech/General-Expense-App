@@ -13,7 +13,7 @@ part 'expense_screen_event.dart';
 class ExpenseScreenBloc extends Bloc<ExpenseScreenEvent, ExpenseScreenState> {
   final Repository repositoryRepo;
 
-  ExpenseScreenBloc(this.repositoryRepo) : super(IncomeListScreenInitialState()) {
+  ExpenseScreenBloc(this.repositoryRepo) : super(ExpenseListScreenInitialState()) {
     on<ExpenseScreenEvent>((event, emit) async {
 
       if (event is FetchAllExpenseCatScreenListScreenAPIsEvent) {

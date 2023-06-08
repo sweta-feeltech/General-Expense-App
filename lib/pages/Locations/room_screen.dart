@@ -104,7 +104,7 @@ class _RoomScreenState extends State<RoomScreen> {
       appBar: AppBar(
         titleSpacing: 15,
         title: Text(
-          "Rooms",
+          "Room",
           style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
         ),
         automaticallyImplyLeading: false,

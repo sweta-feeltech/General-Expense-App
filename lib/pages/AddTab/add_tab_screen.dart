@@ -75,7 +75,7 @@ class _AddTabScreenState extends State<AddTabScreen> {
         views: [
 
           AddExpenseScreen(),
-          AddItemScreen()
+          AddItemScreen("","")
 
         ],
         onChange: (index) {

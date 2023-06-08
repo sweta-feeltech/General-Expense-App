@@ -14,12 +14,9 @@ import '../../blocs/ProfileScreen/profile_screen_bloc.dart';
 import '../../models/ProfileModel/get_profile_model.dart';
 import '../../network/api_client.dart';
 import '../../network/repository.dart';
-import '../Empty/add_home_screen.dart';
-import '../LoginRegistrationScreens/splash_screen.dart';
 import '../Widgets/theme_helper.dart';
 import '../Locations/add_home_Screen.dart';
 import 'edit_profile_screen.dart';
-import 'home_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profileScreen';
@@ -32,10 +29,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-
-
-
 
   Repository repositoryRepo = Repository(ApiClient(httpClient: http.Client()));
 
@@ -320,7 +313,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ListTile(
                             onTap: (){
 
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHome1Screen()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen((){})));
 
                             },
                             title: Row(

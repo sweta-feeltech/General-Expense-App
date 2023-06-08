@@ -3,7 +3,7 @@ part of 'expense_screen_bloc.dart';
 
 @immutable class ExpenseScreenState {}
 
-class IncomeListScreenInitialState extends ExpenseScreenState {}
+class ExpenseListScreenInitialState extends ExpenseScreenState {}
 
 class ExpenseScreenLoadingEventState extends ExpenseScreenState {
   final bool showProgress;

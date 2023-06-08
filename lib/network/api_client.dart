@@ -189,7 +189,7 @@ class ApiClient {
   }
   ///
   ///
-  /// POST REQUEST FOR MULTIPART [form-data]
+  /// POST REQUEST FOR MULTIPART FOR EXPENSE [form-data]
   ///
   ///
   Future<dynamic> apiCallMultipartPost(String baseUrl, String apiEndPoint,dynamic postBody,{bool? isBearer,String? isAccessToken,}) async {
@@ -278,6 +278,101 @@ class ApiClient {
   }
 
 
+  ///
+  ///
+  ///
+  /// POST REQUEST FOR MULTIPART FOR ITEM
+  ///
+  ///
+
+  Future<dynamic> apiCallMultipartPostforItem(String baseUrl, String apiEndPoint,dynamic postBody,{bool? isBearer,String? isAccessToken,}) async {
+
+    postDataItem data = postDataItem.fromJson(postBody);
+
+    var getUrl;
+
+    getUrl = Uri.parse('$baseUrl$apiEndPoint');
+    print("postUrl $getUrl");
+
+    var request = http.MultipartRequest('POST', getUrl);
+
+    // request.headers.addAll({
+    //   "Content-Type": "application/json",
+    //   "isClient": "true",
+    //   "Authorization": "$accessToken"
+    // });
+
+
+    if(isBearer == true){
+      request.headers.addAll({
+        "Content-Type": "application/json",
+        "isClient": "true",
+        "Authorization": "Bearer $accessToken"
+      });
+    }else{
+      request.headers.addAll({
+        "Content-Type": "application/json",
+        "isClient": "true",
+        "Authorization": "$accessToken"
+      });
+    }
+
+
+
+
+
+    if(data.Receipt != null) {
+      var stream = http.ByteStream(data.Receipt!.openRead());
+      stream.cast();
+      var length = await data.Receipt!.length();
+      var multiport = await http.MultipartFile.fromPath("Receipt",data.Receipt!.path, contentType: MediaType('image', 'jpg'));
+      request.files.add(multiport);
+    }
+
+    print("testres");
+
+
+
+    print("dataforpost : ${data.ShelfLocationId} ${data.ItemName} ${data.Price} ${data.Description} ${data.Receipt}");
+
+    request.fields['ItemName'] = data.ItemName!.toString();
+    request.fields['Price'] = data.Price!.toString();
+    request.fields['ShelfLocationId'] = data.ShelfLocationId!.toString();
+    request.fields['Description'] = data.Description!.toString();
+
+
+    var response = await request.send();
+
+    var stringResponse = await response.stream.bytesToString();
+    print("string response ${stringResponse}");
+    print(response.request);
+    print(response.statusCode);
+    switch (response.statusCode) {
+      case 200:
+        var jDecode = json.decode(stringResponse);
+        return jDecode;
+
+    // case 400:
+    //   Map<String, dynamic> jsonD = json.decode(stringResponse);
+    //   ChangePassModel changePassModelRes = ChangePassModel.fromJson(jsonD);
+    //   throw ServerValidationError(changePassModelRes.message);
+
+      case 400:
+        throw ServerValidationError("Server validation error : 404");
+
+      case 401:
+        throw UnAuthorizedException("Unauthorized access or Invalid credentials");
+
+      case 404:
+        throw DoesNotExistException("User Does Not Exist");
+
+      default:
+        throw Exception("Something went Wrong");
+    }
+  }
+
+
+
 
   //////
   ///
@@ -330,9 +425,6 @@ class ApiClient {
         throw Exception(postResponseJson["message"]);
     }
   }
-
-
-
 
 
 
@@ -574,7 +666,6 @@ class ApiClient {
   }
 
 
-
 }
 
 
@@ -628,3 +719,30 @@ postData.fromJson(Map<String, dynamic> json) {
   Receipt = json['Receipt'];
   }
 }
+
+
+
+class postDataItem {
+  String? ItemName;
+  String? Price;
+  String? ShelfLocationId;
+  String? Description;
+  File? Receipt;
+  postDataItem(
+      {
+        this.ItemName,
+        this.Price,
+        this.ShelfLocationId,
+        this.Description,
+        this.Receipt,
+      });
+
+  postDataItem.fromJson(Map<String, dynamic> json) {
+    ItemName = json['ItemName'];
+    Price = json['Price'];
+    ShelfLocationId = json['ShelfLocationId'];
+    Description = json['Description'];
+    Receipt = json['Receipt'];
+  }
+}
+

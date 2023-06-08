@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:general_expense_app/pages/Locations/add_home_Screen.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/add_inventory.dart';
 import 'package:general_expense_app/pages/Dashboard/bottom_nav_bar.dart';
 import 'package:general_expense_app/pages/Dashboard/category_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/expense_screen.dart';
@@ -98,9 +97,6 @@ class MyApp extends StatelessWidget {
     }
     if(settings.name == RoomScreen.routeName) {
       return getMaterialPageRoute(RoomScreen(""));
-    }
-    if(settings.name == AddInventoryScreen.routeName) {
-      return getMaterialPageRoute(AddInventoryScreen());
     }
     if(settings.name == NavDrawer.routeName) {
       return getMaterialPageRoute(NavDrawer());

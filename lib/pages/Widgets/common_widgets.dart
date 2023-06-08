@@ -704,7 +704,7 @@ class CommonWidgets {
       child: InkWell(
         onTap: () {
           Navigator.of(context, rootNavigator: true)
-              .push(MaterialPageRoute(builder: (context) => ItemListScreen("${getShelfListModelData!.id}")));
+              .push(MaterialPageRoute(builder: (context) => ItemListScreen("${getShelfListModelData!.id}","0")));
         },
         child: Material(
           elevation: 1,

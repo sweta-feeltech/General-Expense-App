@@ -425,7 +425,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     // autofocus: false,
                     readOnly: true,
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen(""))).then((value){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1"))).then((value){
                         // FocusManager.instance.primaryFocus?.unfocus();
                       }
                       );
@@ -441,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fillColor: Colors.white,
                     ),
                     onChanged: (value) {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen("")));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1")));
                       // Do something with the search query
                     },
 

@@ -466,6 +466,23 @@ class Repository {
   }
 
 
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~POST: ADD EXP CAT~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+
+  Future<MessageModel> addItemFormModelData(dynamic body) async {
+    try {
+      Map<String, dynamic> json = await apiClient.apiCallMultipartPostforItem(
+          BASEURL, addItemAPIEnd, body,
+          isAccessToken: accessToken, isBearer: true);
+      MessageModel courseSavedRes = MessageModel.fromJson(json);
+      return courseSavedRes;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
 
 
 }
