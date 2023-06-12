@@ -183,10 +183,10 @@ class _ShelfScreenState extends State<ShelfScreen> {
                 autofocus: false,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                  hintText: 'Search Shelf',
+                  hintText: 'Search Shelf . . ',
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   filled: true,
                   fillColor: Colors.white,

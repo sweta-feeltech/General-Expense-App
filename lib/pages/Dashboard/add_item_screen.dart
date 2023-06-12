@@ -219,7 +219,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 }
               },
               child: Text(
-                "Add Income",
+                "Add Item",
                 style: TextStyle(
                     letterSpacing: 1,
                     fontSize: main_Height * 0.018,
@@ -247,14 +247,11 @@ class _AddItemScreenState extends State<AddItemScreen> {
         )  :
         AppBar(toolbarHeight: 0,),
 
-
-
         body: SingleChildScrollView(
           child: Form(
             key: _formkey,
             child: Column(
               children: [
-
 
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -744,9 +741,6 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     ],
                   ),
                 ),
-
-
-
 
                 Container(
                   height: main_Height * 0.13,

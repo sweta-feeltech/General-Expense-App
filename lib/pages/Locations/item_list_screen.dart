@@ -170,7 +170,7 @@ class _ItemListScreenState extends State<ItemListScreen> {
                     autofocus: false,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                      hintText: 'Search Items . . ',
+                      hintText: 'Search Item . . ',
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
