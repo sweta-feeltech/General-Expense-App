@@ -8,6 +8,7 @@ class IncomeScreenListInitialEvent extends IncomeListScreenEvent {}
 
 class FetchAllIncomeScreenListScreenAPIsEvent extends IncomeListScreenEvent {}
 
+
 class PostAddIncomeEvent extends IncomeListScreenEvent {
   final String IncomeDate;
   final String Amount;

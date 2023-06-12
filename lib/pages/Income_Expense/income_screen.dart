@@ -128,92 +128,94 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
 
     return Scaffold(
       backgroundColor: primaryGrey,
-      // appBar: AppBar(
-      //   titleSpacing: 15,
-      //   title: Text(
-      //     "Income List",
-      //     style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
-      //   ),
-      //   automaticallyImplyLeading: false,
-      //   backgroundColor: primaryPurple,
-      //   elevation: 0,
-      //   centerTitle: false,
-      // ),
-      // bottomSheet: Container(
-      //   height: main_Height * 0.1,
-      //   width: main_Width * 1,
-      //   decoration: BoxDecoration(color: Colors.white),
-      //   child: Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //       children: [
-      //         Expanded(
-      //           child: InkWell(
-      //             onTap: (){
-      //               bottomSheetforAddShelfItems(context);
-      //
-      //             },
-      //             child: Container(
-      //               height: main_Height * 0.052,
-      //               decoration: BoxDecoration(
-      //                 // color: Colors.green,
-      //                   border: Border.all(color: primaryPurple, width: 1),
-      //                   borderRadius: BorderRadius.circular(30)),
-      //               child: Center(
-      //                 child: Text(
-      //                   "ADD INCOME",
-      //                   maxLines: 1,
-      //                   overflow: TextOverflow.ellipsis,
-      //                   style: TextStyle(
-      //                     letterSpacing: 1,
-      //                     color: primaryPurple,
-      //                     fontWeight: FontWeight.w600,
-      //                     fontSize: main_Height * 0.015,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //         SizedBox(
-      //           width: main_Width * 0.028,
-      //         ),
-      //         Expanded(
-      //           child: InkWell(
-      //             onTap: () {
-      //               Navigator.of(context).pushNamed(AddExpenseScreen.routeName);
-      //             },
-      //             child: Container(
-      //               height: main_Height * 0.052,
-      //               decoration: BoxDecoration(
-      //                   color: primaryPurple,
-      //                   border: Border.all(
-      //                     color: Colors.white,
-      //                     width: 1,
-      //                   ),
-      //                   borderRadius: BorderRadius.circular(30)),
-      //               child: Center(
-      //                 child: Text(
-      //                   "ADD EXPENSE",
-      //                   maxLines: 1,
-      //                   overflow: TextOverflow.ellipsis,
-      //                   style: TextStyle(
-      //                     color: Colors.white,
-      //                     fontWeight: FontWeight.w600,
-      //                     letterSpacing: 1,
-      //                     fontSize: main_Height * 0.015,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-      body: getIncomeListModelData?.isEmpty == true ?
+      appBar: AppBar(
+        titleSpacing: 15,
+        title: Text(
+          "Income List",
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
+        ),
+        automaticallyImplyLeading: false,
+        backgroundColor: primaryPurple,
+        elevation: 0,
+        centerTitle: false,
+      ),
+      bottomSheet: Container(
+        height: main_Height * 0.1,
+        width: main_Width * 1,
+        decoration: BoxDecoration(color: Colors.white),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    bottomSheetforAddShelfItems(context);
+
+                  },
+                  child: Container(
+                    height: main_Height * 0.052,
+                    decoration: BoxDecoration(
+                      // color: Colors.green,
+                        border: Border.all(color: primaryPurple, width: 1),
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Center(
+                      child: Text(
+                        "ADD INCOME",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          letterSpacing: 1,
+                          color: primaryPurple,
+                          fontWeight: FontWeight.w600,
+                          fontSize: main_Height * 0.015,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: main_Width * 0.028,
+              ),
+              Expanded(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(AddExpenseScreen.routeName);
+                  },
+                  child: Container(
+                    height: main_Height * 0.052,
+                    decoration: BoxDecoration(
+                        color: primaryPurple,
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Center(
+                      child: Text(
+                        "ADD EXPENSE",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.015,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      body:
+
+          getIncomeListModelData?.isEmpty == true ?
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -227,7 +229,7 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
 
 
                 Text(
-                  "You don't have any Income !",
+                  "You don't have any Groups !",
                   maxLines: 1,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
@@ -267,7 +269,7 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
 
                       },
                       child: Text(
-                        "\Add Income",
+                        "Add Income",
                         style: TextStyle(
                             fontSize: main_Height < 700 ? 12 : 15,
                             fontWeight: FontWeight.w500,
@@ -281,83 +283,75 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
             ),
           ) :
 
-      RefreshIndicator(
-       onRefresh: ()async{
-         loadAllIncomeListScreenApiCalls();
-       },
-        child: ListView.builder(
-          // physics: NeverScrollableScrollPhysics(),
-            itemCount: getIncomeListModelData!.length,
-            itemBuilder: (BuildContext context, int index) {
-              return CommonWidgets.CommonIncomeListView(context,
-                  getIncomeListModelData: getIncomeListModelData![index]
-              );
-            }),
-      )
-          // Column(
-          //   children: [
-          //     ///
-          //     /// Heading
-          //     ///
-          //
-          //     Padding(
-          //       padding: EdgeInsets.symmetric(
-          //           horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
-          //       child: Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //         children: [
-          //           Text(
-          //             "Add Income",
-          //             maxLines: 1,
-          //             overflow: TextOverflow.ellipsis,
-          //             style: TextStyle(
-          //                 letterSpacing: 1,
-          //                 fontSize: main_Height * 0.021,
-          //                 fontWeight: FontWeight.w500),
-          //           ),
-          //           InkWell(
-          //             onTap: () {
-          //
-          //               bottomSheetforAddShelfItems(context);
-          //
-          //               ///
-          //             },
-          //             child: Container(
-          //               height: main_Height * 0.05,
-          //               width: main_Height * 0.05,
-          //               child: SvgPicture.asset(
-          //                 "assets/images/add.svg",
-          //                 fit: BoxFit.fill,
-          //               ),
-          //             ),
-          //           )
-          //         ],
-          //       ),
-          //     ),
-          //
-          //     ///
-          //     ///List
-          //     ///
-          //
-          //     Expanded(
-          //       child: ListView.builder(
-          //         // physics: NeverScrollableScrollPhysics(),
-          //           itemCount: getIncomeListModelData!.length,
-          //           itemBuilder: (BuildContext context, int index) {
-          //             return CommonWidgets.CommonIncomeListView(context,
-          //                 getIncomeListModelData: getIncomeListModelData![index]
-          //             );
-          //           }),
-          //     ),
-          //
-          //     // SizedBox(
-          //     //   height: main_Height * 0.1,
-          //     //
-          //     // )
-          //
-          //
-          //   ],
-          // ),
+          RefreshIndicator(
+        onRefresh: () async {
+          loadAllIncomeListScreenApiCalls();
+
+        },
+        child: Column(
+          children: [
+            ///
+            /// Heading
+            ///
+
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: main_Width * 0.03, vertical: main_Height * 0.015),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Add Income",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: main_Height * 0.021,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  InkWell(
+                    onTap: () {
+
+                      bottomSheetforAddShelfItems(context);
+
+                      ///
+                    },
+                    child: Container(
+                      height: main_Height * 0.05,
+                      width: main_Height * 0.05,
+                      child: SvgPicture.asset(
+                        "assets/images/add.svg",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+
+            ///
+            ///List
+            ///
+
+            Expanded(
+              child: ListView.builder(
+                  itemCount: getIncomeListModelData!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CommonWidgets.CommonIncomeListView(context,
+                        getIncomeListModelData: getIncomeListModelData![index]
+                    );
+                  }),
+            ),
+
+            SizedBox(
+              height: main_Height * 0.1,
+
+            )
+
+
+          ],
+        ),
+      ),
     );
 
   }

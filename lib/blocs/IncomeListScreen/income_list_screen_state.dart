@@ -18,9 +18,12 @@ class ApiFailureState extends IncomeListScreenState {
 
 class FetchAllIncomeListScreenAPIsEventState extends IncomeListScreenState {
   final List<IncomeListModel> getIncomeListModelData;
+  final List<GetExpenseListModel> getExpenseListModelData;
 
-  FetchAllIncomeListScreenAPIsEventState(this.getIncomeListModelData);
+
+  FetchAllIncomeListScreenAPIsEventState(this.getIncomeListModelData,this.getExpenseListModelData);
 }
+
 
 class PostAddIncomeEventState extends IncomeListScreenState {
   final MessageModel addIncomeModelData;

@@ -64,7 +64,6 @@ class ExpenseScreenBloc extends Bloc<ExpenseScreenEvent, ExpenseScreenState> {
 
       }
 
-
       if (event is PostAddExpenseFormEvent) {
         late MessageModel messageModelData;
 

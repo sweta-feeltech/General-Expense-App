@@ -10,7 +10,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../Utils/colors.dart';
 import '../Locations/add_home_Screen.dart';
 import 'add_expense_screen.dart';
-import 'expense_screen.dart';
+import '../Income_Expense/expense_screen.dart';
 import 'home_screen.dart';
 
 
