@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/items_screen.dart';
+import 'package:general_expense_app/pages/Empty/add_itm_screen.dart';
 import 'package:general_expense_app/pages/Locations/room_screen.dart';
 import 'package:general_expense_app/pages/Locations/shelf_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
@@ -152,7 +153,7 @@ class _NavDrawerState extends State<NavDrawer> {
 
           ///
           ///
-          /// FOR HOME
+          /// FOR EXPENSE
           ///
           ///
           InkWell(
@@ -217,70 +218,70 @@ class _NavDrawerState extends State<NavDrawer> {
 
           Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
 
-
-          ///
-          ///
-          /// FOR ROOM
-          ///
-          ///
-          InkWell(
-            onTap: () {
-
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen("")));
-
-            },
-            child: ListTile(
-              title: Row(
-                children:  [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.add_business_outlined,
-                      color: primaryPurple,
-                    ),
-                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Add Room", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
-                ],
-              ),
-            ),
-          ),
-
-
-          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
-
-
-
-          ///
-          ///
-          /// FOR SHELF
-          ///
-          ///
-          InkWell(
-            onTap: () {
-
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ShelfScreen("")));
-
-            },
-            child: ListTile(
-              title: Row(
-                children:  [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.add_card_sharp,
-                      color: primaryPurple,
-                    ),
-                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Add Shelf", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
-                ],
-              ),
-            ),
-          ),
-
-          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
-
+          //
+          // ///
+          // ///
+          // /// FOR ROOM
+          // ///
+          // ///
+          // InkWell(
+          //   onTap: () {
+          //
+          //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen("")));
+          //
+          //   },
+          //   child: ListTile(
+          //     title: Row(
+          //       children:  [
+          //         Align(
+          //           alignment: Alignment.center,
+          //           child: Icon(Icons.add_business_outlined,
+          //             color: primaryPurple,
+          //           ),
+          //           // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+          //         ),
+          //         SizedBox(width: 10,),
+          //         Text("Add Room", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          //
+          //
+          // Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+          //
+          //
+          //
+          // ///
+          // ///
+          // /// FOR SHELF
+          // ///
+          // ///
+          // InkWell(
+          //   onTap: () {
+          //
+          //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ShelfScreen("")));
+          //
+          //   },
+          //   child: ListTile(
+          //     title: Row(
+          //       children:  [
+          //         Align(
+          //           alignment: Alignment.center,
+          //           child: Icon(Icons.add_card_sharp,
+          //             color: primaryPurple,
+          //           ),
+          //           // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+          //         ),
+          //         SizedBox(width: 10,),
+          //         Text("Add Shelf", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          //
+          // Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+          //
 
           ///
           ///
@@ -290,7 +291,7 @@ class _NavDrawerState extends State<NavDrawer> {
           InkWell(
             onTap: () {
 
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemScreen()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddItemScreen("")));
 
             },
             child: ListTile(

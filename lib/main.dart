@@ -19,7 +19,6 @@ import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_
 import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
 import 'package:general_expense_app/pages/Widgets/nav_drawer.dart';
 import 'package:general_expense_app/responsive/responsive_layout.dart';
-
 import 'pages/LoginRegistrationScreens/main_screen.dart';
 
 void main() async {
