@@ -643,7 +643,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     ),
                   ),
                   pinned: true,
-
                   floating: false,
                   backgroundColor: primaryGrey,
                   bottom: TabBar(
