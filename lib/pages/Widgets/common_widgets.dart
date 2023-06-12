@@ -160,7 +160,7 @@ class CommonWidgets {
                         fontSize: main_Height * 0.018),
                   ),
                   Text(
-                    "${(dashboardModelData!.incomeDate == null ? dashboardModelData!.expenseDate : dashboardModelData!.incomeDate).toString().substring(0,19).replaceAll("T"," ")}",
+                    "${DateFormat("dd MMM  hh:mm a").format(DateTime.parse("${dashboardModelData!.incomeDate == null ? dashboardModelData!.expenseDate : dashboardModelData!.incomeDate}"))}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -501,7 +501,8 @@ class CommonWidgets {
 
 
                         Text(
-                          "${getIncomeListModelData!.incomeDate.toString().replaceAll("T", ", ").substring(0, 20)}",
+                          "${DateFormat("dd MMM  hh:mm a").format(DateTime.parse("${getIncomeListModelData!.incomeDate}"))}",
+                          // "${getIncomeListModelData!.incomeDate.toString().replaceAll("T", ", ").substring(0, 20)}",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -1040,7 +1041,8 @@ class CommonWidgets {
               children: [
                 Flexible(
                   child: Text(
-                    "${getExpenseListModelData.expenseDate.toString().replaceAll("T", " ~ ")}",
+                    "${DateFormat("dd MMM  hh:mm a").format(DateTime.parse("${getExpenseListModelData.expenseDate}"))}",
+                    // "${getExpenseListModelData.expenseDate.toString().replaceAll("T", " ~ ")}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -1379,7 +1381,7 @@ class CommonWidgets {
                                   child: FloatingActionButton(
                                     child: Image.asset("assets/images/q.png"),
                                     onPressed: () {
-                                      Navigator.pop(context);
+                                      Navigator.of(context).pop();
                                     },
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
