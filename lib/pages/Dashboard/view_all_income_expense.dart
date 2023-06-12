@@ -37,14 +37,11 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
   List<GetGroupListModel>? getGroupListModelData;
   DashboardModel? dashboardModelData;
 
-
-
   MessageModel? messageModelData;
 
   String? Amount;
   String? Description;
   String? IncomeDate;
-
 
 
   @override
@@ -118,7 +115,6 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
   }
 
 
-
   Widget mainViewHomeAllScreenViewWidget(){
 
     double main_Width = MediaQuery.of(context).size.width;
@@ -132,34 +128,35 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: primaryGrey,
-      appBar: AppBar(
-        title: Text(
-          "View All",
-          style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add_card,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              final RenderBox appBarRenderBox =
-              context.findRenderObject() as RenderBox;
-              final Offset appBarOffset =
-              appBarRenderBox.localToGlobal(Offset.zero);
-              final Size appBarSize = appBarRenderBox.size;
 
-              _showPopupMenu(context, appBarOffset, appBarSize);
-            },
+        appBar: AppBar(
+          titleSpacing: 15,
+          title: Text(
+            "View All",
+            style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
           ),
-        ],
-        titleSpacing: 0,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: primaryGrey,
-      ),
+          automaticallyImplyLeading: false,
+          backgroundColor: primaryPurple,
+          elevation: 0,
+          centerTitle: false,
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.add_box,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  final RenderBox appBarRenderBox =
+                  context.findRenderObject() as RenderBox;
+                  final Offset appBarOffset =
+                  appBarRenderBox.localToGlobal(Offset.zero);
+                  final Size appBarSize = appBarRenderBox.size;
+
+                  _showPopupMenu(context, appBarOffset, appBarSize);
+                },
+              ),
+            ]
+        ),
       body: RefreshIndicator(
         onRefresh: ()async{
           loadAllHomeScreenApiCalls();

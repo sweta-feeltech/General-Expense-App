@@ -506,7 +506,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ViewallIncomeExpense()));
+                        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ViewallIncomeExpense()));
                       },
                       child: Text(
                         dashboardModelData?.incomeAndExpense?.isEmpty == true ? "Add Income  > "  :  "View All  > ",
