@@ -278,14 +278,6 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
 
       }
 
-      // if (value == null) {
-      //   // Handle selected option
-      //   print('Selected: $value');
-      //   _displayTextInputDialog(context);
-      // }else if(value != null){
-      //   print('Selected: $value');
-      //   _displayTextInputDialog2forpin(context);
-      // }
     });
   }
 
