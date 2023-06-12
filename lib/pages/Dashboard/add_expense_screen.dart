@@ -57,7 +57,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
   List<GetExpenseCatModel>? getExpenseCatModelData;
 
-  AddExpenseCatModel? addExpenseCatModelData;
   MessageModel? messageModelData;
 
   loadAllCATListScreenApiCalls() {
@@ -78,20 +77,16 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               return ThemeHelper.buildLoadingWidget();
             } else if (state is FetchAllExpenseCatListScreenAPIsEventState) {
               getExpenseCatModelData = state.getExpenseCatModelData;
-
               return mainViewAllScreenViewWidget();
             } else if (state is PostAddExpenseCatEventState) {
-              addExpenseCatModelData = state.addExpenseCatModelData;
-
+              print("hereeeeeeee");
+              messageModelData = state.messageModelData;
               loadAllCATListScreenApiCalls();
               return mainViewAllScreenViewWidget();
             }
-
             else if (state is PostAddExpenseFormEventState) {
               messageModelData = state.messageModelData;
               PIimage = null;
-
-              loadAllCATListScreenApiCalls();
               return mainViewAllScreenViewWidget();
             }
 
@@ -704,8 +699,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
                           expenseScreenBloc.add(
                               PostAddExpenseCatEvent("${CategoryExpense}"));
+
                         }
-                        Navigator.of(context).pop();
+
+                        Navigator.pop(context);
+
                       },
                       child: Text(
                         "Add",
@@ -809,4 +807,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       ),
     );
   }
+
+
 }

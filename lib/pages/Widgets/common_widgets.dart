@@ -1318,8 +1318,6 @@ class CommonWidgets {
                                         4) ==
                                     ".pdf"
                                     ?
-
-
                                 Container(
                                   height: main_Height * 0.3,
                                   width: main_Width * 0.6,
@@ -1374,23 +1372,27 @@ class CommonWidgets {
                                   ),
                                 ),
 
+                                // Positioned(
+                                //   top: 0.0,
+                                //   right: 0.0,
+                                //   child: FloatingActionButton(
+                                //     child: Image.asset("assets/images/q.png"),
+                                //     onPressed: () {
+                                //
+                                //       Navigator.pop(context);
+                                //
+                                //       },
+                                //     shape: RoundedRectangleBorder(
+                                //         borderRadius:
+                                //         BorderRadius.circular(80)),
+                                //     backgroundColor: Colors.white,
+                                //     mini: true,
+                                //     elevation: 5.0,
+                                //   ),
+                                // ),
 
-                                Positioned(
-                                  top: 0.0,
-                                  right: 0.0,
-                                  child: FloatingActionButton(
-                                    child: Image.asset("assets/images/q.png"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(80)),
-                                    backgroundColor: Colors.white,
-                                    mini: true,
-                                    elevation: 5.0,
-                                  ),
-                                ),
+
+
                               ],
                             ),
                           ),

@@ -281,12 +281,12 @@ class Repository {
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~POST: ADD EXP CAT~~~~~~~~~~~~~~~~~~~~~~~
   ///
 
-  Future<AddExpenseCatModel> addExpenseCatModelData(dynamic body) async {
+  Future<MessageModel> addExpenseCatModelData(dynamic body) async {
     try {
       Map<String, dynamic> json = await apiClient.postApiCall(
           BASEURL, addExpCatAPIEnd, body,
           isAccessToken: accessToken, isBearer: true);
-      AddExpenseCatModel courseSavedRes = AddExpenseCatModel.fromJson(json);
+      MessageModel courseSavedRes = MessageModel.fromJson(json);
       return courseSavedRes;
     } on CustomException {
       rethrow;

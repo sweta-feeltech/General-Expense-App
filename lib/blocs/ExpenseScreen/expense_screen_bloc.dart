@@ -34,13 +34,14 @@ class ExpenseScreenBloc extends Bloc<ExpenseScreenEvent, ExpenseScreenState> {
       }
 
       if (event is PostAddExpenseCatEvent) {
-        late AddExpenseCatModel getExpenseCatModelData;
+        late MessageModel messageModelData;
 
         try {
-          getExpenseCatModelData = await repositoryRepo.addExpenseCatModelData(
+          messageModelData = await repositoryRepo.addExpenseCatModelData(
               {"ExpenseCategoryName": event.ExpenseCategoryName,});
-
-          emit(PostAddExpenseCatEventState(getExpenseCatModelData));
+                  print("bloccccc");
+          emit(PostAddExpenseCatEventState(messageModelData));
+          print("bloccccc2");
         } catch (error) {
           emit(ExpenseScreenLoadingEventState(false));
           emit(ApiFailureState(Exception(error.toString())));
