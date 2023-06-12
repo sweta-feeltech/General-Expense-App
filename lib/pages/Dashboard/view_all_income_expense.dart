@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/blocs/HomeScreen/home_screen_bloc.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
+import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
 import 'package:general_expense_app/pages/Locations/item_list_screen.dart';
@@ -139,12 +140,17 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
         actions: [
           IconButton(
             icon: Icon(
-              Icons.notifications_none_outlined,
+              Icons.add_card,
               color: Colors.black,
             ),
             onPressed: () {
-              // Add your onPressed logic here
-              ///for notification
+              final RenderBox appBarRenderBox =
+              context.findRenderObject() as RenderBox;
+              final Offset appBarOffset =
+              appBarRenderBox.localToGlobal(Offset.zero);
+              final Size appBarSize = appBarRenderBox.size;
+
+              _showPopupMenu(context, appBarOffset, appBarSize);
             },
           ),
         ],
@@ -233,13 +239,55 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
         ),
       ),
     );
-
-
-
   }
 
 
+  void _showPopupMenu(
+      BuildContext context, Offset appBarOffset, Size appBarSize) {
+    final popupPosition = RelativeRect.fromLTRB(
+      appBarOffset.dx + appBarSize.width - 10,
+      appBarOffset.dy - appBarSize.height - 10,
+      appBarOffset.dx + appBarSize.width + 10,
+      appBarOffset.dy - 10,
+    );
 
+    showMenu(
+      context: context,
+      position: popupPosition,
+      items: [
+        PopupMenuItem(
+          child: Text('Add Income'),
+          value: '1',
+          onTap: () {},
+        ),
+        PopupMenuItem(
+          child: Text('Add Expense'),
+          value: '2',
+          onTap: () {},
+        ),
+      ],
+      elevation: 8.0,
+    ).then((value) {
+      if (value == '1') {
+        // Handle selected option
+        print('Selected: $value');
+        bottomSheetforAddShelfItems(context);
+      } else if (value == '2') {
+        print('Selected: $value');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddExpenseScreen()));
+
+      }
+
+      // if (value == null) {
+      //   // Handle selected option
+      //   print('Selected: $value');
+      //   _displayTextInputDialog(context);
+      // }else if(value != null){
+      //   print('Selected: $value');
+      //   _displayTextInputDialog2forpin(context);
+      // }
+    });
+  }
 
   void bottomSheetforAddShelfItems(BuildContext context){
 
