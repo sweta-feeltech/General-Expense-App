@@ -38,13 +38,30 @@ class _AddTabScreenState extends State<AddTabScreen> {
     return Scaffold(
       body: ContainedTabBarView(
         tabBarProperties: TabBarProperties(
-            indicatorColor: primaryPurple,
-            padding: EdgeInsets.symmetric(horizontal: 20)),
+          unselectedLabelColor: Colors.black,
+          labelColor: Color(0xFFFB1414),
+          labelStyle: TextStyle(
+              overflow: TextOverflow.ellipsis,
+              color: Color(0xFFFB1414),
+              fontSize: main_Height * 0.016,
+              fontWeight: FontWeight.w500),
+          indicator: ContainerTabIndicator(
+              // color: Color(0xFFFFF3F3),
+            color: Colors.white,
+              radius: BorderRadius.circular(10)),
+          padding: EdgeInsets.symmetric(horizontal: 5,vertical: 6),
+          background: Container(
+            color: primaryPurple,
+          )
+        ),
+        initialIndex: 0,
         tabs: [
           Container(
             height: double.infinity,
             width: double.infinity,
-            child: Center(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.only(top: 2),
               child: Text(
                 'Add Expense',
                 maxLines: 1,
@@ -59,7 +76,9 @@ class _AddTabScreenState extends State<AddTabScreen> {
           Container(
             height: double.infinity,
             width: double.infinity,
-            child: Center(
+            alignment: Alignment.center,
+            child: Padding(
+                padding: EdgeInsets.only(top: 2),
               child: Text(
                 'Add Item',
                 overflow: TextOverflow.ellipsis,
@@ -73,10 +92,8 @@ class _AddTabScreenState extends State<AddTabScreen> {
           ),
         ],
         views: [
-
           AddExpenseScreen(),
           AddItemScreen("","")
-
         ],
         onChange: (index) {
           setState(() {
@@ -85,7 +102,6 @@ class _AddTabScreenState extends State<AddTabScreen> {
           return print("index here :$index   jbsv ${index1}");
         },
       ),
-
 
     );
   }

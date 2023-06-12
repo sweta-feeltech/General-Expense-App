@@ -316,16 +316,17 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                     enabledBorder: InputBorder.none,
                                     focusedBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
-                                    hintText: "Select Category"
+                                    hintText: "Select Home"
                                 ),
 
                                 hint: FittedBox(
                                   child: Text(
                                     "Select Home",
                                     style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w700),
+                                        // fontSize: 16,
+                                        // color: Colors.grey,
+                                        // fontWeight: FontWeight.w700
+                                    ),
                                   ),
                                 ),
 
@@ -398,16 +399,17 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                     enabledBorder: InputBorder.none,
                                     focusedBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
-                                    hintText: "Select Category"
+                                    hintText: "Select Room"
                                 ),
 
                                 hint: FittedBox(
                                   child: Text(
                                     "Select Room",
                                     style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w700),
+                                        // fontSize: 16,
+                                        // color: Colors.grey,
+                                        // fontWeight: FontWeight.w700
+                                    ),
                                   ),
                                 ),
 
@@ -486,9 +488,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                   child: Text(
                                     "Select Shelf",
                                     style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w700),
+                                        // fontSize: 16,
+                                        // color: Colors.grey,
+                                        // fontWeight: FontWeight.w700
+                                    ),
                                   ),
                                 ),
 
