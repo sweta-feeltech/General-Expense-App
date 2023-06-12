@@ -126,8 +126,6 @@ class CommonWidgets {
     double main_Height = MediaQuery.of(context).size.height;
 
 
-
-
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: main_Width * 0.02,vertical: main_Height * 0.005),
       child: Container(
@@ -186,7 +184,7 @@ class CommonWidgets {
                       letterSpacing: 0.6,
                       color: dashboardModelData?.remarks == null ?  Color(0xFF25B07F) : Colors.red,
                       fontWeight: FontWeight.w500,
-                      fontSize: main_Height * 0.02),
+                      fontSize: dashboardModelData.amount.toString().length > 6 ?  dashboardModelData.amount.toString().length > 8 ? main_Height * 0.014 : main_Height * 0.016 : main_Height * 0.02),
                 ),
               ),
             ),

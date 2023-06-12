@@ -216,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   Text(
-                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalBalance))}",
+                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalBalance)).replaceAll(".00","")}",
                                     // "\u20B9 ${dashboardModelData?.totalBalance.toStringAsFixed(0)}",
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -282,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalIncome))}",
+                                            "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalIncome)).replaceAll(".00","")}",
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
@@ -321,7 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalExpense))}",
+                                            "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalExpense)).replaceAll(".00","")}",
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
@@ -399,8 +399,9 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 height: main_Height * 0.2,
                 width: main_Width,
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,),
                 child: ListView.builder(
-                    // itemCount: getGroupListModelData!.length,
+                  padding: EdgeInsets.symmetric(horizontal: 0),
                     itemCount: getGroupListModelData!.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
@@ -411,7 +412,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           getGroupListModel: getGroupListModelData![index],
                           onPressed: () {
                           });
-
 
                     }),
               ),
@@ -541,7 +541,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ) :
               ListView.builder(
-                  itemCount: dashbordFilterList!.length,
+                  itemCount: dashbordFilterList!.length >= 20 ?  20 : dashbordFilterList!.length,
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,

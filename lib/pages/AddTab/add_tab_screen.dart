@@ -36,6 +36,19 @@ class _AddTabScreenState extends State<AddTabScreen> {
     double main_Height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+
+      appBar: AppBar(
+        titleSpacing: 15,
+        title: Text(
+          "Add Expense/Item",
+          style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
+        ),
+        automaticallyImplyLeading: false,
+        backgroundColor: primaryPurple,
+        elevation: 0,
+        centerTitle: false,
+      ),
+
       body: ContainedTabBarView(
         tabBarProperties: TabBarProperties(
           unselectedLabelColor: Colors.black,
@@ -48,7 +61,7 @@ class _AddTabScreenState extends State<AddTabScreen> {
           indicator: ContainerTabIndicator(
               // color: Color(0xFFFFF3F3),
             color: Colors.white,
-              radius: BorderRadius.circular(10)),
+              radius: BorderRadius.circular(30)),
           padding: EdgeInsets.symmetric(horizontal: 5,vertical: 6),
           background: Container(
             color: primaryPurple,
