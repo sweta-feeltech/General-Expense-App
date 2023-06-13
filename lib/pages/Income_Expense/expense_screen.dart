@@ -167,14 +167,14 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         elevation: 0,
         centerTitle: false,
       ),
-      body: DefaultTabController(
-        length: 2, // Number of tabs
-        child: Scaffold(
-          body: RefreshIndicator(
-            onRefresh: ()async{
-              loadAllIncomeListScreenApiCalls();
-            },
-            child: NestedScrollView(
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          loadAllIncomeListScreenApiCalls();
+        },
+        child: DefaultTabController(
+          length: 2, // Number of tabs
+          child: Scaffold(
+            body: NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
@@ -880,7 +880,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),
-                              primary: primaryPurple,
+                              backgroundColor: primaryPurple,
                             ),
                             onPressed: (){
                               if (_formKey.currentState!.validate()) {
