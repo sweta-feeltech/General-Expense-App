@@ -605,7 +605,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                   backgroundColor: primaryPurple,
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pushNamed(AddExpenseScreen.routeName);
+
+                                  Navigator.of(context,rootNavigator: false).push(MaterialPageRoute(builder: (context)=>AddExpenseScreen()));
 
                                 },
                                 child: Text(
