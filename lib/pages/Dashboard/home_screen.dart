@@ -130,447 +130,444 @@ class _HomeScreenState extends State<HomeScreen> {
     dashboardModelData!.incomeAndExpense?.sort((a, b) => a.createdDate!.compareTo(b.createdDate!),);
 
     final dashbordFilterList = dashboardModelData!.incomeAndExpense!.reversed.toList();
-
-    return WillPopScope(
-     onWillPop:()=> exit(0),
-      child: Scaffold(
-        key: _scaffoldKey,
-        backgroundColor: primaryGrey,
-        appBar: AppBar(
-          title: Text(
-            "Home",
-            style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.notifications_none_outlined,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                // Add your onPressed logic here
-                ///for notification
-              },
-            ),
-          ],
-          leading: IconButton(
+    // onWillPop:()=> exit(0),
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: primaryGrey,
+      appBar: AppBar(
+        title: Text(
+          "Home",
+          style: TextStyle(color: Colors.black, fontSize: main_Height * 0.025),
+        ),
+        actions: [
+          IconButton(
             icon: Icon(
-              Icons.menu,
+              Icons.notifications_none_outlined,
               color: Colors.black,
             ),
             onPressed: () {
-              _scaffoldKey.currentState?.openDrawer();
+              // Add your onPressed logic here
+              ///for notification
             },
           ),
-          titleSpacing: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: primaryGrey,
-        ),
-        drawer: Drawer(
-          width: main_Width * 0.6,
-          child: NavDrawer(),
-        ),
-        body: RefreshIndicator(
-          onRefresh: ()async{
-            loadAllHomeScreenApiCalls();
+        ],
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer();
           },
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
+        ),
+        titleSpacing: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: primaryGrey,
+      ),
+      drawer: Drawer(
+        width: main_Width * 0.6,
+        child: NavDrawer(),
+      ),
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          loadAllHomeScreenApiCalls();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
 
-                ///
-                /// Cards
-                ///
+              ///
+              /// Cards
+              ///
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: main_Height * 0.21,
-                        width: main_Width,
-                        child: SvgPicture.asset(
-                          "assets/images/Card1.svg",
-                          clipBehavior: Clip.antiAlias,
-                          fit: BoxFit.fill,
-                        ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: main_Height * 0.21,
+                      width: main_Width,
+                      child: SvgPicture.asset(
+                        "assets/images/Card1.svg",
+                        clipBehavior: Clip.antiAlias,
+                        fit: BoxFit.fill,
                       ),
-                      Container(
-                        height: main_Height * 0.22,
-                        padding: EdgeInsets.symmetric(
-                            vertical: main_Height * 0.018,
-                            horizontal: main_Height * 0.023),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
+                    ),
+                    Container(
+                      height: main_Height * 0.22,
+                      padding: EdgeInsets.symmetric(
+                          vertical: main_Height * 0.018,
+                          horizontal: main_Height * 0.023),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Total Balance",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Color(0xFFCED6EC),
+                                      fontSize: main_Height * 0.018,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalBalance)).replaceAll(".00","")}",
+                                    // "\u20B9 ${dashboardModelData?.totalBalance.toStringAsFixed(0)}",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      letterSpacing: 1,
+                                      color: Colors.white,
+                                      fontSize: main_Height * 0.028,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              InkWell(
+                                onTap:(){
+                                  bottomSheetforAddShelfItems(context);
+
+                                },
+                                child: Container(
+                                    height: main_Height * 0.05,
+                                    width: main_Height * 0.05,
+                                    // child: SvgPicture.asset(
+                                    //     "assets/images/dot.svg")
+                                  alignment: Alignment.center,
+                                child: Text("+",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: main_Height * 0.04,
+                                ),
+                                ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: main_Height * 0.04,
+                          ),
+                          Container(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Total Balance",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Color(0xFFCED6EC),
-                                        fontSize: main_Height * 0.018,
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        child: SvgPicture.asset(
+                                          "assets/images/down.svg",
+                                          clipBehavior: Clip.antiAlias,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalBalance)).replaceAll(".00","")}",
-                                      // "\u20B9 ${dashboardModelData?.totalBalance.toStringAsFixed(0)}",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        letterSpacing: 1,
-                                        color: Colors.white,
-                                        fontSize: main_Height * 0.028,
+                                      SizedBox(
+                                        width: main_Width * 0.02,
                                       ),
-                                    ),
-                                  ],
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Income",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(0xFFCED6EC),
+                                              fontSize: main_Height * 0.014,
+                                            ),
+                                          ),
+                                          Text(
+                                            "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalIncome)).replaceAll(".00","")}",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: main_Height * 0.018),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                InkWell(
-                                  onTap:(){
-                                    bottomSheetforAddShelfItems(context);
-
-                                  },
-                                  child: Container(
-                                      height: main_Height * 0.05,
-                                      width: main_Height * 0.05,
-                                      // child: SvgPicture.asset(
-                                      //     "assets/images/dot.svg")
-                                    alignment: Alignment.center,
-                                  child: Text("+",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: main_Height * 0.04,
-                                  ),
-                                  ),
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        child: SvgPicture.asset(
+                                          "assets/images/up.svg",
+                                          clipBehavior: Clip.antiAlias,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: main_Width * 0.03,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Expense",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(0xFFCED6EC),
+                                              fontSize: main_Height * 0.014,
+                                            ),
+                                          ),
+                                          Text(
+                                            "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalExpense)).replaceAll(".00","")}",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: main_Height * 0.018),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
-                              height: main_Height * 0.04,
-                            ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          child: SvgPicture.asset(
-                                            "assets/images/down.svg",
-                                            clipBehavior: Clip.antiAlias,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: main_Width * 0.02,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Income",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                color: Color(0xFFCED6EC),
-                                                fontSize: main_Height * 0.014,
-                                              ),
-                                            ),
-                                            Text(
-                                              "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalIncome)).replaceAll(".00","")}",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: main_Height * 0.018),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          child: SvgPicture.asset(
-                                            "assets/images/up.svg",
-                                            clipBehavior: Clip.antiAlias,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: main_Width * 0.03,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Expense",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                color: Color(0xFFCED6EC),
-                                                fontSize: main_Height * 0.014,
-                                              ),
-                                            ),
-                                            Text(
-                                              "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalExpense)).replaceAll(".00","")}",
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: main_Height * 0.018),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                ///
-                /// Groups
-                ///
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.005),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Groups",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontSize: main_Height * 0.018,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GroupListScreen()));
-                        },
-                        child: Text(
-                          getGroupListModelData?.isEmpty == true ?  "Add Group  > " : "View All  > ",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black,
-                              letterSpacing: 1,
-                              fontSize: main_Height * 0.016,
-                              fontWeight: FontWeight.w200),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                getGroupListModelData?.isEmpty == true ?
-                Container(
-                  height: main_Height * 0.2,
-                  width: main_Width,
-                  child: Center(
-                    child: Text(
-                      "You don't have any Groups !",
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        // color: Color.fromARGB(255, 158, 158, 158),
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: main_Height * 0.0239,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ) :
-                Container(
-                  height: main_Height * 0.2,
-                  width: main_Width,
-                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,),
-                  child: ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 0),
-                      itemCount: getGroupListModelData!.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-
-                        return CommonWidgets.CommonGroupList3(context,
-                            index: index,
-                            getGroupListModel: getGroupListModelData![index],
-                            onPressed: () {
-                            });
-
-                      }),
+                  ],
                 ),
+              ),
 
+              ///
+              /// Groups
+              ///
 
-                ///
-                /// Search Feild
-                ///
-                ///
-                ///
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.005),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Search for Items",
-                        style: TextStyle(
-                            letterSpacing: 1,
-                            fontSize: main_Height * 0.018,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      // InkWell(
-                      //   onTap: (){
-                      //     Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GroupListScreen()));
-                      //   },
-                      //   child: Text(
-                      //     "View All  > ",
-                      //     maxLines: 1,
-                      //     overflow: TextOverflow.ellipsis,
-                      //     style: TextStyle(
-                      //         color: Colors.black,
-                      //         letterSpacing: 1,
-                      //         fontSize: main_Height * 0.016,
-                      //         fontWeight: FontWeight.w200),
-                      //   ),
-                      // )
-                    ],
-                  ),
-                ),
-                Hero(
-                  tag: "search",
-                  child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
-                    child: TextFormField(
-                      // autofocus: false,
-                      readOnly: true,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.005),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Groups",
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.018,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    InkWell(
                       onTap: (){
-                        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1"))).then((value){
-                          // FocusManager.instance.primaryFocus?.unfocus();
-                        }
-                        );
+                        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GroupListScreen()));
                       },
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                        hintText: 'Search Items . . ',
-                        prefixIcon: Icon(Icons.search),
-                        focusColor: Colors.black38,
-
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(color: Colors.black38),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(color: Colors.black38),
-                        ),
-                        filled: false,
-                        prefixIconColor: Colors.black38,
-                        fillColor: Colors.white,
-                      ),
-                      onChanged: (value) {
-                        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1")));
-                        // Do something with the search query
-                      },
-
-                    ),
-
-                  ),
-                ),
-
-
-                ///
-                /// Last Added
-                ///
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.01),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Last Added",
+                      child: Text(
+                        getGroupListModelData?.isEmpty == true ?  "Add Group  > " : "View All  > ",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
+                            color: Colors.black,
                             letterSpacing: 1,
-                            fontSize: main_Height * 0.018,
-                            fontWeight: FontWeight.w500),
+                            fontSize: main_Height * 0.016,
+                            fontWeight: FontWeight.w200),
                       ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ViewallIncomeExpense()));
-                        },
-                        child: Text(
-                          dashboardModelData?.incomeAndExpense?.isEmpty == true ? "Add Income  > "  :  "View All  > ",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black,
-                              letterSpacing: 1,
-                              fontSize: main_Height * 0.016,
-                              fontWeight: FontWeight.w200),
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-                dashboardModelData?.incomeAndExpense?.isEmpty == true ?
-                Container(
-                  height: main_Height * 0.2,
-                  width: main_Width,
-                  child: Center(
-                    child: Text(
-                      "You don't have any Income or Expense !",
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        // color: Color.fromARGB(255, 158, 158, 158),
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: main_Height * 0.0239,
-                      ),
+              ),
+              getGroupListModelData?.isEmpty == true ?
+              Container(
+                height: main_Height * 0.2,
+                width: main_Width,
+                child: Center(
+                  child: Text(
+                    "You don't have any Groups !",
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      // color: Color.fromARGB(255, 158, 158, 158),
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: main_Height * 0.0239,
                     ),
                   ),
-                ) :
-                ListView.builder(
-                    itemCount: dashbordFilterList!.length >= 20 ?  20 : dashbordFilterList!.length,
-                    physics: const BouncingScrollPhysics(),
+                ),
+              ) :
+              Container(
+                height: main_Height * 0.2,
+                width: main_Width,
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,),
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 0),
+                    itemCount: getGroupListModelData!.length,
                     shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
-                      return CommonWidgets.CommonDashboardListView(context,
-                      dashboardModelData: dashbordFilterList![index],
+
+                      return CommonWidgets.CommonGroupList3(context,
+                          index: index,
+                          getGroupListModel: getGroupListModelData![index],
+                          onPressed: () {
+                          });
+
+                    }),
+              ),
+
+
+              ///
+              /// Search Feild
+              ///
+              ///
+              ///
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.005),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Search for Items",
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.018,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    // InkWell(
+                    //   onTap: (){
+                    //     Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>GroupListScreen()));
+                    //   },
+                    //   child: Text(
+                    //     "View All  > ",
+                    //     maxLines: 1,
+                    //     overflow: TextOverflow.ellipsis,
+                    //     style: TextStyle(
+                    //         color: Colors.black,
+                    //         letterSpacing: 1,
+                    //         fontSize: main_Height * 0.016,
+                    //         fontWeight: FontWeight.w200),
+                    //   ),
+                    // )
+                  ],
+                ),
+              ),
+              Hero(
+                tag: "search",
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
+                  child: TextFormField(
+                    // autofocus: false,
+                    readOnly: true,
+                    onTap: (){
+                      Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1"))).then((value){
+                        // FocusManager.instance.primaryFocus?.unfocus();
+                      }
                       );
-                    })
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
+                      hintText: 'Search Items . . ',
+                      prefixIcon: Icon(Icons.search),
+                      focusColor: Colors.black38,
+
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.black38),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.black38),
+                      ),
+                      filled: false,
+                      prefixIconColor: Colors.black38,
+                      fillColor: Colors.white,
+                    ),
+                    onChanged: (value) {
+                      Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1")));
+                      // Do something with the search query
+                    },
+
+                  ),
+
+                ),
+              ),
+
+
+              ///
+              /// Last Added
+              ///
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.01),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Last Added",
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.018,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ViewallIncomeExpense()));
+                      },
+                      child: Text(
+                        dashboardModelData?.incomeAndExpense?.isEmpty == true ? "Add Income  > "  :  "View All  > ",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            letterSpacing: 1,
+                            fontSize: main_Height * 0.016,
+                            fontWeight: FontWeight.w200),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              dashboardModelData?.incomeAndExpense?.isEmpty == true ?
+              Container(
+                height: main_Height * 0.2,
+                width: main_Width,
+                child: Center(
+                  child: Text(
+                    "You don't have any Income or Expense !",
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      // color: Color.fromARGB(255, 158, 158, 158),
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: main_Height * 0.0239,
+                    ),
+                  ),
+                ),
+              ) :
+              ListView.builder(
+                  itemCount: dashbordFilterList!.length >= 20 ?  20 : dashbordFilterList!.length,
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CommonWidgets.CommonDashboardListView(context,
+                    dashboardModelData: dashbordFilterList![index],
+                    );
+                  })
 
 
 
-              ],
-            ),
+            ],
           ),
         ),
       ),

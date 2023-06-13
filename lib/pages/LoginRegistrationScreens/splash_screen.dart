@@ -67,14 +67,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
       print("splash :${sessionParesdData!.firstName}");
 
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()),(route) => false,);
 
 
 
     } catch(error) {
       print("error: $error");
       // Navigator.pushNamed(context,LoginScreen.routeName);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MainPageScreen()));
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>MainPageScreen()),(route) => false);
 
     }
 
