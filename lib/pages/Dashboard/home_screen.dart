@@ -557,7 +557,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ) :
               ListView.builder(
                   itemCount: dashbordFilterList!.length >= 20 ?  20 : dashbordFilterList!.length,
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (BuildContext context, int index) {
