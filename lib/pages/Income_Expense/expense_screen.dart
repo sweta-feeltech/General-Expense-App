@@ -178,9 +178,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
-                    toolbarHeight: main_Height * 0.02,
                     expandedHeight:
-                    main_Height * 0.63, // Height of the app bar when expanded
+                    main_Height * 0.62, // Height of the app bar when expanded
                     flexibleSpace: FlexibleSpaceBar(
                       background: Container(
                         color: primaryGrey,
@@ -437,9 +436,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ),
                         ),
                       ),
+                      // collapseMode: CollapseMode.none,
                     ),
                     pinned: true,
-                    floating: false,
+                    floating: true,
                     backgroundColor: primaryGrey,
                     bottom: TabBar(
                       automaticIndicatorColorAdjustment: false,
@@ -451,10 +451,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           fontSize: main_Height * 0.016,
                           fontWeight: FontWeight.w500),
                       indicator: ContainerTabIndicator(
-                        // color: Color(0xFFFFF3F3),
                           color: primaryPurple,
-                          radius: BorderRadius.circular(30)),
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+                          radius: BorderRadius.circular(30),
+                        padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.02),
+                      ),
                       tabs: [
                         Tab(
                           text: 'Income',
@@ -467,6 +467,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   ),
                 ];
               },
+
               body: TabBarView(
                 children: [
                   getIncomeListModelData?.isEmpty == true ?
@@ -536,6 +537,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       ],
                     ),
                   ) :
+
                   RefreshIndicator(
                     onRefresh: ()async{
                       loadAllIncomeListScreenApiCalls();
@@ -549,8 +551,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           );
                         }),
                   ),
-
-
 
                   getExpenseListModelData?.isEmpty == true ?
                   SingleChildScrollView(
@@ -634,8 +634,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
                         }),
                   ),
-
-
                 ],
               ),
             ),
