@@ -139,128 +139,133 @@ class _ShelfScreenState extends State<ShelfScreen> {
 
         body:
 
-        Column(
-          children: [
+        RefreshIndicator(
+          onRefresh: ()async{
+            loadAllShelfListScreenApiCalls();
+          },
+          child: Column(
+            children: [
 
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.01),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Add Shelf",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: main_Height * 0.021,
-                        fontWeight: FontWeight.w500
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.01),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Add Shelf",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: main_Height * 0.021,
+                          fontWeight: FontWeight.w500
+                      ),
                     ),
-                  ),
 
-                  InkWell(
-                    onTap: (){
+                    InkWell(
+                      onTap: (){
 
-                      _displayTextInputDialog(context);
-
-
-                    },
-                    child: Container(
-                      height: main_Height * 0.05,
-                      width: main_Height * 0.05,
-                      child: SvgPicture.asset("assets/images/add.svg",
-                        fit: BoxFit.fill,),
-                    ),
-                  )
+                        _displayTextInputDialog(context);
 
 
-                ],
-              ),
-            ),
+                      },
+                      child: Container(
+                        height: main_Height * 0.05,
+                        width: main_Height * 0.05,
+                        child: SvgPicture.asset("assets/images/add.svg",
+                          fit: BoxFit.fill,),
+                      ),
+                    )
 
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
-              child: TextFormField(
-                autofocus: false,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                  hintText: 'Search Shelf . . ',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
+
+                  ],
                 ),
-                onTap: (){
-                  allData = true;
-
-                },
-                onChanged: (value) {
-                  print("ccc");
-                        setState(() {
-                          print("ccc");
-                          allData = true;
-                          searchQuery = value;
-                          searchResults = getShelfListModelData!.where((item) =>
-                              item.description!.toLowerCase().contains(searchQuery.toLowerCase()) ||
-                                  item.shelfLocationName!.toLowerCase().contains(searchQuery.toLowerCase())
-                          ).toList();
-                        });
-                  // Do something with the search query
-                },
-
               ),
 
-            ),
-
-            getShelfListModelData?.isEmpty == true ?
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                
-                children: [
-                  SizedBox(
-                    height: main_Height * 0.1,
-                  ),
-
-                  Text(
-                    "Empty Shelf !",
-                    maxLines: 1,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      // color: Color.fromARGB(255, 158, 158, 158),
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: main_Height * 0.0239,
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
+                child: TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
+                    hintText: 'Search Shelf . . ',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
+                  onTap: (){
+                    allData = true;
 
-                  SizedBox(
-                    height: main_Height * 0.04,
-                  ),
+                  },
+                  onChanged: (value) {
+                    print("ccc");
+                          setState(() {
+                            print("ccc");
+                            allData = true;
+                            searchQuery = value;
+                            searchResults = getShelfListModelData!.where((item) =>
+                                item.description!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+                                    item.shelfLocationName!.toLowerCase().contains(searchQuery.toLowerCase())
+                            ).toList();
+                          });
+                    // Do something with the search query
+                  },
 
+                ),
 
-                ],
               ),
-            )
-                :
-            Expanded(
-              child: ListView.builder(
-                  itemCount: allData == false ? getShelfListModelData!.length : searchResults!.length,
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CommonWidgets.CommonListShelf(context,index: index,
-                    getShelfListModelData:   allData == false ?  getShelfListModelData![index] : searchResults![index]
-                    );
-                  }),
-            ),
+
+              getShelfListModelData?.isEmpty == true ?
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: [
+                    SizedBox(
+                      height: main_Height * 0.1,
+                    ),
+
+                    Text(
+                      "Empty Shelf !",
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        // color: Color.fromARGB(255, 158, 158, 158),
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                        fontSize: main_Height * 0.0239,
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: main_Height * 0.04,
+                    ),
+
+
+                  ],
+                ),
+              )
+                  :
+              Expanded(
+                child: ListView.builder(
+                    itemCount: allData == false ? getShelfListModelData!.length : searchResults!.length,
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CommonWidgets.CommonListShelf(context,index: index,
+                      getShelfListModelData:   allData == false ?  getShelfListModelData![index] : searchResults![index]
+                      );
+                    }),
+              ),
 
 
 
-          ],
+            ],
+          ),
         ),
 
 

@@ -222,7 +222,7 @@ class _ItemListScreenState extends State<ItemListScreen> {
                     ),
 
                     Text(
-                      "Empty Shelf !",
+                      "Empty Item !",
                       maxLines: 1,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
