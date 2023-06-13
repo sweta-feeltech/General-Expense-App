@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Income_Expense/expense_list_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
 import 'package:general_expense_app/pages/Locations/add_home_Screen.dart';
@@ -45,6 +46,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: primaryPurple,
+        focusColor: Colors.black38,
         appBarTheme: AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),

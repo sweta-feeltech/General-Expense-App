@@ -466,7 +466,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // autofocus: false,
                       readOnly: true,
                       onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1"))).then((value){
+                        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1"))).then((value){
                           // FocusManager.instance.primaryFocus?.unfocus();
                         }
                         );
@@ -475,14 +475,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
                         hintText: 'Search Items . . ',
                         prefixIcon: Icon(Icons.search),
+                        focusColor: Colors.black38,
+
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(color: Colors.black38),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.black38),
+                        ),
+                        filled: false,
+                        prefixIconColor: Colors.black38,
                         fillColor: Colors.white,
                       ),
                       onChanged: (value) {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1")));
+                        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1")));
                         // Do something with the search query
                       },
 

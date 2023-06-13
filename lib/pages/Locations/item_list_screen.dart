@@ -167,7 +167,7 @@ class _ItemListScreenState extends State<ItemListScreen> {
                 child: Padding(
                   padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
                   child: TextFormField(
-                    autofocus: false,
+                    autofocus: true,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
                       hintText: 'Search Item . . ',

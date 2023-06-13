@@ -290,9 +290,11 @@ class CommonWidgets {
       /// onTap: onPressed,
       onTap: () {
         // onPressed;
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                SingleGroupViewScreen("${getGroupListModel!.id}")));
+        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SingleGroupViewScreen("${getGroupListModel!.id}")));
+
+        // Navigator.of(context).push(MaterialPageRoute(
+        //     builder: (context) =>
+        //         SingleGroupViewScreen("${getGroupListModel!.id}")));
       },
       child: Padding(
         padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.01,vertical: main_Height * 0.005),
