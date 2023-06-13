@@ -246,7 +246,7 @@ class _ItemListScreenState extends State<ItemListScreen> {
               Expanded(
                 child: ListView.builder(
                     itemCount: allData1 == false ? getItemListModelData!.length : searchResults!.length,
-                    physics: const BouncingScrollPhysics(),
+                    physics: AlwaysScrollableScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {

@@ -78,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               getGroupListModelData = state.getGroupListModelData;
               dashboardModelData = state.dashboardModelData;
-
               return mainViewHomeAllScreenViewWidget();
             }
 
@@ -171,10 +170,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: NavDrawer(),
       ),
       body: RefreshIndicator(
-        onRefresh: ()async{
+        onRefresh: ()async {
           loadAllHomeScreenApiCalls();
         },
         child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
 
@@ -407,6 +407,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 0),
                     itemCount: getGroupListModelData!.length,
                     shrinkWrap: true,
+                    physics: AlwaysScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
 
@@ -556,7 +557,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ) :
               ListView.builder(
                   itemCount: dashbordFilterList!.length >= 20 ?  20 : dashbordFilterList!.length,
-                  physics: const BouncingScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (BuildContext context, int index) {
@@ -574,10 +575,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
 
-
   }
-
-
 
 
   void bottomSheetforAddShelfItems(BuildContext context){

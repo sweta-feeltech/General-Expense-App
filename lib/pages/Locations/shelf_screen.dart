@@ -252,7 +252,7 @@ class _ShelfScreenState extends State<ShelfScreen> {
               Expanded(
                 child: ListView.builder(
                     itemCount: allData == false ? getShelfListModelData!.length : searchResults!.length,
-                    physics: const BouncingScrollPhysics(),
+                    physics: AlwaysScrollableScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
