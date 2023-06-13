@@ -3,8 +3,70 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:general_expense_app/Utils/colors.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:intl/intl.dart';
+
 
 class ThemeHelper {
+
+  //////
+  ///
+  /// THIS FUNCTION WILL USED TO SELECT DATERANGE FROM SYNCFUSION DATE PICKER
+  ///
+  //////
+  static Future<PickerDateRange?> selectDateRangeForFilter(BuildContext context) {
+    double mainWidth = MediaQuery.of(context).size.height;
+    double mainHeight = MediaQuery.of(context).size.height;
+
+    return showDialog<PickerDateRange>(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Select Date Range'),
+          content: SizedBox(
+            height: mainHeight / 3,
+            width: mainWidth,
+            child: SfDateRangePicker(
+              maxDate: DateTime.now(),
+              view: DateRangePickerView.month,
+              selectionMode: DateRangePickerSelectionMode.range,
+              showActionButtons: true,
+              selectionShape: DateRangePickerSelectionShape.rectangle,
+              onSubmit: (p0) {
+                if (p0 != null) {
+                  Navigator.of(context).pop(p0);
+                } else {
+                  print("date: $p0");
+                }
+              },
+              onCancel: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        )
+    );
+  }
+
+  static String filterRangeFormat({DateTime? todayDate,DateTime? startDate, DateTime? endDate}) {
+    String rangeFormat =
+        "${todayDate?.day != null ? '01' : startDate?.day} ${ThemeHelper.convertToMMMFormat((todayDate ?? startDate).toString())} ${(todayDate?.year ?? startDate?.year).toString().substring(2)}"
+        " - "
+        "${todayDate?.day ?? endDate?.day} ${ThemeHelper.convertToMMMFormat((todayDate ?? endDate).toString())} ${(todayDate?.year ?? endDate?.year).toString().substring(2)}";
+    return rangeFormat;
+  }
+
+
+  static String convertToYMDFormat(String dateObj) {
+    String yMdFormat = DateFormat("yyyy-MM-dd").format(DateTime.parse(dateObj));
+    return yMdFormat;
+  }
+
+  static String convertToMMMFormat(String dateObj) {
+    String MMMFormat = DateFormat("MMM").format(DateTime.parse(dateObj));
+    return MMMFormat;
+  }
+
 
   static UnderlineInputBorder myInputBorder() {
     return UnderlineInputBorder(

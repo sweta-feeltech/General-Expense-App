@@ -10,6 +10,7 @@ import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
 import 'package:general_expense_app/pages/Locations/item_list_screen.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../Utils/colors.dart';
 import '../../models/CommonModel/message_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
@@ -17,6 +18,7 @@ import '../../network/repository.dart';
 import '../Widgets/nav_drawer.dart';
 import '../Widgets/common_widgets.dart';
 import '../Widgets/theme_helper.dart';
+import 'filterForTransaction.dart';
 
 class ViewallIncomeExpense extends StatefulWidget {
   static String routeName = '/ViewallIncomeExpense';
@@ -36,6 +38,13 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
 
   List<GetGroupListModel>? getGroupListModelData;
   DashboardModel? dashboardModelData;
+
+  String? incomeExpenseDateRange;
+  PickerDateRange? incomeExpenseDateRangePicker;
+  String? filtredSelectedData;
+  String? globalFilterSelected;
+
+
 
   MessageModel? messageModelData;
 
@@ -151,7 +160,6 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
                   final Offset appBarOffset =
                   appBarRenderBox.localToGlobal(Offset.zero);
                   final Size appBarSize = appBarRenderBox.size;
-
                   _showPopupMenu(context, appBarOffset, appBarSize);
                 },
               ),
@@ -164,42 +172,136 @@ class _ViewallIncomeExpenseState extends State<ViewallIncomeExpense> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.01),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         "Last Added",
+              //         style: TextStyle(
+              //             letterSpacing: 1,
+              //             fontSize: main_Height * 0.018,
+              //             fontWeight: FontWeight.w500),
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ListofIncomeScreen()));
+              //         },
+              //         child: Text(
+              //           dashboardModelData?.incomeAndExpense?.isEmpty == true ? "Add Income  > "  :  "View All  > ",
+              //           maxLines: 1,
+              //           overflow: TextOverflow.ellipsis,
+              //           style: TextStyle(
+              //               color: Colors.black,
+              //               letterSpacing: 1,
+              //               fontSize: main_Height * 0.016,
+              //               fontWeight: FontWeight.w200),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
+              //
+
+
+              CommonWidgets.titleAndFilterDateRageAndCustomFilterUIWidget(
+                context,
+
+                dataRangeText: incomeExpenseDateRange ?? "",
+
+                dataPickerOnTap : () async {
+
+                  incomeExpenseDateRangePicker = await ThemeHelper.selectDateRangeForFilter(context);
+
+                  if (incomeExpenseDateRangePicker?.startDate != null && incomeExpenseDateRangePicker?.endDate != null) {
+                    setState(() {
+                      incomeExpenseDateRange = ThemeHelper.filterRangeFormat(startDate: incomeExpenseDateRangePicker?.startDate, endDate: incomeExpenseDateRangePicker?.endDate);
+                    });
+
+                    // homeScreenBloc.add(
+                    //     FetchRollEntryMachineDataOnFilterEvent(
+                    //         startDate: ThemeHelper.convertToYMDFormat(incomeExpenseDateRangePicker?.startDate.toString() ?? ""),
+                    //         endDate: ThemeHelper.convertToYMDFormat(incomeExpenseDateRangePicker?.endDate.toString() ?? "")
+                    //     )
+                    // );
+
+                  }
+                  print("popup data: ${incomeExpenseDateRangePicker?.startDate}");
+                  print("popup data: ${incomeExpenseDateRangePicker?.endDate}");
+                },
+
+                customFilterPressedFunc: () async {
+                  var resultData = await showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(25.0),
+                        ),
+                      ),
+                      builder: (_) => StatefulBuilder(builder: (BuildContext context, setState) {
+                        return SizedBox(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                FilterForTransaction(preSelected: globalFilterSelected,)
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                  );
+
+                  print(resultData);
+                  if (resultData == "All") {
+                    // rollEntryScreenBloc.add(
+                    //     FetchRollEntryMachineDataOnFilterEvent(
+                    //       startDate: rollEntryDateRange?.startDate.toString() != null ? GlobalMethods.convertToYMDFormat(rollEntryDateRange?.startDate.toString() ?? "") : "${todayDate?.year}-${todayDate?.month}-01",
+                    //       endDate: GlobalMethods.convertToYMDFormat(rollEntryDateRange?.endDate.toString() ?? todayDate.toString()),
+                    //     )
+                    // );
+                    filtredSelectedData = resultData;
+                  }
+                  else if(resultData == "Income") {
+                    // rollEntryScreenBloc.add(
+                    //     FetchRollEntryMachineDataOnFilterEvent(
+                    //         startDate: rollEntryDateRange?.startDate.toString() != null ? GlobalMethods.convertToYMDFormat(rollEntryDateRange?.startDate.toString() ?? "") : "${todayDate?.year}-${todayDate?.month}-01",
+                    //         endDate: GlobalMethods.convertToYMDFormat(rollEntryDateRange?.endDate.toString() ?? todayDate.toString()),
+                    //         filterStatus: "0"
+                    //     )
+                    // );
+                    filtredSelectedData = resultData;
+                  }
+                  else if(resultData == "Expense") {
+                    // rollEntryScreenBloc.add(
+                    //     FetchRollEntryMachineDataOnFilterEvent(
+                    //         startDate: rollEntryDateRange?.startDate.toString() != null ? GlobalMethods.convertToYMDFormat(rollEntryDateRange?.startDate.toString() ?? "") : "${todayDate?.year}-${todayDate?.month}-01",
+                    //         endDate: GlobalMethods.convertToYMDFormat(rollEntryDateRange?.endDate.toString() ?? todayDate.toString()),
+                    //         filterStatus: "0"
+                    //     )
+                    // );
+                    filtredSelectedData = resultData;
+                  }
+                  setState(() {});
+                  print("result Data: $filtredSelectedData");
+                },
+
+
+              ),
+
+
+
+
 
 
               ///
               /// Last Added
               ///
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.01),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Last Added",
-                      style: TextStyle(
-                          letterSpacing: 1,
-                          fontSize: main_Height * 0.018,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ListofIncomeScreen()));
-                      },
-                      child: Text(
-                        dashboardModelData?.incomeAndExpense?.isEmpty == true ? "Add Income  > "  :  "View All  > ",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colors.black,
-                            letterSpacing: 1,
-                            fontSize: main_Height * 0.016,
-                            fontWeight: FontWeight.w200),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+
               dashboardModelData?.incomeAndExpense?.isEmpty == true ?
               Container(
                 height: main_Height * 0.2,

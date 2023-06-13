@@ -1471,4 +1471,147 @@ class CommonWidgets {
 
 
 
+
+
+
+
+
+  static Widget titleAndFilterDateRageAndCustomFilterUIWidget(
+      BuildContext context,
+      {
+        required String dataRangeText,
+        required VoidCallback dataPickerOnTap,
+        required VoidCallback customFilterPressedFunc,
+      }
+      ) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.01),
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+           Flexible(
+              child: Text(
+                "Transactions",
+                        maxLines: 1,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontSize: main_Height * 0.018,
+                            fontWeight: FontWeight.w500),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: dataPickerOnTap,
+
+                  child: Material(
+                    elevation: 2,
+                    borderRadius: BorderRadius.circular(5),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding:const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: primaryPurple,
+                                width: 1
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 8,
+                                  spreadRadius: -2,
+                                  color: Color.fromARGB(255, 190, 190, 190),
+                                  blurStyle: BlurStyle.solid
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                dataRangeText,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+
+                              const SizedBox(width: 2,),
+
+                              const IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(minWidth: 15, minHeight: 40),
+
+                                onPressed: null,
+                                disabledColor: Colors.black,
+                                icon: Image(image: AssetImage("assets/images/calender.png")),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5,),
+
+                Material(
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(5),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 8,
+                            spreadRadius: -2,
+                            color: Color.fromARGB(255, 190, 190, 190),
+                            blurStyle: BlurStyle.solid
+                        ),
+                      ],
+                    ),
+                    child: Container(
+                        padding: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                            border: Border.all(color:primaryPurple),
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white
+                        ),
+                        child: IconButton(
+                          color: primaryPurple,
+                          icon: const Icon(Icons.tune),
+                          constraints: const BoxConstraints(minHeight: double.infinity),
+                          onPressed: customFilterPressedFunc,
+                        )
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
