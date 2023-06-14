@@ -14,6 +14,7 @@ import 'package:general_expense_app/pages/Widgets/theme_helper.dart';
 import 'package:intl/intl.dart';
 import '../../Utils/api_end_points.dart';
 import '../../Utils/colors.dart';
+import '../../models/DashboardModel/transaction_filter_model.dart';
 import '../../models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
 import '../../models/IncomeListModel/income_list_model.dart';
@@ -183,6 +184,82 @@ class CommonWidgets {
                   style: TextStyle(
                       letterSpacing: 0.6,
                       color: dashboardModelData?.remarks == null ?  Color(0xFF25B07F) : Colors.red,
+                      fontWeight: FontWeight.w500,
+                      fontSize: dashboardModelData.amount.toString().length > 6 ?  dashboardModelData.amount.toString().length > 8 ? main_Height * 0.014 : main_Height * 0.016 : main_Height * 0.02),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+   static Widget CommonFilterIncomeExpnseListView(BuildContext context,
+      {required IncomeAndExpense1 dashboardModelData,
+      }
+      ) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: main_Width * 0.02,vertical: main_Height * 0.005),
+      child: Container(
+            height: main_Height * 0.1,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+          padding: EdgeInsets.only(
+              top: main_Height * 0.007,
+              bottom: main_Height * 0.007,
+              right: main_Width * 0.02,
+              left: main_Width * 0.04
+          ),
+        width: main_Width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${(dashboardModelData!.description == null ? dashboardModelData.description : dashboardModelData.description ).toString()}",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 0.06,
+                        fontWeight: FontWeight.w500,
+                        fontSize: main_Height * 0.018),
+                  ),
+                  Text(
+                    "${DateFormat("dd MMM  hh:mm a").format(DateTime.parse("${dashboardModelData.date}"))}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFF959698),
+                        fontSize: main_Height * 0.015),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "${(dashboardModelData.transactionType == 1 ? "-":"+")}${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.amount)).replaceAll(".00","")}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: 0.6,
+                      color: dashboardModelData.transactionType == 0 ?  Color(0xFF25B07F) : Colors.red,
                       fontWeight: FontWeight.w500,
                       fontSize: dashboardModelData.amount.toString().length > 6 ?  dashboardModelData.amount.toString().length > 8 ? main_Height * 0.014 : main_Height * 0.016 : main_Height * 0.02),
                 ),
@@ -463,75 +540,73 @@ class CommonWidgets {
           borderRadius: BorderRadius.circular(7),
         ),
         padding: EdgeInsets.symmetric(horizontal: main_Width * 0.035),
-        child: Flexible(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    height: main_Height * 0.061,
-                    width: main_Height * 0.061,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFEFEFF1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        "assets/images/bankI.svg",
-                        fit: BoxFit.contain,
-                      ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  height: main_Height * 0.061,
+                  width: main_Height * 0.061,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFEFEFF1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      "assets/images/bankI.svg",
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: main_Width * 0.03,
-                        horizontal: main_Width * 0.03),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${getIncomeListModelData!.description}",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              letterSpacing: 0.06,
-                              fontWeight: FontWeight.w500,
-                              fontSize: main_Height * 0.018),
-                        ),
-
-
-                        Text(
-                          "${DateFormat("dd MMM  hh:mm a").format(DateTime.parse("${getIncomeListModelData!.incomeDate}"))}",
-                          // "${getIncomeListModelData!.incomeDate.toString().replaceAll("T", ", ").substring(0, 20)}",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xFF959698),
-                              fontSize: main_Height * 0.015),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Flexible(
-                child: Text(
-                  "+\u20B9${getIncomeListModelData!.amount.toStringAsFixed(0)}",
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                      letterSpacing: 0.6,
-                      color: Color(0xFF25B07F),
-                      fontWeight: FontWeight.w500,
-                      fontSize: main_Height * 0.018),
                 ),
-              )
-            ],
-          ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: main_Width * 0.03,
+                      horizontal: main_Width * 0.03),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${getIncomeListModelData!.description}",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 0.06,
+                            fontWeight: FontWeight.w500,
+                            fontSize: main_Height * 0.018),
+                      ),
+
+
+                      Text(
+                        "${DateFormat("dd MMM  hh:mm a").format(DateTime.parse("${getIncomeListModelData!.incomeDate}"))}",
+                        // "${getIncomeListModelData!.incomeDate.toString().replaceAll("T", ", ").substring(0, 20)}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xFF959698),
+                            fontSize: main_Height * 0.015),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Flexible(
+              child: Text(
+                "+\u20B9${getIncomeListModelData!.amount.toStringAsFixed(0)}",
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: TextStyle(
+                    letterSpacing: 0.6,
+                    color: Color(0xFF25B07F),
+                    fontWeight: FontWeight.w500,
+                    fontSize: main_Height * 0.018),
+              ),
+            )
+          ],
         ),
       ),
     );

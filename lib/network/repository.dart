@@ -533,7 +533,7 @@ class Repository {
   Future<GetFilteredTransactionModel> getFilteredTransactionData({String? dateRangeQuery}) async {
     try {
       Map<String, dynamic> listData = await apiClient.getApiCall(
-          BASEURL, "$getTransactionsFilter",
+          BASEURL, getTransactionsFilter,
           query:  dateRangeQuery ?? "",
           isAccessToken: accessToken, isBearer: true);
       GetFilteredTransactionModel list = GetFilteredTransactionModel.fromJson(listData);

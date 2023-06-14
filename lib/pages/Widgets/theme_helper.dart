@@ -27,7 +27,7 @@ class ThemeHelper {
             height: mainHeight / 3,
             width: mainWidth,
             child: SfDateRangePicker(
-              maxDate: DateTime.now(),
+              // maxDate: DateTime.now(),
               view: DateRangePickerView.month,
               selectionMode: DateRangePickerSelectionMode.range,
               showActionButtons: true,

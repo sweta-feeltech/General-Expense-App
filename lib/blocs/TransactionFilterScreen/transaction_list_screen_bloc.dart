@@ -11,11 +11,11 @@ part  "transaction_list_screen_state.dart";
 
 
 
-class SingleGroupViewScreenBloc
+class TransactionListScreenBloc
     extends Bloc<TrnsacctionListScreenEvent, TrnsacctionListScreenState> {
   final Repository repositoryRepo;
 
-  SingleGroupViewScreenBloc(this.repositoryRepo)
+  TransactionListScreenBloc(this.repositoryRepo)
       : super(TrnsacctionListScreenStateScreenInitialState()) {
 
     on<TrnsacctionListScreenEvent>((event, emit) async {
@@ -34,7 +34,7 @@ class SingleGroupViewScreenBloc
 
         try {
           getFilteredTransactionModelData = await repositoryRepo.getFilteredTransactionData(dateRangeQuery: queryData);
-          emit(FetchRollEntryHeaderDataOnFilterEventState(getFilteredTransactionModelData));
+          emit(FetchTransactionDataOnFilterEventState(getFilteredTransactionModelData));
         }
         catch (error) {
           emit(ApiFailureState(Exception(error.toString())));

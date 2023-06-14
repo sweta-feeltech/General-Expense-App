@@ -1,8 +1,8 @@
 class GetFilteredTransactionModel {
-  int? totalIncome;
-  int? totalExpense;
-  int? totalBalance;
-  List<IncomeAndExpense>? incomeAndExpense;
+  dynamic totalIncome;
+  dynamic totalExpense;
+  dynamic totalBalance;
+  List<IncomeAndExpense1>? incomeAndExpense;
 
   GetFilteredTransactionModel(
       {this.totalIncome,
@@ -15,9 +15,9 @@ class GetFilteredTransactionModel {
     totalExpense = json['totalExpense'];
     totalBalance = json['totalBalance'];
     if (json['incomeAndExpense'] != null) {
-      incomeAndExpense = <IncomeAndExpense>[];
+      incomeAndExpense = <IncomeAndExpense1>[];
       json['incomeAndExpense'].forEach((v) {
-        incomeAndExpense!.add(new IncomeAndExpense.fromJson(v));
+        incomeAndExpense!.add(new IncomeAndExpense1.fromJson(v));
       });
     }
   }
@@ -35,21 +35,21 @@ class GetFilteredTransactionModel {
   }
 }
 
-class IncomeAndExpense {
-  int? amount;
+class IncomeAndExpense1 {
+  dynamic amount;
   String? date;
   String? description;
   String? createdDate;
-  int? transactionType;
+  dynamic transactionType;
 
-  IncomeAndExpense(
+  IncomeAndExpense1(
       {this.amount,
         this.date,
         this.description,
         this.createdDate,
         this.transactionType});
 
-  IncomeAndExpense.fromJson(Map<String, dynamic> json) {
+  IncomeAndExpense1.fromJson(Map<String, dynamic> json) {
     amount = json['amount'];
     date = json['date'];
     description = json['description'];

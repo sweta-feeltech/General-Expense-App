@@ -14,10 +14,10 @@ class TrnsacctionListScreenStateScreenLoadingEventState extends TrnsacctionListS
 }
 
 
-class FetchRollEntryHeaderDataOnFilterEventState extends TrnsacctionListScreenState {
+class FetchTransactionDataOnFilterEventState extends TrnsacctionListScreenState {
   final GetFilteredTransactionModel getFilteredTransactionModelData;
 
-  FetchRollEntryHeaderDataOnFilterEventState(this.getFilteredTransactionModelData);
+  FetchTransactionDataOnFilterEventState(this.getFilteredTransactionModelData);
 }
 
 
