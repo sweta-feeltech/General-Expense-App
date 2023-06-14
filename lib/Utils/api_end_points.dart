@@ -169,6 +169,7 @@ String addRoomAPIEnd = "RoomLocation";
 ///
 ///
 String getRoomLocationAPIEnd = "RoomLocation";
+
 String getShelfLocationAPIEnd = "ShelfLocation";
 
 
@@ -199,4 +200,8 @@ String getItemListAPIEnd = "Item";
 String addItemAPIEnd = "Item";
 //
 //
+//
+/// /// /// ------------------GET FILTERED TRANSACTION LIST API----------------------
+///
 
+String getTransactionsFilter = "Transaction";

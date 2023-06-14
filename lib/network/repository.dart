@@ -7,6 +7,7 @@ import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
 import '../models/DashboardModel/dashboard_model.dart';
+import '../models/DashboardModel/transaction_filter_model.dart';
 import '../models/DropDown/room_data_model.dart';
 import '../models/Expense/add_expense_category_model.dart';
 import '../models/Expense/get_expense_category_model.dart';
@@ -525,10 +526,22 @@ class Repository {
   }
 
 
+  ///
+  /// ~~~~~~~~~~~~~~~~~GET : SHELF LOCATION LIST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ///
 
-
-
-
+  Future<GetFilteredTransactionModel> getFilteredTransactionData({String? dateRangeQuery}) async {
+    try {
+      Map<String, dynamic> listData = await apiClient.getApiCall(
+          BASEURL, "$getTransactionsFilter",
+          query:  dateRangeQuery ?? "",
+          isAccessToken: accessToken, isBearer: true);
+      GetFilteredTransactionModel list = GetFilteredTransactionModel.fromJson(listData);
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
 
 
 
