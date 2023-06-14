@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:general_expense_app/blocs/HomeScreen/home_screen_bloc.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
+import 'package:general_expense_app/pages/Dashboard/search_all_data_screen.dart';
 import 'package:general_expense_app/pages/Dashboard/view_all_income_expense.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
@@ -457,48 +458,42 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              Hero(
-                tag: "search",
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
-                  child: TextFormField(
-                    // autofocus: false,
-                    readOnly: true,
-                    onTap: (){
-                      Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1"))).then((value){
-                        // FocusManager.instance.primaryFocus?.unfocus();
-                      }
-                      );
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
-                      hintText: 'Search Items . . ',
-                      prefixIcon: Icon(Icons.search),
-                      focusColor: Colors.black38,
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
+                child: TextFormField(
+                  // autofocus: false,
+                  readOnly: true,
+                  onTap: (){
+                    Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchAllData()));
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(vertical: main_Height * 0.015), // Adjust vertical padding
+                    hintText: 'Search Items . . ',
+                    prefixIcon: Icon(Icons.search),
+                    focusColor: Colors.black38,
 
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(color: Colors.black38),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(color: Colors.black38),
-                      ),
-                      filled: false,
-                      prefixIconColor: Colors.black38,
-                      fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    onChanged: (value) {
-                      Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1")));
-                      // Do something with the search query
-                    },
-
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: Colors.black38),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(color: Colors.black38),
+                    ),
+                    filled: false,
+                    prefixIconColor: Colors.black38,
+                    fillColor: Colors.white,
                   ),
+                  onChanged: (value) {
+                    Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ItemListScreen("","1")));
+                    // Do something with the search query
+                  },
 
                 ),
+
               ),
 
 

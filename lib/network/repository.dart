@@ -7,6 +7,7 @@ import '../Utils/api_end_points.dart';
 import '../Utils/constants.dart';
 import '../models/CommonModel/user_data_model.dart';
 import '../models/DashboardModel/dashboard_model.dart';
+import '../models/DashboardModel/search_allData_model.dart';
 import '../models/DashboardModel/transaction_filter_model.dart';
 import '../models/DropDown/room_data_model.dart';
 import '../models/Expense/add_expense_category_model.dart';
@@ -542,6 +543,24 @@ class Repository {
       rethrow;
     }
   }
+
+
+
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: SINGLE COURSE ENROLLED COURSE APIS~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<GetSerachModel> getSearchData() async {
+    try {
+      Map<String, dynamic> listData = await apiClient.getApiCall(
+          BASEURL, "$getSearchDataEnd",
+          isAccessToken: accessToken, isBearer: true);
+      GetSerachModel list = GetSerachModel.fromJson(listData);
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
 
 
 

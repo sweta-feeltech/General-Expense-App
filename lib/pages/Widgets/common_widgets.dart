@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/CustomModel/vertical_search_list_model.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
+import 'package:general_expense_app/models/DashboardModel/search_allData_model.dart';
 import 'package:general_expense_app/models/Expense/get_expense_list_model.dart';
 import 'package:general_expense_app/models/GroupModel/group_members_model.dart';
 import 'package:general_expense_app/models/Locations/Item_list_model.dart';
@@ -1546,11 +1548,6 @@ class CommonWidgets {
 
 
 
-
-
-
-
-
   static Widget titleAndFilterDateRageAndCustomFilterUIWidget(
       BuildContext context,
       {
@@ -1680,12 +1677,135 @@ class CommonWidgets {
 
 
 
+  static Widget CommonSearchVerticalListView(BuildContext context,
+      {required VerticalSearchListModel verticalSearchListModelData,
+      }
+      ) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
 
 
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: main_Width * 0.02,vertical: main_Height * 0.005),
+      child: Container(
+        height: main_Height * 0.1,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.only(
+            top: main_Height * 0.007,
+            bottom: main_Height * 0.007,
+            right: main_Width * 0.02,
+            left: main_Width * 0.04
+        ),
+        width: main_Width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
 
+            verticalSearchListModelData!.itemtype == "shelf"
+                ?
+          Row(
+            children: [
+              Container(
+                height: main_Height * 0.061,
+                width: main_Height * 0.061,
+                decoration: BoxDecoration(
+                  color: Color(0xFFEFEFF1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  Icons.door_sliding_outlined,
+                  color: Color(0xFFC3C6D0),
+                  size: main_Height * 0.04,
+                ),
+              ),
+              SizedBox(
+                width: main_Width * 0.02,
+              )
+            ],
+          )  : verticalSearchListModelData!.itemtype == "item"  ?
+            Row(
+              children: [
+                Container(
+                  height: main_Height * 0.061,
+                  width: main_Height * 0.061,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFEFEFF1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    Icons.streetview_rounded,
+                    color: Color(0xFFC3C6D0),
+                    size: main_Height * 0.04,
+                  ),
+                ),
+                SizedBox(
+                  width: main_Width * 0.02,
+                )
+              ],
+            )
+                :Container(),
 
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${(verticalSearchListModelData!.title == null ? verticalSearchListModelData!.title : verticalSearchListModelData!.title ).toString()}",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 0.06,
+                        fontWeight: FontWeight.w500,
+                        fontSize: main_Height * 0.018),
+                  ),
+                  Text(
+                    "${DateFormat("dd MMM  hh:mm a").format(DateTime.parse("${verticalSearchListModelData!.date == null ? verticalSearchListModelData!.date : verticalSearchListModelData!.date}"))}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xFF959698),
+                        fontSize: main_Height * 0.015),
+                  )
+                ],
+              ),
+            ),
 
+            verticalSearchListModelData!.transctionType == "expense" ||
+                verticalSearchListModelData!.transctionType == "income"
+                ?
+            Expanded(
+              flex: 1,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "${verticalSearchListModelData!.transctionType == "expense" ? "-" : verticalSearchListModelData!.transctionType == "income" ? "+" : ""}${verticalSearchListModelData!.amount}",
+                  // "${(verticalSearchListModelData!.transctionType == "expense" ? "-" : verticalSearchListModelData!.transctionType == "income" ? "+" : "")}${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((double.parse("${verticalSearchListModelData!.amount}"))).replaceAll(".00","")}",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      letterSpacing: 0.6,
+                      color: verticalSearchListModelData?.transctionType == "expense" ? Colors.red : verticalSearchListModelData!.transctionType == "income" ? Color(0xFF25B07F) : Colors.white,
+                      // color: verticalSearchListModelData?.title == null ?  Color(0xFF25B07F) : Colors.red,
+                      fontWeight: FontWeight.w500,
+                      fontSize: verticalSearchListModelData.amount.toString().length > 6 ?  verticalSearchListModelData.amount.toString().length > 8 ? main_Height * 0.014 : main_Height * 0.016 : main_Height * 0.02),
+                ),
+              ),
+            ) :
+                Container()
 
+            ,
+          ],
+        ),
+      ),
+    );
+  }
 
 
 
