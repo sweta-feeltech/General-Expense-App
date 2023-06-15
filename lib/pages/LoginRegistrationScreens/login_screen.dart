@@ -51,8 +51,6 @@ class _LogInScreenState extends State<LogInScreen> {
 
 
 
-
-
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   final toast = FToast();
@@ -66,7 +64,6 @@ class _LogInScreenState extends State<LogInScreen> {
 
 
   LoginModel? loginResponseData;
-
 
 
 

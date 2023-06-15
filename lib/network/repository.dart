@@ -37,6 +37,14 @@ class Repository {
     return Repository(ApiClient(httpClient: http.Client()));
   }
 
+
+  ///
+  ///
+  /// Log In
+  ///
+  ///
+
+
   Future<LoginModel> loginPostAPI(String apiEndPoint, dynamic body) async {
     try {
       Map<String, dynamic> json =
@@ -44,6 +52,25 @@ class Repository {
       print("final received json = $json");
       LoginModel loginResponse = LoginModel.fromJson(json);
       return loginResponse;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+  ///
+  ///
+  /// Registration
+  ///
+  ///
+
+  Future<LoginModel> registrationPostAPI(String apiEndPoint, dynamic body) async {
+    try {
+      Map<String, dynamic> json =
+          await apiClient.postApiCall(BASEURL, RegistrationAPIEnd, body);
+      print("final received json = $json");
+      LoginModel RegistrationResponse = LoginModel.fromJson(json);
+      return RegistrationResponse;
     } on CustomException {
       rethrow;
     }

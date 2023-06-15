@@ -1,7 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:general_expense_app/Utils/colors.dart';
-import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
+import 'package:general_expense_app/blocs/Registration/registration_screen_bloc.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../Utils/api_end_points.dart';
 import '../../Utils/constants.dart';
+import '../../models/CommonModel/user_data_model.dart';
+import '../../models/LoginRegisterModel/login_model.dart';
+import '../../models/ProfileModel/get_profile_model.dart';
+import '../../network/repository.dart';
 import '../Dashboard/bottom_nav_bar.dart';
 import '../Widgets/theme_helper.dart';
 
@@ -22,8 +33,105 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool visiblePassowrd = true;
   bool conVisiblePassowrd = true;
 
+  final toast = FToast();
+
+  RegistrationScreenBloc registrationScreenBloc = RegistrationScreenBloc(Repository.getInstance());
+
+
+  LoginModel? loginResponseData;
+
+
   @override
   Widget build(BuildContext context) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    return BlocProvider<RegistrationScreenBloc>(
+      create: (context) => registrationScreenBloc..add(RegistrationScreenInitialEvent()),
+      child: BlocConsumer<RegistrationScreenBloc,RegistrationScreenState>(
+        builder: (context, state) {
+          if (state is RegistrationScreenLoadingState) {
+            return ThemeHelper.buildLoadingWidget();
+          } else {
+            return mainRegistrationScreen();
+          }
+        },
+        listener: (context, state) async {
+          if (state is APIFailureState) {
+            ThemeHelper.toastForAPIFaliure(state.exception.toString());
+          } else if (state is PostRegistrationDataEventState) {
+
+            final prefs = await SharedPreferences.getInstance();
+
+            loginResponseData = state.loginResponseData;
+
+            print("logindd ${loginResponseData!.accessToken}");
+
+            accessToken = state.loginResponseData.accessToken;
+            print("acs${accessToken}");
+
+            appUserData = state.loginResponseData.userData;
+
+            print("aappuu${appUserData}");
+
+            var user_data = jsonDecode(json.encode(loginResponseData?.userData));
+
+            userDataForSession = json.encode(UserData.fromJson(user_data));
+
+            await prefs.setString("accessSession", state.loginResponseData.accessToken!);
+
+
+            await prefs.setString("userSessionData", userDataForSession!);
+
+            // we are calling here Api of User Profile page so we can match email to redirect user to the category page.
+            var userProfileData = await fetchProfileData();
+
+
+            /// 1 = "APPROVED"
+            if(userProfileData!.email != null){
+              print("cate");
+
+              await prefs.setString("accessSession", state.loginResponseData.accessToken!);
+              print("get sess: ${prefs.getString("accessSession")}");
+
+
+              // await prefs.setBool('IsAppUser', IsAppUser!);
+              print("appUserData signup: ${appUserData}");
+
+
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
+
+
+              Fluttertoast.showToast(
+                msg: "Successfully Logged In...",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 3,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
+
+              accessToken = state.loginResponseData.accessToken;
+            }
+
+            else {
+              print("profile");
+            }
+
+          }
+        },
+      ),
+    );
+
+
+
+  }
+
+
+
+  Widget mainRegistrationScreen (){
+
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
@@ -51,8 +159,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                     print(
                         " details $firstName, $lastName, $email, $password, $confirmPassword");
-                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
-
+                    registrationScreenBloc.add(PostRegistrationDataEvent("${firstName}","${lastName}","${email}","${confirmPassword}"));
                   }
 
                 },
@@ -160,9 +267,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     child: Container(
                       width: main_Width,
                       decoration: const BoxDecoration(
-                          // color: Color.fromARGB(255, 240, 240, 240),
-                          color: Colors.transparent,
-                          // borderRadius: BorderRadius.circular(10)
+                        // color: Color.fromARGB(255, 240, 240, 240),
+                        color: Colors.transparent,
+                        // borderRadius: BorderRadius.circular(10)
                       ),
                       child: Form(
                         key: _formkey,
@@ -257,23 +364,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               height: main_Height * 0.016,
                             ),
                             ThemeHelper.mainMobileTextFormField(
-                              main_Height * 0.020,
-                              "Email",
-                              (onSavedVal) {
-                                email = onSavedVal;
-                              },
-                              Icons.mail,
-                              TextInputAction.next,
-                              validatingFunc: (value) {
-                                RegExp regex = RegExp(EmailRegex);
-                                if (value == null || value.isEmpty) {
-                                  return 'Email can\'t be empty';
-                                } else if (!regex.hasMatch(value)) {
-                                  return ("Please check your email address");
-                                }
-                                return null;
-                              },
-                              context: context
+                                main_Height * 0.020,
+                                "Email",
+                                    (onSavedVal) {
+                                  email = onSavedVal;
+                                },
+                                Icons.mail,
+                                TextInputAction.next,
+                                validatingFunc: (value) {
+                                  RegExp regex = RegExp(EmailRegex);
+                                  if (value == null || value.isEmpty) {
+                                    return 'Email can\'t be empty';
+                                  } else if (!regex.hasMatch(value)) {
+                                    return ("Please check your email address");
+                                  }
+                                  return null;
+                                },
+                                context: context
                             ),
                             SizedBox(
                               height: main_Height * 0.016,
@@ -297,7 +404,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 },
                                 decoration: InputDecoration(
                                   floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
+                                  FloatingLabelBehavior.never,
                                   hintText: "Password",
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.w400,
@@ -335,10 +442,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     ),
                                   ),
                                   contentPadding:
-                                      EdgeInsets.only(top: 18, bottom: 0),
+                                  EdgeInsets.only(top: 18, bottom: 0),
                                   enabledBorder: ThemeHelper.signupMyInputBorder(),
                                   focusedBorder:
-                                      ThemeHelper.signupMyFocusedBorder(),
+                                  ThemeHelper.signupMyFocusedBorder(),
                                   errorStyle: TextStyle(color: Colors.redAccent),
                                 ),
                                 textInputAction: TextInputAction.next),
@@ -366,7 +473,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 },
                                 decoration: InputDecoration(
                                   floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
+                                  FloatingLabelBehavior.never,
                                   hintText: "Confirm Password",
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.w400,
@@ -404,10 +511,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     ),
                                   ),
                                   contentPadding:
-                                      EdgeInsets.only(top: 18, bottom: 0),
+                                  EdgeInsets.only(top: 18, bottom: 0),
                                   enabledBorder: ThemeHelper.signupMyInputBorder(),
                                   focusedBorder:
-                                      ThemeHelper.signupMyFocusedBorder(),
+                                  ThemeHelper.signupMyFocusedBorder(),
                                   // errorBorder: ThemeHelper.enableerrorBorder(),
                                   // focusedErrorBorder: ThemeHelper.enablefocuserrorBorder(),
                                   errorStyle: TextStyle(color: Colors.redAccent),
@@ -455,7 +562,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
       ),
     );
+
+
   }
+
+
 
   bool validateAndSave() {
     final form = _formkey.currentState;
@@ -464,6 +575,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<GetProfileModel?> fetchProfileData() async {
+
+
+    final response = await http.get(
+        Uri.parse("${BASEURL}${getProfileApiEnd}"),
+        headers: {
+          "isClient": "true",
+          "Authorization": "Bearer $accessToken"
+        });
+
+    if (response.statusCode == 200) {
+      final r_body = json.decode(response.body);
+      return GetProfileModel.fromJson(r_body);
+    } else {
+      throw Exception("Unable to fetch data!");
     }
   }
 
