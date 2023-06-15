@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/CustomModel/horizontal_search_list_model.dart';
 import 'package:general_expense_app/models/CustomModel/vertical_search_list_model.dart';
 import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
 import 'package:general_expense_app/models/DashboardModel/search_allData_model.dart';
@@ -1785,7 +1786,7 @@ class CommonWidgets {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  "${verticalSearchListModelData!.transctionType == "expense" ? "-" : verticalSearchListModelData!.transctionType == "income" ? "+" : ""}${verticalSearchListModelData!.amount}",
+                  "${verticalSearchListModelData!.transctionType == "expense" ? "-" : verticalSearchListModelData!.transctionType == "income" ? "+" : ""}${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((double.parse("${verticalSearchListModelData!.amount}"))).replaceAll(".00","")}",
                   // "${(verticalSearchListModelData!.transctionType == "expense" ? "-" : verticalSearchListModelData!.transctionType == "income" ? "+" : "")}${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((double.parse("${verticalSearchListModelData!.amount}"))).replaceAll(".00","")}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -1806,6 +1807,138 @@ class CommonWidgets {
       ),
     );
   }
+
+
+
+
+  static Widget CommonHorizontalSearchList(BuildContext context,
+      {int? index,
+        required HorizontalSearchListModel horizontalSearchListModelData,
+        }) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+    return InkWell(
+      ///
+      /// For Delete Group
+      ///
+      /// onTap: onPressed,
+      onTap: () {
+        // onPressed;
+        // Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SingleGroupViewScreen("${getGroupListModel!.id}")));
+
+        // Navigator.of(context).push(MaterialPageRoute(
+        //     builder: (context) =>
+        //         SingleGroupViewScreen("${getGroupListModel!.id}")));
+      },
+      child: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.01,vertical: main_Height * 0.005),
+        child: Material(
+          borderRadius: BorderRadius.circular(7),
+          elevation: 3,
+          child: Padding(
+            padding: EdgeInsets.all(5),
+            child: Container(
+              width: main_Width * 0.35,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7), color: primaryGrey
+                // color: getColor(index!,4)
+
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: getColor(index!, index),
+                          borderRadius: BorderRadius.circular(5)),
+                      // child: items.categoryImg != null ?
+                      child: Center(
+                        child:
+
+                            horizontalSearchListModelData!.boxtype == "Home" ?
+
+                        Container(
+                            height: main_Height * 0.06,
+                            width: main_Height * 0.06,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            // child: items.categoryImg != null ?
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(5),
+                            child: Icon(
+                              Icons.home_outlined,
+                              color: Colors.black,
+                              size: main_Height * 0.04,
+                            )
+                          // SvgPicture.asset("assets/images/shome.svg",),
+                        ) :
+
+                            horizontalSearchListModelData!.boxtype == "Room" ?
+
+                            Container(
+                              height: main_Height * 0.06,
+                              width: main_Height * 0.06,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15)),
+                              // child: items.categoryImg != null ?
+                              padding: EdgeInsets.all(5),
+                              child: Icon(
+                                Icons.meeting_room,
+                                size: main_Height * 0.04,
+                              ),
+                            )
+
+                                :
+
+                        Text(
+                          "${horizontalSearchListModelData!.title!.substring(0, 1).toUpperCase()}",
+                          style: TextStyle(fontSize: main_Height * 0.1),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: main_Height * 0.05,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "${horizontalSearchListModelData?.title}",
+                          maxLines: 1,
+                          // items.name.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: main_Height * 0.014),
+                        ),
+                        Text(
+                          "${horizontalSearchListModelData?.desc}",
+                          // "7 Members",
+                          maxLines: 1,
+                          // items.name.toString(),
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: darkGrey,
+                              fontWeight: FontWeight.w500,
+                              fontSize: main_Height * 0.014),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 
 
 

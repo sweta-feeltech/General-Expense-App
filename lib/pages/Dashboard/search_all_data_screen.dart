@@ -5,6 +5,7 @@ import 'package:general_expense_app/models/CustomModel/vertical_search_list_mode
 import 'package:general_expense_app/models/DashboardModel/search_allData_model.dart';
 
 import '../../Utils/colors.dart';
+import '../../models/CustomModel/horizontal_search_list_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/common_widgets.dart';
 import '../Widgets/theme_helper.dart';
@@ -28,6 +29,7 @@ class _SearchAllDataState extends State<SearchAllData> {
   String searchQuery = '';
 
   List<VerticalSearchListModel> searchResultsVertical = [];
+  List<HorizontalSearchListModel> searchResultsHorizontal = [];
   ///
   /// VERTICAL
   ///
@@ -107,15 +109,46 @@ class _SearchAllDataState extends State<SearchAllData> {
    List<VerticalSearchListModel>? verticalListData;
 
 
+  List<HorizontalSearchListModel> mergeListHorizontal(
+      // List<dynamic> mergeListVertical(
+      List<TblGroup> SearchResTbGroup,
+      List<TblHomeLocation> SearchResTblHomeLocation,
+      List<TblRoomLocation> SearchResTblRoomLocation,
+      ) {
+    // List<dynamic> mergedVerticalList = [];
+    List<HorizontalSearchListModel> mergedHorizontalList = [];
+
+    for(int i = 0; i < SearchResTblGroup!.length; i++) {
+      mergedHorizontalList.add(HorizontalSearchListModel(id: SearchResTblGroup![i].id, title:SearchResTblGroup![i].groupName, desc:SearchResTblGroup![i].description,  boxtype:SearchResTblGroup![i].groupName != null ? "Group" : ""));
+    }
+
+    for(int i = 0; i < SearchResTblHome!.length; i++) {
+      mergedHorizontalList.add(HorizontalSearchListModel(id: SearchResTblHome![i].id, title:SearchResTblHome![i].homeLocationName, desc:SearchResTblHome![i].description,  boxtype:SearchResTblHome![i].homeLocationName != null ? "Home" : ""));
+    }
+
+    for(int i = 0; i < SearchResTblRoom!.length; i++) {
+      mergedHorizontalList.add(HorizontalSearchListModel(id: SearchResTblRoom![i].id, title:SearchResTblRoom![i].roomLocationName, desc:SearchResTblHome![i].description,  boxtype:SearchResTblRoom![i].roomLocationName != null ? "Room" : ""));
+    }
+
+
+    return mergedHorizontalList;
+  }
+
+  List<HorizontalSearchListModel>? horizontalSearchListModelData;
+
+
+
 
   GetSerachModel? getSerachModelData;
 
   bool? allData1;
+  bool? allData2;
 
   @override
   void initState() {
     super.initState();
     allData1 = false;
+    allData2 = false;
     loadAllSearchListScreenApiCalls();
   }
 
@@ -150,23 +183,30 @@ class _SearchAllDataState extends State<SearchAllData> {
 
               verticalListData  =  mergeListVertical(SearchResTblExpense ?? [], SearchResTblIncome ?? [], SearchResTblgrpmember ?? [], SearchResTblShelf ?? [], SearchResTblItem ?? []);
 
-              if(verticalSearchListModelData.isEmpty == true) {
-                for(int i =0; i < (verticalListData?.length ?? 0); i++) {
-                  print("i: ${i}");
-                  print("i: ${verticalListData![i]}");
-                  if(verticalListData![i].runtimeType == TblIncome) {
-                    print(verticalListData![i].runtimeType);
-                    verticalSearchListModelData.add(VerticalSearchListModel(id: verticalListData![i].toString(), title: "sdjhbf", date: "sdkjh"));
-                  }
-                }
-              }
+              print("vert ${verticalListData}");
 
 
+              // if(verticalSearchListModelData.isEmpty == true) {
+              //   for(int i =0; i < (verticalListData?.length ?? 0); i++) {
+              //     print("i: ${i}");
+              //     print("i: ${verticalListData![i]}");
+              //     if(verticalListData![i].runtimeType == TblIncome) {
+              //       print(verticalListData![i].runtimeType);
+              //       verticalSearchListModelData.add(VerticalSearchListModel(id: verticalListData![i].toString(), title: "sdjhbf", date: "sdkjh"));
+              //     }
+              //   }
+              // }
+              //
+              //
 
 
               SearchResTblGroup  = state.getSerachModelData?.tblGroup;
               SearchResTblHome  = state.getSerachModelData?.tblHomeLocation;
               SearchResTblRoom  = state.getSerachModelData?.tblRoomLocation;
+
+              horizontalSearchListModelData  =  mergeListHorizontal(SearchResTblGroup ?? [], SearchResTblHome ?? [], SearchResTblRoom ?? []);
+              print("hori ${horizontalSearchListModelData![0].id}");
+
 
 
 
@@ -239,6 +279,11 @@ class _SearchAllDataState extends State<SearchAllData> {
           child: Column(
             children: [
 
+              ///
+              ///
+              /// SEARCH FEILD
+              ///
+              ///
 
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: main_Width * 0.03, vertical: main_Height * 0.005),
@@ -263,12 +308,39 @@ class _SearchAllDataState extends State<SearchAllData> {
                     setState(() {
                       print("ccc");
                       allData1 = true;
+                      allData2 = true;
                       searchQuery = value;
+
+                      ///
+                      /// Vertical Search Result
+                      ///
+
                       searchResultsVertical = verticalListData!.where((item) =>
                       item.title!.toLowerCase().contains(searchQuery.toLowerCase()) ||
                           item.amount!.toLowerCase().contains(searchQuery.toLowerCase())
                       ).toList();
+
+
+                      searchResultsHorizontal = horizontalSearchListModelData!.where((item) =>
+                      item.title!.toLowerCase().contains(searchQuery.toLowerCase()) ||
+                          item.desc!.toLowerCase().contains(searchQuery.toLowerCase())
+                      ).toList();
+
+
+
+
+
                     });
+
+                    ///
+                    /// Horizontal Search Result
+                    ///
+
+
+
+
+
+
                     // Do something with the search query
                   },
 
@@ -277,19 +349,55 @@ class _SearchAllDataState extends State<SearchAllData> {
               ),
 
 
-              Expanded(
+              ///
+              ///
+              /// HORIZONTAL LIST
+              ///
+              ///
+
+              searchResultsHorizontal!.isEmpty == true ?
+                 Container() :
+              Container(
+                height: main_Height * 0.2,
+                width: main_Width,
+                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,),
                 child: ListView.builder(
-                    itemCount:  allData1 == false ? verticalListData!.length : searchResultsVertical!.length,
-                    physics: AlwaysScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    itemCount:  allData2 == false ?  horizontalSearchListModelData!.length : searchResultsHorizontal!.length,
                     shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
+                    physics: AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
-                      return CommonWidgets.CommonSearchVerticalListView(context,
-                          verticalSearchListModelData: allData1 == false ? verticalListData![index] : searchResultsVertical![index]
-                          // getItemListModelData:   allData1 == false ?  getSerachModelData!.tblExpense![index] : SearchReSTblExpense![index]
+                      return CommonWidgets.CommonHorizontalSearchList(context,
+                          index: index,
+                          horizontalSearchListModelData: allData2 == false ?  horizontalSearchListModelData![index] : searchResultsHorizontal![index]
                       );
-                    }),
+                    }
+
+                    ),
+
               ),
+
+
+              ///
+              ///
+              /// VERTICAL LIST
+              ///
+              ///
+
+                Expanded(
+                  child: ListView.builder(
+                      itemCount:  allData1 == false ? verticalListData!.length : searchResultsVertical!.length,
+                      physics: AlwaysScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CommonWidgets.CommonSearchVerticalListView(context,
+                            verticalSearchListModelData: allData1 == false ? verticalListData![index] : searchResultsVertical![index]
+                          // getItemListModelData:   allData1 == false ?  getSerachModelData!.tblExpense![index] : SearchReSTblExpense![index]
+                        );
+                      }),
+                ),
 
 
             ],
