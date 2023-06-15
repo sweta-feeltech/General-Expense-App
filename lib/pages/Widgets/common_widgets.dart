@@ -257,12 +257,12 @@ class CommonWidgets {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  "${(dashboardModelData.transactionType == 1 ? "-":"+")}${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.amount)).replaceAll(".00","")}",
+                  "${(dashboardModelData.transactionType == "Expense" ? "-":"+")}${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.amount)).replaceAll(".00","")}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       letterSpacing: 0.6,
-                      color: dashboardModelData.transactionType == 0 ?  Color(0xFF25B07F) : Colors.red,
+                      color: dashboardModelData.transactionType == "Expense" ?  Colors.red  : Color(0xFF25B07F),
                       fontWeight: FontWeight.w500,
                       fontSize: dashboardModelData.amount.toString().length > 6 ?  dashboardModelData.amount.toString().length > 8 ? main_Height * 0.014 : main_Height * 0.016 : main_Height * 0.02),
                 ),
