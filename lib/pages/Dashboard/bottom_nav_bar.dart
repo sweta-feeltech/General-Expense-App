@@ -160,39 +160,56 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
       items: [
 
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset(
-            "assets/icons/home_1.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
+          icon: Icon(Icons.home,
+            size: main_Height * 0.036,
           ),
-          // icon: Icon(CupertinoIcons.house_fill),
-          inactiveIcon: SvgPicture.asset(
-            "assets/icons/home.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
-          ),
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          activeColorPrimary: primaryPurple,
+          inactiveColorPrimary: Color(0xFFC9CACF),
         ),
+
+        // PersistentBottomNavBarItem(
+        //   icon: SvgPicture.asset(
+        //     "assets/icons/home_1.svg",
+        //     height: main_Height * 0.06,
+        //     width: main_Height * 0.06,
+        //     fit: BoxFit.none,
+        //   ),
+        //   // icon: Icon(CupertinoIcons.house_fill),
+        //   inactiveIcon: SvgPicture.asset(
+        //     "assets/icons/home.svg",
+        //     height: main_Height * 0.06,
+        //     width: main_Height * 0.06,
+        //     fit: BoxFit.none,
+        //   ),
+        //   inactiveColorPrimary: CupertinoColors.systemGrey,
+        // ),
 
 
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset(
-            "assets/icons/expense_1.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
+          icon: Icon(Icons.bar_chart,
+            size: main_Height * 0.036,
           ),
-          // icon: Icon(CupertinoIcons.house_fill),
-          inactiveIcon: SvgPicture.asset(
-            "assets/icons/expense.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
-          ),
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          activeColorPrimary: primaryPurple,
+          inactiveColorPrimary: Color(0xFFC9CACF),
         ),
+
+
+        // PersistentBottomNavBarItem(
+        //   icon: SvgPicture.asset(
+        //     "assets/icons/expense_1.svg",
+        //     height: main_Height * 0.06,
+        //     width: main_Height * 0.06,
+        //     fit: BoxFit.none,
+        //   ),
+        //   // icon: Icon(CupertinoIcons.house_fill),
+        //   inactiveIcon: SvgPicture.asset(
+        //     "assets/icons/expense.svg",
+        //     height: main_Height * 0.06,
+        //     width: main_Height * 0.06,
+        //     fit: BoxFit.none,
+        //   ),
+        //   inactiveColorPrimary: CupertinoColors.systemGrey,
+        // ),
 
 
         PersistentBottomNavBarItem(
@@ -204,49 +221,44 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> with WidgetsBin
                       builder: (context) => AddTabScreen((){})));
               },
             ),
-
-          // icon: Icon(CupertinoIcons.house_fill),
-          // inactiveIcon: Icon(Icons.add,
-          //   color: Colors.white,),
-          // inactiveColorPrimary: primaryPurple,
           activeColorPrimary: primaryPurple,
-          // inactiveColorSecondary: primaryOrange
         ),
 
 
+
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset(
-            "assets/icons/inventory_1.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
+          icon: Icon(Icons.account_balance_wallet_rounded,
+            size: main_Height * 0.036,
           ),
-          // icon: Icon(CupertinoIcons.house_fill),
-          inactiveIcon: SvgPicture.asset(
-            "assets/icons/inventory.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
-          ),
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          activeColorPrimary: primaryPurple,
+          inactiveColorPrimary: Color(0xFFC9CACF),
         ),
 
 
+        // PersistentBottomNavBarItem(
+        //   icon: SvgPicture.asset(
+        //     "assets/icons/inventory_1.svg",
+        //     height: main_Height * 0.06,
+        //     width: main_Height * 0.06,
+        //     fit: BoxFit.none,
+        //   ),
+        //   // icon: Icon(CupertinoIcons.house_fill),
+        //   inactiveIcon: SvgPicture.asset(
+        //     "assets/icons/inventory.svg",
+        //     height: main_Height * 0.06,
+        //     width: main_Height * 0.06,
+        //     fit: BoxFit.none,
+        //   ),
+        //   inactiveColorPrimary: CupertinoColors.systemGrey,
+        // ),
+
+
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset(
-            "assets/icons/profile_1.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
-          ),
-          // icon: Icon(CupertinoIcons.house_fill),
-          inactiveIcon: SvgPicture.asset(
-            "assets/icons/profile.svg",
-            height: main_Height * 0.06,
-            width: main_Height * 0.06,
-            fit: BoxFit.none,
-          ),
-          inactiveColorPrimary: CupertinoColors.systemGrey,
+          icon: Icon(Icons.settings,
+            size: main_Height * 0.036,
+            ),
+          activeColorPrimary: primaryPurple,
+          inactiveColorPrimary: Color(0xFFC9CACF),
         ),
 
 

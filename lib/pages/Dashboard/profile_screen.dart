@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/Dashboard/search_all_data_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/view_all_income_expense.dart';
 import 'package:general_expense_app/pages/Locations/room_screen.dart';
 import 'package:general_expense_app/pages/LoginRegistrationScreens/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +17,7 @@ import '../../blocs/ProfileScreen/profile_screen_bloc.dart';
 import '../../models/ProfileModel/get_profile_model.dart';
 import '../../network/api_client.dart';
 import '../../network/repository.dart';
+import '../Group/group_list_screen.dart';
 import '../Widgets/theme_helper.dart';
 import '../Locations/add_home_Screen.dart';
 import 'edit_profile_screen.dart';
@@ -240,6 +244,128 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
 
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text("Account Settings ",
+                        style: TextStyle(
+                          letterSpacing: 0.5,
+                          fontSize: main_Height * 0.017,
+                          // fontSize: main_Height * 0.04,
+                          fontWeight: FontWeight.w500,
+                          color: darkGrey,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(7),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                      child: Column(
+                        children: [
+
+                          ListTile(
+                            onTap: (){
+
+                              Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SearchAllData()));
+
+                            },
+                            title: Row(
+                              children:  [
+                                SizedBox(width: 20,),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Transform(
+                                      transform:Matrix4.rotationY(math.pi),
+                                      child: const Icon(Icons.search_outlined,
+                                        color: primaryPurple,
+                                      ),
+                                    )
+                                ),
+                                Text("Find All", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500),),
+                              ],
+                            ),
+                          ),
+                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+
+                          ListTile(
+                            onTap: (){
+                              Navigator.of(context, rootNavigator: true).pushNamed(GroupListScreen.routeName);                            },
+                            title: Row(
+                              children:  [
+                                SizedBox(width: 2),
+                                const Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.group,color: primaryPurple,),
+                                ),
+                                SizedBox(width: main_Height * 0.020,),
+                                Text("Group", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+
+                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+
+                          ListTile(
+                            onTap: () async{
+
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen(
+                                      (){
+
+                                  }
+                              )));
+
+                            },
+                            title: Row(
+                              children:  [
+                                const SizedBox(width: 2),
+                                const Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.home,color: primaryPurple,),
+                                ),
+                                SizedBox(width: main_Height * 0.020,),
+                                Text("Home", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+
+                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
+
+                          ListTile(
+                            onTap: () async{
+
+                              Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ViewallIncomeExpense()));
+
+                            },
+                            title: Row(
+                              children:  [
+                                const SizedBox(width: 2),
+                                const Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.money,color: primaryPurple,),
+                                ),
+                                SizedBox(width: main_Height * 0.020,),
+                                Text("Income Expense", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
 
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -291,106 +417,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
 
-                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
-
-                          ListTile(
-                            onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RoomScreen("")));
-                            },
-                            title: Row(
-                              children:  [
-                                SizedBox(width: 2),
-                                const Align(
-                                  alignment: Alignment.center,
-                                  child: Icon(Icons.book_outlined,color: primaryPurple,),
-                                ),
-                                SizedBox(width: main_Height * 0.020,),
-                                Text("Rooms", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
-                              ],
-                            ),
-                          ),
-                          const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
-
-                          ListTile(
-                            onTap: (){
-
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen((){})));
-
-                            },
-                            title: Row(
-                              children:  [
-                                SizedBox(width: 20,),
-                                Align(
-                                    alignment: Alignment.center,
-                                    child: Transform(
-                                      transform:Matrix4.rotationY(math.pi),
-                                      child: const Icon(Icons.hourglass_empty,
-                                        color: primaryPurple,
-                                      ),
-                                    )
-                                ),
-                                Text("Empty", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500),),
-                              ],
-                            ),
-                          ),
-
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Row(
-                    children: [
-                      Text("Account Settings ",
-                        style: TextStyle(
-                          letterSpacing: 0.5,
-                          fontSize: main_Height * 0.017,
-                          // fontSize: main_Height * 0.04,
-                          fontWeight: FontWeight.w500,
-                          color: darkGrey,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(7),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: Column(
-                        children: [
-
-                          ListTile(
-                            onTap: () async{
-
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen(
-                                  (){
-
-                                  }
-                              )));
-
-                            },
-                            title: Row(
-                              children:  [
-                                const SizedBox(width: 2),
-                                const Align(
-                                  alignment: Alignment.center,
-                                  child: Icon(Icons.home,color: primaryPurple,),
-                                ),
-                                SizedBox(width: main_Height * 0.020,),
-                                Text("Home", style: TextStyle(fontSize: main_Height * 0.019, fontWeight: FontWeight.w500)),
-                              ],
-                            ),
-                          ),
 
                           const Divider(thickness: 1,height: 0, indent: 20, endIndent: 20),
 
@@ -421,11 +447,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
 
 
+
+
                         ],
                       ),
                     ),
                   ),
                 ),
+
 
               ],
             ),

@@ -130,7 +130,12 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
             IconButton(
               icon: Icon(Icons.share),
               onPressed: () {
-                Share.share("${groupMemberModelData?[0].groupPin}");
+                // Share.share("${groupMemberModelData?[0].groupPin}");
+                String code = "Your Friend/Family Member has Invited you to join a Group “${groupMemberModelData?[0].groupName}” on Track Inventory.\n"
+                    "Please Enter the given code while joining the group : ${groupMemberModelData?[0].groupPin}.\n"
+                    "https://feeltechsolutions.com/" ;
+
+                Share.share(code);
               },
             ),
           ],
@@ -172,7 +177,13 @@ class _SingleGroupViewScreenState extends State<SingleGroupViewScreen> {
                           ),
                           child: InkWell(
                             onTap: () {
-                              Share.share("${groupMemberModelData?[0].groupPin}");
+                              // Share.share("${groupMemberModelData?[0].groupPin}");
+
+                              String code = "Your Friend/Family Member has Invited you to join a Group “${groupMemberModelData?[0].groupName}” on Track Inventory.\n"
+                              "Please Enter the given code while joining the group : ${groupMemberModelData?[0].groupPin}.\n"
+                              "https://feeltechsolutions.com/" ;
+
+                              Share.share(code);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,

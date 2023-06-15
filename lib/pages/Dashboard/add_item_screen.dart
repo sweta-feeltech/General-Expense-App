@@ -213,7 +213,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                   PIimage == null ?
                   ThemeHelper.showToastMessage("Add File or Image First")
                       :
-                  itemScreenBloc.add(PostAddItemFormEvent("${ItemName}","${Amount}","${Remarks}","${widget.apbar == "0"  ? widget.shelfId : ShelfN}", File(PIimage!.path.toString())));
+                  itemScreenBloc.add(PostAddItemFormEvent("${ItemName}","${Amount}","${Remarks}","${widget.apbar == "0"  ? widget.shelfId : ShelfN == null ? "" : ShelfN}", File(PIimage!.path.toString())));
 
 
                 }
