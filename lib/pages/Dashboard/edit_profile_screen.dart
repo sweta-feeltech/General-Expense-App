@@ -4,6 +4,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:general_expense_app/models/ProfileModel/get_profile_model.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -16,58 +17,52 @@ import '../../network/api_client.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
 
-
 class EditProfileScreen extends StatefulWidget {
   static String routeName = '/editProfileScreen';
   Function backPressCallback;
 
-  EditProfileScreen(this.backPressCallback,{super.key});
+  EditProfileScreen(this.backPressCallback, {super.key});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-
-
-
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   EditProfileModel? editeprofiledata;
 
   UserData1? getProfileModelData;
 
+  GetProfileModel? getProfileModelData1;
 
-  EditProfilePageBloc editProBloc = EditProfilePageBloc(Repository.getInstance());
-
-
+  EditProfilePageBloc editProBloc =
+      EditProfilePageBloc(Repository.getInstance());
 
   String? firstName, lastName, birthDate;
   File? profilePic;
 
   final _picker = ImagePicker();
 
-
   @override
   void initState() {
     index2 = 0;
+    loadAllEditProfileScreenApiCalls();
+
     super.initState();
   }
 
-
   var index2;
-
 
   Repository repositoryRepo = Repository(ApiClient(httpClient: http.Client()));
 
   Future getImage() async {
+    final pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
 
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
-
-    if(pickedFile != null) {
+    if (pickedFile != null) {
       profilePic = File(pickedFile.path);
-      setState(() {
-      });
+      setState(() {});
       print(profilePic);
     } else {
       print("No Image Selected");
@@ -76,15 +71,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 
 
+  void loadAllEditProfileScreenApiCalls() {
+    editProBloc.add(FetchAllEditProfileScreenScreenAPIsEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-
       body: BlocProvider<EditProfilePageBloc>(
         create: (context) => editProBloc..add(EditProfilePageInitialEvent()),
         child: BlocConsumer<EditProfilePageBloc, EditProfilePageState>(
@@ -93,14 +89,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               print("Loading State");
               return ThemeHelper.buildLoadingWidget();
             }
-            // else
-            // if (state is AllFetchDataForProfilePageState) {
-            //   getProfileModelData = state.allProfileModelresponse;
-            //   return mainAllEditProfileView();
-            // }
-            else
-            if(state is EditPutProfileDataState){
+            else if (state is FetchAllEditProfileScreenAPIsEventState) {
+              getProfileModelData1 = state.getProfileModelData;
 
+              return mainAllEditProfileView();
+            }
+            else if (state is EditPutProfileDataState) {
               print("Put State State1");
               print("${state.editProfileModelResponse.message}");
               print("Put State State2");
@@ -112,14 +106,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               appUserData?.profilePic = getProfileModelData?.profilePic;
               print("Put State State4");
 
-
-
               // editProBloc.add(AllFetchDataForProfilePageEvent());
 
               // TextSpan contentMes = TextSpan(
               //     text: "Profile Data Updated",style: TextStyle(color: Colors.grey, fontSize: 15));
-
-
 
               // ThemeHelper.customDialogForMessage(
               //     isBarrierDismissible: false,
@@ -134,10 +124,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               //     },
               //     ForSuccess: true);
 
-
               return mainAllEditProfileView();
-            }
-            else {
+            } else {
               return mainAllEditProfileView();
             }
           },
@@ -171,20 +159,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
     );
-
-
-
-
   }
 
-  Widget mainAllEditProfileView(){
-
+  Widget mainAllEditProfileView() {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
-
+    
+    print("bb ${getProfileModelData1?.birthDate}");
 
     return WillPopScope(
-
       onWillPop: () async {
         Navigator.of(context).pop("refresh");
         return true;
@@ -192,18 +175,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Form(
         key: _formkey,
         child: RefreshIndicator(
-          onRefresh: () async {
-          },
+          onRefresh: () async {},
           child: Scaffold(
-
             backgroundColor: Colors.white,
             // resizeToAvoidBottomInset: false,
-            appBar:AppBar(
+            appBar: AppBar(
               centerTitle: false,
               titleSpacing: 0,
               backgroundColor: primaryPurple,
               elevation: 0,
-              leading:   IconButton(
+              leading: IconButton(
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minHeight: 20, minWidth: 20),
                 onPressed: () {
@@ -213,20 +194,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 },
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
               ),
-              title:    Text("Edit Profile",
-                style:
-                TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
-
+              title: Text(
+                "Edit Profile",
+                style: TextStyle(
+                    color: Colors.white, fontSize: main_Height * 0.022),
+              ),
             ),
-
 
             bottomSheet: Container(
               height: main_Height * 0.085,
               width: main_Width * 1,
               decoration: const BoxDecoration(color: Colors.white),
               child: Padding(
-                padding:
-                EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: main_Width * 0.05, vertical: 10),
                 child: Container(
                   height: main_Height * 0.06,
                   width: main_Width * 0.75,
@@ -235,24 +216,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                       primary: primaryPurple,
                     ),
                     onPressed: () {
-
-
-                      if(_formkey.currentState!.validate()){
-
+                      if (_formkey.currentState!.validate()) {
                         _formkey.currentState!.save();
 
-                        editProBloc.add(PutProfileDataEvent(firstName,lastName,birthDate,profilePic: profilePic));
-
+                        editProBloc.add(PutProfileDataEvent(
+                            firstName, lastName, birthDate,
+                            profilePic: profilePic));
 
                         TextSpan contentMes = TextSpan(
-                            text: "Profile Data Updated",style: TextStyle(color: Colors.grey, fontSize: 15));
+                            text: "Profile Data Updated",
+                            style: TextStyle(color: Colors.grey, fontSize: 15));
 
                         ThemeHelper.customDialogForMessage(
                             isBarrierDismissible: false,
@@ -260,19 +239,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             "Profile Updated Successfully",
                             main_Width,
                             // contentMessage: contentMes,
-                                () {
-                              Navigator.of(context).pop();
-                              // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileScreen((){})));
-                              // Navigator.of(context).pop('refresh');
-                            },
-                            ForSuccess: true);
-
+                            () {
+                          Navigator.of(context).pop();
+                          // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileScreen((){})));
+                          // Navigator.of(context).pop('refresh');
+                        }, ForSuccess: true);
                       }
-
-
-
                     },
-                    child: Text("Update",
+                    child: Text(
+                      "Update",
                       style: TextStyle(
                           letterSpacing: 1,
                           fontSize: main_Height * 0.018,
@@ -284,7 +259,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
 
-
             body: SafeArea(
               child: SingleChildScrollView(
                 // physics: BouncingScrollPhysics(),
@@ -293,11 +267,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     Container(
                       decoration: BoxDecoration(
                           color: primaryPurple,
-                          border: Border.all(
-                              width: 0,
-                              color: primaryPurple
-                          )
-                      ),
+                          border: Border.all(width: 0, color: primaryPurple)),
                       height: main_Height * 0.015,
                     ),
                     Container(
@@ -307,25 +277,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Column(
                             children: [
                               Container(
-                                decoration: const BoxDecoration(
-                                    color: primaryPurple
-                                ),
+                                decoration:
+                                    const BoxDecoration(color: primaryPurple),
                                 height: main_Height * 0.07,
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(width: 0,color: Colors.white),
+                                    border: Border.all(
+                                        width: 0, color: Colors.white),
                                     borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(30.0),
-                                        topRight: Radius.circular(30.0)
-                                    ),
-                                    color: Colors.white
-                                ),
+                                        topRight: Radius.circular(30.0)),
+                                    color: Colors.white),
                                 height: main_Height * 0.07,
                               )
                             ],
                           ),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -340,114 +307,89 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     child: ClipOval(
                                       child: Material(
                                           child: Container(
-                                            width: main_Height * 0.13,
-                                            height: main_Height * 0.13,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
+                                        width: main_Height * 0.13,
+                                        height: main_Height * 0.13,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
                                                 BorderRadius.circular(7)),
-                                            child: Material(
-                                                color: Colors.transparent,
-                                                child: appUserData?.profilePic != null
-                                                    ? profilePic == null
-                                                    ? Ink.image(
-                                                  image: NetworkImage(
-                                                      "$BASEIMAGEURL${getProfileModelData?.profilePic == null ? appUserData!.profilePic : getProfileModelData!.profilePic}"),
-                                                  fit: BoxFit.cover,
-                                                  width: main_Height * 0.13,
-                                                  height:
-                                                  main_Height * 0.13,
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      getImage();
-                                                    },
-                                                  ),
-                                                )
-                                                    : GestureDetector(
-                                                  onTap: () {
-                                                    getImage();
-                                                  },
-                                                  child: Image.file(
-                                                    File("${profilePic!.path}")
-                                                        .absolute,
-                                                    width:
-                                                    main_Height * 0.13,
-                                                    height:
-                                                    main_Height * 0.13,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                )
-                                                    : profilePic == null
-                                                    ? Ink.image(
-                                                  image: AssetImage(
-                                                      "assets/images/avtar.png"),
-                                                  onImageError: (exception,
-                                                      stackTrace) =>
-                                                      AssetImage(
-                                                          "assets/images/avtar.png"),
-                                                  fit: BoxFit.cover,
-                                                  width: main_Height * 0.13,
-                                                  height:
-                                                  main_Height * 0.13,
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      getImage();
-                                                    },
-                                                  ),
-                                                )
-                                                    : GestureDetector(
-                                                  onTap: () {
-                                                    getImage();
-                                                  },
-                                                  child: Image.file(
-                                                    File("${profilePic!.path}")
-                                                        .absolute,
-                                                    width:
-                                                    main_Height * 0.13,
-                                                    height:
-                                                    main_Height * 0.13,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                )),
-                                          )),
+                                        child: Material(
+                                            color: Colors.transparent,
+                                            child:profilePic == null
+                                                ? Ink.image(
+                                              image: getProfileModelData1
+                                                  ?.profilePic ==
+                                                  null
+                                                  ? AssetImage(
+                                                  "assets/images/avtar.png")
+                                              as ImageProvider
+                                                  : NetworkImage(
+                                                  "$BASEIMAGEURL${getProfileModelData1?.profilePic}"),
+                                              fit: BoxFit.cover,
+                                              width: main_Height * 0.13,
+                                              height:
+                                              main_Height * 0.13,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  getImage();
+                                                },
+                                              ),
+                                            )
+                                                : GestureDetector(
+                                              onTap: () {
+                                                getImage();
+                                              },
+                                              child: Image.file(
+                                                File("${profilePic!.path}")
+                                                    .absolute,
+                                                width:
+                                                main_Height * 0.13,
+                                                height:
+                                                main_Height * 0.13,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            )
+              ),
+                                      )),
                                     ),
                                   ),
-
-
                                 ],
                               )
-                            ],)
-
+                            ],
+                          )
                         ],
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: main_Width * 0.05,),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: main_Width * 0.05,
+                      ),
                       color: Colors.white,
                       child: Column(
                         children: [
-
-
                           Row(
                             children: [
-                              Text("First Name",
+                              Text(
+                                "First Name",
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: main_Height * 0.017,
-                                    fontWeight: FontWeight.w600
-                                ),
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
-                          const SizedBox(height: 5,),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           TextFormField(
                             initialValue:
-                            "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",                            style: TextStyle(
+                                "${getProfileModelData1?.firstName == null ? appUserData!.firstName : getProfileModelData1!.firstName}",
+                            style: TextStyle(
                               fontSize: main_Height * 0.022,
                             ),
                             onSaved: (newValue) {
                               firstName = newValue;
                             },
-                            onChanged: (value){
+                            onChanged: (value) {
                               firstName = value;
                             },
                             validator: (value) {
@@ -457,52 +399,52 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              contentPadding:
-                              const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                              contentPadding: const EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10),
                               // filled: true,
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black38),
                               ),
                               // fillColor: ,
                               hintText: "First Name",
-                              hintStyle:  TextStyle(
+                              hintStyle: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: main_Height * 0.018
-                              ),
+                                  fontSize: main_Height * 0.018),
                               border: OutlineInputBorder(
-                                // borderSide:
-                                //     const BorderSide(color: Colors.transparent),
-                                // borderRadius: BorderRadius.circular(10)
+                                  // borderSide:
+                                  //     const BorderSide(color: Colors.transparent),
+                                  // borderRadius: BorderRadius.circular(10)
 
-                              ),
+                                  ),
                             ),
                           ),
                           const SizedBox(
                             height: 15,
                           ),
-
-
                           Row(
                             children: [
-                              Text("Last Name",
+                              Text(
+                                "Last Name",
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: main_Height * 0.017,
-                                    fontWeight: FontWeight.w600
-                                ),
+                                    fontWeight: FontWeight.w600),
                               )
                             ],
                           ),
-                          const SizedBox(height: 5,),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           TextFormField(
                             initialValue:
-                            "${getProfileModelData?.lastName == null ? appUserData!.lastName : getProfileModelData!.lastName}",                              style: TextStyle(
+                                "${getProfileModelData1?.lastName == null ? appUserData!.lastName : getProfileModelData1!.lastName}",
+                            style: TextStyle(
                               fontSize: main_Height * 0.022,
                             ),
                             onSaved: (newValue) {
                               lastName = newValue;
                             },
-                            onChanged: (value){
+                            onChanged: (value) {
                               lastName = value;
                             },
                             validator: (value) {
@@ -512,77 +454,68 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              contentPadding:
-                              const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                              contentPadding: const EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10),
                               // filled: true,
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black38),
-
                               ),
                               // fillColor: ,
                               hintText: "Last Name",
-                              hintStyle:  TextStyle(
+                              hintStyle: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: main_Height * 0.018
-                              ),
+                                  fontSize: main_Height * 0.018),
                               border: OutlineInputBorder(
-                                // borderSide:
-                                //     const BorderSide(color: Colors.transparent),
-                                // borderRadius: BorderRadius.circular(10)
+                                  // borderSide:
+                                  //     const BorderSide(color: Colors.transparent),
+                                  // borderRadius: BorderRadius.circular(10)
 
-                              ),
+                                  ),
                             ),
                           ),
                           const SizedBox(
                             height: 15,
                           ),
-
-
-
                           Row(
                             children: [
-                              Text("Date of Birth",
+                              Text(
+                                "Date of Birth",
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: main_Height * 0.018,
-                                    fontWeight: FontWeight.w500
-                                ),
+                                    fontWeight: FontWeight.w500),
                               )
                             ],
                           ),
-                          const SizedBox(height: 5,),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           DateTimePicker(
                             decoration: InputDecoration(
-                              contentPadding:
-                              const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                              contentPadding: const EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10),
                               // filled: true,
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black38),
-
                               ),
                               // fillColor: ,
                               hintText: "Date of Birth",
-                              hintStyle:  TextStyle(
+                              hintStyle: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: main_Height * 0.018
-                              ),
+                                  fontSize: main_Height * 0.018),
                               border: const OutlineInputBorder(
-                                // borderSide:
-                                //     const BorderSide(color: Colors.transparent),
-                                // borderRadius: BorderRadius.circular(10)
+                                  // borderSide:
+                                  //     const BorderSide(color: Colors.transparent),
+                                  // borderRadius: BorderRadius.circular(10)
 
-                              ),
+                                  ),
                             ),
                             type: DateTimePickerType.date,
                             dateMask: 'dd MMM, yyyy',
                             initialValue:
-                            "${getProfileModelData?.birthDate == null ? appUserData?.birthDate == null ? DateTime.now().toString() : appUserData?.birthDate : getProfileModelData?.birthDate}",                            // initialValue: "${appUserData!.dob}" == null ? DateTime.now().toString() : "${appUserData!.dob}",
-                            // initialValue: DateTime.now().toString(),
+                                "${getProfileModelData1?.birthDate == null ? DateTime.now().toString() : getProfileModelData1?.birthDate}",
                             firstDate: DateTime(1900),
                             lastDate: DateTime.now(),
-                            // icon: Icon(Icons.event),
-                            // dateLabelText: 'Date',
-                            // timeLabelText: "Hour",
                             onChanged: (val) => print(val),
                             validator: (val) {
                               print(val);
@@ -590,14 +523,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             },
                             onSaved: (val) {
                               birthDate = val;
-
                             },
                           ),
                           const SizedBox(
                             height: 15,
                           ),
-
-
                         ],
                       ),
                     ),
@@ -609,13 +539,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
             ),
-
           ),
         ),
       ),
     );
-
   }
-
-
 }

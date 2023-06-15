@@ -51,13 +51,29 @@ class Repository {
 
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: SINGLE COURSE ENROLLED COURSE APIS~~~~~~~~~~~~~~~~~~~~~
   ///
+  // Future<GetProfileModel> getProfileData() async {
+  //   try {
+  //     Map<String, dynamic> listData = await apiClient.getApiCall(
+  //         BASEURL, "$getProfileApiEnd",
+  //         isAccessToken: accessToken, isBearer: true);
+  //     GetProfileModel list = GetProfileModel.fromJson(listData);
+  //     return list;
+  //   } on CustomException {
+  //     rethrow;
+  //   }
+  // }
+  //
+
   Future<GetProfileModel> getProfileData() async {
+
     try {
-      Map<String, dynamic> listData = await apiClient.getApiCall(
-          BASEURL, "$getProfileApiEnd",
-          isAccessToken: accessToken, isBearer: true);
-      GetProfileModel list = GetProfileModel.fromJson(listData);
-      return list;
+      Map<String, dynamic> json = await apiClient.getApiCall(
+          BASEURL, getProfileApiEnd,
+          isAccessToken: accessToken,
+        isBearer: true
+      );
+      GetProfileModel allRatingModel = GetProfileModel.fromJson(json);
+      return allRatingModel;
     } on CustomException {
       rethrow;
     }

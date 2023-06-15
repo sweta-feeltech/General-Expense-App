@@ -158,15 +158,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           borderRadius:
                                           BorderRadius.circular(10.0),
                                           image: DecorationImage(
-                                            image: profileDataListModelData
-                                                ?.profilePic ==
-                                                null
-                                                ? AssetImage(
+                                            image:
+                                            profileDataListModelData?.profilePic == ""
+                                                ?
+                                            AssetImage(
                                                 "assets/images/avtar.png")
                                             as ImageProvider
                                                 : NetworkImage(
                                                 "$BASEIMAGEURL${profileDataListModelData?.profilePic}"),
                                             fit: BoxFit.fill,
+
                                           )),
                                     )),
                               ),

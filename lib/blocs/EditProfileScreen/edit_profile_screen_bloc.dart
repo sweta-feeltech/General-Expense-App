@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/ProfileModel/edit_profile_model.dart';
+import '../../models/ProfileModel/get_profile_model.dart';
 import '../../network/repository.dart';
 
 part 'edit_profile_screen_event.dart';
@@ -47,6 +48,26 @@ class EditProfilePageBloc extends Bloc<EditProfilePageEvent, EditProfilePageStat
           emit(ApiFailureState(Exception(error.toString())));
         }
       }
+
+      if(event is FetchAllEditProfileScreenScreenAPIsEvent) {
+        late GetProfileModel ProfileListModelData;
+
+        try {
+          emit(EditProfilePageLoadingState(true));
+          print("print1");
+          ProfileListModelData = await repositoryRepo.getProfileData();
+          print("print2");
+          emit(EditProfilePageLoadingState(false));
+          print("ppp${ProfileListModelData}");
+          emit(FetchAllEditProfileScreenAPIsEventState(ProfileListModelData));
+        }
+        catch(error, stacktrace) {
+          print(stacktrace);
+          emit(EditProfilePageLoadingState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
+      }
+
 
     });
 

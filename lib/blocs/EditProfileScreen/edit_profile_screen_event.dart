@@ -7,7 +7,8 @@ abstract class EditProfilePageEvent{}
 
 class EditProfilePageInitialEvent extends EditProfilePageEvent{}
 
-// class AllFetchDataForProfilePageEvent extends EditProfilePageEvent{}
+
+class FetchAllEditProfileScreenScreenAPIsEvent extends EditProfilePageEvent {}
 
 
 class PutProfileDataEvent extends EditProfilePageEvent {

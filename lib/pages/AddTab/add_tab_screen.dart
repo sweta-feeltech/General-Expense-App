@@ -51,58 +51,38 @@ class _AddTabScreenState extends State<AddTabScreen> {
 
       body: ContainedTabBarView(
         tabBarProperties: TabBarProperties(
-          unselectedLabelColor: Colors.black,
-          labelColor: Color(0xFFFB1414),
+          unselectedLabelColor: Colors.white,
+          labelColor: Colors.black,
           labelStyle: TextStyle(
               overflow: TextOverflow.ellipsis,
-              color: Color(0xFFFB1414),
-              fontSize: main_Height * 0.016,
-              fontWeight: FontWeight.w500),
+              color: Colors.white,
+              fontSize: main_Height * 0.02,
+              fontWeight: FontWeight.w500
+          ),
           indicator: ContainerTabIndicator(
-              // color: Color(0xFFFFF3F3),
             color: Colors.white,
               radius: BorderRadius.circular(30)),
           padding: EdgeInsets.symmetric(horizontal: 5,vertical: 6),
           background: Container(
             color: primaryPurple,
-          )
+          ),
+          unselectedLabelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: main_Height * 0.02,
+            fontWeight: FontWeight.w500
+        ),
         ),
         initialIndex: 0,
         tabs: [
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.only(top: 2),
-              child: Text(
-                'Add Expense',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: main_Height * 0.02,
-                    fontWeight: FontWeight.w500),
-              ),
-            ),
+
+          Tab(
+            text: "Add Expense",
           ),
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: Padding(
-                padding: EdgeInsets.only(top: 2),
-              child: Text(
-                'Add Item',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: main_Height * 0.02,
-                    fontWeight: FontWeight.w500),
-              ),
-            ),
-          ),
+
+          Tab(
+            text: "Add Item",
+          )
+
         ],
         views: [
           AddExpenseScreen(),
@@ -114,6 +94,7 @@ class _AddTabScreenState extends State<AddTabScreen> {
           });
           return print("index here :$index   jbsv ${index1}");
         },
+
       ),
 
     );

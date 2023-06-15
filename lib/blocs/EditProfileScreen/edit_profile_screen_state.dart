@@ -9,10 +9,11 @@ class EditProfilePageLoadingState extends  EditProfilePageState{
   EditProfilePageLoadingState(this.showProgress);
 }
 
-// class AllFetchDataForProfilePageState extends EditProfilePageState{
-//   final GetProfileModel allProfileModelresponse;
-//   AllFetchDataForProfilePageState(this.allProfileModelresponse);
-// }
+class FetchAllEditProfileScreenAPIsEventState extends EditProfilePageState {
+  final GetProfileModel getProfileModelData;
+
+  FetchAllEditProfileScreenAPIsEventState(this.getProfileModelData);
+}
 
 
 class EditPutProfileDataState extends EditProfilePageState{
