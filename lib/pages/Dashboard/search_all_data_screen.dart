@@ -355,8 +355,8 @@ class _SearchAllDataState extends State<SearchAllData> {
               ///
               ///
 
-              searchResultsHorizontal!.isEmpty == true ?
-                 Container() :
+              searchResultsHorizontal!.isEmpty == true && allData2 == true ?
+              Container() :
               Container(
                 height: main_Height * 0.2,
                 width: main_Width,

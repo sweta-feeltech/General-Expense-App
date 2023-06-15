@@ -1824,7 +1824,13 @@ class CommonWidgets {
       /// onTap: onPressed,
       onTap: () {
         // onPressed;
-        // Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SingleGroupViewScreen("${getGroupListModel!.id}")));
+        horizontalSearchListModelData!.boxtype == "Home" ?
+        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>RoomScreen("${horizontalSearchListModelData!.id}")))
+            :
+        horizontalSearchListModelData!.boxtype == "Room" ?
+        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>ShelfScreen("${horizontalSearchListModelData!.id}")))
+            :
+        Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>SingleGroupViewScreen("${horizontalSearchListModelData!.id}")));
 
         // Navigator.of(context).push(MaterialPageRoute(
         //     builder: (context) =>
