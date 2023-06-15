@@ -355,7 +355,7 @@ class _SearchAllDataState extends State<SearchAllData> {
               ///
               ///
 
-              searchResultsHorizontal!.isEmpty == true && allData2 == true ?
+              searchResultsHorizontal!.isEmpty == true  ?
               Container() :
               Container(
                 height: main_Height * 0.2,
@@ -385,6 +385,8 @@ class _SearchAllDataState extends State<SearchAllData> {
               ///
               ///
 
+              searchResultsVertical!.isEmpty == true ?
+              Container() :
                 Expanded(
                   child: ListView.builder(
                       itemCount:  allData1 == false ? verticalListData!.length : searchResultsVertical!.length,
