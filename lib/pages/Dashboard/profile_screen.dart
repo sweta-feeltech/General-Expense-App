@@ -131,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //   },
                   //   icon: const Icon(Icons.arrow_back, color: Colors.white),
                   // ),
-                  title:  Text("Profile",
+                  title:  Text("Setting",
                     style:
                     TextStyle(color: Colors.white, fontSize: main_Height * 0.022),),
                 ),
@@ -248,7 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Row(
                     children: [
-                      Text("Account Settings ",
+                      Text("Settings ",
                         style: TextStyle(
                           letterSpacing: 0.5,
                           fontSize: main_Height * 0.017,
