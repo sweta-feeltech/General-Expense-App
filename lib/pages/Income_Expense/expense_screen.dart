@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -186,8 +187,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   headerSliverBuilder: (context, innerBoxIsScrolled) {
                     return [
                       SliverAppBar(
-                        expandedHeight:
-                        main_Height * 0.62, // Height of the app bar when expanded
                         flexibleSpace: FlexibleSpaceBar(
                           background: Container(
                             color: primaryGrey,
@@ -446,10 +445,13 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ),
                           // collapseMode: CollapseMode.none,
                         ),
+                        expandedHeight:
+                        main_Height * 0.62, // Height of the app bar when expanded
                         pinned: true,
                         floating: true,
                         backgroundColor: primaryGrey,
                         bottom: TabBar(
+
                           automaticIndicatorColorAdjustment: false,
                           labelColor: Colors.white,
                           unselectedLabelColor: Colors.black,
@@ -459,10 +461,15 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               fontSize: main_Height * 0.016,
                               fontWeight: FontWeight.w500),
                           indicator: ContainerTabIndicator(
-                              color: primaryPurple,
-                              radius: BorderRadius.circular(30),
+                            height: main_Height * 0.06,
+                            color: primaryPurple,
+                            radius: BorderRadius.circular(30),
                             padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.02),
                           ),
+                          dividerColor: Colors.green,
+                          isScrollable: false,
+                          indicatorColor: Colors.green,
+                          physics: NeverScrollableScrollPhysics(),
                           tabs: [
                             Tab(
                               text: 'Income',
@@ -475,8 +482,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       ),
                     ];
                   },
-
                   body: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
                     children: [
                       getIncomeListModelData?.isEmpty == true ?
                       RefreshIndicator(

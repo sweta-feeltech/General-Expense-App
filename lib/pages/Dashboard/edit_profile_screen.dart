@@ -330,12 +330,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               main_Height * 0.13,
                                               child: InkWell(
                                                 onTap: () {
-                                                  getImage();
-                                                },
+
+                                                  getProfileModelData1
+                                                      ?.profilePic ==
+                                                      null ?
+                                                  getImage() :
+                                                  getImage() ;
+
+
+
+                                                  },
                                               ),
                                             )
                                                 : GestureDetector(
                                               onTap: () {
+                                                print("nullhere2");
                                                 getImage();
                                               },
                                               child: Image.file(
@@ -348,8 +357,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 fit: BoxFit.cover,
                                               ),
                                             )
-              ),
+
+
+
+                                       ),
                                       )),
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        getImage();
+                                      },
+                                      child: ClipOval(
+                                        child: Container(
+                                          padding: EdgeInsets.all(2),
+                                          color: Colors.white,
+                                          child: ClipOval(
+                                            child: Container(
+                                              padding: EdgeInsets.all(6),
+                                              color: Colors.black45,
+                                              child: Icon(
+                                                Icons.edit,
+                                                size: 22,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
