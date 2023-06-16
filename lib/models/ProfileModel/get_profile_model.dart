@@ -7,6 +7,7 @@ class GetProfileModel {
   String? address;
   String? email;
   String? birthDate;
+  String? bio;
   Null? isVerified;
   Null? verifiedAt;
   bool? status;
@@ -24,6 +25,7 @@ class GetProfileModel {
         this.address,
         this.email,
         this.birthDate,
+        this.bio,
         this.isVerified,
         this.verifiedAt,
         this.status,
@@ -41,6 +43,7 @@ class GetProfileModel {
     address = json['address'];
     email = json['email'];
     birthDate = json['birthDate'];
+    bio = json['bio'];
     isVerified = json['isVerified'];
     verifiedAt = json['verifiedAt'];
     status = json['status'];
@@ -60,6 +63,7 @@ class GetProfileModel {
     data['address'] = this.address;
     data['email'] = this.email;
     data['birthDate'] = this.birthDate;
+    data['bio'] = this.bio;
     data['isVerified'] = this.isVerified;
     data['verifiedAt'] = this.verifiedAt;
     data['status'] = this.status;

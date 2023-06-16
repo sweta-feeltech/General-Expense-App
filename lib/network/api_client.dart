@@ -550,6 +550,7 @@ class ApiClient {
     request.fields['firstName'] = data.firstName!.toString();
     request.fields['lastName'] = data.lastName!.toString();
     request.fields['birthDate'] = data.birthDate!.toString();
+    request.fields['bio'] = data.bio!.toString();
 
 
     var response = await request.send();
@@ -674,12 +675,14 @@ class putData {
   String? lastName;
   String? birthDate;
   File? profilePic;
+  String? bio;
   putData(
       {
         this.firstName,
         this.lastName,
         this.birthDate,
         this.profilePic,
+        this.bio,
       });
 
   putData.fromJson(Map<String, dynamic> json) {
@@ -687,6 +690,7 @@ class putData {
     lastName = json['lastName'];
     birthDate = json['birthDate'];
     profilePic = json['profilePic'];
+    bio = json['bio'];
   }
 }
 

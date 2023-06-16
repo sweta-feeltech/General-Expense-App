@@ -74,14 +74,16 @@ class UserData1{
   String? firstName;
   String? lastName;
   String? birthDate;
+  String? bio;
   String? profilePic;
 
-  UserData1({this.firstName, this.lastName, this.birthDate, this.profilePic});
+  UserData1({this.firstName, this.lastName, this.birthDate, this.bio,this.profilePic});
 
   UserData1.fromJson(Map<String, dynamic> json) {
     firstName = json['firstName'];
     lastName = json['lastName'];
     birthDate = json['birthDate'];
+    bio = json['bio'];
     profilePic = json['profilePic'];
   }
 
@@ -90,6 +92,7 @@ class UserData1{
     data['firstName'] = this.firstName;
     data['lastName'] = this.lastName;
     data['birthDate'] = this.birthDate;
+    data['bio'] = this.bio;
     data['profilePic'] = this.profilePic;
     return data;
   }

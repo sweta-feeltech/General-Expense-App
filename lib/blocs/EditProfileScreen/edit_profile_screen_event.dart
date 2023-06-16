@@ -13,7 +13,7 @@ class FetchAllEditProfileScreenScreenAPIsEvent extends EditProfilePageEvent {}
 
 class PutProfileDataEvent extends EditProfilePageEvent {
 
-  final String? firstName, lastName, birthDate;
+  final String? firstName, lastName, birthDate,bio;
 
   final File? profilePic;
 
@@ -21,6 +21,7 @@ class PutProfileDataEvent extends EditProfilePageEvent {
       this.firstName,
       this.lastName,
       this.birthDate,
+      this.bio,
       {this.profilePic}
       );
 

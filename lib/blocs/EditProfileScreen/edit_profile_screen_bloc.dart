@@ -29,6 +29,8 @@ class EditProfilePageBloc extends Bloc<EditProfilePageEvent, EditProfilePageStat
           'lastName': event.lastName,
           'birthDate': event.birthDate,
           'profilePic': event.profilePic,
+          'bio': event.bio,
+
         };
 
         try{

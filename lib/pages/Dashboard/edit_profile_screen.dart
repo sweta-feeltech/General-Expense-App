@@ -40,7 +40,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   EditProfilePageBloc editProBloc =
       EditProfilePageBloc(Repository.getInstance());
 
-  String? firstName, lastName, birthDate;
+  String? firstName, lastName, birthDate,bio;
   File? profilePic;
 
   final _picker = ImagePicker();
@@ -69,8 +69,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       print("No Image Selected");
     }
   }
-
-
 
   void loadAllEditProfileScreenApiCalls() {
     editProBloc.add(FetchAllEditProfileScreenScreenAPIsEvent());
@@ -106,6 +104,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               appUserData?.birthDate = getProfileModelData?.birthDate;
               appUserData?.profilePic = getProfileModelData?.profilePic;
               print("Put State State4");
+
+              loadAllEditProfileScreenApiCalls();
 
               // editProBloc.add(AllFetchDataForProfilePageEvent());
 
@@ -176,7 +176,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Form(
         key: _formkey,
         child: RefreshIndicator(
-          onRefresh: () async {},
+          onRefresh: () async {
+
+            loadAllEditProfileScreenApiCalls();
+          },
           child: Scaffold(
             backgroundColor: Colors.white,
             // resizeToAvoidBottomInset: false,
@@ -227,7 +230,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         _formkey.currentState!.save();
 
                         editProBloc.add(PutProfileDataEvent(
-                            firstName, lastName, birthDate,
+                            firstName, lastName, birthDate,bio,
                             profilePic: profilePic));
 
                         TextSpan contentMes = TextSpan(
@@ -262,7 +265,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
             body: SafeArea(
               child: SingleChildScrollView(
-                // physics: BouncingScrollPhysics(),
+                physics: AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     Container(
@@ -527,30 +530,60 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           const SizedBox(
                             height: 5,
                           ),
+
+
+
+
+                          // DateTimePicker(
+                          //   decoration: InputDecoration(
+                          //     contentPadding: const EdgeInsets.only(
+                          //         top: 5, bottom: 5, left: 10),
+                          //     // filled: true,
+                          //     enabledBorder: const OutlineInputBorder(
+                          //       borderSide: BorderSide(color: Colors.black38),
+                          //     ),
+                          //     // fillColor: ,
+                          //     hintText: "Date of Birth",
+                          //     hintStyle: TextStyle(
+                          //         color: Colors.grey,
+                          //         fontSize: main_Height * 0.018),
+                          //     border: const OutlineInputBorder(
+                          //         // borderSide:
+                          //         //     const BorderSide(color: Colors.transparent),
+                          //         // borderRadius: BorderRadius.circular(10)
+                          //
+                          //         ),
+                          //   ),
+                          //   type: DateTimePickerType.date,
+                          //   dateMask: 'dd MMM, yyyy',
+                          //   initialValue:
+                          //       "${getProfileModelData1?.birthDate == null ? DateTime.now().toString() : getProfileModelData1?.birthDate}",
+                          //   firstDate: DateTime(1900),
+                          //   lastDate: DateTime.now(),
+                          //   onChanged: (val) => print(val),
+                          //   validator: (val) {
+                          //     print(val);
+                          //     return null;
+                          //   },
+                          //   onSaved: (val) {
+                          //     birthDate = val;
+                          //   },
+                          // ),
                           DateTimePicker(
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(
                                   top: 5, bottom: 5, left: 10),
-                              // filled: true,
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black38),
-                              ),
-                              // fillColor: ,
+                              enabledBorder: OutlineInputBorder(),
                               hintText: "Date of Birth",
                               hintStyle: TextStyle(
-                                  color: Colors.grey,
+                                  color: Colors.black38,
                                   fontSize: main_Height * 0.018),
-                              border: const OutlineInputBorder(
-                                  // borderSide:
-                                  //     const BorderSide(color: Colors.transparent),
-                                  // borderRadius: BorderRadius.circular(10)
-
-                                  ),
+                              border: OutlineInputBorder(),
                             ),
                             type: DateTimePickerType.date,
                             dateMask: 'dd MMM, yyyy',
                             initialValue:
-                                "${getProfileModelData1?.birthDate == null ? DateTime.now().toString() : getProfileModelData1?.birthDate}",
+                            "${getProfileModelData1?.birthDate == null ? "" : getProfileModelData1?.birthDate}",
                             firstDate: DateTime(1900),
                             lastDate: DateTime.now(),
                             onChanged: (val) => print(val),
@@ -562,8 +595,58 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               birthDate = val;
                             },
                           ),
+
+
                           const SizedBox(
                             height: 15,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Bio",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: main_Height * 0.017,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            height: main_Height * 0.2,
+                            child: TextFormField(
+                              initialValue:
+                              // "${getProfileModelData?.description}",
+                              "${getProfileModelData1?.bio == null ? "" : getProfileModelData1?.bio}",
+                              textAlignVertical: TextAlignVertical.top,
+                              keyboardType: TextInputType.multiline,
+                              expands: true,
+                              maxLines: null,
+                              style: TextStyle(
+                                fontSize: main_Height * 0.022,
+                              ),
+                              onSaved: (newValue) {
+                                bio = newValue;
+                              },
+                              onChanged: (value) {
+                                bio = value;
+                              },
+                              decoration: InputDecoration(
+                                hintText: "Bio..",
+                                contentPadding:
+                                EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                // filled: true,
+                                enabledBorder: OutlineInputBorder(),
+                                // fillColor: ,
+
+                                hintStyle: TextStyle(
+                                    color: Colors.black38,
+                                    fontSize: main_Height * 0.018),
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
                           ),
                         ],
                       ),
