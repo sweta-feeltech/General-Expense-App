@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/gestures.dart';
+import 'package:general_expense_app/models/DashboardModel/dashboard_model.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,13 +36,13 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   var index1;
 
 
-
-
   IncomeListScreenBloc incomeListScreenBloc = IncomeListScreenBloc(Repository.getInstance());
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 
+
+  DashboardModel? dashboardModelData;
 
   List<IncomeListModel>? getIncomeListModelData;
   List<IncomeListModel>? reversegetIncomeListModelData;
@@ -52,6 +53,17 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
   MessageModel? messageModelData;
 
+  late TooltipBehavior _tooltipBehavior;
+  late TrackballBehavior _trackballBehavior;
+  late ZoomPanBehavior? _zoomPanBehavior;
+
+  late TooltipBehavior _tooltipBehaviorForBarGraph;
+  late ZoomPanBehavior? _zoomPanBehaviorForBarGraph;
+
+
+
+
+
   String? Amount;
   String? Description;
   String? IncomeDate;
@@ -61,11 +73,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
 
 
-  void loadAllIncomeListScreenApiCalls() {
 
-    //TODO: remove static values
-    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: _durationSelected == "Monthly" ? "": "type=0"));
-  }
 
 
   @override
@@ -75,8 +83,28 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
     _tooltip = TooltipBehavior(enable: true);
 
+
+    _trackballBehavior = ThemeHelper.trackballBehaviorDesign();
+
+    _zoomPanBehavior = ThemeHelper.zoomPanBehaviorDesign();
+    _zoomPanBehaviorForBarGraph = ThemeHelper.zoomPanBehaviorDesign();
+
+    _tooltipBehavior = ThemeHelper.tooltipBehaviorDesign();
+    _tooltipBehaviorForBarGraph = ThemeHelper.tooltipBehaviorDesign();
+
+
     super.initState();
   }
+
+  void loadAllIncomeListScreenApiCalls() {
+
+    //TODO: remove static values
+
+
+    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: _durationSelected == "Monthly" ? "": "type=0"));
+
+  }
+
 
 
   @override
@@ -104,11 +132,14 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               // getIncomeListModelData = state.getIncomeListModelData;
 
               getExpenseListModelData = state.getExpenseListModelData;
+              dashboardModelData = state.dashboardModelData;
+
 
               getTransactionChartModelData = state.getTransactionChartModel;
 
               expenseModelData = state.getTransactionChartModel.expense;
               incomeModelData = state.getTransactionChartModel.income;
+              // ThemeHelper.SevenDaysDuration(incomeData: incomeModelData);
 
               return mainViewAllIncomeExpenseList();
             }
@@ -195,6 +226,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -225,7 +257,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                     height: main_Height * 0.01,
                                                   ),
                                                   Text(
-                                                    "\u20B97,750.00",
+                                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalIncome)).replaceAll(".00","")}",
                                                     maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
@@ -268,12 +300,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                     height: main_Height * 0.01,
                                                   ),
                                                   Text(
-                                                    "\u20B94,390.00",
+                                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalExpense)).replaceAll(".00","")}",
                                                     maxLines: 1,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                         color: Color(0xFFE98852),
-                                                        fontSize: main_Height * 0.022,
+                                                        fontSize:    dashboardModelData!.totalExpense.toString().length >= 12 ?  main_Height * 0.02 : main_Height * 0.022,
                                                         fontWeight: FontWeight.w500),
                                                   ),
                                                 ],
@@ -394,12 +426,17 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                         ),
 
                                         SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
                                           height: 300,
                                           child: SfCartesianChart(
                                             // enableAxisAnimation: true,
+                                            zoomPanBehavior: _zoomPanBehavior,
+                                            // enableAxisAnimation: true,
                                             plotAreaBorderColor: Colors.transparent,
-                                            // tooltipBehavior: _tooltipBehaviorForBarGraph,
 
+                                            // tooltipBehavior: _tooltipBehaviorForBarGraph,
                                             legend: Legend(
                                               isVisible: true,
                                               position: LegendPosition.bottom,
@@ -409,13 +446,18 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                 horizontal: 5),
 
                                             primaryXAxis: CategoryAxis(
+                                              minimum: 0,
                                               majorGridLines: const MajorGridLines(
                                                   color: Colors.transparent),
                                               labelStyle: TextStyle(
                                                   fontWeight: FontWeight.w500),
+                                              // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
+                                              // arrangeByIndex: true
                                             ),
 
-                                            primaryYAxis: CategoryAxis(),
+                                            primaryYAxis: NumericAxis(
+                                              numberFormat: NumberFormat.compact(),
+                                            ),
 
                                             onSelectionChanged: (selectionArgs) {
                                               selectionArgs.selectedColor = Colors.red;
@@ -428,16 +470,24 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               /// TARGET PRODUCTION DATA FOR GRAPH
                                               ///
                                               /////
-                                              ColumnSeries<Expense, String>(
+                                              ColumnSeries<ChartData, String>(
                                                 name: "Expense",
                                                 enableTooltip: true,
                                                 legendIconType:
                                                 LegendIconType.rectangle,
-                                                dataSource: expenseModelData!,
-                                                xValueMapper: (Expense data, _) =>
-                                                    DateFormat("EEE").format(DateTime.parse("${data.expenseDate}")),
-                                                yValueMapper: (Expense data, _) =>
-                                                data.totalAmount,
+                                                dataSource:
+
+
+                                                _durationSelected == "Monthly" ?
+                                                ThemeHelper.SevenDaysDurationforExpanseMonthly(expenseData: expenseModelData):
+                                                ThemeHelper.SevenDaysDurationforExpanse(expenseData: expenseModelData)
+                                                ,
+                                                xValueMapper: (ChartData data, _) =>
+                                                _durationSelected == "Monthly" ?
+                                                DateFormat("dd MMM").format(DateTime.parse("${data.x}")) :
+                                                    DateFormat("EEE").format(DateTime.parse("${data.x}")),
+                                                yValueMapper: (ChartData data, _) =>
+                                                data.y,
                                                 borderRadius: BorderRadius.only(
                                                     topLeft: Radius.circular(10),
                                                     topRight: Radius.circular(10)),
@@ -457,15 +507,19 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               /// ACTUAL PRODUCTION DATA FOR GRAPH
                                               ///
                                               /////
-                                              ColumnSeries<Income, String>(
+                                              ColumnSeries<ChartData, String>(
                                                 name: "Income",
                                                 legendIconType:
                                                 LegendIconType.rectangle,
-                                                dataSource: incomeModelData!,
-                                                xValueMapper: (Income data, _) =>
-                                                DateFormat("EEE").format(DateTime.parse("${data.incomeDate}")),
-                                                yValueMapper: (Income data, _) =>
-                                                data.totalAmount,
+                                                dataSource:
+                                                _durationSelected == "Monthly" ?
+                                                ThemeHelper.SevenDaysDurationforIncomeMonthly(incomeData: incomeModelData)
+                                                    :
+                                                ThemeHelper.SevenDaysDurationforIncome(incomeData: incomeModelData),
+                                                xValueMapper: (ChartData data, _) =>
+                                                DateFormat("EEE").format(DateTime.parse("${data.x}")),
+                                                yValueMapper: (ChartData data, _) =>
+                                                data.y,
                                                 borderRadius: BorderRadius.only(
                                                     topLeft: Radius.circular(10),
                                                     topRight: Radius.circular(10)),
@@ -487,7 +541,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               ),
                             ),
                           ),
-                          // collapseMode: CollapseMode.none,
                         ),
                         expandedHeight:
                         main_Height * 0.62, // Height of the app bar when expanded

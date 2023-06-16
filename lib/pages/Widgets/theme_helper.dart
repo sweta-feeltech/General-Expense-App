@@ -4,12 +4,332 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/models/Expense/get_transactions_chart_model.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
 
+class ChartData {
+  ChartData(this.x, this.y);
+
+  final String x;
+  final double y;
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "x${x} : y${y}";
+  }
+}
+
+
 class ThemeHelper {
 
+
+
+
+
+  static List<ChartData> SevenDaysDurationforIncome(
+  {
+    required List<Income>? incomeData,
+    }
+      ){
+
+    DateTime todayDate  = DateTime.now();
+
+    int daysDuratin = 6;
+
+    List<ChartData> chartData = [];
+
+
+    bool isDateAvailable = false;
+
+    double? amount;
+
+    if(chartData.isEmpty == true){
+
+      for(int i = 0;i <= 7; i++){
+
+        DateTime previousDates  = todayDate.subtract(Duration(days: daysDuratin));
+
+
+
+        incomeData?.where((data) {
+
+          print("ddddate${data.incomeDate.toString().substring(0,10) == previousDates.toString().substring(0,10)}");
+          if(data.incomeDate.toString().substring(0,10) == previousDates.toString().substring(0,10) ){
+
+            // chartData.add(_ChartData("${data.incomeDate}",data.totalAmount));
+
+            isDateAvailable = true;
+
+            amount = data.totalAmount;
+
+
+          }
+
+          print("chartdatattt${chartData}");
+
+          return true;
+        } ).toList();
+
+
+        if(isDateAvailable == true){
+          chartData.add(ChartData("${previousDates}",amount!));
+          isDateAvailable = false;
+        }
+        else {
+          chartData.add(ChartData(previousDates.toString(),0));
+          isDateAvailable = false;
+        }
+
+        daysDuratin--;
+
+      }
+
+    }
+
+
+    return chartData;
+
+
+  }
+
+  static List<ChartData> SevenDaysDurationforIncomeMonthly(
+      {
+        required List<Income>? incomeData,
+      }
+      ){
+
+    DateTime todayDate  = DateTime.now();
+
+    int daysDuratin = 29;
+
+    List<ChartData> chartData = [];
+
+
+    bool isDateAvailable = false;
+
+    double? amount;
+
+    if(chartData.isEmpty == true){
+
+      for(int i = 0;i <= 30; i++){
+
+        DateTime previousDates  = todayDate.subtract(Duration(days: daysDuratin));
+
+
+
+        incomeData?.where((data) {
+
+          print("ddddate${data.incomeDate.toString().substring(0,10) == previousDates.toString().substring(0,10)}");
+          if(data.incomeDate.toString().substring(0,10) == previousDates.toString().substring(0,10) ){
+
+            // chartData.add(_ChartData("${data.incomeDate}",data.totalAmount));
+
+            isDateAvailable = true;
+
+            amount = data.totalAmount;
+
+
+          }
+
+          print("chartdatattt${chartData}");
+
+          return true;
+        } ).toList();
+
+
+        if(isDateAvailable == true){
+          chartData.add(ChartData("${previousDates}",amount!));
+          isDateAvailable = false;
+        }
+        else {
+          chartData.add(ChartData(previousDates.toString(),0));
+          isDateAvailable = false;
+        }
+
+        daysDuratin--;
+
+      }
+
+    }
+
+
+    return chartData;
+
+
+  }
+
+
+
+
+  static List<ChartData> SevenDaysDurationforExpanse(
+      {
+        required List<Expense>? expenseData,
+      }
+      ){
+
+    DateTime todayDate  = DateTime.now();
+
+    int daysDuratin = 6;
+
+    List<ChartData> chartData = [];
+
+
+    bool isDateAvailable = false;
+
+    double? amount;
+
+    if(chartData.isEmpty == true){
+
+      for(int i = 0;i <= 7; i++){
+
+        DateTime previousDates  = todayDate.subtract(Duration(days: daysDuratin));
+
+
+
+        expenseData?.where((data) {
+
+          if(data.expenseDate.toString().substring(0,10) == previousDates.toString().substring(0,10) ){
+
+            // chartData.add(_ChartData("${data.incomeDate}",data.totalAmount));
+
+            isDateAvailable = true;
+
+            amount = data.totalAmount;
+
+
+          }
+
+          print("chartdatattt${chartData}");
+
+          return true;
+        } ).toList();
+
+
+        if(isDateAvailable == true){
+          chartData.add(ChartData("${previousDates}",amount!));
+          isDateAvailable = false;
+        }
+        else {
+          chartData.add(ChartData(previousDates.toString(),0));
+          isDateAvailable = false;
+        }
+
+        daysDuratin--;
+
+      }
+
+    }
+
+
+    return chartData;
+
+
+  }
+
+  static List<ChartData> SevenDaysDurationforExpanseMonthly(
+      {
+        required List<Expense>? expenseData,
+      }
+      ){
+
+    DateTime todayDate  = DateTime.now();
+
+    int daysDuratin = 29;
+
+    List<ChartData> chartData = [];
+
+
+    bool isDateAvailable = false;
+
+    double? amount;
+
+    if(chartData.isEmpty == true){
+
+      for(int i = 0;i <= 30; i++){
+
+        DateTime previousDates  = todayDate.subtract(Duration(days: daysDuratin));
+
+
+
+        expenseData?.where((data) {
+
+          if(data.expenseDate.toString().substring(0,10) == previousDates.toString().substring(0,10) ){
+
+            // chartData.add(_ChartData("${data.incomeDate}",data.totalAmount));
+
+            isDateAvailable = true;
+
+            amount = data.totalAmount;
+
+
+          }
+
+          print("chartdatattt${chartData}");
+
+          return true;
+        } ).toList();
+
+
+        if(isDateAvailable == true){
+          chartData.add(ChartData("${previousDates}",amount!));
+          isDateAvailable = false;
+        }
+        else {
+          chartData.add(ChartData(previousDates.toString(),0));
+          isDateAvailable = false;
+        }
+
+        daysDuratin--;
+
+      }
+
+    }
+
+
+    return chartData;
+
+
+  }
+
+
+
+
+
+
+
+
+  ///
+  static TooltipBehavior tooltipBehaviorDesign() {
+    return TooltipBehavior(
+        enable: true,
+        color: Colors.white,
+        opacity: 0.8,
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Colors.black)
+    );
+  }
+
+  static ZoomPanBehavior zoomPanBehaviorDesign() {
+    return ZoomPanBehavior(
+        enablePinching: true,
+        enablePanning: true,
+        zoomMode: ZoomMode.x
+    );
+  }
+
+  static TrackballBehavior trackballBehaviorDesign() {
+    return TrackballBehavior(
+      enable: true,
+      tooltipDisplayMode: TrackballDisplayMode.floatAllPoints,
+      lineType: TrackballLineType.none,
+      activationMode: ActivationMode.singleTap,
+    );
+  }
+  ///
 
 
   //////

@@ -193,143 +193,103 @@ class _MainPageScreenState extends State<MainPageScreen> {
                   ),
               ),
               Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("Or Signin With Google",
-                        style: TextStyle(
-                            fontSize: main_Height < 700 ? 12 : 14,
-                            // fontWeight: FontWeight.w600,
-                            color: Colors.black
-                        ),
-                      ),
-
-                    ]
-              ),
-              Container(
-                height: main_Height * 0.060,
-                width: main_Width * 0.9,
-                decoration: BoxDecoration(
-                  color: primaryPurple,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                  children: <Widget>[
+                    Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          indent: 55,
+                          endIndent: 15,
+                          color: Color.fromARGB(100, 0, 0, 0),
+                        )
                     ),
-                    primary: Colors.white,
-                  ),
-                  onPressed: () {
 
-                    _googleSignIn.signIn().then((value) {
-
-                      try{
-                        setState(() {
-
-                          login();
-
-                          String username = value!.displayName!;
-                          String? email = value.email;
-                          String? serviceAuth = value.serverAuthCode;
-                          String? profilePicture = value.photoUrl;
-                          String? id = value.id;
-                          print("serviceAuth;   $serviceAuth");
-                          print("id;   $id");
-                          // print("profile;   $profilePicture");
-                          // print("profile;   $profilePicture");
-
-                          AuthorizedUser = true;
-
-                          Username = username;
-                          Email  = email;
-                          ServiceAuth = serviceAuth;
-                          ProfilePicture = profilePicture;
-                          ID = id;
-
-                        }
-                        );
-
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNavBarScreen()));
-                      }catch(e){
-                        print(" ${e}");
-                      }
-
-                    });
-
-
-
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-
-
-                          Container(
-                            height: main_Height * 0.04,
-                            width: main_Height * 0.04,
-                            child: Image.asset("assets/images/g.png",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-
-
-                          Text("Google",
-                            style: TextStyle(
-                                letterSpacing: 1,
-                                fontSize: main_Height * 0.018,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
-
-                        ],
+                    Text("or",
+                      style: TextStyle(
+                          fontSize: main_Height < 700 ? 12 : 14,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(100, 0, 0, 0)
                       ),
-                    ],
-                  ),
-                ),
+                    ),
 
+                    Expanded(
+                        child: Divider(
+                          color: Color.fromARGB(100, 0, 0, 0),
+                          thickness: 1,
+                          indent:15,
+                          endIndent: 55,
+                        )
+                    ),
+                  ]
               ),
 
+              Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(30),
+                child: SizedBox(
+                  height: main_Height * 0.060,
+                  width: main_Width * 0.9,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      side: BorderSide(
+                          style: BorderStyle.none
+                      ),
+                      backgroundColor: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogInScreen()));
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                          fontSize: main_Height < 700 ? 12 : 15,
+                          fontWeight: FontWeight.w500,
+                          color: primaryPurple),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
                 ),
 
+              Container()
 
-
-              Center(child:
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                     Text(
-                      "Already have an account ?",
-                      style: TextStyle(
-                        fontSize: main_Height * 0.0165,
-                        color: Colors.black,),
-                      textAlign: TextAlign.center,
-                    ),
-                    TextButton(
-                      onPressed: () => {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogInScreen()))
-                      },
-                      child:  Text(
-                        "Log In",
-                        style: TextStyle(
-                          fontSize: main_Height * 0.0165,
-                          // color: Color(0xFFFF7622),
-                          color: primaryPurple,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              )
+              //
+              // Center(child:
+              // Container(
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //        Text(
+              //         "Already have an account ?",
+              //         style: TextStyle(
+              //           fontSize: main_Height * 0.0165,
+              //           color: Colors.black,),
+              //         textAlign: TextAlign.center,
+              //       ),
+              //       TextButton(
+              //         onPressed: () => {
+              //           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogInScreen()))
+              //         },
+              //         child:  Text(
+              //           "Log In",
+              //           style: TextStyle(
+              //             fontSize: main_Height * 0.0165,
+              //             // color: Color(0xFFFF7622),
+              //             color: primaryPurple,
+              //             fontWeight: FontWeight.w500,
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              //
+              // )
 
             ],
           ),

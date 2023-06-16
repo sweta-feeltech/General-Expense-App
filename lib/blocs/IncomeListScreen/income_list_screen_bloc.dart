@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/network/repository.dart';
 
 import '../../models/CommonModel/message_model.dart';
+import '../../models/DashboardModel/dashboard_model.dart';
 import '../../models/Expense/get_expense_list_model.dart';
 import '../../models/Expense/get_transactions_chart_model.dart';
 import '../../models/IncomeListModel/income_list_model.dart';
@@ -20,15 +21,17 @@ class IncomeListScreenBloc extends Bloc<IncomeListScreenEvent, IncomeListScreenS
         late List<IncomeListModel> getIncomeListModelData;
         late List<GetExpenseListModel> getExpenseListModelData;
         late GetTransactionChartModel getTransactionChartModelData;
+        late DashboardModel dashboardModelData;
 
         try {
           emit(IncomeListScreenLoadingEventState(true));
           getIncomeListModelData = await repositoryRepo.getIncomeListModelData();
           getExpenseListModelData = await repositoryRepo.getExpenseListModelData();
           getTransactionChartModelData = await repositoryRepo.getTransactionChart(event.chartQuery);
+          dashboardModelData = await repositoryRepo.getDashboardData();
           emit(IncomeListScreenLoadingEventState(false));
           emit(FetchAllIncomeListScreenAPIsEventState(
-              getIncomeListModelData,getExpenseListModelData,getTransactionChartModelData));
+              getIncomeListModelData,getExpenseListModelData,getTransactionChartModelData,dashboardModelData));
         } catch (error, stacktrace) {
           print(stacktrace);
           emit(IncomeListScreenLoadingEventState(false));

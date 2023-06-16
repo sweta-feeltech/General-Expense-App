@@ -4,13 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:general_expense_app/Utils/colors.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/items_screen.dart';
-import 'package:general_expense_app/pages/Empty/add_itm_screen.dart';
-import 'package:general_expense_app/pages/Locations/room_screen.dart';
-import 'package:general_expense_app/pages/Locations/shelf_screen.dart';
 import 'package:general_expense_app/pages/Group/group_list_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/constants.dart';
+import '../Dashboard/add_item_screen.dart';
 import '../Income_Expense/income_screen.dart';
 import '../Locations/add_home_Screen.dart';
 import '../Dashboard/category_screen.dart';
@@ -191,7 +188,7 @@ class _NavDrawerState extends State<NavDrawer> {
           InkWell(
             onTap: () {
 
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddHomeScreen(
+              Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>AddHomeScreen(
                   (){
 
                   }
@@ -291,7 +288,7 @@ class _NavDrawerState extends State<NavDrawer> {
           InkWell(
             onTap: () {
 
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AddItemScreen("")));
+              Navigator.of(context,rootNavigator: true).push(MaterialPageRoute(builder: (context)=>AddItemScreen("","")));
 
             },
             child: ListTile(
