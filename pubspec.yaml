@@ -91,6 +91,9 @@ dependencies:
   ## pdf viewer
   syncfusion_flutter_pdfviewer: ^20.4.54
 
+  ## Photo Viwer
+  photo_view: ^0.14.0
+
 
 
 

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:general_expense_app/models/ProfileModel/get_profile_model.dart';
+import 'package:general_expense_app/pages/Widgets/photo_viwer_screen.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -316,9 +317,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             color: Colors.transparent,
                                             child:profilePic == null
                                                 ? Ink.image(
-                                              image: getProfileModelData1
-                                                  ?.profilePic ==
-                                                  null
+                                              image: getProfileModelData1?.profilePic ==
+                                                  ""
                                                   ? AssetImage(
                                                   "assets/images/avtar.png")
                                               as ImageProvider
@@ -333,11 +333,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                                                   getProfileModelData1
                                                       ?.profilePic ==
-                                                      null ?
+                                                      "" ?
                                                   getImage() :
-                                                  getImage() ;
-
-
+                                                  _displayTextInputDialog2forpin(context);
 
                                                   },
                                               ),
@@ -583,4 +581,113 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
+
+
+
+  Future<void> _displayTextInputDialog2forpin(BuildContext context) async {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
+    final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Form(
+            key: _formkey,
+            child: AlertDialog(
+              contentPadding:
+              EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+              actions: <Widget>[
+                Column(
+                  children: [
+                    Container(
+                      height: main_Height * 0.085,
+                      width: main_Width * 1,
+                      decoration: const BoxDecoration(color: Colors.white),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: main_Width * 0.05, vertical: 10),
+                        child: Container(
+                          height: main_Height * 0.06,
+                          width: main_Width * 0.75,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              primary: primaryPurple,
+                            ),
+                            onPressed: () {
+
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PhotoViwerScreen(path: "${getProfileModelData1!.profilePic}"))).then((value) => Navigator.of(context).pop());
+
+
+                            },
+                            child: Text(
+                              "View Profile Pic",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: main_Height * 0.085,
+                      width: main_Width * 1,
+                      decoration: const BoxDecoration(color: Colors.white),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: main_Width * 0.05, vertical: 10),
+                        child: Container(
+                          height: main_Height * 0.06,
+                          width: main_Width * 0.75,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              primary: primaryPurple,
+                            ),
+                            onPressed: () {
+
+                              getImage().then((value) => Navigator.of(context).pop());
+
+                            },
+                            child: Text(
+                              "Update Profile Pic",
+                              style: TextStyle(
+                                  letterSpacing: 1,
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+
+              ],
+            ),
+          );
+        });
+  }
+
+
+
+
+
 }
