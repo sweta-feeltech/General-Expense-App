@@ -56,23 +56,22 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   String? Description;
   String? IncomeDate;
 
+  var durationList = ["Weekly","Monthly"];
+  String? _durationSelected;
+
 
 
   void loadAllIncomeListScreenApiCalls() {
+
     //TODO: remove static values
-    // incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: "type=0"));
-    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: ""));
+    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: _durationSelected == "Monthly" ? "": "type=0"));
   }
-
-
 
 
   @override
   void initState() {
     loadAllIncomeListScreenApiCalls();
     index1 = 0;
-
-
 
     _tooltip = TooltipBehavior(enable: true);
 
@@ -99,6 +98,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               return ThemeHelper.buildLoadingWidget();
             }
             else if(state is FetchAllIncomeListScreenAPIsEventState) {
+              _durationSelected = durationList[ _durationSelected == "Monthly" ? 1 : 0];
 
               getIncomeListModelData = state.getIncomeListModelData.reversed.toList();
               // getIncomeListModelData = state.getIncomeListModelData;
@@ -306,42 +306,90 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               ),
                                             ),
                                             Container(
-                                              height: 35,
-                                              width: 110,
-                                              child: DateTimePicker(
-                                                decoration: const InputDecoration(
-                                                  contentPadding: EdgeInsets.only(
-                                                    top: 5,
-                                                    bottom: 5,
-                                                    left: 5,
-                                                  ),
-                                                  // filled: true,
-                                                  enabledBorder: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.black)),
-                                                  // fillColor: ,
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.black)
-                                                    // borderSide:
-                                                    //     const BorderSide(color: Colors.transparent),
-                                                    // borderRadius: BorderRadius.circular(10)
+                                              decoration: BoxDecoration(
+                                                border: Border.all(color: Colors.black38),
+                                                borderRadius: BorderRadius.circular(3)
+                                              ),
+                                              height: main_Height * 0.04,
+                                              width: main_Width * 0.3,
+                                              child: PopupMenuButton(
+                                                itemBuilder: (context) {
+                                                  return durationList.map((String items) {
+                                                    return PopupMenuItem(
+                                                      child: Text(
+                                                        items,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: TextStyle(color: Colors.black, fontSize: main_Height * 0.0165),
+                                                      ),
+                                                      value: items,
+                                                    );
+                                                  }).toList();
+                                                },
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.02),
+                                                  child: Row(
 
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    // mainAxisSize: MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        _durationSelected!,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: TextStyle(color: Colors.black, fontSize: main_Height * 0.0165),
+                                                      ),
+                                                      Icon(
+                                                        Icons.arrow_drop_down,
+                                                        color: Colors.black,
+                                                        size: 20,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                type: DateTimePickerType.date,
-                                                dateMask: 'dd MMM, yyyy',
-                                                initialValue:
-                                                "${DateTime.now().toString()}",
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime.now(),
-                                                onChanged: (val) => print(val),
-                                                validator: (val) {
-                                                  print(val);
-                                                  return null;
+                                                onSelected: (String value) {
+                                                  setState(() {
+                                                    _durationSelected = value;
+                                                    loadAllIncomeListScreenApiCalls();
+                                                  });
                                                 },
                                               ),
-                                            ),
+                                            )
+                                            // Container(
+                                            //   height: 35,
+                                            //   width: 110,
+                                            //   child: DateTimePicker(
+                                            //     decoration: const InputDecoration(
+                                            //       contentPadding: EdgeInsets.only(
+                                            //         top: 5,
+                                            //         bottom: 5,
+                                            //         left: 5,
+                                            //       ),
+                                            //       // filled: true,
+                                            //       enabledBorder: OutlineInputBorder(
+                                            //           borderSide: BorderSide(
+                                            //               color: Colors.black)),
+                                            //       // fillColor: ,
+                                            //       border: OutlineInputBorder(
+                                            //           borderSide: BorderSide(
+                                            //               color: Colors.black)
+                                            //         // borderSide:
+                                            //         //     const BorderSide(color: Colors.transparent),
+                                            //         // borderRadius: BorderRadius.circular(10)
+                                            //
+                                            //       ),
+                                            //     ),
+                                            //     type: DateTimePickerType.date,
+                                            //     dateMask: 'dd MMM, yyyy',
+                                            //     initialValue:
+                                            //     "${DateTime.now().toString()}",
+                                            //     firstDate: DateTime(1900),
+                                            //     lastDate: DateTime.now(),
+                                            //     onChanged: (val) => print(val),
+                                            //     validator: (val) {
+                                            //       print(val);
+                                            //       return null;
+                                            //     },
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
 
