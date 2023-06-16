@@ -126,7 +126,7 @@ class ApiClient {
     }else{
       headers = {
         "Content-Type": "application/json",
-        "Authorization": "$isAccessToken"
+        // "Authorization": "$isAccessToken"
       };
     }
 

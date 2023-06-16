@@ -131,7 +131,7 @@ String getExpListAPIEnd = "Expense";
 ///// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DASHBOARD END POINTS~~~~~~~~~~~~~~~~~~~~~~~
 ///
 ///
-String dashboardListAPIEnd = "Income/getDashboardData";
+String dashboardListAPIEnd = "Transaction/getDashboardData";
 ///
 
 

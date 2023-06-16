@@ -67,7 +67,7 @@ class Repository {
   Future<LoginModel> registrationPostAPI(String apiEndPoint, dynamic body) async {
     try {
       Map<String, dynamic> json =
-          await apiClient.postApiCall(BASEURL, RegistrationAPIEnd, body);
+          await apiClient.postApiCall(BASEURL, RegistrationAPIEnd, body,isBearer: false);
       print("final received json = $json");
       LoginModel RegistrationResponse = LoginModel.fromJson(json);
       return RegistrationResponse;
