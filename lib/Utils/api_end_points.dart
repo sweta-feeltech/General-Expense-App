@@ -209,7 +209,19 @@ String addItemAPIEnd = "Item";
 ///
 
 String getTransactionsFilter = "Transaction";
+///
+///
+///
+///
 String getSearchDataEnd = "Transaction/getalldata";
+///
+///
+///
+String getTransactionsChart = "Transaction/chart";
+//
+/// /// /// ------------------GET FILTERED TRANSACTION LIST API----------------------
+///
+
 
 
 

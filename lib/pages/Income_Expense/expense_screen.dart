@@ -3,10 +3,12 @@ import 'dart:ffi';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/gestures.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/models/Expense/get_transactions_chart_model.dart';
 import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
 import 'package:general_expense_app/pages/Widgets/common_widgets.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -28,7 +30,6 @@ class ExpenseScreen extends StatefulWidget {
 }
 
 class _ExpenseScreenState extends State<ExpenseScreen> {
-  late List<_ChartData> data;
   late TooltipBehavior _tooltip;
 
   var index1;
@@ -45,6 +46,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   List<IncomeListModel>? getIncomeListModelData;
   List<IncomeListModel>? reversegetIncomeListModelData;
   List<GetExpenseListModel>? getExpenseListModelData;
+  GetTransactionChartModel? getTransactionChartModelData;
+  List<Expense>? expenseModelData;
+  List<Income>? incomeModelData;
 
   MessageModel? messageModelData;
 
@@ -53,9 +57,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   String? IncomeDate;
 
 
+
   void loadAllIncomeListScreenApiCalls() {
     //TODO: remove static values
-    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent());
+    // incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: "type=0"));
+    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: ""));
   }
 
 
@@ -66,23 +72,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     loadAllIncomeListScreenApiCalls();
     index1 = 0;
 
-    data = [
-      _ChartData('CHN', 12),
-      _ChartData('GER', 15),
-      _ChartData('RUS', 30),
-      _ChartData('BRZ', 6.4),
-      _ChartData('IND', 14)
-    ];
+
 
     _tooltip = TooltipBehavior(enable: true);
 
     super.initState();
   }
-
-
-
-
-
 
 
   @override
@@ -109,6 +104,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               // getIncomeListModelData = state.getIncomeListModelData;
 
               getExpenseListModelData = state.getExpenseListModelData;
+
+              getTransactionChartModelData = state.getTransactionChartModel;
+
+              expenseModelData = state.getTransactionChartModel.expense;
+              incomeModelData = state.getTransactionChartModel.income;
 
               return mainViewAllIncomeExpenseList();
             }
@@ -363,16 +363,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             primaryXAxis: CategoryAxis(
                                               majorGridLines: const MajorGridLines(
                                                   color: Colors.transparent),
-                                              //interval: 2,
                                               labelStyle: TextStyle(
                                                   fontWeight: FontWeight.w500),
-                                              //visibleMinimum: ((productionChartData?.actual?.length ?? 0) <= 5) ? 0 : 5,
-                                              // visibleMaximum: ((productionChartData?.actual?.length ?? 0) <= 5) ? 4 : 5,
                                             ),
 
                                             primaryYAxis: CategoryAxis(),
-
-                                            // zoomPanBehavior: _zoomPanBehavior,
 
                                             onSelectionChanged: (selectionArgs) {
                                               selectionArgs.selectedColor = Colors.red;
@@ -385,17 +380,16 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               /// TARGET PRODUCTION DATA FOR GRAPH
                                               ///
                                               /////
-                                              ColumnSeries<_ChartData, String>(
-                                                name: "Target",
+                                              ColumnSeries<Expense, String>(
+                                                name: "Expense",
                                                 enableTooltip: true,
-                                                // borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                                                 legendIconType:
                                                 LegendIconType.rectangle,
-                                                dataSource: data,
-                                                xValueMapper: (_ChartData data, _) =>
-                                                data.x,
-                                                yValueMapper: (_ChartData data, _) =>
-                                                data.y,
+                                                dataSource: expenseModelData!,
+                                                xValueMapper: (Expense data, _) =>
+                                                    DateFormat("EEE").format(DateTime.parse("${data.expenseDate}")),
+                                                yValueMapper: (Expense data, _) =>
+                                                data.totalAmount,
                                                 borderRadius: BorderRadius.only(
                                                     topLeft: Radius.circular(10),
                                                     topRight: Radius.circular(10)),
@@ -403,8 +397,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                 width: 0.9,
                                                 dataLabelSettings:
                                                 const DataLabelSettings(
-                                                  // isVisible: true,
-
                                                 ),
                                                 onPointTap: (pointInteractionDetails) {
                                                   print(pointInteractionDetails
@@ -417,15 +409,15 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               /// ACTUAL PRODUCTION DATA FOR GRAPH
                                               ///
                                               /////
-                                              ColumnSeries<_ChartData, String>(
-                                                name: "Actual",
+                                              ColumnSeries<Income, String>(
+                                                name: "Income",
                                                 legendIconType:
                                                 LegendIconType.rectangle,
-                                                dataSource: data,
-                                                xValueMapper: (_ChartData data, _) =>
-                                                data.x,
-                                                yValueMapper: (_ChartData data, _) =>
-                                                data.y,
+                                                dataSource: incomeModelData!,
+                                                xValueMapper: (Income data, _) =>
+                                                DateFormat("EEE").format(DateTime.parse("${data.incomeDate}")),
+                                                yValueMapper: (Income data, _) =>
+                                                data.totalAmount,
                                                 borderRadius: BorderRadius.only(
                                                     topLeft: Radius.circular(10),
                                                     topRight: Radius.circular(10)),
@@ -435,7 +427,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               ),
                                             ],
                                           ),
-                                        )
+                                        ),
+
+
+
+
                                       ],
                                     ),
                                   ),
@@ -953,11 +949,4 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
   }
 
-}
-
-class _ChartData {
-  _ChartData(this.x, this.y);
-
-  final String x;
-  final double y;
 }

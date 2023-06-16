@@ -6,7 +6,10 @@ abstract class IncomeListScreenEvent {}
 
 class IncomeScreenListInitialEvent extends IncomeListScreenEvent {}
 
-class FetchAllIncomeScreenListScreenAPIsEvent extends IncomeListScreenEvent {}
+class FetchAllIncomeScreenListScreenAPIsEvent extends IncomeListScreenEvent {
+  final String? chartQuery;
+  FetchAllIncomeScreenListScreenAPIsEvent({this.chartQuery});
+}
 
 
 class PostAddIncomeEvent extends IncomeListScreenEvent {
