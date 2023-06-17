@@ -136,7 +136,7 @@ class ThemeHelper {
     lengthOfApiExpenseList = expenseData2.length;
     countOfApiExpenseList = expenseData2.length;
 
-    print(expenseData2[0].expenseData);
+    // print(expenseData2[0].expenseData);
 
     if(chartData.isEmpty == true){
       for(int i = 0; i < 5; i++ ) {

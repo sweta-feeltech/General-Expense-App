@@ -127,7 +127,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     //TODO: remove static values
 
     incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(
-        chartQuery: _durationSelected == "Monthly" ? "month=6" :  "type=0"));
+        chartQuery: _durationSelected == "Monthly" ? "month=$selectedMonth" :  "type=0"));
   }
 
   @override
@@ -160,7 +160,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               incomeModelData = state.getTransactionChartModel.income;
 
               print("identify");
-              print(getTransactionChartModel2Data!.expense![0].expenseData);
+
+              selectedMonth = DateTime.now().month;
+              
+              print("mmmmmm${selectedMonth}");
 
               // ThemeHelper.weekwiseSingleMonthDataforIncome(incomeData2: getTransactionChartModel2Data!.income!);
               // ThemeHelper.weekwiseSingleMonthDataforExpense(expenseData2: getTransactionChartModel2Data!.expense!);
@@ -371,70 +374,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               ),
                                             ),
 
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black38),
-                                                  borderRadius:
-                                                      BorderRadius.circular(3)),
-                                              height: main_Height * 0.04,
-                                              width: main_Width * 0.3,
-                                              child: PopupMenuButton(
-                                                itemBuilder: (context) {
-                                                  return durationList
-                                                      .map((String items) {
-                                                    return PopupMenuItem(
-                                                      child: Text(
-                                                        items,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize:
-                                                                main_Height *
-                                                                    0.0165),
-                                                      ),
-                                                      value: items,
-                                                    );
-                                                  }).toList();
-                                                },
-                                                child: Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal:
-                                                          main_Width * 0.02),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    // mainAxisSize: MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      Text(
-                                                        _durationSelected!,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize:
-                                                                main_Height *
-                                                                    0.0165),
-                                                      ),
-                                                      Icon(
-                                                        Icons.arrow_drop_down,
-                                                        color: Colors.black,
-                                                        size: 20,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                onSelected: (String value) {
-                                                  setState(() {
-                                                    _durationSelected = value;
-                                                    loadAllIncomeListScreenApiCalls();
-                                                  });
-                                                },
-                                              ),
-                                            ) ,
 
+                                            _durationSelected == "Monthly" ?
 
                                             Container(
                                               decoration: BoxDecoration(
@@ -501,7 +442,71 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                   });
                                                 },
                                               ),
-                                            )
+                                            ) :
+                                            Container(),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.black38),
+                                                  borderRadius:
+                                                  BorderRadius.circular(3)),
+                                              height: main_Height * 0.04,
+                                              width: main_Width * 0.3,
+                                              child: PopupMenuButton(
+                                                itemBuilder: (context) {
+                                                  return durationList
+                                                      .map((String items) {
+                                                    return PopupMenuItem(
+                                                      child: Text(
+                                                        items,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                            main_Height *
+                                                                0.0165),
+                                                      ),
+                                                      value: items,
+                                                    );
+                                                  }).toList();
+                                                },
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                      main_Width * 0.02),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                    // mainAxisSize: MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        _durationSelected!,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                            main_Height *
+                                                                0.0165),
+                                                      ),
+                                                      Icon(
+                                                        Icons.arrow_drop_down,
+                                                        color: Colors.black,
+                                                        size: 20,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onSelected: (String value) {
+                                                  setState(() {
+                                                    _durationSelected = value;
+                                                    loadAllIncomeListScreenApiCalls();
+                                                  });
+                                                },
+                                              ),
+                                            ) ,
 
 
                                             // Container(
