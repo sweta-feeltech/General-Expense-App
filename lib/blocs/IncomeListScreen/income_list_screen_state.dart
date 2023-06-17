@@ -27,6 +27,13 @@ class FetchAllIncomeListScreenAPIsEventState extends IncomeListScreenState {
   FetchAllIncomeListScreenAPIsEventState(this.getIncomeListModelData,this.getExpenseListModelData,this.getTransactionChartModel,this.getTransactionChart2Model,this.dashboardModelData);
 }
 
+class FetchChartMonthlyEventState extends IncomeListScreenState {
+  final GetTransactionChartModel2 getTransactionChart2Model;
+
+
+  FetchChartMonthlyEventState(this.getTransactionChart2Model);
+}
+
 
 class PostAddIncomeEventState extends IncomeListScreenState {
   final MessageModel addIncomeModelData;

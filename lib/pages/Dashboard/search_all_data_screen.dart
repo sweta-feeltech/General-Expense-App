@@ -205,7 +205,7 @@ class _SearchAllDataState extends State<SearchAllData> {
               SearchResTblRoom  = state.getSerachModelData?.tblRoomLocation;
 
               horizontalSearchListModelData  =  mergeListHorizontal(SearchResTblGroup ?? [], SearchResTblHome ?? [], SearchResTblRoom ?? []);
-              print("hori ${horizontalSearchListModelData![0].id}");
+              // print("hori ${horizontalSearchListModelData![0].id}");
 
 
 

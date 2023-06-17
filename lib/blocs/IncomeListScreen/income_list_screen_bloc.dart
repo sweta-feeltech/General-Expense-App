@@ -26,22 +26,48 @@ class IncomeListScreenBloc extends Bloc<IncomeListScreenEvent, IncomeListScreenS
         late DashboardModel dashboardModelData;
 
         try {
-          // emit(IncomeListScreenLoadingEventState(true));
+          emit(IncomeListScreenLoadingEventState(true));
           getIncomeListModelData = await repositoryRepo.getIncomeListModelData();
           getExpenseListModelData = await repositoryRepo.getExpenseListModelData();
           getTransactionChartModelData = await repositoryRepo.getTransactionChart(event.chartQuery);
           getTransactionChartModel2Data = await repositoryRepo.getTransactionChart2(event.chartQuery);
           dashboardModelData = await repositoryRepo.getDashboardData();
-          // emit(IncomeListScreenLoadingEventState(false));
+          emit(IncomeListScreenLoadingEventState(false));
           emit(FetchAllIncomeListScreenAPIsEventState(
               getIncomeListModelData,getExpenseListModelData,getTransactionChartModelData,getTransactionChartModel2Data,dashboardModelData));
+        } catch (error, stacktrace) {
+          print(stacktrace);
+          emit(IncomeListScreenLoadingEventState(false));
+          emit(ApiFailureState(Exception(error.toString())));
+        }
+
+      }
+
+
+      if(event is FetchChartMonthlyEvent){
+        late GetTransactionChartModel2 getTransactionChartModel2Data;
+
+        try {
+          // emit(IncomeListScreenLoadingEventState(true));
+          getTransactionChartModel2Data = await repositoryRepo.getTransactionChart2(event.chartQuery2);
+          // emit(IncomeListScreenLoadingEventState(false));
+          emit(FetchChartMonthlyEventState(getTransactionChartModel2Data));
         } catch (error, stacktrace) {
           print(stacktrace);
           // emit(IncomeListScreenLoadingEventState(false));
           emit(ApiFailureState(Exception(error.toString())));
         }
 
+
+
+
+
+
+
       }
+
+
+
 
 
       if (event is PostAddIncomeEvent) {

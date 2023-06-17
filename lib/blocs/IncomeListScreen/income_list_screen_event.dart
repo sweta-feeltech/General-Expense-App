@@ -12,6 +12,13 @@ class FetchAllIncomeScreenListScreenAPIsEvent extends IncomeListScreenEvent {
 }
 
 
+
+class FetchChartMonthlyEvent extends IncomeListScreenEvent {
+  final String? chartQuery2;
+  FetchChartMonthlyEvent({this.chartQuery2});
+}
+
+
 class PostAddIncomeEvent extends IncomeListScreenEvent {
   final String IncomeDate;
   final String Amount;

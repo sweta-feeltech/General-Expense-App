@@ -142,7 +142,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           builder: (context, state) {
             if (state is IncomeListScreenLoadingEventState) {
               return ThemeHelper.buildLoadingWidget();
-            } else if (state is FetchAllIncomeListScreenAPIsEventState) {
+            }
+            else if (state is FetchAllIncomeListScreenAPIsEventState) {
               _durationSelected =
                   durationList[_durationSelected == "Monthly" ? 1 : 0];
               // _mothselected = "";
@@ -170,7 +171,15 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               // ThemeHelper.SevenDaysDuration(incomeData: incomeModelData);
 
               return mainViewAllIncomeExpenseList();
-            } else if (state is PostAddIncomeEventState) {
+            }
+              else if(state is FetchChartMonthlyEventState){
+
+                getTransactionChartModel2Data = state.getTransactionChart2Model;
+
+                return mainViewAllIncomeExpenseList();
+            }
+
+              else if (state is PostAddIncomeEventState) {
               messageModelData = state.addIncomeModelData;
               loadAllIncomeListScreenApiCalls();
 
@@ -438,7 +447,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                     selectedMonth = value.monthInNumber;
                                                     _mothselected = chartMonthlyModelData[value.monthInNumber! - 1].monthInText;
 
-                                                    loadAllIncomeListScreenApiCalls();
+                                                    incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2: "month=${selectedMonth}"));
+
+                                                    // loadAllIncomeListScreenApiCalls();
+
+
                                                   });
                                                 },
                                               ),
