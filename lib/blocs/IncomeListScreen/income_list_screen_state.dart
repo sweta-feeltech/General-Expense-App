@@ -20,10 +20,11 @@ class FetchAllIncomeListScreenAPIsEventState extends IncomeListScreenState {
   final List<IncomeListModel> getIncomeListModelData;
   final List<GetExpenseListModel> getExpenseListModelData;
   final GetTransactionChartModel getTransactionChartModel;
+  final GetTransactionChartModel2 getTransactionChart2Model;
   final DashboardModel dashboardModelData;
 
 
-  FetchAllIncomeListScreenAPIsEventState(this.getIncomeListModelData,this.getExpenseListModelData,this.getTransactionChartModel,this.dashboardModelData);
+  FetchAllIncomeListScreenAPIsEventState(this.getIncomeListModelData,this.getExpenseListModelData,this.getTransactionChartModel,this.getTransactionChart2Model,this.dashboardModelData);
 }
 
 

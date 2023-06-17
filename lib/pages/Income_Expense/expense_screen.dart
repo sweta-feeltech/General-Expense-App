@@ -16,7 +16,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../Utils/colors.dart';
 import '../../blocs/IncomeListScreen/income_list_screen_bloc.dart';
 import '../../models/CommonModel/message_model.dart';
+import '../../models/CustomModel/chart_mothly_model.dart';
 import '../../models/Expense/get_expense_list_model.dart';
+import '../../models/Expense/get_transaction_chart_mode2.dart';
 import '../../models/IncomeListModel/income_list_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/theme_helper.dart';
@@ -46,8 +48,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   List<IncomeListModel>? reversegetIncomeListModelData;
   List<GetExpenseListModel>? getExpenseListModelData;
   GetTransactionChartModel? getTransactionChartModelData;
+  GetTransactionChartModel2? getTransactionChartModel2Data;
   List<Expense>? expenseModelData;
   List<Income>? incomeModelData;
+
 
   MessageModel? messageModelData;
 
@@ -63,7 +67,31 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   String? IncomeDate;
 
   var durationList = ["Weekly", "Monthly"];
+
+  List<ChartMonthlyModel> chartMonthlyModelData = [];
+
+
+  final List<String> months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+
+
+
+
   String? _durationSelected;
+  String? _mothselected;
+  int? selectedMonth;
 
   @override
   void initState() {
@@ -80,6 +108,18 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     _tooltipBehavior = ThemeHelper.tooltipBehaviorDesign();
     _tooltipBehaviorForBarGraph = ThemeHelper.tooltipBehaviorDesign();
 
+
+    for(int i = 1; i <= months.length; i++){
+
+      chartMonthlyModelData.add(ChartMonthlyModel(i,months[i-1]));
+
+    }
+
+
+
+
+
+
     super.initState();
   }
 
@@ -87,7 +127,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     //TODO: remove static values
 
     incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(
-        chartQuery: _durationSelected == "Monthly" ? "" : "type=0"));
+        chartQuery: _durationSelected == "Monthly" ? "month=6" :  "type=0"));
   }
 
   @override
@@ -105,7 +145,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             } else if (state is FetchAllIncomeListScreenAPIsEventState) {
               _durationSelected =
                   durationList[_durationSelected == "Monthly" ? 1 : 0];
-
+              // _mothselected = "";
+              // _mothselected = chartMonthlyModelData[0].monthInText;
               getIncomeListModelData =
                   state.getIncomeListModelData.reversed.toList();
               // getIncomeListModelData = state.getIncomeListModelData;
@@ -114,9 +155,15 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               dashboardModelData = state.dashboardModelData;
 
               getTransactionChartModelData = state.getTransactionChartModel;
-
+              getTransactionChartModel2Data = state.getTransactionChart2Model;
               expenseModelData = state.getTransactionChartModel.expense;
               incomeModelData = state.getTransactionChartModel.income;
+
+              print("identify");
+              print(getTransactionChartModel2Data!.expense![0].expenseData);
+
+              // ThemeHelper.weekwiseSingleMonthDataforIncome(incomeData2: getTransactionChartModel2Data!.income!);
+              // ThemeHelper.weekwiseSingleMonthDataforExpense(expenseData2: getTransactionChartModel2Data!.expense!);
               // ThemeHelper.SevenDaysDuration(incomeData: incomeModelData);
 
               return mainViewAllIncomeExpenseList();
@@ -147,6 +194,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   Widget mainViewAllIncomeExpenseList() {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
+
 
     return WillPopScope(
       onWillPop: () {
@@ -322,6 +370,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                         FontWeight.w500),
                                               ),
                                             ),
+
                                             Container(
                                               decoration: BoxDecoration(
                                                   border: Border.all(
@@ -384,7 +433,77 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                   });
                                                 },
                                               ),
+                                            ) ,
+
+
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.black38),
+                                                  borderRadius:
+                                                  BorderRadius.circular(3)),
+                                              height: main_Height * 0.04,
+                                              width: main_Width * 0.3,
+                                              child: PopupMenuButton(
+                                                itemBuilder: (context) {
+                                                  return chartMonthlyModelData
+                                                      .map((ChartMonthlyModel items) {
+                                                    return PopupMenuItem(
+                                                      child: Text(
+                                                        items.monthInText.toString(),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                            main_Height *
+                                                                0.0165),
+                                                      ),
+                                                      value: items,
+                                                    );
+                                                  }).toList();
+                                                },
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                      main_Width * 0.02),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                    // mainAxisSize: MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        _mothselected ?? "",
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                            main_Height *
+                                                                0.0165),
+                                                      ),
+                                                      Icon(
+                                                        Icons.arrow_drop_down,
+                                                        color: Colors.black,
+                                                        size: 20,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                onSelected: (ChartMonthlyModel value) {
+                                                  setState(() {
+                                                    print("valllll ${value.monthInNumber.toString()}");
+                                                    selectedMonth = value.monthInNumber;
+                                                    _mothselected = chartMonthlyModelData[value.monthInNumber! - 1].monthInText;
+
+                                                    loadAllIncomeListScreenApiCalls();
+                                                  });
+                                                },
+                                              ),
                                             )
+
+
                                             // Container(
                                             //   height: 35,
                                             //   width: 110,
@@ -427,14 +546,151 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                         SizedBox(
                                           height: 10,
                                         ),
+                                        // SizedBox(
+                                        //   height: 300,
+                                        //   child: SfCartesianChart(
+                                        //     // enableAxisAnimation: true,
+                                        //     zoomPanBehavior: _zoomPanBehavior,
+                                        //     // enableAxisAnimation: true,
+                                        //     plotAreaBorderColor:
+                                        //         Colors.transparent,
+                                        //
+                                        //     // tooltipBehavior: _tooltipBehaviorForBarGraph,
+                                        //     legend: Legend(
+                                        //       isVisible: true,
+                                        //       position: LegendPosition.bottom,
+                                        //     ),
+                                        //
+                                        //     margin: const EdgeInsets.symmetric(
+                                        //         horizontal: 5),
+                                        //
+                                        //     primaryXAxis: CategoryAxis(
+                                        //       minimum: 0,
+                                        //       majorGridLines:
+                                        //           const MajorGridLines(
+                                        //               color:
+                                        //                   Colors.transparent),
+                                        //       labelStyle: TextStyle(
+                                        //           fontWeight: FontWeight.w500),
+                                        //       // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
+                                        //       // arrangeByIndex: true
+                                        //     ),
+                                        //
+                                        //     primaryYAxis: NumericAxis(
+                                        //       numberFormat:
+                                        //           NumberFormat.compact(),
+                                        //     ),
+                                        //
+                                        //     onSelectionChanged:
+                                        //         (selectionArgs) {
+                                        //       selectionArgs.selectedColor =
+                                        //           Colors.red;
+                                        //       print(selectionArgs
+                                        //           .viewportPointIndex);
+                                        //     },
+                                        //
+                                        //     series: <ChartSeries>[
+                                        //       /////
+                                        //       ///
+                                        //       /// TARGET PRODUCTION DATA FOR GRAPH
+                                        //       ///
+                                        //       /////
+                                        //       ColumnSeries<ChartData, String>(
+                                        //         name: "Expense",
+                                        //         enableTooltip: true,
+                                        //         legendIconType:
+                                        //             LegendIconType.rectangle,
+                                        //         dataSource: _durationSelected ==
+                                        //                 "Monthly"
+                                        //             ? ThemeHelper
+                                        //                 .SevenDaysDurationforExpanseMonthly(
+                                        //                     expenseData:
+                                        //                         expenseModelData)
+                                        //             : ThemeHelper
+                                        //                 .SevenDaysDurationforExpanse(
+                                        //                     expenseData:
+                                        //                         expenseModelData),
+                                        //         xValueMapper: (ChartData data,
+                                        //                 _) =>
+                                        //             _durationSelected ==
+                                        //                     "Monthly"
+                                        //                 ? DateFormat("dd MMM")
+                                        //                     .format(
+                                        //                         DateTime.parse(
+                                        //                             "${data.x}"))
+                                        //                 : DateFormat("EEE")
+                                        //                     .format(
+                                        //                         DateTime.parse(
+                                        //                             "${data.x}")),
+                                        //         yValueMapper:
+                                        //             (ChartData data, _) =>
+                                        //                 data.y,
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft:
+                                        //                 Radius.circular(10),
+                                        //             topRight:
+                                        //                 Radius.circular(10)),
+                                        //         spacing: 0.3,
+                                        //         width: 0.9,
+                                        //         dataLabelSettings:
+                                        //             const DataLabelSettings(),
+                                        //         onPointTap:
+                                        //             (pointInteractionDetails) {
+                                        //           print(pointInteractionDetails
+                                        //               .pointIndex);
+                                        //         },
+                                        //         color: primaryOrange,
+                                        //       ),
+                                        //       /////
+                                        //       ///
+                                        //       /// ACTUAL PRODUCTION DATA FOR GRAPH
+                                        //       ///
+                                        //       /////
+                                        //       ColumnSeries<ChartData, String>(
+                                        //         name: "Income",
+                                        //         legendIconType:
+                                        //             LegendIconType.rectangle,
+                                        //         dataSource: _durationSelected ==
+                                        //                 "Monthly"
+                                        //             ? ThemeHelper
+                                        //                 .SevenDaysDurationforIncomeMonthly(
+                                        //                     incomeData:
+                                        //                         incomeModelData)
+                                        //             : ThemeHelper
+                                        //                 .SevenDaysDurationforIncome(
+                                        //                     incomeData:
+                                        //                         incomeModelData),
+                                        //         xValueMapper: (ChartData data,
+                                        //                 _) =>
+                                        //             DateFormat("EEE").format(
+                                        //                 DateTime.parse(
+                                        //                     "${data.x}")),
+                                        //         yValueMapper:
+                                        //             (ChartData data, _) =>
+                                        //                 data.y,
+                                        //         borderRadius: BorderRadius.only(
+                                        //             topLeft:
+                                        //                 Radius.circular(10),
+                                        //             topRight:
+                                        //                 Radius.circular(10)),
+                                        //         spacing: 0.3,
+                                        //         width: 0.9,
+                                        //         color: primaryPurple,
+                                        //       ),
+                                        //     ],
+                                        //   ),
+                                        // ),
+
+                                        getTransactionChartModel2Data != "null" ?
                                         SizedBox(
-                                          height: 300,
+                                          height: main_Height * 0.35,
+                                          width: main_Width,
                                           child: SfCartesianChart(
                                             // enableAxisAnimation: true,
                                             zoomPanBehavior: _zoomPanBehavior,
                                             // enableAxisAnimation: true,
                                             plotAreaBorderColor:
-                                                Colors.transparent,
+                                            Colors.transparent,
 
                                             // tooltipBehavior: _tooltipBehaviorForBarGraph,
                                             legend: Legend(
@@ -443,23 +699,24 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             ),
 
                                             margin: const EdgeInsets.symmetric(
-                                                horizontal: 5),
+                                                horizontal: 3),
 
                                             primaryXAxis: CategoryAxis(
-                                              minimum: 0,
+                                              // minimum: 0,
                                               majorGridLines:
-                                                  const MajorGridLines(
-                                                      color:
-                                                          Colors.transparent),
+                                              const MajorGridLines(
+                                                  color:
+                                                  Colors.transparent),
                                               labelStyle: TextStyle(
                                                   fontWeight: FontWeight.w500),
+
                                               // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
                                               // arrangeByIndex: true
                                             ),
 
                                             primaryYAxis: NumericAxis(
                                               numberFormat:
-                                                  NumberFormat.compact(),
+                                              NumberFormat.compact(),
                                             ),
 
                                             onSelectionChanged:
@@ -478,48 +735,49 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               /////
                                               ColumnSeries<ChartData, String>(
                                                 name: "Expense",
-                                                enableTooltip: true,
+                                                // enableTooltip: true,
                                                 legendIconType:
-                                                    LegendIconType.rectangle,
-                                                dataSource: _durationSelected ==
-                                                        "Monthly"
-                                                    ? ThemeHelper
-                                                        .SevenDaysDurationforExpanseMonthly(
-                                                            expenseData:
-                                                                expenseModelData)
-                                                    : ThemeHelper
-                                                        .SevenDaysDurationforExpanse(
-                                                            expenseData:
-                                                                expenseModelData),
+                                                LegendIconType.rectangle,
+                                                dataSource:
+
+                                                _durationSelected == "Monthly" ?
+                                                ThemeHelper.weekwiseSingleMonthDataforExpense(
+                                                    expenseData2:getTransactionChartModel2Data!.expense!)
+                                            :
+                                            ThemeHelper.SevenDaysDurationforExpanse(
+                                                                expenseData:
+                                                                    expenseModelData),
+
+
                                                 xValueMapper: (ChartData data,
-                                                        _) =>
-                                                    _durationSelected ==
-                                                            "Monthly"
-                                                        ? DateFormat("dd MMM")
-                                                            .format(
-                                                                DateTime.parse(
-                                                                    "${data.x}"))
-                                                        : DateFormat("EEE")
-                                                            .format(
-                                                                DateTime.parse(
-                                                                    "${data.x}")),
+                                                    _) =>
+                                                            _durationSelected ==
+                                                                    "Monthly" ?
+                                                data.x  :
+                                            DateFormat("EEE")
+                                                        .format(
+                                                            DateTime.parse(
+                                                                "${data.x}")),
+
                                                 yValueMapper:
                                                     (ChartData data, _) =>
-                                                        data.y,
+                                                data.y,
+
+
                                                 borderRadius: BorderRadius.only(
                                                     topLeft:
-                                                        Radius.circular(10),
+                                                    Radius.circular(10),
                                                     topRight:
-                                                        Radius.circular(10)),
+                                                    Radius.circular(10)),
                                                 spacing: 0.3,
                                                 width: 0.9,
-                                                dataLabelSettings:
-                                                    const DataLabelSettings(),
-                                                onPointTap:
-                                                    (pointInteractionDetails) {
-                                                  print(pointInteractionDetails
-                                                      .pointIndex);
-                                                },
+                                                // dataLabelSettings:
+                                                // const DataLabelSettings(),
+                                                // onPointTap:
+                                                //     (pointInteractionDetails) {
+                                                //   print(pointInteractionDetails
+                                                //       .pointIndex);
+                                                // },
                                                 color: primaryOrange,
                                               ),
                                               /////
@@ -530,39 +788,48 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               ColumnSeries<ChartData, String>(
                                                 name: "Income",
                                                 legendIconType:
-                                                    LegendIconType.rectangle,
-                                                dataSource: _durationSelected ==
-                                                        "Monthly"
-                                                    ? ThemeHelper
-                                                        .SevenDaysDurationforIncomeMonthly(
-                                                            incomeData:
-                                                                incomeModelData)
-                                                    : ThemeHelper
-                                                        .SevenDaysDurationforIncome(
-                                                            incomeData:
-                                                                incomeModelData),
+                                                LegendIconType.rectangle,
+                                                dataSource:
+                                                _durationSelected ==
+                                                                    "Monthly" ?
+                                                ThemeHelper.weekwiseSingleMonthDataforIncome(
+                                                    incomeData2:getTransactionChartModel2Data!.income!):
+                                                ThemeHelper.SevenDaysDurationforIncome(
+                                                                    incomeData:
+                                                                        incomeModelData),
                                                 xValueMapper: (ChartData data,
-                                                        _) =>
-                                                    DateFormat("EEE").format(
-                                                        DateTime.parse(
-                                                            "${data.x}")),
+                                                    _) =>
+
+                                                _durationSelected ==
+                                                                    "Monthly" ?
+                                                data.x :
+                                                  DateFormat("EEE").format(
+                                                                DateTime.parse(
+                                                                    "${data.x}")),
                                                 yValueMapper:
                                                     (ChartData data, _) =>
-                                                        data.y,
+                                                data.y,
+
+
                                                 borderRadius: BorderRadius.only(
                                                     topLeft:
-                                                        Radius.circular(10),
+                                                    Radius.circular(10),
                                                     topRight:
-                                                        Radius.circular(10)),
+                                                    Radius.circular(10)),
                                                 spacing: 0.3,
                                                 width: 0.9,
                                                 color: primaryPurple,
                                               ),
                                             ],
                                           ),
-                                        ),
+                                        ):
+                                        Container(),
+
                                       ],
                                     ),
+                                  ),
+                                  SizedBox(
+                                    height: main_Height * 0.015,
                                   ),
                                 ],
                               ),

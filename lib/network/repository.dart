@@ -13,6 +13,7 @@ import '../models/DropDown/room_data_model.dart';
 import '../models/Expense/add_expense_category_model.dart';
 import '../models/Expense/get_expense_category_model.dart';
 import '../models/Expense/get_expense_list_model.dart';
+import '../models/Expense/get_transaction_chart_mode2.dart';
 import '../models/Expense/get_transactions_chart_model.dart';
 import '../models/GroupModel/add_group_model.dart';
 import '../models/GroupModel/group_link_model.dart';
@@ -614,6 +615,23 @@ class Repository {
           BASEURL, "$getTransactionsChart?$query",
           isAccessToken: accessToken, isBearer: true);
       GetTransactionChartModel json = GetTransactionChartModel.fromJson(listData);
+      return json;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+
+  ///
+  /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP LINK REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
+  ///
+  Future<GetTransactionChartModel2> getTransactionChart2(String? query) async {
+    try {
+      Map<String, dynamic> listData = await apiClient.getApiCall(
+          BASEURL, "$getTransactionsChart2?$query",
+          isAccessToken: accessToken, isBearer: true);
+      GetTransactionChartModel2 json = GetTransactionChartModel2.fromJson(listData);
       return json;
     } on CustomException {
       rethrow;

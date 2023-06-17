@@ -218,6 +218,10 @@ String getSearchDataEnd = "Transaction/getalldata";
 ///
 ///
 String getTransactionsChart = "Transaction/chart";
+
+String getTransactionsChart2 = "Transaction/chartmonthly";
+
+
 //
 /// /// /// ------------------GET FILTERED TRANSACTION LIST API----------------------
 ///

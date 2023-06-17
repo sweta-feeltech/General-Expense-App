@@ -8,6 +8,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
+import '../../models/Expense/get_transaction_chart_mode2.dart';
+
 
 class ChartData {
   ChartData(this.x, this.y);
@@ -26,7 +28,224 @@ class ChartData {
 class ThemeHelper {
 
 
+  // static List<ChartData> weekwiseSingleMonthDataforIncome({
+  //   required List<Income2> incomeData2
+  // }) {
+  //   List<ChartData> chartData = [];
+  //
+  //   double sumOfOneWeekAmount = 0;
+  //
+  //   if(chartData.isEmpty == true){
+  //     for(int i = 0; i < 5; i++ ) {
+  //       print(incomeData2.length);
+  //       if(incomeData2[i].weekNumber == (i+1)) {
+  //         if(incomeData2[i].incomeData?.isNotEmpty == true) {
+  //           for(int j = 0; j < incomeData2[i].incomeData!.length; j++) {
+  //             sumOfOneWeekAmount = sumOfOneWeekAmount + incomeData2[i].incomeData![j].totalAmount;
+  //           }
+  //         }
+  //         print("in If section ${i}");
+  //         print(("sum of Income = ${sumOfOneWeekAmount}"));
+  //         chartData.add(ChartData(incomeData2[i].weekNumber.toString(), sumOfOneWeekAmount));
+  //
+  //       }
+  //       else {
+  //         print("in else section ${i}");
+  //       }
+  //       sumOfOneWeekAmount = 0;
+  //     }
+  //   }
+  //
+  //   print("chartData : ${chartData}");
+  //
+  //
+  //   return chartData;
+  // }
 
+///
+  ///
+  ///
+  ///
+
+  static List<ChartData> weekwiseSingleMonthDataforIncome({
+    required List<Income2> incomeData2
+  }) {
+    List<ChartData> chartData = [];
+
+    int lengthOfApiIncomeList = 0;
+    int countOfApiIncomeList = 0;
+
+    double sumOfOneWeekAmount = 0;
+
+    lengthOfApiIncomeList = incomeData2.length;
+    countOfApiIncomeList = incomeData2.length;
+
+    if(chartData.isEmpty == true){
+      for(int i = 0; i < 5; i++ ) {
+
+        print("jkdfhgjkhsgfd");
+        print(lengthOfApiIncomeList);
+        print(countOfApiIncomeList);
+        print(lengthOfApiIncomeList - countOfApiIncomeList);
+        if(countOfApiIncomeList != 0) {
+          if(incomeData2[lengthOfApiIncomeList - countOfApiIncomeList].weekNumber == (i+1)) {
+            // if(expenseData2[i].weekNumber == (i+1)) {
+            if(incomeData2[lengthOfApiIncomeList - countOfApiIncomeList].incomeData?.isNotEmpty == true) {
+              for(int j = 0; j < incomeData2[lengthOfApiIncomeList - countOfApiIncomeList].incomeData!.length; j++) {
+                sumOfOneWeekAmount = sumOfOneWeekAmount + incomeData2[lengthOfApiIncomeList - countOfApiIncomeList].incomeData![j].totalAmount;
+              }
+              countOfApiIncomeList--;
+            }
+            print("in If section ${i}");
+            print(("sum of Income = ${sumOfOneWeekAmount}"));
+            print(lengthOfApiIncomeList - countOfApiIncomeList);
+            chartData.add(ChartData(incomeData2[(lengthOfApiIncomeList - countOfApiIncomeList)-1].weekNumber.toString(), sumOfOneWeekAmount));
+
+          }
+          else {
+            print("in else section ${i}");
+            chartData.add(ChartData((i+1).toString(), 0));
+          }
+
+        }
+        else {
+          print("in else section ${i}");
+          chartData.add(ChartData((i+1).toString(), 0));
+        }
+        sumOfOneWeekAmount = 0;
+      }
+    }
+
+    print("chartData : ${chartData}");
+
+
+    return chartData;
+  }
+
+
+  static List<ChartData> weekwiseSingleMonthDataforExpense({
+    required List<Expense2> expenseData2
+  }) {
+    List<ChartData> chartData = [];
+
+    int lengthOfApiExpenseList = 0;
+    int countOfApiExpenseList = 0;
+
+    double sumOfOneWeekAmount = 0;
+
+    lengthOfApiExpenseList = expenseData2.length;
+    countOfApiExpenseList = expenseData2.length;
+
+    print(expenseData2[0].expenseData);
+
+    if(chartData.isEmpty == true){
+      for(int i = 0; i < 5; i++ ) {
+
+        print("jkdfhgjkhsgfd");
+        print(lengthOfApiExpenseList);
+        print(countOfApiExpenseList);
+        if(countOfApiExpenseList != 0) {
+          if(expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].weekNumber == (i+1)) {
+            // if(expenseData2[i].weekNumber == (i+1)) {
+            print(expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseData?.isNotEmpty);
+            if(expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseData?.isNotEmpty == true) {
+              for(int j = 0; j < expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseData!.length; j++) {
+                print(expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseData![j].totalAmount);
+                sumOfOneWeekAmount = sumOfOneWeekAmount + expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseData![j].totalAmount;
+                print(sumOfOneWeekAmount);
+              }
+              countOfApiExpenseList--;
+            }
+            print("in If section ${i}");
+            print(("sum of expense = ${sumOfOneWeekAmount}"));
+            print(lengthOfApiExpenseList - countOfApiExpenseList);
+            chartData.add(ChartData(expenseData2[(lengthOfApiExpenseList - countOfApiExpenseList)-1].weekNumber.toString(), sumOfOneWeekAmount));
+
+          }
+          else {
+            print("in else section ${i}");
+            chartData.add(ChartData((i+1).toString(), 0));
+          }
+
+        }
+        else {
+          print("in else section ${i}");
+          chartData.add(ChartData((i+1).toString(), 0));
+        }
+        sumOfOneWeekAmount = 0;
+      }
+    }
+
+    print("chartData : ${chartData}");
+
+
+    return chartData;
+  }
+
+
+
+
+
+  ///
+  ///
+  ///
+  /// First CODE
+
+  // static List<ChartData> weekwiseSingleMonthDataforExpense({
+  //   required List<Expense2> expenseData2
+  // }) {
+  //   List<ChartData> chartData = [];
+  //
+  //   int lengthOfApiExpenseList = 0;
+  //   int countOfApiExpenseList = 0;
+  //
+  //   double sumOfOneWeekAmount = 0;
+  //
+  //   lengthOfApiExpenseList = expenseData2.length;
+  //   countOfApiExpenseList = expenseData2.length;
+  //
+  //   print("objectdvsdfsd ${expenseData2} ");
+  //
+  //   if(chartData.isEmpty == true){
+  //     for(int i = 0; i < 5; i++ ) {
+  //
+  //       print("jkdfhgjkhsgfd");
+  //       print(lengthOfApiExpenseList);
+  //       print(countOfApiExpenseList);
+  //       if(countOfApiExpenseList != 0) {
+  //         if(expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].weekNumber == (i+1)) {
+  //           // if(expenseData2[i].weekNumber == (i+1)) {
+  //           if(expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseDate?.isNotEmpty == true) {
+  //             for(int j = 0; j < expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseDate!.length; j++) {
+  //               sumOfOneWeekAmount = sumOfOneWeekAmount + expenseData2[lengthOfApiExpenseList - countOfApiExpenseList].expenseDate![j].totalAmount;
+  //             }
+  //             countOfApiExpenseList--;
+  //           }
+  //           print("in If section ${i}");
+  //           print(("sum of EXPENSE = ${sumOfOneWeekAmount}"));
+  //           print(lengthOfApiExpenseList - countOfApiExpenseList);
+  //           chartData.add(ChartData(expenseData2[(lengthOfApiExpenseList - countOfApiExpenseList)].weekNumber.toString(), sumOfOneWeekAmount));
+  //
+  //         }
+  //         else {
+  //           print("in else section ${i}");
+  //           chartData.add(ChartData((i+1).toString(), 0));
+  //         }
+  //
+  //       }
+  //       else {
+  //         print("in else section ${i}");
+  //         chartData.add(ChartData((i+1).toString(), 0));
+  //       }
+  //       sumOfOneWeekAmount = 0;
+  //     }
+  //   }
+  //
+  //   print("chartData : ${chartData}");
+  //
+  //
+  //   return chartData;
+  // }
 
 
   static List<ChartData> SevenDaysDurationforIncome(
