@@ -1628,7 +1628,7 @@ class ThemeHelper {
   static void toastForAPIFaliure(String message) {
 
     Fluttertoast.showToast(
-        msg: "User Not Found,try Again..",
+        msg: "${message.toString().replaceAll("Exception:","").replaceAll(":","")}",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 3,

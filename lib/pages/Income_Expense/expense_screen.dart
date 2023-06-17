@@ -35,12 +35,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
   var index1;
 
-
-  IncomeListScreenBloc incomeListScreenBloc = IncomeListScreenBloc(Repository.getInstance());
+  IncomeListScreenBloc incomeListScreenBloc =
+      IncomeListScreenBloc(Repository.getInstance());
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-
 
   DashboardModel? dashboardModelData;
 
@@ -60,21 +58,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   late TooltipBehavior _tooltipBehaviorForBarGraph;
   late ZoomPanBehavior? _zoomPanBehaviorForBarGraph;
 
-
-
-
-
   String? Amount;
   String? Description;
   String? IncomeDate;
 
-  var durationList = ["Weekly","Monthly"];
+  var durationList = ["Weekly", "Monthly"];
   String? _durationSelected;
-
-
-
-
-
 
   @override
   void initState() {
@@ -82,7 +71,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     index1 = 0;
 
     _tooltip = TooltipBehavior(enable: true);
-
 
     _trackballBehavior = ThemeHelper.trackballBehaviorDesign();
 
@@ -92,48 +80,38 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     _tooltipBehavior = ThemeHelper.tooltipBehaviorDesign();
     _tooltipBehaviorForBarGraph = ThemeHelper.tooltipBehaviorDesign();
 
-
     super.initState();
   }
 
   void loadAllIncomeListScreenApiCalls() {
-
     //TODO: remove static values
 
-
-    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(chartQuery: _durationSelected == "Monthly" ? "": "type=0"));
-
+    incomeListScreenBloc.add(FetchAllIncomeScreenListScreenAPIsEvent(
+        chartQuery: _durationSelected == "Monthly" ? "" : "type=0"));
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
-
-
     return BlocProvider<IncomeListScreenBloc>(
-        create: (context) => incomeListScreenBloc..add(IncomeScreenListInitialEvent()),
-
+        create: (context) =>
+            incomeListScreenBloc..add(IncomeScreenListInitialEvent()),
         child: BlocConsumer<IncomeListScreenBloc, IncomeListScreenState>(
-
           builder: (context, state) {
-            if(state is IncomeListScreenLoadingEventState) {
-
+            if (state is IncomeListScreenLoadingEventState) {
               return ThemeHelper.buildLoadingWidget();
-            }
-            else if(state is FetchAllIncomeListScreenAPIsEventState) {
-              _durationSelected = durationList[ _durationSelected == "Monthly" ? 1 : 0];
+            } else if (state is FetchAllIncomeListScreenAPIsEventState) {
+              _durationSelected =
+                  durationList[_durationSelected == "Monthly" ? 1 : 0];
 
-              getIncomeListModelData = state.getIncomeListModelData.reversed.toList();
+              getIncomeListModelData =
+                  state.getIncomeListModelData.reversed.toList();
               // getIncomeListModelData = state.getIncomeListModelData;
 
               getExpenseListModelData = state.getExpenseListModelData;
               dashboardModelData = state.dashboardModelData;
-
 
               getTransactionChartModelData = state.getTransactionChartModel;
 
@@ -142,61 +120,46 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               // ThemeHelper.SevenDaysDuration(incomeData: incomeModelData);
 
               return mainViewAllIncomeExpenseList();
-            }
-
-            else if(state is PostAddIncomeEventState){
-
+            } else if (state is PostAddIncomeEventState) {
               messageModelData = state.addIncomeModelData;
               loadAllIncomeListScreenApiCalls();
 
               return mainViewAllIncomeExpenseList();
-
-            }
-
-
-            else {
+            } else {
               return Container();
             }
           },
-
           listener: (context, state) {
-            if(state is ApiFailureState) {
+            if (state is ApiFailureState) {
               print(state.exception.toString());
-              ThemeHelper.customDialogForMessage(context, (state.exception.toString().replaceAll('Exception:', '')).replaceAll(':',''), MediaQuery.of(context).size.width,
-                      () {
-                    Navigator.of(context, rootNavigator: true).pop();
-                  },
-                  ForSuccess: false
-              );
-
+              ThemeHelper.customDialogForMessage(
+                  context,
+                  (state.exception.toString().replaceAll('Exception:', ''))
+                      .replaceAll(':', ''),
+                  MediaQuery.of(context).size.width, () {
+                Navigator.of(context, rootNavigator: true).pop();
+              }, ForSuccess: false);
             }
           },
-        )
-    );
-
-
-
+        ));
   }
 
-
-
-  Widget mainViewAllIncomeExpenseList(){
-
+  Widget mainViewAllIncomeExpenseList() {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
 
     return WillPopScope(
-      onWillPop: (){
-        return  widget.backPressCallback.call();
+      onWillPop: () {
+        return widget.backPressCallback.call();
       },
       child: Scaffold(
         backgroundColor: primaryGrey,
-
         appBar: AppBar(
           titleSpacing: 15,
           title: Text(
             "Expense",
-            style: TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
+            style:
+                TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
           ),
           automaticallyImplyLeading: false,
           backgroundColor: primaryPurple,
@@ -204,13 +167,13 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           centerTitle: false,
         ),
         body: RefreshIndicator(
-          onRefresh: ()async{
+          onRefresh: () async {
             loadAllIncomeListScreenApiCalls();
           },
           child: DefaultTabController(
             length: 2, // Number of tabs
             child: RefreshIndicator(
-              onRefresh: ()async{
+              onRefresh: () async {
                 loadAllIncomeListScreenApiCalls();
               },
               child: Scaffold(
@@ -222,13 +185,15 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           background: Container(
                             color: primaryGrey,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: main_Width * 0.03,vertical: main_Height * 0.02),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: main_Width * 0.03,
+                                  vertical: main_Height * 0.02),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: InkWell(
@@ -238,32 +203,37 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             height: main_Height * 0.11,
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(7),
+                                                    BorderRadius.circular(7),
                                                 color: Color(0xFFE6EBFE)),
 
                                             child: Center(
                                               child: Column(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Text(
                                                     "Total Income",
                                                     style: TextStyle(
-                                                        color: Color(0xFFAAB1CF),
-                                                        fontSize:
-                                                        main_Height * 0.015),
+                                                        color:
+                                                            Color(0xFFAAB1CF),
+                                                        fontSize: main_Height *
+                                                            0.015),
                                                   ),
                                                   SizedBox(
                                                     height: main_Height * 0.01,
                                                   ),
                                                   Text(
-                                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalIncome)).replaceAll(".00","")}",
+                                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalIncome)).replaceAll(".00", "")}",
                                                     maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                        color: Color(0xFF677CD2),
-                                                        fontSize: main_Height * 0.022,
-                                                        fontWeight: FontWeight.w500),
+                                                        color:
+                                                            Color(0xFF677CD2),
+                                                        fontSize:
+                                                            main_Height * 0.022,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                                   ),
                                                 ],
                                               ),
@@ -282,31 +252,42 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             height: main_Height * 0.11,
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(7),
+                                                    BorderRadius.circular(7),
                                                 color: Color(0xFFF6E5DC)),
                                             child: Center(
                                               child: Column(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Text(
                                                     "Total Expense",
                                                     style: TextStyle(
-                                                        color: Color(0xFFD0B6A8),
-                                                        fontSize:
-                                                        main_Height * 0.015),
+                                                        color:
+                                                            Color(0xFFD0B6A8),
+                                                        fontSize: main_Height *
+                                                            0.015),
                                                   ),
                                                   SizedBox(
                                                     height: main_Height * 0.01,
                                                   ),
                                                   Text(
-                                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalExpense)).replaceAll(".00","")}",
+                                                    "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((dashboardModelData!.totalExpense)).replaceAll(".00", "")}",
                                                     maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     style: TextStyle(
-                                                        color: Color(0xFFE98852),
-                                                        fontSize:    dashboardModelData!.totalExpense.toString().length >= 12 ?  main_Height * 0.02 : main_Height * 0.022,
-                                                        fontWeight: FontWeight.w500),
+                                                        color:
+                                                            Color(0xFFE98852),
+                                                        fontSize: dashboardModelData!
+                                                                    .totalExpense
+                                                                    .toString()
+                                                                    .length >=
+                                                                12
+                                                            ? main_Height * 0.02
+                                                            : main_Height *
+                                                                0.022,
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                                   ),
                                                 ],
                                               ),
@@ -316,16 +297,19 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: main_Height * 0.015,),
+                                  SizedBox(
+                                    height: main_Height * 0.015,
+                                  ),
                                   Padding(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: main_Width * 0.03),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Flexible(
                                               child: Text(
@@ -334,40 +318,56 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                     fontSize: 16,
-                                                    fontWeight: FontWeight.w500),
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               ),
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                border: Border.all(color: Colors.black38),
-                                                borderRadius: BorderRadius.circular(3)
-                                              ),
+                                                  border: Border.all(
+                                                      color: Colors.black38),
+                                                  borderRadius:
+                                                      BorderRadius.circular(3)),
                                               height: main_Height * 0.04,
                                               width: main_Width * 0.3,
                                               child: PopupMenuButton(
                                                 itemBuilder: (context) {
-                                                  return durationList.map((String items) {
+                                                  return durationList
+                                                      .map((String items) {
                                                     return PopupMenuItem(
                                                       child: Text(
                                                         items,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        style: TextStyle(color: Colors.black, fontSize: main_Height * 0.0165),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                                main_Height *
+                                                                    0.0165),
                                                       ),
                                                       value: items,
                                                     );
                                                   }).toList();
                                                 },
                                                 child: Padding(
-                                                  padding: EdgeInsets.symmetric(horizontal: main_Width * 0.02),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          main_Width * 0.02),
                                                   child: Row(
-
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     // mainAxisSize: MainAxisSize.min,
                                                     children: <Widget>[
                                                       Text(
                                                         _durationSelected!,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        style: TextStyle(color: Colors.black, fontSize: main_Height * 0.0165),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize:
+                                                                main_Height *
+                                                                    0.0165),
                                                       ),
                                                       Icon(
                                                         Icons.arrow_drop_down,
@@ -424,7 +424,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             // ),
                                           ],
                                         ),
-
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -434,7 +433,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             // enableAxisAnimation: true,
                                             zoomPanBehavior: _zoomPanBehavior,
                                             // enableAxisAnimation: true,
-                                            plotAreaBorderColor: Colors.transparent,
+                                            plotAreaBorderColor:
+                                                Colors.transparent,
 
                                             // tooltipBehavior: _tooltipBehaviorForBarGraph,
                                             legend: Legend(
@@ -447,8 +447,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
                                             primaryXAxis: CategoryAxis(
                                               minimum: 0,
-                                              majorGridLines: const MajorGridLines(
-                                                  color: Colors.transparent),
+                                              majorGridLines:
+                                                  const MajorGridLines(
+                                                      color:
+                                                          Colors.transparent),
                                               labelStyle: TextStyle(
                                                   fontWeight: FontWeight.w500),
                                               // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
@@ -456,12 +458,16 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             ),
 
                                             primaryYAxis: NumericAxis(
-                                              numberFormat: NumberFormat.compact(),
+                                              numberFormat:
+                                                  NumberFormat.compact(),
                                             ),
 
-                                            onSelectionChanged: (selectionArgs) {
-                                              selectionArgs.selectedColor = Colors.red;
-                                              print(selectionArgs.viewportPointIndex);
+                                            onSelectionChanged:
+                                                (selectionArgs) {
+                                              selectionArgs.selectedColor =
+                                                  Colors.red;
+                                              print(selectionArgs
+                                                  .viewportPointIndex);
                                             },
 
                                             series: <ChartSeries>[
@@ -474,29 +480,43 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                 name: "Expense",
                                                 enableTooltip: true,
                                                 legendIconType:
-                                                LegendIconType.rectangle,
-                                                dataSource:
-
-
-                                                _durationSelected == "Monthly" ?
-                                                ThemeHelper.SevenDaysDurationforExpanseMonthly(expenseData: expenseModelData):
-                                                ThemeHelper.SevenDaysDurationforExpanse(expenseData: expenseModelData)
-                                                ,
-                                                xValueMapper: (ChartData data, _) =>
-                                                _durationSelected == "Monthly" ?
-                                                DateFormat("dd MMM").format(DateTime.parse("${data.x}")) :
-                                                    DateFormat("EEE").format(DateTime.parse("${data.x}")),
-                                                yValueMapper: (ChartData data, _) =>
-                                                data.y,
+                                                    LegendIconType.rectangle,
+                                                dataSource: _durationSelected ==
+                                                        "Monthly"
+                                                    ? ThemeHelper
+                                                        .SevenDaysDurationforExpanseMonthly(
+                                                            expenseData:
+                                                                expenseModelData)
+                                                    : ThemeHelper
+                                                        .SevenDaysDurationforExpanse(
+                                                            expenseData:
+                                                                expenseModelData),
+                                                xValueMapper: (ChartData data,
+                                                        _) =>
+                                                    _durationSelected ==
+                                                            "Monthly"
+                                                        ? DateFormat("dd MMM")
+                                                            .format(
+                                                                DateTime.parse(
+                                                                    "${data.x}"))
+                                                        : DateFormat("EEE")
+                                                            .format(
+                                                                DateTime.parse(
+                                                                    "${data.x}")),
+                                                yValueMapper:
+                                                    (ChartData data, _) =>
+                                                        data.y,
                                                 borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(10),
-                                                    topRight: Radius.circular(10)),
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    topRight:
+                                                        Radius.circular(10)),
                                                 spacing: 0.3,
                                                 width: 0.9,
                                                 dataLabelSettings:
-                                                const DataLabelSettings(
-                                                ),
-                                                onPointTap: (pointInteractionDetails) {
+                                                    const DataLabelSettings(),
+                                                onPointTap:
+                                                    (pointInteractionDetails) {
                                                   print(pointInteractionDetails
                                                       .pointIndex);
                                                 },
@@ -510,19 +530,30 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                               ColumnSeries<ChartData, String>(
                                                 name: "Income",
                                                 legendIconType:
-                                                LegendIconType.rectangle,
-                                                dataSource:
-                                                _durationSelected == "Monthly" ?
-                                                ThemeHelper.SevenDaysDurationforIncomeMonthly(incomeData: incomeModelData)
-                                                    :
-                                                ThemeHelper.SevenDaysDurationforIncome(incomeData: incomeModelData),
-                                                xValueMapper: (ChartData data, _) =>
-                                                DateFormat("EEE").format(DateTime.parse("${data.x}")),
-                                                yValueMapper: (ChartData data, _) =>
-                                                data.y,
+                                                    LegendIconType.rectangle,
+                                                dataSource: _durationSelected ==
+                                                        "Monthly"
+                                                    ? ThemeHelper
+                                                        .SevenDaysDurationforIncomeMonthly(
+                                                            incomeData:
+                                                                incomeModelData)
+                                                    : ThemeHelper
+                                                        .SevenDaysDurationforIncome(
+                                                            incomeData:
+                                                                incomeModelData),
+                                                xValueMapper: (ChartData data,
+                                                        _) =>
+                                                    DateFormat("EEE").format(
+                                                        DateTime.parse(
+                                                            "${data.x}")),
+                                                yValueMapper:
+                                                    (ChartData data, _) =>
+                                                        data.y,
                                                 borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(10),
-                                                    topRight: Radius.circular(10)),
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    topRight:
+                                                        Radius.circular(10)),
                                                 spacing: 0.3,
                                                 width: 0.9,
                                                 color: primaryPurple,
@@ -530,10 +561,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                             ],
                                           ),
                                         ),
-
-
-
-
                                       ],
                                     ),
                                   ),
@@ -542,26 +569,27 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             ),
                           ),
                         ),
-                        expandedHeight:
-                        main_Height * 0.62, // Height of the app bar when expanded
+                        expandedHeight: main_Height *
+                            0.62, // Height of the app bar when expanded
                         pinned: true,
                         floating: true,
                         backgroundColor: primaryGrey,
                         bottom: TabBar(
-
                           automaticIndicatorColorAdjustment: false,
                           labelColor: Colors.white,
                           unselectedLabelColor: Colors.black,
                           labelStyle: TextStyle(
                               overflow: TextOverflow.ellipsis,
-                              color:Colors.white,
+                              color: Colors.white,
                               fontSize: main_Height * 0.016,
                               fontWeight: FontWeight.w500),
                           indicator: ContainerTabIndicator(
                             height: main_Height * 0.06,
                             color: primaryPurple,
                             radius: BorderRadius.circular(30),
-                            padding: EdgeInsets.symmetric(vertical: main_Height * 0.005,horizontal: main_Width * 0.02),
+                            padding: EdgeInsets.symmetric(
+                                vertical: main_Height * 0.005,
+                                horizontal: main_Width * 0.02),
                           ),
                           dividerColor: Colors.green,
                           isScrollable: false,
@@ -582,181 +610,172 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   body: TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      getIncomeListModelData?.isEmpty == true ?
-                      RefreshIndicator(
-                        onRefresh: ()async{
-                          loadAllIncomeListScreenApiCalls();
-                        },
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: SvgPicture.asset("assets/icons/group.svg",
-                                  height: main_Height * 0.4,
-                                ),
-                              ),
-
-
-
-                              Text(
-                                "You don't have any Income !",
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  // color: Color.fromARGB(255, 158, 158, 158),
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: main_Height * 0.0239,
-                                ),
-                              ),
-
-                              SizedBox(
-                                height: main_Height * 0.04,
-                              ),
-
-                              Material(
-                                elevation: 3,
-                                borderRadius: BorderRadius.circular(30),
-                                child: SizedBox(
-                                  height: main_Height * 0.060,
-                                  width: main_Width * 0.5,
-                                  child: OutlinedButton(
-                                    style: OutlinedButton.styleFrom(
-                                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30)
+                      getIncomeListModelData?.isEmpty == true
+                          ? RefreshIndicator(
+                              onRefresh: () async {
+                                loadAllIncomeListScreenApiCalls();
+                              },
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: SvgPicture.asset(
+                                        "assets/icons/group.svg",
+                                        height: main_Height * 0.4,
                                       ),
-                                      side: BorderSide(
-                                          style: BorderStyle.none
-                                      ),
-                                      backgroundColor: primaryPurple,
                                     ),
-                                    onPressed: () {
-
-                                      bottomSheetforAddShelfItems(context);
-
-                                    },
-                                    child: Text(
-                                      "Add Income",
+                                    Text(
+                                      "You don't have any Income !",
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          fontSize: main_Height < 700 ? 12 : 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              )
-
-                            ],
-                          ),
-                        ),
-                      ) :
-
-                      RefreshIndicator(
-                        onRefresh: ()async{
-                          loadAllIncomeListScreenApiCalls();
-                        },
-                        child: ListView.builder(
-                          // physics: NeverScrollableScrollPhysics(),
-                            itemCount: getIncomeListModelData!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return CommonWidgets.CommonIncomeListView(context,
-                                  getIncomeListModelData: getIncomeListModelData![index]
-                              );
-                            }),
-                      ),
-
-                      getExpenseListModelData?.isEmpty == true ?
-                      RefreshIndicator(
-                        onRefresh: ()async{
-                          loadAllIncomeListScreenApiCalls();
-                        },
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: SvgPicture.asset("assets/icons/group.svg",
-                                  height: main_Height * 0.4,
-                                ),
-                              ),
-
-
-
-                              Text(
-                                "You don't have any Expenses !",
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  // color: Color.fromARGB(255, 158, 158, 158),
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: main_Height * 0.0239,
-                                ),
-                              ),
-
-                              SizedBox(
-                                height: main_Height * 0.04,
-                              ),
-
-                              Material(
-                                elevation: 3,
-                                borderRadius: BorderRadius.circular(30),
-                                child: SizedBox(
-                                  height: main_Height * 0.060,
-                                  width: main_Width * 0.5,
-                                  child: OutlinedButton(
-                                    style: OutlinedButton.styleFrom(
-                                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30)
+                                        // color: Color.fromARGB(255, 158, 158, 158),
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: main_Height * 0.0239,
                                       ),
-                                      side: BorderSide(
-                                          style: BorderStyle.none
-                                      ),
-                                      backgroundColor: primaryPurple,
                                     ),
-                                    onPressed: () {
-
-                                      Navigator.of(context,rootNavigator: false).push(MaterialPageRoute(builder: (context)=>AddExpenseScreen()));
-
-                                    },
-                                    child: Text(
-                                      "Add Expense",
+                                    SizedBox(
+                                      height: main_Height * 0.04,
+                                    ),
+                                    Material(
+                                      elevation: 3,
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: SizedBox(
+                                        height: main_Height * 0.060,
+                                        width: main_Width * 0.5,
+                                        child: OutlinedButton(
+                                          style: OutlinedButton.styleFrom(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 10, 0, 10),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30)),
+                                            side: BorderSide(
+                                                style: BorderStyle.none),
+                                            backgroundColor: primaryPurple,
+                                          ),
+                                          onPressed: () {
+                                            bottomSheetforAddShelfItems(
+                                                context);
+                                          },
+                                          child: Text(
+                                            "Add Income",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    main_Height < 700 ? 12 : 15,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          : RefreshIndicator(
+                              onRefresh: () async {
+                                loadAllIncomeListScreenApiCalls();
+                              },
+                              child: ListView.builder(
+                                  // physics: NeverScrollableScrollPhysics(),
+                                  itemCount: getIncomeListModelData!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return CommonWidgets.CommonIncomeListView(
+                                        context,
+                                        getIncomeListModelData:
+                                            getIncomeListModelData![index]);
+                                  }),
+                            ),
+                      getExpenseListModelData?.isEmpty == true
+                          ? RefreshIndicator(
+                              onRefresh: () async {
+                                loadAllIncomeListScreenApiCalls();
+                              },
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: SvgPicture.asset(
+                                        "assets/icons/group.svg",
+                                        height: main_Height * 0.4,
+                                      ),
+                                    ),
+                                    Text(
+                                      "You don't have any Expenses !",
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          fontSize: main_Height < 700 ? 12 : 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white),
+                                        // color: Color.fromARGB(255, 158, 158, 158),
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: main_Height * 0.0239,
+                                      ),
                                     ),
-                                  ),
+                                    SizedBox(
+                                      height: main_Height * 0.04,
+                                    ),
+                                    Material(
+                                      elevation: 3,
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: SizedBox(
+                                        height: main_Height * 0.060,
+                                        width: main_Width * 0.5,
+                                        child: OutlinedButton(
+                                          style: OutlinedButton.styleFrom(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 10, 0, 10),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30)),
+                                            side: BorderSide(
+                                                style: BorderStyle.none),
+                                            backgroundColor: primaryPurple,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context,
+                                                    rootNavigator: false)
+                                                .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AddExpenseScreen()));
+                                          },
+                                          child: Text(
+                                            "Add Expense",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    main_Height < 700 ? 12 : 15,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-
-                            ],
-                          ),
-                        ),
-                      ) :
-
-                      RefreshIndicator(
-                        onRefresh: ()async{
-                          loadAllIncomeListScreenApiCalls();
-                        },
-                        child: ListView.builder(
-                            itemCount: getExpenseListModelData!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return   CommonWidgets.masterCategoryCardOfUI2(context,
-                                      () {},
-                                  index: 1,
-                                  getExpenseListModelData: getExpenseListModelData![index]
-                              );
-
-                            }),
-                      ),
+                              ),
+                            )
+                          : RefreshIndicator(
+                              onRefresh: () async {
+                                loadAllIncomeListScreenApiCalls();
+                              },
+                              child: ListView.builder(
+                                  itemCount: getExpenseListModelData!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return CommonWidgets
+                                        .masterCategoryCardOfUI2(context, () {},
+                                            index: 1,
+                                            getExpenseListModelData:
+                                                getExpenseListModelData![
+                                                    index]);
+                                  }),
+                            ),
                     ],
                   ),
                 ),
@@ -766,17 +785,12 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         ),
       ),
     );
-
   }
 
-
-
-  void bottomSheetforAddShelfItems(BuildContext context){
-
+  void bottomSheetforAddShelfItems(BuildContext context) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 
     showModalBottomSheet<void>(
       context: context,
@@ -793,7 +807,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         String? textField3Value;
 
         return Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
@@ -826,7 +841,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     ),
                     // Text Field 1
                     Padding(
-                      padding:  EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                           horizontal: main_Width * 0.03,
                           vertical: main_Height * 0.01),
                       child: Column(
@@ -834,7 +849,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           SizedBox(
                             height: main_Height * 0.01,
                           ),
-
                           Row(
                             children: [
                               Text(
@@ -866,25 +880,22 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             },
                             decoration: InputDecoration(
                               contentPadding:
-                              EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                                  EdgeInsets.only(top: 5, bottom: 5, left: 10),
                               // filled: true,
-                              enabledBorder:  OutlineInputBorder(
+                              enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black38),
                               ),
                               // fillColor: ,
                               hintText: "Amount",
                               hintStyle: TextStyle(
-                                  color: Colors.grey, fontSize: main_Height * 0.018),
-                              border: const OutlineInputBorder(
-
-                              ),
+                                  color: Colors.grey,
+                                  fontSize: main_Height * 0.018),
+                              border: const OutlineInputBorder(),
                             ),
                           ),
                           SizedBox(
                             height: main_Height * 0.01,
                           ),
-
-
                           Row(
                             children: [
                               Text(
@@ -911,8 +922,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              contentPadding:
-                              const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                              contentPadding: const EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10),
                               // filled: true,
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black38),
@@ -920,19 +931,19 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               // fillColor: ,
                               hintText: "Description",
                               hintStyle: TextStyle(
-                                  color: Colors.grey, fontSize: main_Height * 0.018),
+                                  color: Colors.grey,
+                                  fontSize: main_Height * 0.018),
                               border: const OutlineInputBorder(
-                                // borderSide:
-                                // const BorderSide(color: Colors.white),
-                                // borderRadius: BorderRadius.circular(10)
+                                  // borderSide:
+                                  // const BorderSide(color: Colors.white),
+                                  // borderRadius: BorderRadius.circular(10)
 
-                              ),
+                                  ),
                             ),
                           ),
                           SizedBox(
                             height: main_Height * 0.01,
                           ),
-
                           Row(
                             children: [
                               Text(
@@ -971,17 +982,13 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               print(val);
                               return null;
                             },
-                            onSaved: (val){
+                            onSaved: (val) {
                               textField3Value = val;
-
                             },
                           ),
                           SizedBox(
                             height: main_Height * 0.01,
                           ),
-
-
-
                         ],
                       ),
                     ),
@@ -991,8 +998,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       width: main_Width * 1,
                       decoration: const BoxDecoration(color: Colors.white),
                       child: Padding(
-                        padding:
-                        EdgeInsets.symmetric(horizontal: main_Width * 0.05, vertical: 10),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: main_Width * 0.05, vertical: 10),
                         child: Container(
                           height: main_Height * 0.06,
                           width: main_Width * 0.75,
@@ -1001,33 +1008,41 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               backgroundColor: primaryPurple,
                             ),
-                            onPressed: (){
+                            onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                print("tttf ${textField1Value} ${textField2Value} ${textField3Value}");
+                                print(
+                                    "tttf ${textField1Value} ${textField2Value} ${textField3Value}");
 
                                 /// 2023-06-02 11:50:11.735992  NOW
                                 /// 2023-06-08 06:50  change
                                 /// 2023-06-08t06:50:00
 
                                 print("${textField3Value!.length}");
-                                final testdate = textField3Value.toString().length == 16 ? "${textField3Value.toString().replaceAll(" ", "T")}:00.946Z" : "${textField3Value.toString().substring(0,16).replaceAll(" ", "T")}:00.946Z";
+                                final testdate = textField3Value
+                                            .toString()
+                                            .length ==
+                                        16
+                                    ? "${textField3Value.toString().replaceAll(" ", "T")}:00.946Z"
+                                    : "${textField3Value.toString().substring(0, 16).replaceAll(" ", "T")}:00.946Z";
 
                                 print("${testdate}");
-                                incomeListScreenBloc.add(PostAddIncomeEvent( "${testdate.toString()}","${textField1Value}","${textField2Value}",));
+                                incomeListScreenBloc.add(PostAddIncomeEvent(
+                                  "${testdate.toString()}",
+                                  "${textField1Value}",
+                                  "${textField2Value}",
+                                ));
 
                                 Navigator.of(context).pop();
-
-
                               }
                             },
-                            child: Text("Add Income",
+                            child: Text(
+                              "Add Income",
                               style: TextStyle(
                                   letterSpacing: 1,
                                   fontSize: main_Height * 0.018,
@@ -1046,8 +1061,5 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         );
       },
     );
-
-
   }
-
 }

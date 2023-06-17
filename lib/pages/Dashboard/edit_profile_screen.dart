@@ -583,7 +583,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             type: DateTimePickerType.date,
                             dateMask: 'dd MMM, yyyy',
                             initialValue:
-                            "${getProfileModelData1?.birthDate == null ? "" : getProfileModelData1?.birthDate}",
+                            "${getProfileModelData1?.birthDate == "0001-01-01T00:00:00" ?  "" : getProfileModelData1?.birthDate}",
                             firstDate: DateTime(1900),
                             lastDate: DateTime.now(),
                             onChanged: (val) => print(val),
