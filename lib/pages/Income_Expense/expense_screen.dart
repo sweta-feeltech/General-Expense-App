@@ -243,673 +243,678 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           elevation: 0,
           centerTitle: false,
         ),
-        body: DefaultTabController(
-          length: 2, // Number of tabs
-          child: Scaffold(
-            body: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
-                  SliverAppBar(
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Container(
-                        color: primaryGrey,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: main_Width * 0.03,
-                              vertical: main_Height * 0.02),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        // width: main_Width * 0.4,
-                                        height: main_Height * 0.11,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            color: Color(0xFFE6EBFE)),
 
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Total Income",
-                                                style: TextStyle(
-                                                    color:
-                                                        Color(0xFFAAB1CF),
-                                                    fontSize: main_Height *
-                                                        0.015),
-                                              ),
-                                              SizedBox(
-                                                height: main_Height * 0.01,
-                                              ),
-                                              Text(
-                                                "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((getTransactionChartModelData?.totalIncome)).replaceAll(".00", "")}",
-                                                maxLines: 1,
-                                                overflow:
-                                                    TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color:
-                                                        Color(0xFF677CD2),
-                                                    fontSize:
-                                                        main_Height * 0.022,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+        body:  NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              // SliverAppBar(
+              //   expandedHeight: 0,
+              //   pinned: true,
+              //   flexibleSpace: FlexibleSpaceBar(
+              //     title: Text(
+              //       'Container',
+              //       style: TextStyle(color: Colors.white),
+              //     ),
+              //     background: Container(
+              //       color: Colors.blue,
+              //     ),
+              //   ),
+              // ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: main_Width * 0.03,
+                      vertical: main_Height * 0.02),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                // width: main_Width * 0.4,
+                                height: main_Height * 0.11,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(7),
+                                    color: Color(0xFFE6EBFE)),
+
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Total Income",
+                                        style: TextStyle(
+                                            color:
+                                            Color(0xFFAAB1CF),
+                                            fontSize: main_Height *
+                                                0.015),
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: main_Width * 0.028,
-                                  ),
-                                  Expanded(
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        // width: main_Width * 0.4,
-                                        height: main_Height * 0.11,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            color: Color(0xFFF6E5DC)),
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Total Expense",
-                                                style: TextStyle(
-                                                    color:
-                                                        Color(0xFFD0B6A8),
-                                                    fontSize: main_Height *
-                                                        0.015),
-                                              ),
-                                              SizedBox(
-                                                height: main_Height * 0.01,
-                                              ),
-                                              Text(
-                                                "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((getTransactionChartModelData!.totalExpense)).replaceAll(".00", "")}",
-                                                maxLines: 1,
-                                                overflow:
-                                                    TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color:
-                                                        Color(0xFFE98852),
-                                                    fontSize: getTransactionChartModelData!
-                                                                .totalExpense
-                                                                .toString()
-                                                                .length >=
-                                                            12
-                                                        ? main_Height * 0.02
-                                                        : main_Height *
-                                                            0.022,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                      SizedBox(
+                                        height: main_Height * 0.01,
                                       ),
-                                    ),
+                                      Text(
+                                        "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((getTransactionChartModelData?.totalIncome)).replaceAll(".00", "")}",
+                                        maxLines: 1,
+                                        overflow:
+                                        TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color:
+                                            Color(0xFF677CD2),
+                                            fontSize:
+                                            main_Height * 0.022,
+                                            fontWeight:
+                                            FontWeight.w500),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
-                              SizedBox(
-                                height: main_Height * 0.015,
+                            ),
+                          ),
+                          SizedBox(
+                            width: main_Width * 0.028,
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                // width: main_Width * 0.4,
+                                height: main_Height * 0.11,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(7),
+                                    color: Color(0xFFF6E5DC)),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Total Expense",
+                                        style: TextStyle(
+                                            color:
+                                            Color(0xFFD0B6A8),
+                                            fontSize: main_Height *
+                                                0.015),
+                                      ),
+                                      SizedBox(
+                                        height: main_Height * 0.01,
+                                      ),
+                                      Text(
+                                        "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((getTransactionChartModelData!.totalExpense)).replaceAll(".00", "")}",
+                                        maxLines: 1,
+                                        overflow:
+                                        TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color:
+                                            Color(0xFFE98852),
+                                            fontSize: getTransactionChartModelData!
+                                                .totalExpense
+                                                .toString()
+                                                .length >=
+                                                12
+                                                ? main_Height * 0.02
+                                                : main_Height *
+                                                0.022,
+                                            fontWeight:
+                                            FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: main_Width * 0.03),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Flexible(
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: main_Height * 0.015,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: main_Width * 0.03),
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Flexible(
+                                  child: Text(
+                                    "History",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight:
+                                        FontWeight.w500),
+                                  ),
+                                ),
+
+                                _durationSelected == "Monthly" ?
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black38),
+                                      borderRadius:
+                                      BorderRadius.circular(3)),
+                                  height: main_Height * 0.04,
+                                  width: main_Width * 0.33,
+                                  child: PopupMenuButton(
+                                    itemBuilder: (context) {
+                                      return chartMonthlyModelData
+                                          .map((ChartMonthlyModel items) {
+                                        return PopupMenuItem(
                                           child: Text(
-                                            "History",
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
+                                            items.monthInText.toString(),
+
+                                            overflow: TextOverflow
+                                                .ellipsis,
                                             style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.w500),
+                                                color: Colors.black,
+                                                fontSize:
+                                                main_Height *
+                                                    0.0165),
                                           ),
-                                        ),
-
-                                        _durationSelected == "Monthly" ?
-
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.black38),
-                                              borderRadius:
-                                              BorderRadius.circular(3)),
-                                          height: main_Height * 0.04,
-                                          width: main_Width * 0.33,
-                                          child: PopupMenuButton(
-                                            itemBuilder: (context) {
-                                              return chartMonthlyModelData
-                                                  .map((ChartMonthlyModel items) {
-                                                return PopupMenuItem(
-                                                  child: Text(
-                                                    items.monthInText.toString(),
-
-                                                    overflow: TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize:
-                                                        main_Height *
-                                                            0.0165),
-                                                  ),
-                                                  value: items,
-                                                );
-                                              }).toList();
-                                            },
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal:
-                                                  main_Width * 0.02),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
-                                                // mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Text(
-                                                    _mothselected ?? "Select Month",
-                                                    overflow: TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize:
-                                                        main_Height *
-                                                            0.0165),
-                                                  ),
-                                                  Icon(
-                                                    Icons.arrow_drop_down,
-                                                    color: Colors.black,
-                                                    size: 20,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            onSelected: (ChartMonthlyModel value) {
-                                              setState(() {
-                                                print("valllll ${value.monthInNumber.toString()}");
-                                                selectedMonth = value.monthInNumber;
-                                                _mothselected = chartMonthlyModelData[value.monthInNumber! - 1].monthInText;
-
-                                                incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2: "month=${selectedMonth}"));
-
-                                                // loadAllIncomeListScreenApiCalls();
-
-
-                                              });
-                                            },
+                                          value: items,
+                                        );
+                                      }).toList();
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                          main_Width * 0.02),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        // mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Text(
+                                            _mothselected ?? "Select Month",
+                                            overflow: TextOverflow
+                                                .ellipsis,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                main_Height *
+                                                    0.0165),
                                           ),
-                                        ) :
-                                        Container(),
-
-
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.black38),
-                                              borderRadius:
-                                              BorderRadius.circular(3)),
-                                          height: main_Height * 0.04,
-                                          width: main_Width * 0.3,
-                                          child: PopupMenuButton(
-                                            itemBuilder: (context) {
-                                              return durationList
-                                                  .map((String items) {
-                                                return PopupMenuItem(
-                                                  child: Text(
-                                                    items,
-                                                    overflow: TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize:
-                                                        main_Height *
-                                                            0.0165),
-                                                  ),
-                                                  value: items,
-                                                );
-                                              }).toList();
-                                            },
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal:
-                                                  main_Width * 0.02),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
-                                                // mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Text(
-                                                    _durationSelected!,
-                                                    overflow: TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize:
-                                                        main_Height *
-                                                            0.0165),
-                                                  ),
-                                                  Icon(
-                                                    Icons.arrow_drop_down,
-                                                    color: Colors.black,
-                                                    size: 20,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            onSelected: (String value) {
-                                              setState(() {
-                                                _durationSelected = value;
-                                                _mothselected = months[DateTime.now().month - 1];
-                                                selectedMonth = DateTime.now().month;
-                                                incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2:"month=${selectedMonth}"));
-                                                loadAllIncomeListScreenApiCalls();
-
-                                              });
-                                            },
-                                          ),
-                                        ) ,
-
-
-                                        // Container(
-                                        //   height: 35,
-                                        //   width: 110,
-                                        //   child: DateTimePicker(
-                                        //     decoration: const InputDecoration(
-                                        //       contentPadding: EdgeInsets.only(
-                                        //         top: 5,
-                                        //         bottom: 5,
-                                        //         left: 5,
-                                        //       ),
-                                        //       // filled: true,
-                                        //       enabledBorder: OutlineInputBorder(
-                                        //           borderSide: BorderSide(
-                                        //               color: Colors.black)),
-                                        //       // fillColor: ,
-                                        //       border: OutlineInputBorder(
-                                        //           borderSide: BorderSide(
-                                        //               color: Colors.black)
-                                        //         // borderSide:
-                                        //         //     const BorderSide(color: Colors.transparent),
-                                        //         // borderRadius: BorderRadius.circular(10)
-                                        //
-                                        //       ),
-                                        //     ),
-                                        //     type: DateTimePickerType.date,
-                                        //     dateMask: 'dd MMM, yyyy',
-                                        //     initialValue:
-                                        //     "${DateTime.now().toString()}",
-                                        //     firstDate: DateTime(1900),
-                                        //     lastDate: DateTime.now(),
-                                        //     onChanged: (val) => print(val),
-                                        //     validator: (val) {
-                                        //       print(val);
-                                        //       return null;
-                                        //     },
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    // SizedBox(
-                                    //   height: 300,
-                                    //   child: SfCartesianChart(
-                                    //     // enableAxisAnimation: true,
-                                    //     zoomPanBehavior: _zoomPanBehavior,
-                                    //     // enableAxisAnimation: true,
-                                    //     plotAreaBorderColor:
-                                    //         Colors.transparent,
-                                    //
-                                    //     // tooltipBehavior: _tooltipBehaviorForBarGraph,
-                                    //     legend: Legend(
-                                    //       isVisible: true,
-                                    //       position: LegendPosition.bottom,
-                                    //     ),
-                                    //
-                                    //     margin: const EdgeInsets.symmetric(
-                                    //         horizontal: 5),
-                                    //
-                                    //     primaryXAxis: CategoryAxis(
-                                    //       minimum: 0,
-                                    //       majorGridLines:
-                                    //           const MajorGridLines(
-                                    //               color:
-                                    //                   Colors.transparent),
-                                    //       labelStyle: TextStyle(
-                                    //           fontWeight: FontWeight.w500),
-                                    //       // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
-                                    //       // arrangeByIndex: true
-                                    //     ),
-                                    //
-                                    //     primaryYAxis: NumericAxis(
-                                    //       numberFormat:
-                                    //           NumberFormat.compact(),
-                                    //     ),
-                                    //
-                                    //     onSelectionChanged:
-                                    //         (selectionArgs) {
-                                    //       selectionArgs.selectedColor =
-                                    //           Colors.red;
-                                    //       print(selectionArgs
-                                    //           .viewportPointIndex);
-                                    //     },
-                                    //
-                                    //     series: <ChartSeries>[
-                                    //       /////
-                                    //       ///
-                                    //       /// TARGET PRODUCTION DATA FOR GRAPH
-                                    //       ///
-                                    //       /////
-                                    //       ColumnSeries<ChartData, String>(
-                                    //         name: "Expense",
-                                    //         enableTooltip: true,
-                                    //         legendIconType:
-                                    //             LegendIconType.rectangle,
-                                    //         dataSource: _durationSelected ==
-                                    //                 "Monthly"
-                                    //             ? ThemeHelper
-                                    //                 .SevenDaysDurationforExpanseMonthly(
-                                    //                     expenseData:
-                                    //                         expenseModelData)
-                                    //             : ThemeHelper
-                                    //                 .SevenDaysDurationforExpanse(
-                                    //                     expenseData:
-                                    //                         expenseModelData),
-                                    //         xValueMapper: (ChartData data,
-                                    //                 _) =>
-                                    //             _durationSelected ==
-                                    //                     "Monthly"
-                                    //                 ? DateFormat("dd MMM")
-                                    //                     .format(
-                                    //                         DateTime.parse(
-                                    //                             "${data.x}"))
-                                    //                 : DateFormat("EEE")
-                                    //                     .format(
-                                    //                         DateTime.parse(
-                                    //                             "${data.x}")),
-                                    //         yValueMapper:
-                                    //             (ChartData data, _) =>
-                                    //                 data.y,
-                                    //         borderRadius: BorderRadius.only(
-                                    //             topLeft:
-                                    //                 Radius.circular(10),
-                                    //             topRight:
-                                    //                 Radius.circular(10)),
-                                    //         spacing: 0.3,
-                                    //         width: 0.9,
-                                    //         dataLabelSettings:
-                                    //             const DataLabelSettings(),
-                                    //         onPointTap:
-                                    //             (pointInteractionDetails) {
-                                    //           print(pointInteractionDetails
-                                    //               .pointIndex);
-                                    //         },
-                                    //         color: primaryOrange,
-                                    //       ),
-                                    //       /////
-                                    //       ///
-                                    //       /// ACTUAL PRODUCTION DATA FOR GRAPH
-                                    //       ///
-                                    //       /////
-                                    //       ColumnSeries<ChartData, String>(
-                                    //         name: "Income",
-                                    //         legendIconType:
-                                    //             LegendIconType.rectangle,
-                                    //         dataSource: _durationSelected ==
-                                    //                 "Monthly"
-                                    //             ? ThemeHelper
-                                    //                 .SevenDaysDurationforIncomeMonthly(
-                                    //                     incomeData:
-                                    //                         incomeModelData)
-                                    //             : ThemeHelper
-                                    //                 .SevenDaysDurationforIncome(
-                                    //                     incomeData:
-                                    //                         incomeModelData),
-                                    //         xValueMapper: (ChartData data,
-                                    //                 _) =>
-                                    //             DateFormat("EEE").format(
-                                    //                 DateTime.parse(
-                                    //                     "${data.x}")),
-                                    //         yValueMapper:
-                                    //             (ChartData data, _) =>
-                                    //                 data.y,
-                                    //         borderRadius: BorderRadius.only(
-                                    //             topLeft:
-                                    //                 Radius.circular(10),
-                                    //             topRight:
-                                    //                 Radius.circular(10)),
-                                    //         spacing: 0.3,
-                                    //         width: 0.9,
-                                    //         color: primaryPurple,
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
-
-                                    getTransactionChartModel2Data != "null" ?
-                                    SizedBox(
-                                      height: main_Height * 0.35,
-                                      width: main_Width,
-                                      child: SfCartesianChart(
-                                        // enableAxisAnimation: true,
-                                        zoomPanBehavior: _zoomPanBehavior,
-                                        // enableAxisAnimation: true,
-                                        plotAreaBorderColor:
-                                        Colors.transparent,
-
-                                        // tooltipBehavior: _tooltipBehaviorForBarGraph,
-                                        legend: Legend(
-                                          isVisible: true,
-                                          position: LegendPosition.bottom,
-                                        ),
-
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 3),
-
-                                        primaryXAxis: CategoryAxis(
-                                          // minimum: 0,
-                                          majorGridLines:
-                                          const MajorGridLines(
-                                              color:
-                                              Colors.transparent),
-                                          labelStyle: TextStyle(
-                                              fontWeight: FontWeight.w500),
-
-                                          // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
-                                          // arrangeByIndex: true
-                                        ),
-
-                                        primaryYAxis: NumericAxis(
-                                          numberFormat:
-                                          NumberFormat.compact(),
-                                        ),
-
-                                        onSelectionChanged:
-                                            (selectionArgs) {
-                                          selectionArgs.selectedColor =
-                                              Colors.red;
-                                          print(selectionArgs
-                                              .viewportPointIndex);
-                                        },
-
-                                        series: <ChartSeries>[
-                                          /////
-                                          ///
-                                          /// TARGET PRODUCTION DATA FOR GRAPH
-                                          ///
-                                          /////
-                                          ColumnSeries<ChartData, String>(
-                                            name: "Expense",
-                                            // enableTooltip: true,
-                                            legendIconType:
-                                            LegendIconType.rectangle,
-                                            dataSource:
-
-                                            _durationSelected == "Monthly" ?
-                                            ThemeHelper.weekwiseSingleMonthDataforExpense(
-                                                expenseData2:getTransactionChartModel2Data!.expense!)
-                                        :
-                                        ThemeHelper.SevenDaysDurationforExpanse(
-                                                            expenseData:
-                                                                expenseModelData),
-
-
-                                            xValueMapper: (ChartData data,
-                                                _) =>
-                                                        _durationSelected ==
-                                                                "Monthly" ?
-                                            data.x  :
-                                        DateFormat("EEE")
-                                                    .format(
-                                                        DateTime.parse(
-                                                            "${data.x}")),
-
-                                            yValueMapper:
-                                                (ChartData data, _) =>
-                                            data.y,
-
-
-                                            borderRadius: BorderRadius.only(
-                                                topLeft:
-                                                Radius.circular(10),
-                                                topRight:
-                                                Radius.circular(10)),
-                                            spacing: 0.3,
-                                            width: 0.9,
-                                            // dataLabelSettings:
-                                            // const DataLabelSettings(),
-                                            // onPointTap:
-                                            //     (pointInteractionDetails) {
-                                            //   print(pointInteractionDetails
-                                            //       .pointIndex);
-                                            // },
-                                            color: primaryOrange,
-                                          ),
-                                          /////
-                                          ///
-                                          /// ACTUAL PRODUCTION DATA FOR GRAPH
-                                          ///
-                                          /////
-                                          ColumnSeries<ChartData, String>(
-                                            name: "Income",
-                                            legendIconType:
-                                            LegendIconType.rectangle,
-                                            dataSource:
-                                            _durationSelected ==
-                                                                "Monthly" ?
-                                            ThemeHelper.weekwiseSingleMonthDataforIncome(
-                                                incomeData2:getTransactionChartModel2Data!.income!):
-                                            ThemeHelper.SevenDaysDurationforIncome(
-                                                                incomeData:
-                                                                    incomeModelData),
-                                            xValueMapper: (ChartData data,
-                                                _) =>
-
-                                            _durationSelected ==
-                                                                "Monthly" ?
-                                            data.x :
-                                              DateFormat("EEE").format(
-                                                            DateTime.parse(
-                                                                "${data.x}")),
-                                            yValueMapper:
-                                                (ChartData data, _) =>
-                                            data.y,
-
-
-                                            borderRadius: BorderRadius.only(
-                                                topLeft:
-                                                Radius.circular(10),
-                                                topRight:
-                                                Radius.circular(10)),
-                                            spacing: 0.3,
-                                            width: 0.9,
-                                            color: primaryPurple,
+                                          Icon(
+                                            Icons.arrow_drop_down,
+                                            color: Colors.black,
+                                            size: 20,
                                           ),
                                         ],
                                       ),
-                                    ):
-                                    Container(),
+                                    ),
+                                    onSelected: (ChartMonthlyModel value) {
+                                      setState(() {
+                                        print("valllll ${value.monthInNumber.toString()}");
+                                        selectedMonth = value.monthInNumber;
+                                        _mothselected = chartMonthlyModelData[value.monthInNumber! - 1].monthInText;
 
-                                  ],
+                                        incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2: "month=${selectedMonth}"));
+
+                                        // loadAllIncomeListScreenApiCalls();
+
+
+                                      });
+                                    },
+                                  ),
+                                ) :
+                                Container(),
+
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black38),
+                                      borderRadius:
+                                      BorderRadius.circular(3)),
+                                  height: main_Height * 0.04,
+                                  width: main_Width * 0.3,
+                                  child: PopupMenuButton(
+                                    itemBuilder: (context) {
+                                      return durationList
+                                          .map((String items) {
+                                        return PopupMenuItem(
+                                          child: Text(
+                                            items,
+                                            overflow: TextOverflow
+                                                .ellipsis,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                main_Height *
+                                                    0.0165),
+                                          ),
+                                          value: items,
+                                        );
+                                      }).toList();
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                          main_Width * 0.02),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        // mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Text(
+                                            _durationSelected!,
+                                            overflow: TextOverflow
+                                                .ellipsis,
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                main_Height *
+                                                    0.0165),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_drop_down,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onSelected: (String value) {
+                                      setState(() {
+                                        _durationSelected = value;
+                                        _mothselected = months[DateTime.now().month - 1];
+                                        selectedMonth = DateTime.now().month;
+                                        incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2:"month=${selectedMonth}"));
+                                        loadAllIncomeListScreenApiCalls();
+
+                                      });
+                                    },
+                                  ),
+                                ) ,
+
+
+                                // Container(
+                                //   height: 35,
+                                //   width: 110,
+                                //   child: DateTimePicker(
+                                //     decoration: const InputDecoration(
+                                //       contentPadding: EdgeInsets.only(
+                                //         top: 5,
+                                //         bottom: 5,
+                                //         left: 5,
+                                //       ),
+                                //       // filled: true,
+                                //       enabledBorder: OutlineInputBorder(
+                                //           borderSide: BorderSide(
+                                //               color: Colors.black)),
+                                //       // fillColor: ,
+                                //       border: OutlineInputBorder(
+                                //           borderSide: BorderSide(
+                                //               color: Colors.black)
+                                //         // borderSide:
+                                //         //     const BorderSide(color: Colors.transparent),
+                                //         // borderRadius: BorderRadius.circular(10)
+                                //
+                                //       ),
+                                //     ),
+                                //     type: DateTimePickerType.date,
+                                //     dateMask: 'dd MMM, yyyy',
+                                //     initialValue:
+                                //     "${DateTime.now().toString()}",
+                                //     firstDate: DateTime(1900),
+                                //     lastDate: DateTime.now(),
+                                //     onChanged: (val) => print(val),
+                                //     validator: (val) {
+                                //       print(val);
+                                //       return null;
+                                //     },
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            // SizedBox(
+                            //   height: 300,
+                            //   child: SfCartesianChart(
+                            //     // enableAxisAnimation: true,
+                            //     zoomPanBehavior: _zoomPanBehavior,
+                            //     // enableAxisAnimation: true,
+                            //     plotAreaBorderColor:
+                            //         Colors.transparent,
+                            //
+                            //     // tooltipBehavior: _tooltipBehaviorForBarGraph,
+                            //     legend: Legend(
+                            //       isVisible: true,
+                            //       position: LegendPosition.bottom,
+                            //     ),
+                            //
+                            //     margin: const EdgeInsets.symmetric(
+                            //         horizontal: 5),
+                            //
+                            //     primaryXAxis: CategoryAxis(
+                            //       minimum: 0,
+                            //       majorGridLines:
+                            //           const MajorGridLines(
+                            //               color:
+                            //                   Colors.transparent),
+                            //       labelStyle: TextStyle(
+                            //           fontWeight: FontWeight.w500),
+                            //       // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
+                            //       // arrangeByIndex: true
+                            //     ),
+                            //
+                            //     primaryYAxis: NumericAxis(
+                            //       numberFormat:
+                            //           NumberFormat.compact(),
+                            //     ),
+                            //
+                            //     onSelectionChanged:
+                            //         (selectionArgs) {
+                            //       selectionArgs.selectedColor =
+                            //           Colors.red;
+                            //       print(selectionArgs
+                            //           .viewportPointIndex);
+                            //     },
+                            //
+                            //     series: <ChartSeries>[
+                            //       /////
+                            //       ///
+                            //       /// TARGET PRODUCTION DATA FOR GRAPH
+                            //       ///
+                            //       /////
+                            //       ColumnSeries<ChartData, String>(
+                            //         name: "Expense",
+                            //         enableTooltip: true,
+                            //         legendIconType:
+                            //             LegendIconType.rectangle,
+                            //         dataSource: _durationSelected ==
+                            //                 "Monthly"
+                            //             ? ThemeHelper
+                            //                 .SevenDaysDurationforExpanseMonthly(
+                            //                     expenseData:
+                            //                         expenseModelData)
+                            //             : ThemeHelper
+                            //                 .SevenDaysDurationforExpanse(
+                            //                     expenseData:
+                            //                         expenseModelData),
+                            //         xValueMapper: (ChartData data,
+                            //                 _) =>
+                            //             _durationSelected ==
+                            //                     "Monthly"
+                            //                 ? DateFormat("dd MMM")
+                            //                     .format(
+                            //                         DateTime.parse(
+                            //                             "${data.x}"))
+                            //                 : DateFormat("EEE")
+                            //                     .format(
+                            //                         DateTime.parse(
+                            //                             "${data.x}")),
+                            //         yValueMapper:
+                            //             (ChartData data, _) =>
+                            //                 data.y,
+                            //         borderRadius: BorderRadius.only(
+                            //             topLeft:
+                            //                 Radius.circular(10),
+                            //             topRight:
+                            //                 Radius.circular(10)),
+                            //         spacing: 0.3,
+                            //         width: 0.9,
+                            //         dataLabelSettings:
+                            //             const DataLabelSettings(),
+                            //         onPointTap:
+                            //             (pointInteractionDetails) {
+                            //           print(pointInteractionDetails
+                            //               .pointIndex);
+                            //         },
+                            //         color: primaryOrange,
+                            //       ),
+                            //       /////
+                            //       ///
+                            //       /// ACTUAL PRODUCTION DATA FOR GRAPH
+                            //       ///
+                            //       /////
+                            //       ColumnSeries<ChartData, String>(
+                            //         name: "Income",
+                            //         legendIconType:
+                            //             LegendIconType.rectangle,
+                            //         dataSource: _durationSelected ==
+                            //                 "Monthly"
+                            //             ? ThemeHelper
+                            //                 .SevenDaysDurationforIncomeMonthly(
+                            //                     incomeData:
+                            //                         incomeModelData)
+                            //             : ThemeHelper
+                            //                 .SevenDaysDurationforIncome(
+                            //                     incomeData:
+                            //                         incomeModelData),
+                            //         xValueMapper: (ChartData data,
+                            //                 _) =>
+                            //             DateFormat("EEE").format(
+                            //                 DateTime.parse(
+                            //                     "${data.x}")),
+                            //         yValueMapper:
+                            //             (ChartData data, _) =>
+                            //                 data.y,
+                            //         borderRadius: BorderRadius.only(
+                            //             topLeft:
+                            //                 Radius.circular(10),
+                            //             topRight:
+                            //                 Radius.circular(10)),
+                            //         spacing: 0.3,
+                            //         width: 0.9,
+                            //         color: primaryPurple,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+
+                            getTransactionChartModel2Data != "null" ?
+                            SizedBox(
+                              height: main_Height * 0.35,
+                              width: main_Width,
+                              child: SfCartesianChart(
+                                // enableAxisAnimation: true,
+                                zoomPanBehavior: _zoomPanBehavior,
+                                // enableAxisAnimation: true,
+                                plotAreaBorderColor:
+                                Colors.transparent,
+
+                                // tooltipBehavior: _tooltipBehaviorForBarGraph,
+                                legend: Legend(
+                                  isVisible: true,
+                                  position: LegendPosition.bottom,
                                 ),
+
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 3),
+
+                                primaryXAxis: CategoryAxis(
+                                  // minimum: 0,
+                                  majorGridLines:
+                                  const MajorGridLines(
+                                      color:
+                                      Colors.transparent),
+                                  labelStyle: TextStyle(
+                                      fontWeight: FontWeight.w500),
+
+                                  // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
+                                  // arrangeByIndex: true
+                                ),
+
+                                primaryYAxis: NumericAxis(
+                                  numberFormat:
+                                  NumberFormat.compact(),
+                                ),
+
+                                onSelectionChanged:
+                                    (selectionArgs) {
+                                  selectionArgs.selectedColor =
+                                      Colors.red;
+                                  print(selectionArgs
+                                      .viewportPointIndex);
+                                },
+
+                                series: <ChartSeries>[
+                                  /////
+                                  ///
+                                  /// TARGET PRODUCTION DATA FOR GRAPH
+                                  ///
+                                  /////
+                                  ColumnSeries<ChartData, String>(
+                                    name: "Expense",
+                                    // enableTooltip: true,
+                                    legendIconType:
+                                    LegendIconType.rectangle,
+                                    dataSource:
+
+                                    _durationSelected == "Monthly" ?
+                                    ThemeHelper.weekwiseSingleMonthDataforExpense(
+                                        expenseData2:getTransactionChartModel2Data!.expense!)
+                                        :
+                                    ThemeHelper.SevenDaysDurationforExpanse(
+                                        expenseData:
+                                        expenseModelData),
+
+
+                                    xValueMapper: (ChartData data,
+                                        _) =>
+                                    _durationSelected ==
+                                        "Monthly" ?
+                                    data.x  :
+                                    DateFormat("EEE")
+                                        .format(
+                                        DateTime.parse(
+                                            "${data.x}")),
+
+                                    yValueMapper:
+                                        (ChartData data, _) =>
+                                    data.y,
+
+
+                                    borderRadius: BorderRadius.only(
+                                        topLeft:
+                                        Radius.circular(10),
+                                        topRight:
+                                        Radius.circular(10)),
+                                    spacing: 0.3,
+                                    width: 0.9,
+                                    // dataLabelSettings:
+                                    // const DataLabelSettings(),
+                                    // onPointTap:
+                                    //     (pointInteractionDetails) {
+                                    //   print(pointInteractionDetails
+                                    //       .pointIndex);
+                                    // },
+                                    color: primaryOrange,
+                                  ),
+                                  /////
+                                  ///
+                                  /// ACTUAL PRODUCTION DATA FOR GRAPH
+                                  ///
+                                  /////
+                                  ColumnSeries<ChartData, String>(
+                                    name: "Income",
+                                    legendIconType:
+                                    LegendIconType.rectangle,
+                                    dataSource:
+                                    _durationSelected ==
+                                        "Monthly" ?
+                                    ThemeHelper.weekwiseSingleMonthDataforIncome(
+                                        incomeData2:getTransactionChartModel2Data!.income!):
+                                    ThemeHelper.SevenDaysDurationforIncome(
+                                        incomeData:
+                                        incomeModelData),
+                                    xValueMapper: (ChartData data,
+                                        _) =>
+
+                                    _durationSelected ==
+                                        "Monthly" ?
+                                    data.x :
+                                    DateFormat("EEE").format(
+                                        DateTime.parse(
+                                            "${data.x}")),
+                                    yValueMapper:
+                                        (ChartData data, _) =>
+                                    data.y,
+
+
+                                    borderRadius: BorderRadius.only(
+                                        topLeft:
+                                        Radius.circular(10),
+                                        topRight:
+                                        Radius.circular(10)),
+                                    spacing: 0.3,
+                                    width: 0.9,
+                                    color: primaryPurple,
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: main_Height * 0.015,
-                              ),
-                            ],
-                          ),
+                            ):
+                            Container(),
+
+                          ],
                         ),
                       ),
-                    ),
-                    expandedHeight: main_Height *
-                        0.62, // Height of the app bar when expanded
-                    pinned: true,
-                    floating: true,
-                    backgroundColor: primaryGrey,
-                    bottom: TabBar(
-                      automaticIndicatorColorAdjustment: false,
-                      labelColor: Colors.white,
-                      unselectedLabelColor: Colors.black,
-                      labelStyle: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          color: Colors.white,
-                          fontSize: main_Height * 0.016,
-                          fontWeight: FontWeight.w500),
-                      indicator: ContainerTabIndicator(
-                        height: main_Height * 0.06,
-                        color: primaryPurple,
-                        radius: BorderRadius.circular(30),
-                        padding: EdgeInsets.symmetric(
-                            vertical: main_Height * 0.005,
-                            horizontal: main_Width * 0.02),
+                      SizedBox(
+                        height: main_Height * 0.015,
                       ),
-                      dividerColor: Colors.green,
-                      isScrollable: false,
-                      indicatorColor: Colors.green,
-                      physics: NeverScrollableScrollPhysics(),
-                      tabs: [
-                        Tab(
-                          text: 'Income',
-                        ),
-                        Tab(
-                          text: 'Expense',
-                        ),
-                      ],
-                    ),
+                    ],
                   ),
-                ];
-              },
-              body: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: [
+                ),
+              ),
+            ];
+          },
+          body: DefaultTabController(
+            length: 2,
+            child: Column(
+              children: [
+                TabBar(
+                  automaticIndicatorColorAdjustment: false,
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.black,
+                  labelStyle: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      color: Colors.white,
+                      fontSize: main_Height * 0.016,
+                      fontWeight: FontWeight.w500),
+                  indicator: ContainerTabIndicator(
+                    height: main_Height * 0.06,
+                    color: primaryPurple,
+                    radius: BorderRadius.circular(30),
+                    padding: EdgeInsets.symmetric(
+                        vertical: main_Height * 0.005,
+                        horizontal: main_Width * 0.02),
+                  ),
+                  dividerColor: Colors.green,
+                  isScrollable: false,
+                  indicatorColor: Colors.green,
+                  physics: NeverScrollableScrollPhysics(),
+                  tabs: [
+                    Tab(
+                      text: 'Income',
+                    ),
+                    Tab(
+                      text: 'Expense',
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: TabBarView(
+                    children: [
 
 
 
@@ -917,7 +922,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   _durationSelected == "Monthly"
                   ?
                   getIncomeListModelData2?.isEmpty == true
-                      ? Container(
+                    ? Container(
                     color: primaryGrey,
                     child: Center(
                       child: SvgPicture.asset(
@@ -926,89 +931,857 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       ),
                     ),
                   )
-                      :  ListView.builder(
+                        :  ListView.builder(
                     // physics: NeverScrollableScrollPhysics(),
-                      itemCount: getIncomeListModelData2?.length ,
-                      itemBuilder:
-                          (BuildContext context, int index) {
-                        return CommonWidgets.CommonIncomeListView(
-                            context,
-                            getIncomeListModelData:
-                            getIncomeListModelData![index]);
-                      })
-                      :
-                  getIncomeListModelData?.isEmpty == true
-                      ? Container(
-                        color: primaryGrey,
-                        child: Center(
-                          child: SvgPicture.asset(
-                            "assets/images/stupid 2.svg",
+                    itemCount: getIncomeListModelData2?.length ,
+                    itemBuilder:
+                        (BuildContext context, int index) {
+                      return CommonWidgets.CommonIncomeListView(
+                          context,
+                          getIncomeListModelData:
+                          getIncomeListModelData![index]);
+                    })
+                    :
+                getIncomeListModelData?.isEmpty == true
+                    ? Container(
+                  color: primaryGrey,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      "assets/images/stupid 2.svg",
 
-                          ),
-                        ),
-                      )
-                      :  ListView.builder(
-                          // physics: NeverScrollableScrollPhysics(),
-                          itemCount:           _durationSelected == "Monthly" ? getIncomeListModelData2?.length :  getIncomeListModelData?.length,
-                          itemBuilder:
-                              (BuildContext context, int index) {
-                            return CommonWidgets.CommonIncomeListView(
-                                context,
-                                getIncomeListModelData:
-                                _durationSelected == "Monthly" ? getIncomeListModelData2![index] :
-                                    getIncomeListModelData![index]);
-                          }),
-
-                  _durationSelected == "Monthly"
-                      ?
-                  getExpenseListModelData2?.isEmpty == true
-                      ? Container(
-                    color: primaryGrey,
-                    child: Center(
-                      child: SvgPicture.asset(
-                        "assets/images/stupid 2.svg",
-
-                      ),
                     ),
-                  )
-                      :  ListView.builder(
-                      itemCount:
-                      getExpenseListModelData2?.length,
-                      itemBuilder:
-                          (BuildContext context, int index) {
-                        return CommonWidgets
-                            .masterCategoryCardOfUI2(context, () {},
-                            index: 1,
-                            getExpenseListModelData:
-                           getExpenseListModelData2![index] );
-                      })
-                      :
+                  ),
+                )
+                    :  ListView.builder(
+                  // physics: NeverScrollableScrollPhysics(),
+                    itemCount:           _durationSelected == "Monthly" ? getIncomeListModelData2?.length :  getIncomeListModelData?.length,
+                    itemBuilder:
+                        (BuildContext context, int index) {
+                      return CommonWidgets.CommonIncomeListView(
+                          context,
+                          getIncomeListModelData:
+                          _durationSelected == "Monthly" ? getIncomeListModelData2![index] :
+                          getIncomeListModelData![index]);
+                    }),
 
-                  getExpenseListModelData?.isEmpty == true
-                      ? Container(
-                        color: primaryGrey,
-                        child: SvgPicture.asset(
-                          "assets/images/stupid 2.svg",
-                        ),
-                      )
-                      : ListView.builder(
-                          itemCount: getExpenseListModelData!.length,
-                          itemBuilder:
-                              (BuildContext context, int index) {
-                            return CommonWidgets
-                                .masterCategoryCardOfUI2(context, () {},
-                                    index: 1,
-                                    getExpenseListModelData:
-                                        getExpenseListModelData![
-                                            index]);
-                          }),
+                _durationSelected == "Monthly"
+                    ?
+                getExpenseListModelData2?.isEmpty == true
+                    ? Container(
+                  color: primaryGrey,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      "assets/images/stupid 2.svg",
+
+                    ),
+                  ),
+                )
+                    :  ListView.builder(
+                    itemCount:
+                    getExpenseListModelData2?.length,
+                    itemBuilder:
+                        (BuildContext context, int index) {
+                      return CommonWidgets
+                          .masterCategoryCardOfUI2(context, () {},
+                          index: 1,
+                          getExpenseListModelData:
+                          getExpenseListModelData2![index] );
+                    })
+                    :
+
+                getExpenseListModelData?.isEmpty == true
+                    ? Container(
+                  color: primaryGrey,
+                  child: SvgPicture.asset(
+                    "assets/images/stupid 2.svg",
+                  ),
+                )
+                    : ListView.builder(
+                    itemCount: getExpenseListModelData!.length,
+                    itemBuilder:
+                        (BuildContext context, int index) {
+                      return CommonWidgets
+                          .masterCategoryCardOfUI2(context, () {},
+                          index: 1,
+                          getExpenseListModelData:
+                          getExpenseListModelData![
+                          index]);
+                    }),
 
 
-                ],
-              ),
+              ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
+        // body: DefaultTabController(
+        //   length: 2, // Number of tabs
+        //   child: Scaffold(
+        //     body: NestedScrollView(
+        //       headerSliverBuilder: (context, innerBoxIsScrolled) {
+        //         return [
+        //           SliverAppBar(
+        //             flexibleSpace: FlexibleSpaceBar(
+        //               background: Container(
+        //                 color: primaryGrey,
+        //                 child: Padding(
+        //                   padding: EdgeInsets.symmetric(
+        //                       horizontal: main_Width * 0.03,
+        //                       vertical: main_Height * 0.02),
+        //                   child: Column(
+        //                     crossAxisAlignment: CrossAxisAlignment.start,
+        //                     children: [
+        //                       Row(
+        //                         mainAxisAlignment:
+        //                             MainAxisAlignment.spaceBetween,
+        //                         children: [
+        //                           Expanded(
+        //                             child: InkWell(
+        //                               onTap: () {},
+        //                               child: Container(
+        //                                 // width: main_Width * 0.4,
+        //                                 height: main_Height * 0.11,
+        //                                 decoration: BoxDecoration(
+        //                                     borderRadius:
+        //                                         BorderRadius.circular(7),
+        //                                     color: Color(0xFFE6EBFE)),
+        //
+        //                                 child: Center(
+        //                                   child: Column(
+        //                                     mainAxisAlignment:
+        //                                         MainAxisAlignment.center,
+        //                                     children: [
+        //                                       Text(
+        //                                         "Total Income",
+        //                                         style: TextStyle(
+        //                                             color:
+        //                                                 Color(0xFFAAB1CF),
+        //                                             fontSize: main_Height *
+        //                                                 0.015),
+        //                                       ),
+        //                                       SizedBox(
+        //                                         height: main_Height * 0.01,
+        //                                       ),
+        //                                       Text(
+        //                                         "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((getTransactionChartModelData?.totalIncome)).replaceAll(".00", "")}",
+        //                                         maxLines: 1,
+        //                                         overflow:
+        //                                             TextOverflow.ellipsis,
+        //                                         style: TextStyle(
+        //                                             color:
+        //                                                 Color(0xFF677CD2),
+        //                                             fontSize:
+        //                                                 main_Height * 0.022,
+        //                                             fontWeight:
+        //                                                 FontWeight.w500),
+        //                                       ),
+        //                                     ],
+        //                                   ),
+        //                                 ),
+        //                               ),
+        //                             ),
+        //                           ),
+        //                           SizedBox(
+        //                             width: main_Width * 0.028,
+        //                           ),
+        //                           Expanded(
+        //                             child: InkWell(
+        //                               onTap: () {},
+        //                               child: Container(
+        //                                 // width: main_Width * 0.4,
+        //                                 height: main_Height * 0.11,
+        //                                 decoration: BoxDecoration(
+        //                                     borderRadius:
+        //                                         BorderRadius.circular(7),
+        //                                     color: Color(0xFFF6E5DC)),
+        //                                 child: Center(
+        //                                   child: Column(
+        //                                     mainAxisAlignment:
+        //                                         MainAxisAlignment.center,
+        //                                     children: [
+        //                                       Text(
+        //                                         "Total Expense",
+        //                                         style: TextStyle(
+        //                                             color:
+        //                                                 Color(0xFFD0B6A8),
+        //                                             fontSize: main_Height *
+        //                                                 0.015),
+        //                                       ),
+        //                                       SizedBox(
+        //                                         height: main_Height * 0.01,
+        //                                       ),
+        //                                       Text(
+        //                                         "${NumberFormat.simpleCurrency(locale: 'hi-In', decimalDigits: 2).format((getTransactionChartModelData!.totalExpense)).replaceAll(".00", "")}",
+        //                                         maxLines: 1,
+        //                                         overflow:
+        //                                             TextOverflow.ellipsis,
+        //                                         style: TextStyle(
+        //                                             color:
+        //                                                 Color(0xFFE98852),
+        //                                             fontSize: getTransactionChartModelData!
+        //                                                         .totalExpense
+        //                                                         .toString()
+        //                                                         .length >=
+        //                                                     12
+        //                                                 ? main_Height * 0.02
+        //                                                 : main_Height *
+        //                                                     0.022,
+        //                                             fontWeight:
+        //                                                 FontWeight.w500),
+        //                                       ),
+        //                                     ],
+        //                                   ),
+        //                                 ),
+        //                               ),
+        //                             ),
+        //                           ),
+        //                         ],
+        //                       ),
+        //                       SizedBox(
+        //                         height: main_Height * 0.015,
+        //                       ),
+        //                       Padding(
+        //                         padding: EdgeInsets.symmetric(
+        //                             horizontal: main_Width * 0.03),
+        //                         child: Column(
+        //                           crossAxisAlignment:
+        //                               CrossAxisAlignment.start,
+        //                           children: [
+        //                             Row(
+        //                               mainAxisAlignment:
+        //                                   MainAxisAlignment.spaceBetween,
+        //                               children: [
+        //                                 const Flexible(
+        //                                   child: Text(
+        //                                     "History",
+        //                                     maxLines: 2,
+        //                                     overflow: TextOverflow.ellipsis,
+        //                                     style: TextStyle(
+        //                                         fontSize: 16,
+        //                                         fontWeight:
+        //                                             FontWeight.w500),
+        //                                   ),
+        //                                 ),
+        //
+        //                                 _durationSelected == "Monthly" ?
+        //
+        //                                 Container(
+        //                                   decoration: BoxDecoration(
+        //                                       border: Border.all(
+        //                                           color: Colors.black38),
+        //                                       borderRadius:
+        //                                       BorderRadius.circular(3)),
+        //                                   height: main_Height * 0.04,
+        //                                   width: main_Width * 0.33,
+        //                                   child: PopupMenuButton(
+        //                                     itemBuilder: (context) {
+        //                                       return chartMonthlyModelData
+        //                                           .map((ChartMonthlyModel items) {
+        //                                         return PopupMenuItem(
+        //                                           child: Text(
+        //                                             items.monthInText.toString(),
+        //
+        //                                             overflow: TextOverflow
+        //                                                 .ellipsis,
+        //                                             style: TextStyle(
+        //                                                 color: Colors.black,
+        //                                                 fontSize:
+        //                                                 main_Height *
+        //                                                     0.0165),
+        //                                           ),
+        //                                           value: items,
+        //                                         );
+        //                                       }).toList();
+        //                                     },
+        //                                     child: Padding(
+        //                                       padding: EdgeInsets.symmetric(
+        //                                           horizontal:
+        //                                           main_Width * 0.02),
+        //                                       child: Row(
+        //                                         mainAxisAlignment:
+        //                                         MainAxisAlignment
+        //                                             .spaceBetween,
+        //                                         // mainAxisSize: MainAxisSize.min,
+        //                                         children: <Widget>[
+        //                                           Text(
+        //                                             _mothselected ?? "Select Month",
+        //                                             overflow: TextOverflow
+        //                                                 .ellipsis,
+        //                                             style: TextStyle(
+        //                                                 color: Colors.black,
+        //                                                 fontSize:
+        //                                                 main_Height *
+        //                                                     0.0165),
+        //                                           ),
+        //                                           Icon(
+        //                                             Icons.arrow_drop_down,
+        //                                             color: Colors.black,
+        //                                             size: 20,
+        //                                           ),
+        //                                         ],
+        //                                       ),
+        //                                     ),
+        //                                     onSelected: (ChartMonthlyModel value) {
+        //                                       setState(() {
+        //                                         print("valllll ${value.monthInNumber.toString()}");
+        //                                         selectedMonth = value.monthInNumber;
+        //                                         _mothselected = chartMonthlyModelData[value.monthInNumber! - 1].monthInText;
+        //
+        //                                         incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2: "month=${selectedMonth}"));
+        //
+        //                                         // loadAllIncomeListScreenApiCalls();
+        //
+        //
+        //                                       });
+        //                                     },
+        //                                   ),
+        //                                 ) :
+        //                                 Container(),
+        //
+        //
+        //                                 Container(
+        //                                   decoration: BoxDecoration(
+        //                                       border: Border.all(
+        //                                           color: Colors.black38),
+        //                                       borderRadius:
+        //                                       BorderRadius.circular(3)),
+        //                                   height: main_Height * 0.04,
+        //                                   width: main_Width * 0.3,
+        //                                   child: PopupMenuButton(
+        //                                     itemBuilder: (context) {
+        //                                       return durationList
+        //                                           .map((String items) {
+        //                                         return PopupMenuItem(
+        //                                           child: Text(
+        //                                             items,
+        //                                             overflow: TextOverflow
+        //                                                 .ellipsis,
+        //                                             style: TextStyle(
+        //                                                 color: Colors.black,
+        //                                                 fontSize:
+        //                                                 main_Height *
+        //                                                     0.0165),
+        //                                           ),
+        //                                           value: items,
+        //                                         );
+        //                                       }).toList();
+        //                                     },
+        //                                     child: Padding(
+        //                                       padding: EdgeInsets.symmetric(
+        //                                           horizontal:
+        //                                           main_Width * 0.02),
+        //                                       child: Row(
+        //                                         mainAxisAlignment:
+        //                                         MainAxisAlignment
+        //                                             .spaceBetween,
+        //                                         // mainAxisSize: MainAxisSize.min,
+        //                                         children: <Widget>[
+        //                                           Text(
+        //                                             _durationSelected!,
+        //                                             overflow: TextOverflow
+        //                                                 .ellipsis,
+        //                                             style: TextStyle(
+        //                                                 color: Colors.black,
+        //                                                 fontSize:
+        //                                                 main_Height *
+        //                                                     0.0165),
+        //                                           ),
+        //                                           Icon(
+        //                                             Icons.arrow_drop_down,
+        //                                             color: Colors.black,
+        //                                             size: 20,
+        //                                           ),
+        //                                         ],
+        //                                       ),
+        //                                     ),
+        //                                     onSelected: (String value) {
+        //                                       setState(() {
+        //                                         _durationSelected = value;
+        //                                         _mothselected = months[DateTime.now().month - 1];
+        //                                         selectedMonth = DateTime.now().month;
+        //                                         incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2:"month=${selectedMonth}"));
+        //                                         loadAllIncomeListScreenApiCalls();
+        //
+        //                                       });
+        //                                     },
+        //                                   ),
+        //                                 ) ,
+        //
+        //
+        //                                 // Container(
+        //                                 //   height: 35,
+        //                                 //   width: 110,
+        //                                 //   child: DateTimePicker(
+        //                                 //     decoration: const InputDecoration(
+        //                                 //       contentPadding: EdgeInsets.only(
+        //                                 //         top: 5,
+        //                                 //         bottom: 5,
+        //                                 //         left: 5,
+        //                                 //       ),
+        //                                 //       // filled: true,
+        //                                 //       enabledBorder: OutlineInputBorder(
+        //                                 //           borderSide: BorderSide(
+        //                                 //               color: Colors.black)),
+        //                                 //       // fillColor: ,
+        //                                 //       border: OutlineInputBorder(
+        //                                 //           borderSide: BorderSide(
+        //                                 //               color: Colors.black)
+        //                                 //         // borderSide:
+        //                                 //         //     const BorderSide(color: Colors.transparent),
+        //                                 //         // borderRadius: BorderRadius.circular(10)
+        //                                 //
+        //                                 //       ),
+        //                                 //     ),
+        //                                 //     type: DateTimePickerType.date,
+        //                                 //     dateMask: 'dd MMM, yyyy',
+        //                                 //     initialValue:
+        //                                 //     "${DateTime.now().toString()}",
+        //                                 //     firstDate: DateTime(1900),
+        //                                 //     lastDate: DateTime.now(),
+        //                                 //     onChanged: (val) => print(val),
+        //                                 //     validator: (val) {
+        //                                 //       print(val);
+        //                                 //       return null;
+        //                                 //     },
+        //                                 //   ),
+        //                                 // ),
+        //                               ],
+        //                             ),
+        //                             SizedBox(
+        //                               height: 10,
+        //                             ),
+        //                             // SizedBox(
+        //                             //   height: 300,
+        //                             //   child: SfCartesianChart(
+        //                             //     // enableAxisAnimation: true,
+        //                             //     zoomPanBehavior: _zoomPanBehavior,
+        //                             //     // enableAxisAnimation: true,
+        //                             //     plotAreaBorderColor:
+        //                             //         Colors.transparent,
+        //                             //
+        //                             //     // tooltipBehavior: _tooltipBehaviorForBarGraph,
+        //                             //     legend: Legend(
+        //                             //       isVisible: true,
+        //                             //       position: LegendPosition.bottom,
+        //                             //     ),
+        //                             //
+        //                             //     margin: const EdgeInsets.symmetric(
+        //                             //         horizontal: 5),
+        //                             //
+        //                             //     primaryXAxis: CategoryAxis(
+        //                             //       minimum: 0,
+        //                             //       majorGridLines:
+        //                             //           const MajorGridLines(
+        //                             //               color:
+        //                             //                   Colors.transparent),
+        //                             //       labelStyle: TextStyle(
+        //                             //           fontWeight: FontWeight.w500),
+        //                             //       // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
+        //                             //       // arrangeByIndex: true
+        //                             //     ),
+        //                             //
+        //                             //     primaryYAxis: NumericAxis(
+        //                             //       numberFormat:
+        //                             //           NumberFormat.compact(),
+        //                             //     ),
+        //                             //
+        //                             //     onSelectionChanged:
+        //                             //         (selectionArgs) {
+        //                             //       selectionArgs.selectedColor =
+        //                             //           Colors.red;
+        //                             //       print(selectionArgs
+        //                             //           .viewportPointIndex);
+        //                             //     },
+        //                             //
+        //                             //     series: <ChartSeries>[
+        //                             //       /////
+        //                             //       ///
+        //                             //       /// TARGET PRODUCTION DATA FOR GRAPH
+        //                             //       ///
+        //                             //       /////
+        //                             //       ColumnSeries<ChartData, String>(
+        //                             //         name: "Expense",
+        //                             //         enableTooltip: true,
+        //                             //         legendIconType:
+        //                             //             LegendIconType.rectangle,
+        //                             //         dataSource: _durationSelected ==
+        //                             //                 "Monthly"
+        //                             //             ? ThemeHelper
+        //                             //                 .SevenDaysDurationforExpanseMonthly(
+        //                             //                     expenseData:
+        //                             //                         expenseModelData)
+        //                             //             : ThemeHelper
+        //                             //                 .SevenDaysDurationforExpanse(
+        //                             //                     expenseData:
+        //                             //                         expenseModelData),
+        //                             //         xValueMapper: (ChartData data,
+        //                             //                 _) =>
+        //                             //             _durationSelected ==
+        //                             //                     "Monthly"
+        //                             //                 ? DateFormat("dd MMM")
+        //                             //                     .format(
+        //                             //                         DateTime.parse(
+        //                             //                             "${data.x}"))
+        //                             //                 : DateFormat("EEE")
+        //                             //                     .format(
+        //                             //                         DateTime.parse(
+        //                             //                             "${data.x}")),
+        //                             //         yValueMapper:
+        //                             //             (ChartData data, _) =>
+        //                             //                 data.y,
+        //                             //         borderRadius: BorderRadius.only(
+        //                             //             topLeft:
+        //                             //                 Radius.circular(10),
+        //                             //             topRight:
+        //                             //                 Radius.circular(10)),
+        //                             //         spacing: 0.3,
+        //                             //         width: 0.9,
+        //                             //         dataLabelSettings:
+        //                             //             const DataLabelSettings(),
+        //                             //         onPointTap:
+        //                             //             (pointInteractionDetails) {
+        //                             //           print(pointInteractionDetails
+        //                             //               .pointIndex);
+        //                             //         },
+        //                             //         color: primaryOrange,
+        //                             //       ),
+        //                             //       /////
+        //                             //       ///
+        //                             //       /// ACTUAL PRODUCTION DATA FOR GRAPH
+        //                             //       ///
+        //                             //       /////
+        //                             //       ColumnSeries<ChartData, String>(
+        //                             //         name: "Income",
+        //                             //         legendIconType:
+        //                             //             LegendIconType.rectangle,
+        //                             //         dataSource: _durationSelected ==
+        //                             //                 "Monthly"
+        //                             //             ? ThemeHelper
+        //                             //                 .SevenDaysDurationforIncomeMonthly(
+        //                             //                     incomeData:
+        //                             //                         incomeModelData)
+        //                             //             : ThemeHelper
+        //                             //                 .SevenDaysDurationforIncome(
+        //                             //                     incomeData:
+        //                             //                         incomeModelData),
+        //                             //         xValueMapper: (ChartData data,
+        //                             //                 _) =>
+        //                             //             DateFormat("EEE").format(
+        //                             //                 DateTime.parse(
+        //                             //                     "${data.x}")),
+        //                             //         yValueMapper:
+        //                             //             (ChartData data, _) =>
+        //                             //                 data.y,
+        //                             //         borderRadius: BorderRadius.only(
+        //                             //             topLeft:
+        //                             //                 Radius.circular(10),
+        //                             //             topRight:
+        //                             //                 Radius.circular(10)),
+        //                             //         spacing: 0.3,
+        //                             //         width: 0.9,
+        //                             //         color: primaryPurple,
+        //                             //       ),
+        //                             //     ],
+        //                             //   ),
+        //                             // ),
+        //
+        //                             getTransactionChartModel2Data != "null" ?
+        //                             SizedBox(
+        //                               height: main_Height * 0.35,
+        //                               width: main_Width,
+        //                               child: SfCartesianChart(
+        //                                 // enableAxisAnimation: true,
+        //                                 zoomPanBehavior: _zoomPanBehavior,
+        //                                 // enableAxisAnimation: true,
+        //                                 plotAreaBorderColor:
+        //                                 Colors.transparent,
+        //
+        //                                 // tooltipBehavior: _tooltipBehaviorForBarGraph,
+        //                                 legend: Legend(
+        //                                   isVisible: true,
+        //                                   position: LegendPosition.bottom,
+        //                                 ),
+        //
+        //                                 margin: const EdgeInsets.symmetric(
+        //                                     horizontal: 3),
+        //
+        //                                 primaryXAxis: CategoryAxis(
+        //                                   // minimum: 0,
+        //                                   majorGridLines:
+        //                                   const MajorGridLines(
+        //                                       color:
+        //                                       Colors.transparent),
+        //                                   labelStyle: TextStyle(
+        //                                       fontWeight: FontWeight.w500),
+        //
+        //                                   // visibleMaximum: ((incomeModelData?.length ?? 0) <= 7) ? 6 : 7,
+        //                                   // arrangeByIndex: true
+        //                                 ),
+        //
+        //                                 primaryYAxis: NumericAxis(
+        //                                   numberFormat:
+        //                                   NumberFormat.compact(),
+        //                                 ),
+        //
+        //                                 onSelectionChanged:
+        //                                     (selectionArgs) {
+        //                                   selectionArgs.selectedColor =
+        //                                       Colors.red;
+        //                                   print(selectionArgs
+        //                                       .viewportPointIndex);
+        //                                 },
+        //
+        //                                 series: <ChartSeries>[
+        //                                   /////
+        //                                   ///
+        //                                   /// TARGET PRODUCTION DATA FOR GRAPH
+        //                                   ///
+        //                                   /////
+        //                                   ColumnSeries<ChartData, String>(
+        //                                     name: "Expense",
+        //                                     // enableTooltip: true,
+        //                                     legendIconType:
+        //                                     LegendIconType.rectangle,
+        //                                     dataSource:
+        //
+        //                                     _durationSelected == "Monthly" ?
+        //                                     ThemeHelper.weekwiseSingleMonthDataforExpense(
+        //                                         expenseData2:getTransactionChartModel2Data!.expense!)
+        //                                 :
+        //                                 ThemeHelper.SevenDaysDurationforExpanse(
+        //                                                     expenseData:
+        //                                                         expenseModelData),
+        //
+        //
+        //                                     xValueMapper: (ChartData data,
+        //                                         _) =>
+        //                                                 _durationSelected ==
+        //                                                         "Monthly" ?
+        //                                     data.x  :
+        //                                 DateFormat("EEE")
+        //                                             .format(
+        //                                                 DateTime.parse(
+        //                                                     "${data.x}")),
+        //
+        //                                     yValueMapper:
+        //                                         (ChartData data, _) =>
+        //                                     data.y,
+        //
+        //
+        //                                     borderRadius: BorderRadius.only(
+        //                                         topLeft:
+        //                                         Radius.circular(10),
+        //                                         topRight:
+        //                                         Radius.circular(10)),
+        //                                     spacing: 0.3,
+        //                                     width: 0.9,
+        //                                     // dataLabelSettings:
+        //                                     // const DataLabelSettings(),
+        //                                     // onPointTap:
+        //                                     //     (pointInteractionDetails) {
+        //                                     //   print(pointInteractionDetails
+        //                                     //       .pointIndex);
+        //                                     // },
+        //                                     color: primaryOrange,
+        //                                   ),
+        //                                   /////
+        //                                   ///
+        //                                   /// ACTUAL PRODUCTION DATA FOR GRAPH
+        //                                   ///
+        //                                   /////
+        //                                   ColumnSeries<ChartData, String>(
+        //                                     name: "Income",
+        //                                     legendIconType:
+        //                                     LegendIconType.rectangle,
+        //                                     dataSource:
+        //                                     _durationSelected ==
+        //                                                         "Monthly" ?
+        //                                     ThemeHelper.weekwiseSingleMonthDataforIncome(
+        //                                         incomeData2:getTransactionChartModel2Data!.income!):
+        //                                     ThemeHelper.SevenDaysDurationforIncome(
+        //                                                         incomeData:
+        //                                                             incomeModelData),
+        //                                     xValueMapper: (ChartData data,
+        //                                         _) =>
+        //
+        //                                     _durationSelected ==
+        //                                                         "Monthly" ?
+        //                                     data.x :
+        //                                       DateFormat("EEE").format(
+        //                                                     DateTime.parse(
+        //                                                         "${data.x}")),
+        //                                     yValueMapper:
+        //                                         (ChartData data, _) =>
+        //                                     data.y,
+        //
+        //
+        //                                     borderRadius: BorderRadius.only(
+        //                                         topLeft:
+        //                                         Radius.circular(10),
+        //                                         topRight:
+        //                                         Radius.circular(10)),
+        //                                     spacing: 0.3,
+        //                                     width: 0.9,
+        //                                     color: primaryPurple,
+        //                                   ),
+        //                                 ],
+        //                               ),
+        //                             ):
+        //                             Container(),
+        //
+        //                           ],
+        //                         ),
+        //                       ),
+        //                       SizedBox(
+        //                         height: main_Height * 0.015,
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //               ),
+        //             ),
+        //             expandedHeight: main_Height *
+        //                 0.62, // Height of the app bar when expanded
+        //             pinned: true,
+        //             floating: true,
+        //             backgroundColor: primaryGrey,
+        //             bottom: TabBar(
+        //               automaticIndicatorColorAdjustment: false,
+        //               labelColor: Colors.white,
+        //               unselectedLabelColor: Colors.black,
+        //               labelStyle: TextStyle(
+        //                   overflow: TextOverflow.ellipsis,
+        //                   color: Colors.white,
+        //                   fontSize: main_Height * 0.016,
+        //                   fontWeight: FontWeight.w500),
+        //               indicator: ContainerTabIndicator(
+        //                 height: main_Height * 0.06,
+        //                 color: primaryPurple,
+        //                 radius: BorderRadius.circular(30),
+        //                 padding: EdgeInsets.symmetric(
+        //                     vertical: main_Height * 0.005,
+        //                     horizontal: main_Width * 0.02),
+        //               ),
+        //               dividerColor: Colors.green,
+        //               isScrollable: false,
+        //               indicatorColor: Colors.green,
+        //               physics: NeverScrollableScrollPhysics(),
+        //               tabs: [
+        //                 Tab(
+        //                   text: 'Income',
+        //                 ),
+        //                 Tab(
+        //                   text: 'Expense',
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ];
+        //       },
+        //       body: TabBarView(
+        //         physics: NeverScrollableScrollPhysics(),
+        //         children: [
+        //
+        //
+        //
+        //
+        //           _durationSelected == "Monthly"
+        //           ?
+        //           getIncomeListModelData2?.isEmpty == true
+        //               ? Container(
+        //             color: primaryGrey,
+        //             child: Center(
+        //               child: SvgPicture.asset(
+        //                 "assets/images/stupid 2.svg",
+        //
+        //               ),
+        //             ),
+        //           )
+        //               :  ListView.builder(
+        //             // physics: NeverScrollableScrollPhysics(),
+        //               itemCount: getIncomeListModelData2?.length ,
+        //               itemBuilder:
+        //                   (BuildContext context, int index) {
+        //                 return CommonWidgets.CommonIncomeListView(
+        //                     context,
+        //                     getIncomeListModelData:
+        //                     getIncomeListModelData![index]);
+        //               })
+        //               :
+        //           getIncomeListModelData?.isEmpty == true
+        //               ? Container(
+        //                 color: primaryGrey,
+        //                 child: Center(
+        //                   child: SvgPicture.asset(
+        //                     "assets/images/stupid 2.svg",
+        //
+        //                   ),
+        //                 ),
+        //               )
+        //               :  ListView.builder(
+        //                   // physics: NeverScrollableScrollPhysics(),
+        //                   itemCount:           _durationSelected == "Monthly" ? getIncomeListModelData2?.length :  getIncomeListModelData?.length,
+        //                   itemBuilder:
+        //                       (BuildContext context, int index) {
+        //                     return CommonWidgets.CommonIncomeListView(
+        //                         context,
+        //                         getIncomeListModelData:
+        //                         _durationSelected == "Monthly" ? getIncomeListModelData2![index] :
+        //                             getIncomeListModelData![index]);
+        //                   }),
+        //
+        //           _durationSelected == "Monthly"
+        //               ?
+        //           getExpenseListModelData2?.isEmpty == true
+        //               ? Container(
+        //             color: primaryGrey,
+        //             child: Center(
+        //               child: SvgPicture.asset(
+        //                 "assets/images/stupid 2.svg",
+        //
+        //               ),
+        //             ),
+        //           )
+        //               :  ListView.builder(
+        //               itemCount:
+        //               getExpenseListModelData2?.length,
+        //               itemBuilder:
+        //                   (BuildContext context, int index) {
+        //                 return CommonWidgets
+        //                     .masterCategoryCardOfUI2(context, () {},
+        //                     index: 1,
+        //                     getExpenseListModelData:
+        //                    getExpenseListModelData2![index] );
+        //               })
+        //               :
+        //
+        //           getExpenseListModelData?.isEmpty == true
+        //               ? Container(
+        //                 color: primaryGrey,
+        //                 child: SvgPicture.asset(
+        //                   "assets/images/stupid 2.svg",
+        //                 ),
+        //               )
+        //               : ListView.builder(
+        //                   itemCount: getExpenseListModelData!.length,
+        //                   itemBuilder:
+        //                       (BuildContext context, int index) {
+        //                     return CommonWidgets
+        //                         .masterCategoryCardOfUI2(context, () {},
+        //                             index: 1,
+        //                             getExpenseListModelData:
+        //                                 getExpenseListModelData![
+        //                                     index]);
+        //                   }),
+        //
+        //
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }
