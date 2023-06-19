@@ -247,507 +247,529 @@ class _AddItemScreenState extends State<AddItemScreen> {
         )  :
         AppBar(toolbarHeight: 0,),
 
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formkey,
-            child: Column(
-              children: [
+        body: RefreshIndicator(
+          onRefresh: ()async{
+            loadAllItemListScreenApiCalls();
+          },
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Form(
+              key: _formkey,
+              child: Column(
+                children: [
 
-                Padding(
-                  padding: EdgeInsets.symmetric(
-            horizontal: main_Width * 0.03,
-                vertical: main_Height * 0.01),
-                  child: Column(
-                    children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+              horizontal: main_Width * 0.03,
+                  vertical: main_Height * 0.01),
+                    child: Column(
+                      children: [
 
-                      widget.apbar == "0"  ?
-                      Container():
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Home",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: main_Height * 0.018,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            // width: main_Width,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colors.black38,
-                                ),
-                                borderRadius: BorderRadius.circular(3)),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: ButtonTheme(
-                              alignedDropdown: true,
-                              child: DropdownButtonFormField<dynamic>(
-                                key: _Homekey,
+                        widget.apbar == "0"  ?
+                        Container():
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Home",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: main_Height * 0.018,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              // width: main_Width,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Colors.black38,
+                                  ),
+                                  borderRadius: BorderRadius.circular(3)),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButtonFormField<dynamic>(
+                                  key: _Homekey,
 
-                                // value: user.stateId,
+                                  // value: user.stateId,
 
-                                onTap: () {
-                                  // _districtDrop.currentState!.reset();
-                                  // _cityDropDown.currentState!.reset();
-                                  // DistrictsList.clear();
-                                  // CitiesList.clear();
-                                },
-                                isExpanded: true,
-                                // validator: (value) {
-                                //   if (value == null) {
-                                //     return 'Please select your state';
-                                //   }
-                                //   return null;
-                                // },
-                                alignment: Alignment.centerLeft,
+                                  onTap: () {
+                                    print("ladjilad");
 
-                                decoration: InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    hintText: "Select Home"
-                                ),
+                                    setState(() {
+                                      _Roomkey.currentState?.reset();
+                                      _Shelfkey.currentState?.reset();
+                                      RoomLocationList?.clear();
+                                      ShelfLocationList?.clear();
+                                    });
 
-                                hint: FittedBox(
-                                  child: Text(
-                                    "Select Home",
-                                    style: TextStyle(
-                                        // fontSize: 16,
-                                        // color: Colors.grey,
-                                        // fontWeight: FontWeight.w700
+                                    // _districtDrop.currentState!.reset();
+                                    // _cityDropDown.currentState!.reset();
+                                    // DistrictsList.clear();
+                                    // CitiesList.clear();
+                                  },
+                                  isExpanded: true,
+                                  // validator: (value) {
+                                  //   if (value == null) {
+                                  //     return 'Please select your state';
+                                  //   }
+                                  //   return null;
+                                  // },
+                                  alignment: Alignment.centerLeft,
+
+                                  decoration: InputDecoration(
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      hintText: "Select Home"
+                                  ),
+
+                                  hint: FittedBox(
+                                    child: Text(
+                                      "Select Home",
+                                      style: TextStyle(
+                                          // fontSize: 16,
+                                          // color: Colors.grey,
+                                          // fontWeight: FontWeight.w700
+                                      ),
                                     ),
                                   ),
+
+                                  onSaved: (onSavedVal) {
+                                    HomeN = onSavedVal;
+                                    print("HomeN : ${HomeN}");
+                                  },
+
+                                  onChanged: (_value) => homeValueChanged(_value),
+
+                                  items: getHomeListModelData?.map((GetHomeListModel item) {
+                                    return DropdownMenuItem<dynamic>(
+                                        value: item.id,
+                                        child: FittedBox(child: Text("${item.homeLocationName}")));
+                                  }).toList(),
                                 ),
-
-                                onSaved: (onSavedVal) {
-                                  HomeN = onSavedVal;
-                                  print("HomeN : ${HomeN}");
-                                },
-
-                                onChanged: (_value) => homeValueChanged(_value),
-
-                                items: getHomeListModelData?.map((GetHomeListModel item) {
-                                  return DropdownMenuItem<dynamic>(
-                                      value: item.id,
-                                      child: FittedBox(child: Text("${item.homeLocationName}")));
-                                }).toList(),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
+                            const SizedBox(
+                              height: 15,
+                            ),
 
 
-                          Row(
-                            children: [
-                              Text(
-                                "Room",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: main_Height * 0.018,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            // width: main_Width,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colors.black38,
-                                ),
-                                borderRadius: BorderRadius.circular(3)),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: ButtonTheme(
-                              alignedDropdown: true,
-                              child: DropdownButtonFormField<dynamic>(
-                                key: _Roomkey,
+                            Row(
+                              children: [
+                                Text(
+                                  "Room",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: main_Height * 0.018,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              // width: main_Width,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Colors.black38,
+                                  ),
+                                  borderRadius: BorderRadius.circular(3)),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButtonFormField<dynamic>(
+                                  key: _Roomkey,
 
-                                // value: user.stateId,
+                                  // value: user.stateId,
 
-                                onTap: () {
-                                  // _districtDrop.currentState!.reset();
-                                  // _cityDropDown.currentState!.reset();
-                                  // DistrictsList.clear();
-                                  // CitiesList.clear();
-                                },
-                                isExpanded: true,
-                                // validator: (value) {
-                                //   if (value == null) {
-                                //     return 'Please select your state';
-                                //   }
-                                //   return null;
-                                // },
-                                alignment: Alignment.centerLeft,
+                                  onTap: () {
+                                    setState(() {
+                                      // _Roomkey.currentState?.reset();
+                                      _Shelfkey.currentState?.reset();
+                                      // RoomLocationList?.clear();
+                                      ShelfLocationList?.clear();
+                                    });
 
-                                decoration: InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    hintText: "Select Room"
-                                ),
+                                    // _districtDrop.currentState!.reset();
+                                    // _cityDropDown.currentState!.reset();
+                                    // DistrictsList.clear();
+                                    // CitiesList.clear();
+                                  },
+                                  isExpanded: true,
+                                  // validator: (value) {
+                                  //   if (value == null) {
+                                  //     return 'Please select your state';
+                                  //   }
+                                  //   return null;
+                                  // },
+                                  alignment: Alignment.centerLeft,
 
-                                hint: FittedBox(
-                                  child: Text(
-                                    "Select Room",
-                                    style: TextStyle(
-                                        // fontSize: 16,
-                                        // color: Colors.grey,
-                                        // fontWeight: FontWeight.w700
+                                  decoration: InputDecoration(
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      hintText: "Select Room"
+                                  ),
+
+                                  hint: FittedBox(
+                                    child: Text(
+                                      "Select Room",
+                                      style: TextStyle(
+                                          // fontSize: 16,
+                                          // color: Colors.grey,
+                                          // fontWeight: FontWeight.w700
+                                      ),
                                     ),
                                   ),
+
+                                  onSaved: (onSavedVal) {
+                                    RoomN = onSavedVal;
+                                    print("HomeN : ${HomeN}");
+                                  },
+
+                                  onChanged: disabledRoomListDropDown ? null : (_value) => RoomValueChanged(_value),
+                                  items: RoomLocationList?.map((GetRoomLocationModel item) {
+                                    return DropdownMenuItem<dynamic>(
+                                        value: item.id,
+                                        child: FittedBox(child: Text("${item.roomLocationName}")));
+                                  }).toList(),
                                 ),
-
-                                onSaved: (onSavedVal) {
-                                  RoomN = onSavedVal;
-                                  print("HomeN : ${HomeN}");
-                                },
-
-                                onChanged: disabledRoomListDropDown ? null : (_value) => RoomValueChanged(_value),
-                                items: RoomLocationList?.map((GetRoomLocationModel item) {
-                                  return DropdownMenuItem<dynamic>(
-                                      value: item.id,
-                                      child: FittedBox(child: Text("${item.roomLocationName}")));
-                                }).toList(),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
+                            const SizedBox(
+                              height: 15,
+                            ),
 
 
-                          Row(
-                            children: [
-                              Text(
-                                "Shelf",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: main_Height * 0.018,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            // width: main_Width,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colors.black38,
-                                ),
-                                borderRadius: BorderRadius.circular(3)),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: ButtonTheme(
-                              alignedDropdown: true,
-                              child: DropdownButtonFormField<dynamic>(
-                                key: _Shelfkey,
-                                // value: user.stateId,
+                            Row(
+                              children: [
+                                Text(
+                                  "Shelf",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontSize: main_Height * 0.018,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              // width: main_Width,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Colors.black38,
+                                  ),
+                                  borderRadius: BorderRadius.circular(3)),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButtonFormField<dynamic>(
+                                  key: _Shelfkey,
+                                  // value: user.stateId,
 
 
-                                onTap: () {
-                                  // _districtDrop.currentState!.reset();
-                                  // _cityDropDown.currentState!.reset();
-                                  // DistrictsList.clear();
-                                  // CitiesList.clear();
-                                },
-                                isExpanded: true,
-                                // validator: (value) {
-                                //   if (value == null) {
-                                //     return 'Please select your Shelf';
-                                //   }
-                                //   return null;
-                                // },
-                                alignment: Alignment.centerLeft,
+                                  onTap: () {
+                                    // _districtDrop.currentState!.reset();
+                                    // _cityDropDown.currentState!.reset();
+                                    // DistrictsList.clear();
+                                    // CitiesList.clear();
+                                  },
+                                  isExpanded: true,
+                                  // validator: (value) {
+                                  //   if (value == null) {
+                                  //     return 'Please select your Shelf';
+                                  //   }
+                                  //   return null;
+                                  // },
+                                  alignment: Alignment.centerLeft,
 
-                                decoration: InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    hintText: "Select Shelf"
-                                ),
+                                  decoration: InputDecoration(
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      hintText: "Select Shelf"
+                                  ),
 
-                                hint: FittedBox(
-                                  child: Text(
-                                    "Select Shelf",
-                                    style: TextStyle(
-                                        // fontSize: 16,
-                                        // color: Colors.grey,
-                                        // fontWeight: FontWeight.w700
+                                  hint: FittedBox(
+                                    child: Text(
+                                      "Select Shelf",
+                                      style: TextStyle(
+                                          // fontSize: 16,
+                                          // color: Colors.grey,
+                                          // fontWeight: FontWeight.w700
+                                      ),
                                     ),
                                   ),
+
+                                  onSaved: (onSavedVal) {
+                                    ShelfN = onSavedVal;
+                                    print("HomeN : ${HomeN}");
+                                  },
+
+                                  onChanged: disabledShelfListDropDown ? null : (_value) => shelfValueChanged(_value),
+                                  items: ShelfLocationList?.map((GetShelfLocationModel item) {
+                                    return DropdownMenuItem<dynamic>(
+                                        value: item.id,
+                                        child: FittedBox(child: Text("${item.shelfLocationName}")));
+                                  }).toList(),
                                 ),
-
-                                onSaved: (onSavedVal) {
-                                  ShelfN = onSavedVal;
-                                  print("HomeN : ${HomeN}");
-                                },
-
-                                onChanged: disabledShelfListDropDown ? null : (_value) => shelfValueChanged(_value),
-                                items: ShelfLocationList?.map((GetShelfLocationModel item) {
-                                  return DropdownMenuItem<dynamic>(
-                                      value: item.id,
-                                      child: FittedBox(child: Text("${item.shelfLocationName}")));
-                                }).toList(),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
+                            const SizedBox(
+                              height: 15,
+                            ),
 
 
 
-                        ],
-                      ),
-
-
-
-
-
-
-
-
-                      Row(
-                        children: [
-                          Text(
-                            "Item",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.018,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        // initialValue: "${Username}",
-                        // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
-                        style: TextStyle(
-                          fontSize: main_Height * 0.022,
+                          ],
                         ),
-                        onSaved: (newValue2) {
-                          ItemName = newValue2;
-                        },
-                        // onChanged: (value){
-                        //   firstName = value;
-                        // },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Item Name can\'t be empty';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                          // filled: true,
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black38),
-                          ),
-                          // fillColor: ,
-                          hintText: "Item Name",
-                          hintStyle: TextStyle(
-                              color: Colors.grey, fontSize: main_Height * 0.018),
-                          border: const OutlineInputBorder(
-                            // borderSide:
-                            // const BorderSide(color: Colors.white),
-                            // borderRadius: BorderRadius.circular(10)
 
-                          ),
+
+
+
+
+
+
+
+                        Row(
+                          children: [
+                            Text(
+                              "Item",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-
-
-
-                      Row(
-                        children: [
-                          Text(
-                            "Amount",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.018,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        // initialValue: "${Username}",
-                        // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
-                        style: TextStyle(
-                          fontSize: main_Height * 0.022,
+                        const SizedBox(
+                          height: 5,
                         ),
-                        onSaved: (newValue1) {
-                          Amount = newValue1;
-                        },
-                        // onChanged: (value){
-                        //   firstName = value;
-                        // },
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Amount can\'t be empty';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding:
-                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                          // filled: true,
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black38),
-                          ),
-                          // fillColor: ,
-                          hintText: "Amount",
-                          hintStyle: TextStyle(
-                              color: Colors.grey, fontSize: main_Height * 0.018),
-                          border: const OutlineInputBorder(
-                            // borderSide:
-                            // const BorderSide(color: Colors.white),
-                            // borderRadius: BorderRadius.circular(10)
-
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Remarks",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.018,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: main_Height * 0.2,
-                        child: TextFormField(
-                          // initialValue: "Remarks",
-                          // initialValue: "${getProfileModelData?.description == null ? appUserData?.description == null ?  "" : appUserData?.description : getProfileModelData?.description}",
-                          textAlignVertical: TextAlignVertical.top,
-                          keyboardType: TextInputType.multiline,
-                          expands: true,
-                          // textAlign: TextAlign.start,
-                          maxLines: null,
-                          // minLines: null,
+                        TextFormField(
+                          // initialValue: "${Username}",
+                          // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
                           style: TextStyle(
                             fontSize: main_Height * 0.022,
                           ),
-                          onSaved: (newValue) {
-                            Remarks = newValue;
+                          onSaved: (newValue2) {
+                            ItemName = newValue2;
                           },
                           // onChanged: (value){
-                          //   description = value;
+                          //   firstName = value;
                           // },
-                          // validator: (value) {
-                          //   if (value == null || value.isEmpty) {
-                          //     return 'First Name can\'t be empty';
-                          //   }
-                          //   return null;
-                          // },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Item Name can\'t be empty';
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
-                            hintText: "Remarks",
                             contentPadding:
-                            EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                             // filled: true,
                             enabledBorder: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black38),
                             ),
                             // fillColor: ,
-
+                            hintText: "Item Name",
                             hintStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: main_Height * 0.018),
-                            border: OutlineInputBorder(
+                                color: Colors.grey, fontSize: main_Height * 0.018),
+                            border: const OutlineInputBorder(
                               // borderSide:
-                              //     const BorderSide(color: Colors.transparent),
+                              // const BorderSide(color: Colors.white),
                               // borderRadius: BorderRadius.circular(10)
+
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Add File Or Images",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: main_Height * 0.018,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: main_Height * 0.1,
-                        child: InkWell(
-                          onTap: () async {
-                            PlatformFile? aIamge =
-                            await UploadDocumets.selectFile();
-
-                            PIimage = aIamge;
-
-                            // print("sssssimage${PIimage}");
-                            // print("sssssimage${aIamge}");
-
-                            setState(() {
-                              PIimage = aIamge;
-                              // print("sssssimage${PIimage!.name}");
-                            });
-                          },
-                          child: Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: (PIimage != null)
-                                  ? cardOfDocAfterUploadSuccessWidget(PIimage!,
-                                  cardTextWidth: 200)
-                                  : cardOfDocBeforeUploadWidget(
-                                  PIimage?.identifier, context)),
+                        const SizedBox(
+                          height: 15,
                         ),
-                      ),
 
 
 
-                    ],
+                        Row(
+                          children: [
+                            Text(
+                              "Amount",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          // initialValue: "${Username}",
+                          // initialValue: "${getProfileModelData?.firstName == null ? appUserData!.firstName : getProfileModelData!.firstName}",
+                          style: TextStyle(
+                            fontSize: main_Height * 0.022,
+                          ),
+                          onSaved: (newValue1) {
+                            Amount = newValue1;
+                          },
+                          // onChanged: (value){
+                          //   firstName = value;
+                          // },
+                          keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Amount can\'t be empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            contentPadding:
+                            const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                            // filled: true,
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black38),
+                            ),
+                            // fillColor: ,
+                            hintText: "Amount",
+                            hintStyle: TextStyle(
+                                color: Colors.grey, fontSize: main_Height * 0.018),
+                            border: const OutlineInputBorder(
+                              // borderSide:
+                              // const BorderSide(color: Colors.white),
+                              // borderRadius: BorderRadius.circular(10)
+
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Remarks",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          height: main_Height * 0.2,
+                          child: TextFormField(
+                            // initialValue: "Remarks",
+                            // initialValue: "${getProfileModelData?.description == null ? appUserData?.description == null ?  "" : appUserData?.description : getProfileModelData?.description}",
+                            textAlignVertical: TextAlignVertical.top,
+                            keyboardType: TextInputType.multiline,
+                            expands: true,
+                            // textAlign: TextAlign.start,
+                            maxLines: null,
+                            // minLines: null,
+                            style: TextStyle(
+                              fontSize: main_Height * 0.022,
+                            ),
+                            onSaved: (newValue) {
+                              Remarks = newValue;
+                            },
+                            // onChanged: (value){
+                            //   description = value;
+                            // },
+                            // validator: (value) {
+                            //   if (value == null || value.isEmpty) {
+                            //     return 'First Name can\'t be empty';
+                            //   }
+                            //   return null;
+                            // },
+                            decoration: InputDecoration(
+                              hintText: "Remarks",
+                              contentPadding:
+                              EdgeInsets.only(top: 5, bottom: 5, left: 10),
+                              // filled: true,
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black38),
+                              ),
+                              // fillColor: ,
+
+                              hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: main_Height * 0.018),
+                              border: OutlineInputBorder(
+                                // borderSide:
+                                //     const BorderSide(color: Colors.transparent),
+                                // borderRadius: BorderRadius.circular(10)
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Add File Or Images",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: main_Height * 0.018,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: main_Height * 0.1,
+                          child: InkWell(
+                            onTap: () async {
+                              PlatformFile? aIamge =
+                              await UploadDocumets.selectFile();
+
+                              PIimage = aIamge;
+
+                              // print("sssssimage${PIimage}");
+                              // print("sssssimage${aIamge}");
+
+                              setState(() {
+                                PIimage = aIamge;
+                                // print("sssssimage${PIimage!.name}");
+                              });
+                            },
+                            child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: (PIimage != null)
+                                    ? cardOfDocAfterUploadSuccessWidget(PIimage!,
+                                    cardTextWidth: 200)
+                                    : cardOfDocBeforeUploadWidget(
+                                    PIimage?.identifier, context)),
+                          ),
+                        ),
+
+
+
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  height: main_Height * 0.13,
-                  width: main_Width * 1,
-                )
+                  Container(
+                    height: main_Height * 0.13,
+                    width: main_Width * 1,
+                  )
 
-              ],
+                ],
+              ),
             ),
           ),
         ),
