@@ -48,22 +48,22 @@ class ExpenseScreenBloc extends Bloc<ExpenseScreenEvent, ExpenseScreenState> {
         }
       }
 
-      if (event is FetchAllExpenseScreenListScreenAPIsEvent) {
-        late List<GetExpenseListModel> getIncomeListModelData;
-
-        try {
-          emit(ExpenseScreenLoadingEventState(true));
-          getIncomeListModelData = await repositoryRepo.getExpenseListModelData();
-          emit(ExpenseScreenLoadingEventState(false));
-          emit(FetchAllExpenseListScreenAPIsEventState(
-              getIncomeListModelData));
-        } catch (error, stacktrace) {
-          print(stacktrace);
-          emit(ExpenseScreenLoadingEventState(false));
-          emit(ApiFailureState(Exception(error.toString())));
-        }
-
-      }
+      // if (event is FetchAllExpenseScreenListScreenAPIsEvent) {
+      //   late List<GetExpenseListModel> getIncomeListModelData;
+      //
+      //   try {
+      //     emit(ExpenseScreenLoadingEventState(true));
+      //     getIncomeListModelData = await repositoryRepo.getExpenseListModelData();
+      //     emit(ExpenseScreenLoadingEventState(false));
+      //     emit(FetchAllExpenseListScreenAPIsEventState(
+      //         getIncomeListModelData));
+      //   } catch (error, stacktrace) {
+      //     print(stacktrace);
+      //     emit(ExpenseScreenLoadingEventState(false));
+      //     emit(ApiFailureState(Exception(error.toString())));
+      //   }
+      //
+      // }
 
       if (event is PostAddExpenseFormEvent) {
         late MessageModel messageModelData;

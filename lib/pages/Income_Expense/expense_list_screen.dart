@@ -35,7 +35,7 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
 
 
    loadAllExpenseListScreenApiCalls() {
-     expenseListScreenBloc.add(FetchAllExpenseScreenListScreenAPIsEvent());
+     // expenseListScreenBloc.add(FetchAllExpenseScreenListScreenAPIsEvent());
    }
 
 
@@ -53,11 +53,13 @@ class _ListOfExpensesState extends State<ListOfExpenses> {
           builder: (context, state) {
             if (state is ExpenseScreenLoadingEventState) {
               return ThemeHelper.buildLoadingWidget();
-            } else if (state is FetchAllExpenseListScreenAPIsEventState) {
-              getExpenseListModelData = state.getExpenseListModelData;
-
-              return mainViewAllExpenseScreenViewWidget();
             }
+
+            // else if (state is FetchAllExpenseListScreenAPIsEventState) {
+            //   getExpenseListModelData = state.getExpenseListModelData;
+            //
+            //   return mainViewAllExpenseScreenViewWidget();
+            // }
             else {
               return Container();
             }

@@ -122,29 +122,29 @@ class _NavDrawerState extends State<NavDrawer> {
           /// FOR INCOME
           ///
           ///
-          InkWell(
-            onTap: () {
-              Navigator.of(context, rootNavigator: true).pushNamed(ListofIncomeScreen.routeName);
-            },
-            child: ListTile(
-              title: Row(
-                children:  [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.add_chart,
-                      color: primaryPurple,
-                    ),
-                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Add Income", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
-                ],
-              ),
-            ),
-          ),
-
-
-          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.of(context, rootNavigator: true).pushNamed(ListofIncomeScreen.routeName);
+          //   },
+          //   child: ListTile(
+          //     title: Row(
+          //       children:  [
+          //         Align(
+          //           alignment: Alignment.center,
+          //           child: Icon(Icons.add_chart,
+          //             color: primaryPurple,
+          //           ),
+          //           // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+          //         ),
+          //         SizedBox(width: 10,),
+          //         Text("Add Income", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          //
+          //
+          // Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
 
 
 

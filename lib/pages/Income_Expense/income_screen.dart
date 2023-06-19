@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../Utils/colors.dart';
 import '../../blocs/IncomeListScreen/income_list_screen_bloc.dart';
 import '../../models/CommonModel/message_model.dart';
-import '../../models/IncomeListModel/income_list_model.dart';
+import '../../models/Expense/income_list_model.dart';
 import '../../network/repository.dart';
 import '../Dashboard/add_expense_screen.dart';
 import '../Widgets/theme_helper.dart';
@@ -32,8 +32,8 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
 
 
 
-  List<IncomeListModel>? getIncomeListModelData;
-  List<IncomeListModel>? reversegetIncomeListModelData;
+  List<GetIncomeListModel>? getIncomeListModelData;
+  List<GetIncomeListModel>? reversegetIncomeListModelData;
 
 
 
@@ -81,7 +81,7 @@ class _ListofIncomeScreenState extends State<ListofIncomeScreen> {
             }
             else if(state is FetchAllIncomeListScreenAPIsEventState) {
 
-              getIncomeListModelData = state.getIncomeListModelData.reversed.toList();
+              // getIncomeListModelData = state.getIncomeListModelData.reversed.toList();
               // getIncomeListModelData = state.getIncomeListModelData;
 
 

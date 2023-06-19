@@ -15,12 +15,13 @@ import '../models/Expense/get_expense_category_model.dart';
 import '../models/Expense/get_expense_list_model.dart';
 import '../models/Expense/get_transaction_chart_mode2.dart';
 import '../models/Expense/get_transactions_chart_model.dart';
+import '../models/Expense/income_list_model.dart';
 import '../models/GroupModel/add_group_model.dart';
 import '../models/GroupModel/group_link_model.dart';
 import '../models/GroupModel/group_list_model.dart';
 import '../models/GroupModel/group_members_model.dart';
 import '../models/GroupModel/single_group_view_model.dart';
-import '../models/IncomeListModel/income_list_model.dart';
+// import '../models/IncomeListModel/income_list_model.dart';/
 import '../models/Locations/Item_list_model.dart';
 import '../models/Locations/home_list_model.dart';
 import '../models/Locations/room_list_model.dart';
@@ -212,17 +213,17 @@ class Repository {
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: INCOME LIST  APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<List<IncomeListModel>> getIncomeListModelData({String? access}) async {
-    try {
-      var listData = await apiClient.getApiCall(BASEURL, getIncomeListAPIEnd,
-          isAccessToken: accessToken, isBearer: true) as List;
-      var list =
-          listData.map((json) => IncomeListModel.fromJson(json)).toList();
-      return list;
-    } on CustomException {
-      rethrow;
-    }
-  }
+  // Future<List<IncomeListModel>> getIncomeListModelData({String? access}) async {
+  //   try {
+  //     var listData = await apiClient.getApiCall(BASEURL, getIncomeListAPIEnd,
+  //         isAccessToken: accessToken, isBearer: true) as List;
+  //     var list =
+  //         listData.map((json) => IncomeListModel.fromJson(json)).toList();
+  //     return list;
+  //   } on CustomException {
+  //     rethrow;
+  //   }
+  // }
 
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: GROUP MEMCER REQUEST APIS~~~~~~~~~~~~~~~~~~~~~~~
@@ -359,17 +360,17 @@ class Repository {
   ///
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: EXPENSE LIST  APIS~~~~~~~~~~~~~~~~~~~~~~~
   ///
-  Future<List<GetExpenseListModel>> getExpenseListModelData({String? access}) async {
-    try {
-      var listData = await apiClient.getApiCall(BASEURL, getExpListAPIEnd,
-          isAccessToken: accessToken, isBearer: true) as List;
-      var list =
-      listData.map((json) => GetExpenseListModel.fromJson(json)).toList();
-      return list;
-    } on CustomException {
-      rethrow;
-    }
-  }
+  // Future<List<GetExpenseListModel>> getExpenseListModelData({String? access}) async {
+  //   try {
+  //     var listData = await apiClient.getApiCall(BASEURL, getExpListAPIEnd,
+  //         isAccessToken: accessToken, isBearer: true) as List;
+  //     var list =
+  //     listData.map((json) => GetExpenseListModel.fromJson(json)).toList();
+  //     return list;
+  //   } on CustomException {
+  //     rethrow;
+  //   }
+  // }
 
 
   /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GET: SINGLE COURSE ENROLLED COURSE APIS~~~~~~~~~~~~~~~~~~~~~
@@ -533,7 +534,6 @@ class Repository {
 
 
 
-
 ///
 ///
 ///
@@ -633,6 +633,40 @@ class Repository {
           isAccessToken: accessToken, isBearer: true);
       GetTransactionChartModel2 json = GetTransactionChartModel2.fromJson(listData);
       return json;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+
+
+  Future<List<GetIncomeListModel>> getIncomeChartList(String? query) async {
+    try {
+      var listData = await apiClient.getApiCall(
+          BASEURL, "$getIncomeListAPIEnd?$query",
+          isAccessToken: accessToken) as List;
+      // print("listData: $listData");
+      var list =
+      listData.map((json) => GetIncomeListModel.fromJson(json)).toList();
+      return list;
+    } on CustomException {
+      rethrow;
+    }
+  }
+
+
+
+
+  Future<List<GetExpenseListModel>> getExpenseChartList(String? query) async {
+    try {
+      var listData = await apiClient.getApiCall(
+          BASEURL, "$getExpListAPIEnd?$query",
+          isAccessToken: accessToken) as List;
+      // print("listData: $listData");
+      var list =
+      listData.map((json) => GetExpenseListModel.fromJson(json)).toList();
+      return list;
     } on CustomException {
       rethrow;
     }

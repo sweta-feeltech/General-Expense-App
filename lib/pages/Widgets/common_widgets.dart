@@ -20,7 +20,7 @@ import '../../Utils/colors.dart';
 import '../../models/DashboardModel/transaction_filter_model.dart';
 import '../../models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
-import '../../models/IncomeListModel/income_list_model.dart';
+import '../../models/Expense/income_list_model.dart';
 import '../../models/Locations/home_list_model.dart';
 import '../../models/Locations/room_list_model.dart';
 import '../../models/Locations/shelf_list_model.dart';
@@ -528,7 +528,7 @@ class CommonWidgets {
 
   static Widget CommonIncomeListView(
     BuildContext context, {
-    required IncomeListModel getIncomeListModelData,
+    required GetIncomeListModel getIncomeListModelData,
   }) {
     double main_Width = MediaQuery.of(context).size.width;
     double main_Height = MediaQuery.of(context).size.height;
@@ -599,7 +599,7 @@ class CommonWidgets {
             ),
             Flexible(
               child: Text(
-                "+\u20B9${getIncomeListModelData!.amount.toStringAsFixed(0)}",
+                "+\u20B9${getIncomeListModelData!.amount?.toStringAsFixed(0)}",
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 style: TextStyle(

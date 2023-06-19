@@ -8,7 +8,7 @@ class ExpenseScreenListInitialEvent extends ExpenseScreenEvent {}
 
 class FetchAllExpenseCatScreenListScreenAPIsEvent extends ExpenseScreenEvent {}
 
-class FetchAllExpenseScreenListScreenAPIsEvent extends ExpenseScreenEvent {}
+// class FetchAllExpenseScreenListScreenAPIsEvent extends ExpenseScreenEvent {}
 
 
 class PostAddExpenseCatEvent extends ExpenseScreenEvent {

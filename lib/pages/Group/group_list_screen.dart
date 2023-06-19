@@ -127,31 +127,32 @@ class _GroupListScreenState extends State<GroupListScreen> {
       SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Center(
-              child: SvgPicture.asset("assets/icons/group.svg",
-                height: main_Height * 0.4,
-              ),
+            SvgPicture.asset(
+              "assets/images/stupid 2.svg",
+              height: main_Height * 0.4,
+              // fit: BoxFit.fill,
             ),
 
-
-
-            Text(
-              "You don't have any Groups !",
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                // color: Color.fromARGB(255, 158, 158, 158),
-                color: Colors.grey,
-                fontWeight: FontWeight.w500,
-                fontSize: main_Height * 0.0239,
-              ),
-            ),
-
-            SizedBox(
-              height: main_Height * 0.04,
-            ),
+            //
+            //
+            // Text(
+            //   "You don't have any Groups !",
+            //   maxLines: 1,
+            //   textAlign: TextAlign.center,
+            //   overflow: TextOverflow.ellipsis,
+            //   style: TextStyle(
+            //     // color: Color.fromARGB(255, 158, 158, 158),
+            //     color: Colors.grey,
+            //     fontWeight: FontWeight.w500,
+            //     fontSize: main_Height * 0.0239,
+            //   ),
+            // ),
+            //
+            // SizedBox(
+            //   height: main_Height * 0.04,
+            // ),
 
             Material(
               elevation: 3,
