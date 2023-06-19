@@ -313,7 +313,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               },
                               Icons.mail,
                               TextInputAction.next,
-                              // initalTxt: "admin@gmail.com",
+                              initalTxt: "admin@gmail.com",
                               validatingFunc: (value) {
                                 RegExp regex = RegExp(EmailRegex);
                                 if (value == null || value.isEmpty) {
@@ -338,7 +338,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               onChanged: (value) {
                                 password = value;
                               },
-                              // initialValue: "Admin@123",
+                              initialValue: "Admin@123",
                               validator: (value) {
                                 RegExp regex = RegExp(PassWordRegex);
                                 if (value == null || value.isEmpty) {
