@@ -386,17 +386,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: main_Height * 0.2,
                 width: main_Width,
                 child: Center(
-                  child: Text(
-                    "You don't have any Groups !",
-                    maxLines: 1,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      // color: Color.fromARGB(255, 158, 158, 158),
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: main_Height * 0.0239,
-                    ),
+                  child: SvgPicture.asset(
+                    "assets/images/stupid 2.svg",
+                    fit: BoxFit.fill,
                   ),
                 ),
               ) :
@@ -536,17 +528,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: main_Height * 0.2,
                 width: main_Width,
                 child: Center(
-                  child: Text(
-                    "You don't have any Income or Expense !",
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      // color: Color.fromARGB(255, 158, 158, 158),
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: main_Height * 0.0239,
-                    ),
+                  child: SvgPicture.asset(
+                    "assets/images/stupid 2.svg",
+                    fit: BoxFit.fill,
                   ),
                 ),
               ) :

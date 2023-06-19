@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:general_expense_app/blocs/SearchScreenBloc/search_list_screen_bloc.dart';
 import 'package:general_expense_app/models/CustomModel/vertical_search_list_model.dart';
 import 'package:general_expense_app/models/DashboardModel/search_allData_model.dart';
@@ -349,57 +350,84 @@ class _SearchAllDataState extends State<SearchAllData> {
               ),
 
 
-              ///
-              ///
-              /// HORIZONTAL LIST
-              ///
-              ///
+              searchResultsHorizontal!.isEmpty == true &&
+                  searchResultsVertical!.isEmpty == true ?
 
-              searchResultsHorizontal!.isEmpty == true  ?
-              Container() :
-              Container(
-                height: main_Height * 0.2,
-                width: main_Width,
-                padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,),
-                child: ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 0),
-                    itemCount:  allData2 == false ?  horizontalSearchListModelData!.length : searchResultsHorizontal!.length,
-                    shrinkWrap: true,
-                    physics: AlwaysScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CommonWidgets.CommonHorizontalSearchList(context,
-                          index: index,
-                          horizontalSearchListModelData: allData2 == false ?  horizontalSearchListModelData![index] : searchResultsHorizontal![index]
-                      );
-                    }
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/stupid 2.svg",
+                    height: main_Height * 0.3,
+                  ),
+                ],
+              )
+              :
+              Container(),
+              // &&
+              //     searchResultsVertical!.isEmpty == true ?
+
+              Column(
+                children: [
+                  ///
+                  ///
+                  /// HORIZONTAL LIST
+                  ///
+                  ///
+
+                  searchResultsHorizontal!.isEmpty == true  ?
+                    Container() :
+                  Container(
+                    height: main_Height * 0.2,
+                    width: main_Width,
+                    padding: EdgeInsets.symmetric(horizontal: main_Width * 0.025,),
+                    child: ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 0),
+                        itemCount:  allData2 == false ?  horizontalSearchListModelData!.length : searchResultsHorizontal!.length,
+                        shrinkWrap: true,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CommonWidgets.CommonHorizontalSearchList(context,
+                              index: index,
+                              horizontalSearchListModelData: allData2 == false ?  horizontalSearchListModelData![index] : searchResultsHorizontal![index]
+                          );
+                        }
 
                     ),
 
-              ),
+                  ),
 
 
-              ///
-              ///
-              /// VERTICAL LIST
-              ///
-              ///
+                  ///
+                  ///
+                  /// VERTICAL LIST
+                  ///
+                  ///
 
-              searchResultsVertical!.isEmpty == true ?
-              Container() :
-                Expanded(
-                  child: ListView.builder(
-                      itemCount:  allData1 == false ? verticalListData!.length : searchResultsVertical!.length,
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CommonWidgets.CommonSearchVerticalListView(context,
-                            verticalSearchListModelData: allData1 == false ? verticalListData![index] : searchResultsVertical![index]
-                          // getItemListModelData:   allData1 == false ?  getSerachModelData!.tblExpense![index] : SearchReSTblExpense![index]
-                        );
-                      }),
-                ),
+                  searchResultsVertical!.isEmpty == true ?
+                  Container() :
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount:  allData1 == false ? verticalListData!.length : searchResultsVertical!.length,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CommonWidgets.CommonSearchVerticalListView(context,
+                              verticalSearchListModelData: allData1 == false ? verticalListData![index] : searchResultsVertical![index]
+                            // getItemListModelData:   allData1 == false ?  getSerachModelData!.tblExpense![index] : SearchReSTblExpense![index]
+                          );
+                        }),
+                  ),
+
+
+                ],
+              )
+
+
+
+
 
 
             ],

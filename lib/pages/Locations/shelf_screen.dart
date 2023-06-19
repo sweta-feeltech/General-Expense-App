@@ -218,36 +218,40 @@ class _ShelfScreenState extends State<ShelfScreen> {
               ),
 
               getShelfListModelData?.isEmpty == true ?
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
 
-                  children: [
-                    SizedBox(
-                      height: main_Height * 0.1,
-                    ),
-
-                    Text(
-                      "Empty Shelf !",
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        // color: Color.fromARGB(255, 158, 158, 158),
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: main_Height * 0.0239,
-                      ),
-                    ),
-
-                    SizedBox(
-                      height: main_Height * 0.04,
-                    ),
-
-
-                  ],
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/stupid 2.svg",
+                    height: main_Height * 0.3,
+                  ),
+                ],
               )
+              // Expanded(
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //
+              //     children: [
+              //       SizedBox(
+              //         height: main_Height * 0.1,
+              //       ),
+              //
+              //   SvgPicture.asset(
+              //     "assets/images/stupid 2.svg",
+              //     height: main_Height * 0.4 ,
+              //   ),
+              //
+              //
+              //
+              //       SizedBox(
+              //         height: main_Height * 0.04,
+              //       ),
+              //
+              //
+              //     ],
+              //   ),
+              // )
                   :
               Expanded(
                 child: ListView.builder(
