@@ -382,7 +382,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                       children: [
                                         const Flexible(
                                           child: Text(
-                                            "Expense",
+                                            "History",
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
@@ -391,7 +391,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                     FontWeight.w500),
                                           ),
                                         ),
-
 
                                         _durationSelected == "Monthly" ?
 
@@ -529,7 +528,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                                 _durationSelected = value;
                                                 _mothselected = months[DateTime.now().month - 1];
                                                 selectedMonth = DateTime.now().month;
-
+                                                incomeListScreenBloc.add(FetchChartMonthlyEvent(chartQuery2:"month=${selectedMonth}"));
                                                 loadAllIncomeListScreenApiCalls();
 
                                               });
