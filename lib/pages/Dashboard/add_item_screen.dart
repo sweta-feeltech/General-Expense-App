@@ -267,6 +267,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
                         widget.apbar == "0"  ?
                         Container():
+                        getHomeListModelData?.isEmpty == true ?
+                            Container():
                         Column(
                           children: [
                             Row(
@@ -535,11 +537,6 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
                           ],
                         ),
-
-
-
-
-
 
 
 
