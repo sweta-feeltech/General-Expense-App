@@ -54,7 +54,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
         RoomLocationList.add(key);
       }
     });
-    print("rrrrrr${RoomLocationList![0].homeLocationName}");
+    print("rrrrrr${RoomLocationList[0].homeLocationName}");
     setState(() {
       value = _value;
       print("setState: $value");
@@ -307,8 +307,8 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                     setState(() {
                                       _Roomkey.currentState?.reset();
                                       _Shelfkey.currentState?.reset();
-                                      RoomLocationList?.clear();
-                                      ShelfLocationList?.clear();
+                                      RoomLocationList.clear();
+                                      ShelfLocationList.clear();
                                     });
 
                                     // _districtDrop.currentState!.reset();
@@ -398,7 +398,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                       // _Roomkey.currentState?.reset();
                                       _Shelfkey.currentState?.reset();
                                       // RoomLocationList?.clear();
-                                      ShelfLocationList?.clear();
+                                      ShelfLocationList.clear();
                                     });
 
                                     // _districtDrop.currentState!.reset();
@@ -439,7 +439,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                   },
 
                                   onChanged: disabledRoomListDropDown ? null : (_value) => RoomValueChanged(_value),
-                                  items: RoomLocationList?.map((GetRoomLocationModel item) {
+                                  items: RoomLocationList.map((GetRoomLocationModel item) {
                                     return DropdownMenuItem<dynamic>(
                                         value: item.id,
                                         child: FittedBox(child: Text("${item.roomLocationName}")));
@@ -521,7 +521,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                   },
 
                                   onChanged: disabledShelfListDropDown ? null : (_value) => shelfValueChanged(_value),
-                                  items: ShelfLocationList?.map((GetShelfLocationModel item) {
+                                  items: ShelfLocationList.map((GetShelfLocationModel item) {
                                     return DropdownMenuItem<dynamic>(
                                         value: item.id,
                                         child: FittedBox(child: Text("${item.shelfLocationName}")));
