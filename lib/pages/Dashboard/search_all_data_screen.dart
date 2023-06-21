@@ -40,7 +40,6 @@ class _SearchAllDataState extends State<SearchAllData> {
   List<TblShelfLocation>? SearchResTblShelf;
   List<TblItem>? SearchResTblItem;
 
-  List<VerticalSearchListModel> verticalSearchListModelData = [];
 
   ///
   /// HORIZONTAL

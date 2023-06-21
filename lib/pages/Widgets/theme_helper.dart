@@ -659,8 +659,11 @@ class ThemeHelper {
   }
 
   static Widget buildLoadingWidget() {
-    return Center(
-      child: CircularProgressIndicator(),
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 

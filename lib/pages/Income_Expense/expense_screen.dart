@@ -234,7 +234,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         appBar: AppBar(
           titleSpacing: 15,
           title: Text(
-            "Expense",
+            "Income/Expense",
             style:
                 TextStyle(color: Colors.white, fontSize: main_Height * 0.022),
           ),
@@ -959,16 +959,21 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       ),
                     ),
                   )
-                      :  ListView.builder(
+                      :  RefreshIndicator(
+                    onRefresh: ()async{
+                      loadAllIncomeListScreenApiCalls();
+                    },
+                    child: ListView.builder(
                     // physics: NeverScrollableScrollPhysics(),
-                      itemCount:  getIncomeListModelData?.length,
-                      itemBuilder:
-                          (BuildContext context, int index) {
-                        return CommonWidgets.CommonIncomeListView(
-                            context,
-                            getIncomeListModelData:
-                            getIncomeListModelData![index]);
-                      }),
+                        itemCount:  getIncomeListModelData?.length,
+                        itemBuilder:
+                            (BuildContext context, int index) {
+                          return CommonWidgets.CommonIncomeListView(
+                              context,
+                              getIncomeListModelData:
+                              getIncomeListModelData![index]);
+                        }),
+                      ),
 
                   _durationSelected == "Monthly"
                       ?
