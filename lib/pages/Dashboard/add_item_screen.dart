@@ -267,8 +267,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
                         widget.apbar == "0"  ?
                         Container():
-                        getHomeListModelData?.isEmpty == true ?
+                        getShelfLocationModelData?.isEmpty == true ?
                             Container():
+
                         Column(
                           children: [
                             Row(
