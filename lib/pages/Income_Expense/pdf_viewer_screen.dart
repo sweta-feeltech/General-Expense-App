@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:general_expense_app/Utils/api_end_points.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 
+import '../../Utils/api_end_points.dart';
 import '../../Utils/colors.dart';
 
 class PdfViewerScreen extends StatefulWidget {

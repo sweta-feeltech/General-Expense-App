@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:general_expense_app/Utils/api_end_points.dart';
 import 'package:photo_view/photo_view.dart';
+
+import '../../Utils/api_end_points.dart';
 
 
 class PhotoViwerScreen extends StatefulWidget {

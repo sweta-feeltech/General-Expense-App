@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:general_expense_app/models/CommonModel/message_model.dart';
-import 'package:general_expense_app/models/Locations/home_list_model.dart';
+import '../../../models/CommonModel/message_model.dart';
+import '../../../models/Locations/home_list_model.dart';
 import '../../../network/repository.dart';
 
 part 'add_home_list_screen_event.dart';

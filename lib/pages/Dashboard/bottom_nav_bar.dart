@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:general_expense_app/pages/AddTab/add_tab_screen.dart';
-import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
-import 'package:general_expense_app/pages/Locations/room_screen.dart';
+
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:trackventory/pages/Dashboard/profile_screen.dart';
 
 import '../../Utils/colors.dart';
+import '../AddTab/add_tab_screen.dart';
 import '../Locations/add_home_Screen.dart';
 import 'add_expense_screen.dart';
 import '../Income_Expense/expense_screen.dart';

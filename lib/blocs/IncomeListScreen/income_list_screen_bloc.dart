@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:general_expense_app/models/Expense/income_list_model.dart';
-import 'package:general_expense_app/network/repository.dart';
 
 import '../../models/CommonModel/message_model.dart';
 import '../../models/DashboardModel/dashboard_model.dart';
 import '../../models/Expense/get_expense_list_model.dart';
 import '../../models/Expense/get_transaction_chart_mode2.dart';
 import '../../models/Expense/get_transactions_chart_model.dart';
+import '../../models/Expense/income_list_model.dart';
+import '../../network/repository.dart';
 
 part 'income_list_screen_event.dart';
 part 'income_list_screen_state.dart';

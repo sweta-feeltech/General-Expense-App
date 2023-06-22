@@ -1,8 +1,7 @@
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:general_expense_app/Utils/colors.dart';
-import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
 
+import '../../Utils/colors.dart';
 import '../Dashboard/add_expense_screen.dart';
 import '../Dashboard/add_item_screen.dart';
 

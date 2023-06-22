@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:general_expense_app/models/GroupModel/add_group_model.dart';
 
+import '../../models/GroupModel/add_group_model.dart';
 import '../../models/GroupModel/group_list_model.dart';
 import '../../network/repository.dart';
 
