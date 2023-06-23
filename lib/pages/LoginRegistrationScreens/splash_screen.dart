@@ -109,14 +109,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double main_Width = MediaQuery.of(context).size.width;
+    double main_Height = MediaQuery.of(context).size.height;
+
     return Scaffold(
   backgroundColor: Colors.white,
       body: Center(
         child: Container(
           color: Colors.white,
-            height: 150,
-            width: 150,
-            child: Image.asset("assets/images/g.png")),
+            width: main_Width * 0.8,
+            child: Image.asset("assets/images/trackventory2.png")),
       ),
     );
   }

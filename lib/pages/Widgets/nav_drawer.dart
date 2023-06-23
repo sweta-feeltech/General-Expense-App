@@ -62,30 +62,30 @@ class _NavDrawerState extends State<NavDrawer> {
           /// FOR CATEGORY CARDS
           ///
           ///
-          InkWell(
-            onTap: () {
-
-              Navigator.of(context, rootNavigator: true).pushNamed(CategoryScreen.routeName);
-            },
-            child: ListTile(
-              title: Row(
-                children:  [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.add_card_outlined,
-                      color: primaryPurple,
-                    ),
-                    // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
-                  ),
-                  SizedBox(width: 10,),
-                  Text("category", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
-                ],
-              ),
-            ),
-          ),
-
-
-          Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
+          // InkWell(
+          //   onTap: () {
+          //
+          //     Navigator.of(context, rootNavigator: true).pushNamed(CategoryScreen.routeName);
+          //   },
+          //   child: ListTile(
+          //     title: Row(
+          //       children:  [
+          //         Align(
+          //           alignment: Alignment.center,
+          //           child: Icon(Icons.add_card_outlined,
+          //             color: primaryPurple,
+          //           ),
+          //           // child: SvgPicture.asset("assets/icons/donation_icon.svg", width: 20, height: 20,),
+          //         ),
+          //         SizedBox(width: 10,),
+          //         Text("category", style: TextStyle(fontSize: main_Height * 0.018, fontWeight: FontWeight.w500),),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          //
+          //
+          // Divider(thickness: 1, height: 0,indent: 15, endIndent: 15,),
 
           ///
           ///
