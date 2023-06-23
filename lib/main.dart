@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trackventory/pages/Dashboard/add_expense_screen.dart';
-import 'package:trackventory/pages/Dashboard/bottom_nav_bar.dart';
-import 'package:trackventory/pages/Dashboard/category_screen.dart';
-import 'package:trackventory/pages/Dashboard/edit_profile_screen.dart';
-import 'package:trackventory/pages/Dashboard/items_screen.dart';
-import 'package:trackventory/pages/Dashboard/profile_screen.dart';
-import 'package:trackventory/pages/Group/group_list_screen.dart';
-import 'package:trackventory/pages/Income_Expense/expense_list_screen.dart';
-import 'package:trackventory/pages/Income_Expense/expense_screen.dart';
-import 'package:trackventory/pages/Income_Expense/income_screen.dart';
-import 'package:trackventory/pages/Locations/add_home_Screen.dart';
-import 'package:trackventory/pages/Locations/room_screen.dart';
-import 'package:trackventory/pages/Locations/shelf_screen.dart';
-import 'package:trackventory/pages/LoginRegistrationScreens/login_screen.dart';
-import 'package:trackventory/pages/LoginRegistrationScreens/registration_screen.dart';
-import 'package:trackventory/pages/LoginRegistrationScreens/splash_screen.dart';
-import 'package:trackventory/pages/Widgets/nav_drawer.dart';
-import 'package:trackventory/responsive/responsive_layout.dart';
-
-import 'Utils/colors.dart';
+import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/pages/Income_Expense/expense_list_screen.dart';
+import 'package:general_expense_app/pages/Income_Expense/income_screen.dart';
+import 'package:general_expense_app/pages/Locations/add_home_Screen.dart';
+import 'package:general_expense_app/pages/Dashboard/add_expense_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/bottom_nav_bar.dart';
+import 'package:general_expense_app/pages/Dashboard/category_screen.dart';
+import 'package:general_expense_app/pages/Income_Expense/expense_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/items_screen.dart';
+import 'package:general_expense_app/pages/Group/group_list_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/home_screen.dart';
+import 'package:general_expense_app/pages/Locations/room_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/edit_profile_screen.dart';
+import 'package:general_expense_app/pages/Dashboard/profile_screen.dart';
+import 'package:general_expense_app/pages/Locations/shelf_screen.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/registration_screen.dart';
+import 'package:general_expense_app/pages/LoginRegistrationScreens/splash_screen.dart';
+import 'package:general_expense_app/pages/Widgets/nav_drawer.dart';
+import 'package:general_expense_app/responsive/responsive_layout.dart';
 import 'pages/LoginRegistrationScreens/main_screen.dart';
 
 void main() async {

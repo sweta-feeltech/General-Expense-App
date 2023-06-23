@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:general_expense_app/Utils/colors.dart';
+import 'package:general_expense_app/blocs/Registration/registration_screen_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/api_end_points.dart';
-import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
-import '../../blocs/Registration/registration_screen_bloc.dart';
 import '../../models/CommonModel/user_data_model.dart';
 import '../../models/LoginRegisterModel/login_model.dart';
 import '../../models/ProfileModel/get_profile_model.dart';

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:general_expense_app/blocs/SearchScreenBloc/search_list_screen_bloc.dart';
+import 'package:general_expense_app/models/CustomModel/vertical_search_list_model.dart';
+import 'package:general_expense_app/models/DashboardModel/search_allData_model.dart';
 
 import '../../Utils/colors.dart';
-import '../../blocs/SearchScreenBloc/search_list_screen_bloc.dart';
 import '../../models/CustomModel/horizontal_search_list_model.dart';
-import '../../models/CustomModel/vertical_search_list_model.dart';
-import '../../models/DashboardModel/search_allData_model.dart';
 import '../../network/repository.dart';
 import '../Widgets/common_widgets.dart';
 import '../Widgets/theme_helper.dart';
