@@ -95,6 +95,7 @@ dependencies:
   photo_view: ^0.14.0
 
   flutter_launcher_icons: ^0.9.1
+  rename_app: ^1.1.0
 
 
 
