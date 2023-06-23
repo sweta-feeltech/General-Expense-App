@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:general_expense_app/Utils/colors.dart';
+
+import '../../Utils/colors.dart';
 
 class FilterForTransaction extends StatefulWidget {
   final String? preSelected;

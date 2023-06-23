@@ -1,11 +1,8 @@
 import 'dart:io';
 
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:general_expense_app/models/ProfileModel/get_profile_model.dart';
-import 'package:general_expense_app/pages/Widgets/photo_viwer_screen.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -14,8 +11,10 @@ import '../../Utils/colors.dart';
 import '../../Utils/constants.dart';
 import '../../blocs/EditProfileScreen/edit_profile_screen_bloc.dart';
 import '../../models/ProfileModel/edit_profile_model.dart';
+import '../../models/ProfileModel/get_profile_model.dart';
 import '../../network/api_client.dart';
 import '../../network/repository.dart';
+import '../Widgets/photo_viwer_screen.dart';
 import '../Widgets/theme_helper.dart';
 
 class EditProfileScreen extends StatefulWidget {

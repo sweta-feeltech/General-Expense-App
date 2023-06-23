@@ -1,8 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:general_expense_app/models/DashboardModel/transaction_filter_model.dart';
 
+import '../../models/DashboardModel/transaction_filter_model.dart';
 import '../../network/repository.dart';
 
 part  "transaction_list_screen_event.dart";

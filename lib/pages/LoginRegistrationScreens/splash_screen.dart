@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:general_expense_app/models/ProfileModel/edit_profile_model.dart';
-import 'package:general_expense_app/pages/LoginRegistrationScreens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import '../Dashboard/botton_bar_1.dart';
 import '../../Utils/constants.dart';
