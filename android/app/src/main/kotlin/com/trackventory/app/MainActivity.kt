@@ -1,4 +1,4 @@
-package com.example.general_expense_app
+package com.trackventory.app
 
 import io.flutter.embedding.android.FlutterActivity
 
